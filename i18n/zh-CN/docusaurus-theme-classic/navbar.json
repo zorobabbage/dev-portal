@@ -1,0 +1,34 @@
+{
+  "title": {
+    "message": "Zilliqa 开发者门户",
+    "description": "The title in the navbar"
+  },
+  "item.label.Basics": {
+    "message": "基础介绍",
+    "description": "Navbar item with label Basics"
+  },
+  "item.label.Developers": {
+    "message": "开发者",
+    "description": "Navbar item with label Developers"
+  },
+  "item.label.APIs": {
+    "message": "APIs",
+    "description": "Navbar item with label APIs"
+  },
+  "item.label.Miners": {
+    "message": "矿工",
+    "description": "Navbar item with label Miners"
+  },
+  "item.label.Exchanges": {
+    "message": "交易所",
+    "description": "Navbar item with label Exchanges"
+  },
+  "item.label.Staking": {
+    "message": "质押",
+    "description": "Navbar item with label Staking"
+  },
+  "item.label.Contributors": {
+    "message": "贡献者",
+    "description": "Navbar item with label Contributors"
+  }
+}

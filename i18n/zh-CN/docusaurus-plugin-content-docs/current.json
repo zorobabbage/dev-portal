@@ -1,0 +1,186 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.BasicsSideBar.category.Blockchain Basics": {
+    "message": "区块链基础",
+    "description": "The label for category Blockchain Basics in sidebar BasicsSideBar"
+  },
+  "sidebar.BasicsSideBar.category.Zilliqa Architecture": {
+    "message": "Zilliqa 架构",
+    "description": "The label for category Zilliqa Architecture in sidebar BasicsSideBar"
+  },
+  "sidebar.BasicsSideBar.category.Zilliqa Ecosystem": {
+    "message": "Zilliqa 生态系统",
+    "description": "The label for category Zilliqa Ecosystem in sidebar BasicsSideBar"
+  },
+  "sidebar.APIsSideBar.category.Introduction": {
+    "message": "介绍",
+    "description": "The label for category Introduction in sidebar APIsSideBar"
+  },
+  "sidebar.APIsSideBar.category.Blockchain-related Methods": {
+    "message": "区块链相关方法",
+    "description": "The label for category Blockchain-related Methods in sidebar APIsSideBar"
+  },
+  "sidebar.APIsSideBar.category.Transaction-related Methods": {
+    "message": "交易相关方法",
+    "description": "The label for category Transaction-related Methods in sidebar APIsSideBar"
+  },
+  "sidebar.APIsSideBar.category.Contract-related Methods": {
+    "message": "合约相关方法",
+    "description": "The label for category Contract-related Methods in sidebar APIsSideBar"
+  },
+  "sidebar.APIsSideBar.category.Account-related Methods": {
+    "message": "账户相关方法",
+    "description": "The label for category Account-related Methods in sidebar APIsSideBar"
+  },
+  "sidebar.DevelopersSidebar.category.Getting Started": {
+    "message": "入门",
+    "description": "The label for category Getting Started in sidebar DevelopersSidebar"
+  },
+  "sidebar.DevelopersSidebar.category.Upgrade Notices": {
+    "message": "升级通知",
+    "description": "The label for category Upgrade Notices in sidebar DevelopersSidebar"
+  },
+  "sidebar.DevelopersSidebar.category.User Key Management": {
+    "message": "用户密钥管理",
+    "description": "The label for category User Key Management in sidebar DevelopersSidebar"
+  },
+  "sidebar.DevelopersSidebar.category.Developer Toolings": {
+    "message": "开发工具",
+    "description": "The label for category Developer Toolings in sidebar DevelopersSidebar"
+  },
+  "sidebar.DevelopersSidebar.category.SDKs": {
+    "message": "SDKs",
+    "description": "The label for category SDKs in sidebar DevelopersSidebar"
+  },
+  "sidebar.DevelopersSidebar.category.Transaction Lifecycle": {
+    "message": "交易生命周期",
+    "description": "The label for category Transaction Lifecycle in sidebar DevelopersSidebar"
+  },
+  "sidebar.DevelopersSidebar.category.Educational Resources": {
+    "message": "教育资源",
+    "description": "The label for category Educational Resources in sidebar DevelopersSidebar"
+  },
+  "sidebar.DevelopersSidebar.category.Sample app – RentOnZilliqa": {
+    "message": "示例应用程序 – RentOnZilliqa",
+    "description": "The label for category Sample app – RentOnZilliqa in sidebar DevelopersSidebar"
+  },
+  "sidebar.DevelopersSidebar.category.Scilla Contract": {
+    "message": "Scilla 合约",
+    "description": "The label for category Scilla Contract in sidebar DevelopersSidebar"
+  },
+  "sidebar.DevelopersSidebar.category.Frontend Application": {
+    "message": "前端应用程序",
+    "description": "The label for category Frontend Application in sidebar DevelopersSidebar"
+  },
+  "sidebar.MinersSidebar.category.Miners": {
+    "message": "矿工",
+    "description": "The label for category Miners in sidebar MinersSidebar"
+  },
+  "sidebar.ExchangesSidebar.category.Exchange Integration": {
+    "message": "交易所集成",
+    "description": "The label for category Exchange Integration in sidebar ExchangesSidebar"
+  },
+  "sidebar.ExchangesSidebar.category.Getting Started": {
+    "message": "入门",
+    "description": "The label for category Getting Started in sidebar ExchangesSidebar"
+  },
+  "sidebar.ExchangesSidebar.category.Rosetta": {
+    "message": "Rosetta",
+    "description": "The label for category Rosetta in sidebar ExchangesSidebar"
+  },
+  "sidebar.ExchangesSidebar.category.Introduction": {
+    "message": "介绍",
+    "description": "The label for category Introduction in sidebar ExchangesSidebar"
+  },
+  "sidebar.ExchangesSidebar.category.Data API": {
+    "message": "数据 API",
+    "description": "The label for category Data API in sidebar ExchangesSidebar"
+  },
+  "sidebar.ExchangesSidebar.category.Network": {
+    "message": "网络",
+    "description": "The label for category Network in sidebar ExchangesSidebar"
+  },
+  "sidebar.ExchangesSidebar.category.Account": {
+    "message": "账户",
+    "description": "The label for category Account in sidebar ExchangesSidebar"
+  },
+  "sidebar.ExchangesSidebar.category.Block": {
+    "message": "区块",
+    "description": "The label for category Block in sidebar ExchangesSidebar"
+  },
+  "sidebar.ExchangesSidebar.category.Mempool": {
+    "message": "内存池",
+    "description": "The label for category Mempool in sidebar ExchangesSidebar"
+  },
+  "sidebar.ExchangesSidebar.category.Construction API": {
+    "message": "构造 API",
+    "description": "The label for category Construction API in sidebar ExchangesSidebar"
+  },
+  "sidebar.StakingSidebar.category.Zilliqa Seed Node Staking": {
+    "message": "Zilliqa 种子节点质押",
+    "description": "The label for category Zilliqa Seed Node Staking in sidebar StakingSidebar"
+  },
+  "sidebar.StakingSidebar.category.Staking Phase 1": {
+    "message": "质押阶段 1 ",
+    "description": "The label for category Staking Phase 1 in sidebar StakingSidebar"
+  },
+  "sidebar.StakingSidebar.category.Delegators": {
+    "message": "委托人",
+    "description": "The label for category Delegators in sidebar StakingSidebar"
+  },
+  "sidebar.StakingSidebar.category.SSN Operators": {
+    "message": "SSN 运营商",
+    "description": "The label for category SSN Operators in sidebar StakingSidebar"
+  },
+  "sidebar.StakingSidebar.category.Staking Phase 0 (EOL)": {
+    "message": "质押阶段 0 (EOL)",
+    "description": "The label for category Staking Phase 0 (EOL) in sidebar StakingSidebar"
+  },
+  "sidebar.ContributorsSidebar.category.Contributors": {
+    "message": "贡献者",
+    "description": "The label for category Contributors in sidebar ContributorsSidebar"
+  },
+  "sidebar.ContributorsSidebar.category.Core Protocol Design": {
+    "message": "核心协议设计",
+    "description": "The label for category Core Protocol Design in sidebar ContributorsSidebar"
+  },
+  "sidebar.ContributorsSidebar.category.Design Overview": {
+    "message": "设计概述",
+    "description": "The label for category Design Overview in sidebar ContributorsSidebar"
+  },
+  "sidebar.ContributorsSidebar.category.Consensus Layer": {
+    "message": "共识层",
+    "description": "The label for category Consensus Layer in sidebar ContributorsSidebar"
+  },
+  "sidebar.ContributorsSidebar.category.Network Layer": {
+    "message": "网络层",
+    "description": "The label for category Network Layer in sidebar ContributorsSidebar"
+  },
+  "sidebar.ContributorsSidebar.category.Messaging Layer": {
+    "message": "消息层",
+    "description": "The label for category Messaging Layer in sidebar ContributorsSidebar"
+  },
+  "sidebar.ContributorsSidebar.category.Data Layer": {
+    "message": "数据层",
+    "description": "The label for category Data Layer in sidebar ContributorsSidebar"
+  },
+  "sidebar.ContributorsSidebar.category.Directory Service": {
+    "message": "目录服务",
+    "description": "The label for category Directory Service in sidebar ContributorsSidebar"
+  },
+  "sidebar.ContributorsSidebar.category.Lookup": {
+    "message": "查找",
+    "description": "The label for category Lookup in sidebar ContributorsSidebar"
+  },
+  "sidebar.ContributorsSidebar.category.Mining": {
+    "message": "挖矿",
+    "description": "The label for category Mining in sidebar ContributorsSidebar"
+  },
+  "sidebar.ContributorsSidebar.category.Mitigation Measures": {
+    "message": "缓解措施",
+    "description": "The label for category Mitigation Measures in sidebar ContributorsSidebar"
+  }
+}

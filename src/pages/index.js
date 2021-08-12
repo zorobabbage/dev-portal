@@ -12,9 +12,12 @@ import MineSvg from './components/cards_img03.js';
 import ExchangeSvg from './components/cards_img04.js';
 import ContributeSvg from './components/cards_img05.js';
 
+import Translate from '@docusaurus/Translate';
+
 const CoverImgDiv = () => {
   const {isDarkTheme} = useThemeContext();
   if (isDarkTheme) {
+    document.documentElement.setAttribute('data-theme', 'dark');
     return (
       <>
         <div className="cover-image">
@@ -49,17 +52,21 @@ function Feature({imageUrl, title, description}) {
 function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
-  const {isDarkTheme} = useThemeContext();
-  if (isDarkTheme) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
 
   return (
       <Layout>
         <div className="cover-container">
           <div className="cover-title">
-            <h1 className="hero__title">{siteConfig.title}</h1>
-            <p className="hero__subtitle">{siteConfig.tagline}</p>
+            <h1 className="hero__title">
+              <Translate id="site.translation.title">
+                {siteConfig.title}
+              </Translate>
+            </h1>
+            <p className="hero__subtitle">
+              <Translate id="site.translation.tagline">
+                {siteConfig.tagline}
+              </Translate>
+            </p>
           </div>
           <CoverImgDiv/>
         </div>
@@ -69,8 +76,8 @@ function Home() {
               <div>
                   <StarSvg/>
                   <div className="cards-text">
-                    <h2>Basics</h2>
-                    <p>Learn about blockchain and Zilliqa.</p>
+                    <h2><Translate id="site.translation.basics.title">Basics</Translate></h2>
+                    <p><Translate id="site.translation.basics.desc">Learn about blockchain and Zilliqa.</Translate></p>
                   </div>
               </div>
             </a>
@@ -80,8 +87,8 @@ function Home() {
               <div>
                 <CodeSvg/>
                 <div className="cards-text">
-                  <h2>Developers</h2>
-                  <p>Build full-stack blockchain apps on Zilliqa.</p>
+                  <h2><Translate id="site.translation.developers.title">Developers</Translate></h2>
+                  <p><Translate id="site.translation.developers.desc">Build full-stack blockchain apps on Zilliqa.</Translate></p>
                 </div>
               </div>
             </a>
@@ -91,8 +98,8 @@ function Home() {
               <div>
                 <MineSvg />
                 <div className="cards-text">
-                  <h2>Miners</h2>
-                  <p>Participate as a miner and start earning $ZIL.</p>
+                  <h2><Translate id="site.translation.miners.title">Miners</Translate></h2>
+                  <p><Translate id="site.translation.miners.desc">Participate as a miner and start earning $ZIL.</Translate></p>
                 </div>
               </div>
             </a>
@@ -102,8 +109,8 @@ function Home() {
               <div>
                 <ExchangeSvg/>
                 <div className="cards-text">
-                  <h2>Exchanges</h2>
-                  <p>Information for exchanges and seed node operators.</p>
+                  <h2><Translate id="site.translation.exchanges.title">Exchanges</Translate></h2>
+                  <p><Translate id="site.translation.exchanges.desc">Information for exchanges and seed node operators.</Translate></p>
                 </div>
               </div>
             </a>
@@ -113,8 +120,8 @@ function Home() {
               <div>
                 <ContributeSvg/>
                 <div className="cards-text">
-                  <h2>Contributors</h2>
-                  <p>Learn how you can contribute to Zilliqa's ecosystem.</p>
+                  <h2><Translate id="site.translation.contributors.title">Contributors</Translate></h2>
+                  <p><Translate id="site.translation.contributors.desc">Learn how you can contribute to Zilliqa's ecosystem.</Translate></p>
                 </div>
               </div>
             </a>

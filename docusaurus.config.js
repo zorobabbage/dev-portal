@@ -6,6 +6,20 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'zilliqa', // Usually your GitHub org/user name.
   projectName: 'dev-portal', // Usually your repo name.
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'zh-CN'],
+    localeConfigs: {
+      'en': {
+        label: 'English',
+        direction: 'ltr',
+      },
+      'zh-CN': {
+        label: '中文（简体）',
+        direction: 'ltr',
+      },
+    },
+  },
   themeConfig: {
     colorMode: {
       defaultMode: 'light',
@@ -17,7 +31,11 @@ module.exports = {
         alt: 'Zilliqa Logo',
         src: 'img/logo.png',
       },
-      links: [
+      items: [
+        {
+          type: 'localeDropdown',
+          position: 'left',
+        },
         {
           to: 'docs/basics/basics-intro-blockchain',
           activeBasePath: 'docs/basics',
@@ -118,7 +136,6 @@ module.exports = {
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: 'basics-intro-blockchain',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
@@ -129,5 +146,5 @@ module.exports = {
         },
       },
     ],
-  ],
+  ]
 };
