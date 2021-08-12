@@ -23,7 +23,7 @@ The construction flow is in this sequence:
 1. [/construction/derive](rosetta-construction-derive)
 2. [/construction/preprocess](rosetta-construction-preprocess)
 3. [/construction/metadata](rosetta-construction-metadata)
-4. [/construction/payloads](rosetta-construction-payload)
+4. [/construction/payloads](rosetta-construction-payloads)
 5. [/construction/parse](rosetta-construction-parse)
 6. [/construction/combine](rosetta-construction-combine)
 7. /construction/parse (to confirm correctness)
