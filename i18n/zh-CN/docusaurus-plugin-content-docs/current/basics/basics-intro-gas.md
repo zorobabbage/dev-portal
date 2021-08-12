@@ -11,16 +11,9 @@ description: Transaction gas
 
 ---
 
-As transactions require the network to commit resources (compute, memory,
-storage and bandwidth), it is important to ensure that the resources are not
-abused. 
+由于交易需要网络提交资源（计算、内存、存储和带宽），因此确保资源不被滥用很重要。
 
-To this end, the resources consumed to process each transaction is measured in
-a unit called "gas". Therefore, if a transaction handles a simple transfer of
-native tokens, it will lead to less gas consumed compared to a transaction that
-executes a complicated smart contract. 
+为此，处理每个交易相关的资源时，都会以 “gas” 为单位来计算费用。 因此，如果交易处理原生代币的简单转移，与执行复杂智能合约的交易相比，前者将花费更少的 gas 费用。
 
-Users issuing transactions then have to pay to the network to process their
-transactions. The cost is proportional to the gas consumed to process the
-transaction. 
+用户发起交易后，必须支付一定的费用给网络来处理他们的交易。 成本与处理交易所花费的 gas 费用成正比。
 

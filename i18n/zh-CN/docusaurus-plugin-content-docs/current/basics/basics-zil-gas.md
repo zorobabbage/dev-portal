@@ -1,6 +1,6 @@
 ---
 id: basics-zil-gas
-title: Gas Accounting
+title: Gas 计算
 keywords: 
 - gas accounting
 - gas pricing
@@ -14,44 +14,24 @@ description: Zilliqa Gas
 
 ## Gas Pricer
 
-Zilliqa's consensus algorithm (i.e., PBFT)  requires nodes to vote on each
-block and hence each transaction therein. Every transaction that goes to the
-network has a gas price -- which is the price (in $ZIL) per gas unit that the
-sender is willing to pay to the miners to process the transaction. 
+Zilliqa 的共识算法（即 PBFT）要求节点对每个区块以及其中的每个交易进行投票。 进入网络的每笔交易都有一个 gas 价格——这是发送者愿意支付给矿工以处理交易的一个 gas 单位的价格（以 ZIL 为单位）。
 
-In order to ensure that miners do not impose a gas price of their own which
-could make it impossible to agree on transactions, the Zilliqa protocol
-maintains a _global minimum gas price_ that all miners will accept.
+为了确保矿工不会强加自己的 gas 价格，这可能导致无法就交易达成一致，Zilliqa 协议维护了一个所有矿工都会接受的 _全局最小 gas 价格_。
 
-The network runs an algorithm to compute the acceptable global minimum gas
-price that the entire network will agree upon. The algorithm takes into
-account: a) the previous gas prices for the last few epochs b) the minimum
-gas price that each miner is willing to accept for the current epoch and, c)
-network congestion. 
+网络运行算法来计算整个网络将同意的可接受的全局最低 gas 价格。 该算法考虑了：a）最近几个时期的先前 gas 价格 b）每个矿工在当前时期愿意接受的最低 gas 价格，以及 c）网络拥堵。
 
-Essentially, the algorithm decides on the gas price depending on the
-network congestion in the last few epochs. The rationale being that if the
-network congestion is high, then the miners get to have a say on the gas
-price, while if the network is not congested, then the gas price should not
-depend too much on the proposed gas prices. 
+本质上，该算法根据最近几个纪元的网络拥堵情况来决定 gas 价格。 理由是，如果网络拥堵严重，那么矿工就可以对 gas 价格发表意见，而如果网络不拥堵，则 gas 价格不应过多依赖于提议的 gas 价格。
 
 
-The current global minimum gas price is 0.002 ZIL.
+当前全局最低 gas 价格为 0.002 ZIL。
 
-## Payment Transactions
+## 支付交易
 
-Each payment transaction consumes 1 gas unit and therefore, the gas to be paid
-for a payment transaction is 0.002 ZIL. 
+每笔支付交易消耗 1 个 gas 单位，因此，支付交易要支付的 gas 为 0.002 ZIL。
 
 
-## Smart Contract Transactions
+## 智能合约交易
 
-As smart contract transactions involve more compute and storage, the gas
-required to process a smart contract transaction depends on the complexity of
-the contract being called, the parameters being passed etc. Scilla comes with
-an in-built gas accounting module that keeps track of gas consumed as the
-Scilla interpreter executes a contract. 
+由于智能合约交易涉及更多的计算和存储，处理智能合约交易所需的 gas 取决于被调用的合约的复杂性、传递的参数等。 Scilla 带有一个内置的 gas 计算模块，可以跟踪 gas 在 Scilla 解释器执行合约时消耗。
 
-Each usage of a Scilla literal, executing an expression and statement in Scilla
-have a deterministic associated cost. More details can be found the [gas
-accounting documentation](https://github.com/Zilliqa/scilla-docs/blob/master/docs/texsources/gas-costs/gas-doc.pdf) 
+Scilla 文字的每次使用以及在 Scilla 中执行表达式和语句都有确定性的相关成本。 更多详细信息可以在 [gas 计算文档](https://github.com/Zilliqa/scilla-docs/blob/master/docs/texsources/gas-costs/gas-doc.pdf)中找到

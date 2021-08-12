@@ -1,6 +1,6 @@
 ---
 id: basics-intro-consensus
-title: Consensus mechanism
+title: 共识机制
 keywords: 
 - intro 
 - conesnsus
@@ -13,37 +13,22 @@ description: Types of Blockchain consensus mechanisms
 
 ---
 
-The blockchain network being decentralized has to have a mechanism to agree
-upon the next state of system. This is achieved via a _consensus protocol_.
+去中心化的区块链网络必须有一种机制来就系统的下一个状态达成一致。 这是通过_共识协议_实现的。
 
 
-## Types of Consensus Mechanism
+## 共识机制的类型
 
-Over the last two decades, several new consensus protocols have been developed
-and used in the blockchain space. The most common ones are:
+在过去的二十年中，区块链领域已经开发并使用了几种新的共识协议。 最常见的是：
 
 
-### BFT: Byzantine Fault Tolerance Protocol
+### BFT：拜占庭容错协议
 
-This is the most classical way to reach consensus which works on the assumption
-that the network has at most 1/3 of malicious nodes. The protocol requires each
-honest node to agree on the state via voting. This involves several rounds of
-communication among the nodes.
+这是达成共识的最经典方式，它假设网络最多有 1/3 的恶意节点。 该协议要求每个诚实节点通过投票就状态达成一致。 这涉及节点之间的几轮通信。
 
-### Nakamoto Consensus
+### PoW：中本聪共识
 
-Nakamoto consensus was pioneered by Bitcoin. It uses proof-of-work and
-longest-chain-win rule to reach consensus among all honest nodes. Using
-proof-of-work, each node is required to solve a computational puzzle and the node
-fastest to find a solution decides the next state of the system. In the
-longest-chain-win rule, the node will adopt the longest chain and extend it
-with new valid block. A block in the blockchain is deemed to be committed once
-there is a sufficient number of block mined after the block.
+中本聪共识是由比特币开创的。 它使用工作量证明和最长链赢规则在所有诚实节点之间达成共识。 使用工作量证明，每个节点都需要解决一个计算难题，找到解决方案最快的节点决定了系统的下一个状态。 在最长链获胜规则中，节点将采用最长链并用新的有效块对其进行扩展。 一旦在区块之后挖出足够数量的区块，就认为区块链中的区块被提交。
 
-### PoS: Proof of Stake
+### PoS：权益证明
 
-In Proof-of-Stake, nodes are required to stake an amount of assets (e.g.,
-native currency of the blockchain). Those who stake are allowed to decide on
-the next state of the system. By putting a stake, the expectation is that they
-will not make detrimental decisions. And in fact, the probability that a
-certain node is chosen to propose the next state is proportional to its stake. 
+在 Proof-of-Stake 中，节点需要质押一定数量的资产（例如，区块链的原生货币）。 质押者可以决定系统的下一个状态。 通过质押，来期望他们不会做出有害的决定。 事实上，某个节点被选中提出下一个状态的概率与其质押成正比。

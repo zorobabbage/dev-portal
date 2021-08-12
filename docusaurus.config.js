@@ -4,7 +4,7 @@ module.exports = {
   url: 'https://dev.zilliqa.com',
   baseUrl: '/',
   favicon: 'img/favicon.png',
-  organizationName: 'zilliqa', // Usually your GitHub org/user name.
+  organizationName: 'zorobabbage', // Usually your GitHub org/user name.
   projectName: 'dev-portal', // Usually your repo name.
   i18n: {
     defaultLocale: 'en',
@@ -139,7 +139,8 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/Zilliqa/dev-portal/tree/master/',
+            'https://github.com/zorobabbage/dev-portal/tree/master/',
+            editLocalizedFiles: true,
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

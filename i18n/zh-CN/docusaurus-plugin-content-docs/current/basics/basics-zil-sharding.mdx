@@ -1,6 +1,6 @@
 ---
 id: basics-zil-sharding
-title: Sharding Mechanism
+title: 分片机制
 keywords: 
 - types of sharding
 - network sharding
@@ -13,48 +13,48 @@ description: Zilliqa Sharding Mechanism
 ---
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-In this section, we present the core idea of sharding that makes Zilliqa scale. Sharding in Zilliqa takes many forms: *network sharding*, *transaction sharding*, and *computational sharding*. The most important among these is network sharding as the other sharding mechanisms are built atop the network sharding layer.
+在本节中，我们将介绍使 Zilliqa 扩展的分片核心思想。 Zilliqa 中的分片有多种形式：*网络分片*、*交易分片*和*计算分片*。 其中最重要的是网络分片，因为其他分片机制都建立在网络分片层之上。
 
-## Network Sharding
+## 网络分片
 
 <img alt="Network sharding" src={useBaseUrl('img/basics/networksharding.png')} />
 
-Network sharding (which will be referred to simply as *sharding* in this context) is a mechanism that allows the Zilliqa network to be divided into smaller groups of nodes each referred to as a *shard*. Simply put, imagine a network of 1,000 nodes, then, one may divide the network into 10 shards each composed of 100 nodes.
+网络分片（在此语境下，其将被简称为*分片*）是一种机制，其允许 Zilliqa 网络被分成节点更小的组，每个组被称为*分片*。简单地说，假设在有1000个节点的网络中，则可以将网络划分为10组切片，每组切片由节点中的100个为一组组成。
 
-Network sharding is the secret sauce that makes Zilliqa truly scalable. Imagine our example network of 1,000 nodes. Zilliqa would automatically divide the network into 10 shards each with 100 nodes. Now, these shards can process transactions in parallel. If each shard is capable of processing 10 transactions per second, then all shards together can process 100 transactions per second. The ability to process transactions in parallel due to the sharded architecture ensures that the throughput in Zilliqa linearly increases with the size of the network.
+网络分分是秘密武器，它可以让 Zilliqa 具有真正的可扩展性。试想一下，我们例子中的1000个节点的网络。Zilliqa 会自动地将网络划分为每组具有100个节点的10组分片。现在，这些分片可以并行处理交易。如果每个分片每秒能够处理10个交易，那么所有分片一起每秒就可以处理100个交易。其并行处理交易的能力，取决于它的分片架构，此架构可以确保 Zilliqa 网络的吞吐量会随其网络大小的增加而线性增加。
 
-The idea of sharding is certainly not new, and it can be traced back to the field of databases, where it is employed to improve performance, scalability and I/O bandwidth. The idea of sharding in the context of blockchains however was first put forth in an [academic paper](https://dl.acm.org/doi/10.1145/2976749.2978389) co-authored by Zilliqa team members in 2015.
+分片的想法当然不是新的，它可以追溯到数据库领域，在那里它被用来提高性能、可扩展性和 I/O 带宽。 然而，在区块链背景下分片的想法首先在由 Zilliqa 团队成员于 2015 年合著的 [学术论文](https://dl.acm.org/doi/10.1145/2976749.2978389) 中提出。
 
-## Transaction Sharding
+## 交易分片
 
-As discussed above, network sharding opens up avenues for parallel transaction processing — each shard should now be able to independently process transactions and hence yield high throughput. Whenever a transaction reaches the network, it gets assigned to a specific shard. The assignment is determined by the first few bits of the sending address of the transaction. This is called *transaction sharding*.
+如上所述，网络分片为并行交易处理开辟了途径——每个分片现在应该能够独立处理交易，从而产生高吞吐量。 每当交易到达网络时，它就会被分配到特定的分片。 分配由交易发送地址的前几位决定。 这称为*交易分片*。
 
-For example, to assign transactions in a network with two shards S1 and S2, we first check the sender’s address. If the sender’s address ends with 0, then the transaction should be assigned to S1, else it should be assigned to S2.
+例如，要在具有两个分片 S1 和 S2 的网络中分配交易，我们首先检查发送方的地址。 如果发送方的地址以 0 结尾，则交易应分配给 S1，否则应分配给 S2。
 
-This assignment strategy, however, only works with payment transactions. To properly handle both payment and smart contract transactions, a different solution is employed by categorizing transactions so that we can have a separate assignment strategy for each category.
+但是，此分配策略仅适用于支付交易。 为了正确处理支付和智能合约交易，通过对交易进行分类而采取不同的解决方案，这样我们就可以为每个类别制定单独的分配策略。
 
-Transactions received by the network can be classified into the following categories depending on the type of accounts involved. Below, we call an account a *user account* (or a non-contract account) if it is controlled by a user and does not hold contract code. As an extension, an account that holds contract code will be referred to as a *contract account*.
+根据所涉及的帐户的类型，网络接收到的交易数据可以分为以下几类。下面，如果它是由用户控制，且未持有合约代码，我们称之为*用户帐户*（或非合约帐户）。作为扩展，持有合约代码的账户被称之为*合约帐户*。
 
 <img alt="Transaction sharding" src={useBaseUrl('img/basics/txnsharding.png')} />
 
-### Type I
+### 类型 I
 
-Type I (U1 -> U2): A user account sending some money to another user account, i.e., regular payment transactions that do not involve smart contracts. An example transaction would be a user Alice sending some $ZILs to another user Bob.
+类型 I (U1 -> U2)：一个用户账户向另一个用户账户发送一些资金，即不涉及智能合约的常规支付交易。 一个示例交易是用户 Alice 向另一个用户 Bob 发送一些 $ZIL。
 
-### Type II
+### 类型 II
 
-Type II (U -> C): A user calling a smart contract that does not call any other smart contract, neither does the contract transfer funds to another user. I.e., transactions that involve only a user account and a smart contract. An example transaction would be a user Alice donating 5 $ZIL to a crowdfunding contract.
+类型 II (U -> C)：用户调用智能合约，但被调用的合约不调用任何其他智能合约，合约也不向其他用户转移资金。 即，仅涉及用户帐户和智能合约的交易。 一个示例交易是用户 Alice 向众筹合约捐赠 5 $ZIL。
 
-### Type III
+### 类型 III
 
-Type III (U1 -> C1 -> … -> Cn [-> U2]): Any other transaction. This category includes transactions originating from a user that can invoke a chain of contracts and potentially terminate with a user account. An example transaction will be Alice calling a travel agent contract (C1) that calls an airline contract (C2) that in turn calls an insurance contract (C3).
+类型 III (U1 -> C1 -> … -> Cn [-> U2])：任何其他交易。 此类别包括源自用户的交易，这些交易可以调用一系列合约并可能以用户帐户终止。 一个示例交易是 Alice 调用旅行社合约 (C1)，旅行社合约 (C1) 调用航空公司合约 (C2)，然后航空公司合约 (C2) 再调用保险合约 (C3)。
 
-### Assignment Strategy
+### 分配策略
 
-At any given time, each shard will only handle transactions of Type I and II, while the DS committee will handle transactions of Type III only after transactions of Categories I and II have been validated by the rest of the shards. The DS committee may also handle certain transactions of Type I or II. Do note that the DS committee will not handle transactions in parallel (to the shards); otherwise, it will become possible to double spend.
+在任何给定时间，每个分片将只处理 I 类和 II 类交易，而 DS 委员会仅在 I 类和 II 类交易被其余分片验证后才会处理 III 类交易。 DS 委员会也可能处理某些类型 I 或 II 的交易。 请注意，DS 委员会不会并行处理交易（对分片而言）； 否则，就有可能发生双花。
 
-The exact assignment strategy is as follows:
+具体的分配策略如下：
 
-1. For a network with k = 2^n shards, each shard will only process transactions of Type I and II in which both the sender’s and the recipient’s address have the same last n bits.
+1. 对于具有 k = 2^n 个分片的网络，每个分片将仅处理类型 I 和 II 的交易，其中发送者和接收者的地址具有相同的最后 n 位。
 
-2. Any other transaction (including of Type III)) will be processed by the DS committee after the other shards have finished processing transactions meant for them.
+2. 任何其他交易（包括类型 III）将由DS委员会进行处理，而这必须在其它分片完成处理交易之后。

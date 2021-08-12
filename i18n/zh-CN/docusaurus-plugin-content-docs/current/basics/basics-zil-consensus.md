@@ -1,6 +1,6 @@
 ---
 id: basics-zil-consensus
-title: Consensus Mechanism
+title: 共识机制
 keywords: 
 - consensus
 - ds committee
@@ -10,10 +10,10 @@ description: Zilliqa Consensus
 ---
 
 ---
-The Zilliqa network is composed of one DS Committee (a special type of shard), and `n` normal shards. Each shard has a number of nodes, with one node being a `leader` and `k` number of `backups`.
+Zilliqa 网络由一个 DS 委员会（一种特殊类型的分片）和 `n` 个普通分片组成。 每个分片都有许多节点，其中一个节点是 `领导者`，而 `k` 个节点是 `备份`。
 
-Broadly, each shard runs an algorithm called [practical Byzantine fault tolerance (pBFT)](http://pmg.csail.mit.edu/papers/osdi99.pdf) to achieve consensus on the state of the blockchain at any point. A rough outline is as follows:
+概括地说，每个分片运行名为[实用拜占庭容错（pBFT）](http://pmg.csail.mit.edu/papers/osdi99.pdf) 的算法来实现在任何点上区块链的状态共识。 大致的轮廓如下：
 
-1. Pre-prepare: the `leader` announces the state of the blockchain it has to all `backup` nodes in the shard as a **pre-prepare** message.
-2. Prepare: each node receives and validates the state received from the `leader` in the pre-prepare phase, and multicasts its decision as a **prepare** message to the rest of the nodes in the shard.
-3. Commit: upon receiving a valid **prepare** message from a super majority (2/3) of nodes, it multicasts a **commit** message to all other nodes. Once a **commit** message is recieved from a super majority, the node records the new state.
+1. 预准备：`领导者` 以**预准备**消息的形式向分片中的所有 `备份` 节点宣布它所拥有的区块链状态。
+2. 准备：每个节点在准备阶段接收并验证从 `领导者` 收到的状态，并将其决定作为**准备**消息广播给分片中的其余节点。
+3. 提交：在收到来自绝大多数 (2/3) 节点的有效 **准备** 消息后，它会向所有其他节点广播 **提交** 消息。 一旦收到来自绝对多数的 **提交** 消息，节点就会记录新状态。

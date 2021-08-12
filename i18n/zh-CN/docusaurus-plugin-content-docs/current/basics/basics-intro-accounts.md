@@ -1,6 +1,6 @@
 ---
 id: basics-intro-accounts
-title: Accounts
+title: 帐户
 keywords: 
 - blockchain 
 - accounts
@@ -11,21 +11,16 @@ description: Zilliqa types of accounts
 
 ---
 
-The Zilliqa blockchain follows an account-based model similar to Ethereum.
-Accounts can hold native assets such as $ZIL or app-layer tokens issued as
-Fungible or Non-Fungible assets. These assets can be transferred from one
-account to another.
+Zilliqa 区块链遵循类似于以太坊的基于账户的模型。 账户可以持有原生资产，例如 $ZIL 或作为同质化或非同质化资产发行的应用层代币。 这些资产可以从一个账户转移到另一个账户。
 
-The collective state of all the accounts represents the global state of the
-blockchain. Each account is identified by its address which is a 20-byte
-string generated using a hash function.
+所有账户的集体状态代表了区块链的全局状态。 每个帐户都由其地址标识，地址是使用哈希函数生成的 20 字节字符串。
 
 Similar to Ethereum, the Zilliqa network supports two types of accounts:
 
-### 1. Externally-Owned Account (aka User Account)
-An account controlled by an end user who owns a public-private signature key pair. The address of an externally-owned account is essentially a truncated hash of the public key.
+### 1. 外部拥有的帐户（即用户帐户）
+由拥有公私签名密钥对的最终用户控制的帐户。 外部拥有帐户的地址本质上是公钥的截断散列。
 
-### 2. Contract Account
-An account that has a smart contract code associated withit. A contract account gets created by a user when she deploys a smart contract on the network. The address of a contract account is the hash of the address of the user account that deployed the contract and some other information. 
+### 2. 合约账户
+具有与其关联的智能合约代码的帐户。 用户在网络上部署智能合约时会创建一个合约账户。 合约账户的地址是部署合约的用户账户地址和其他一些信息的哈希值。
 
 

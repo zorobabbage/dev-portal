@@ -1,6 +1,6 @@
 ---
 id: basics-zil-reward
-title: Reward Mechanism
+title: 激励机制
 keywords: 
 - base rewards
 - flexible rewards
@@ -11,29 +11,29 @@ description: Zilliqa Rewards
 ---
 
 ---
-In the Zilliqa network, rewards are split into:
+在 Zilliqa 网络中，激励分为：
 
-* **[20% of total] Base rewards** for all validating nodes (DS/shard) in the network.
-* **[40% of total] Flexible rewards** that are based on the amount of valid and accepted (first 2/3 signers within a shard) signatures submitted by a node during a TX epoch while doing the pBFT consensus.
+* **[总量的 20%] 基础激励**，分配给网络中所有验证节点（DS/分片）。
+* **[总量的 40%] 动态激励**，基于节点在 TX 时期执行 pBFT 共识时提交的有效和接受（分片内的前 2/3 签名者）签名的数量。
 
-Both base rewards and flexible rewards have the same weightage for both DS and shard nodes. All rewards are consolidated over an entire DS epoch and only distributed during the vacuous epoch (i.e., the last transaction epoch for a DS epoch).
+对于 DS 和分片节点，基本激励和动态激励具有相同的权重。 所有激励都集中在整个 DS 纪元中，并且仅在空的纪元期间（即 DS 纪元的最后一个交易纪元）分配。
 
-Do note that the last **40%** of the rewards are given to the Zilliqa staking program.
+请注意，激励的最后 **40%** 将提供给 Zilliqa 质押计划。
 
-Say for example, if there are a total of `2400` nodes in the Zilliqa network and the `COINBASE_REWARD` is set at `197244.577626` ZILs per DS Epoch, the reward distribution will be:
+例如，如果 Zilliqa 网络中总共有 2400 个节点，并且 `COINBASE_REWARD` 设置为每个 DS 纪元的 ZIL 为 `197244.577626`，则激励分配将为：
 
-- For Base rewards:
+- 基础激励：
     ```shell
     197244.577626 * 0.25 / 2400
     = 20.546310169375 $ZIL per node per DS Epoch
     ```
-- For Flexible rewards: (on a first-come-first-serve basis)
+- 动态激励：（先到先得）
     ```shell
     197244.577626 * 0.70 / (2,400 * 2/3 [Successful signers] * 99 [TX blocks])
     = ~0.8716616435492 $ZIL per valid and accepted signature
     ```
 :::note
-For the stability of this nascent network, Guard nodes by Zilliqa are deployed in the network, both in DS committee and across all shards. These Guard nodes always stays within the network without doing PoW, but they are not rewarded. However, the division of rewards before distribution does include the guard nodes in the count. Hence, there are no "bonus" rewards for non-guard nodes that manage to fufil the PoW requirements.
+为了这个新生网络的稳定性，Zilliqa 的守护节点也部署在网络中，包括 DS 委员会和所有分片。 这些守护节点始终留在网络中，不进行 PoW，也不会得到激励。 但是，分配前的激励划分确会将保护节点计算在内。 因此，对于设法满足 PoW 要求的非保护节点没有“奖金”激励。
 :::
 
-Find our your daily mining profitability by making a copy of the [**Reward Calculator**](https://docs.google.com/spreadsheets/d/1iA3DvXMiAql6bf1mGHHxfGLICm0wZ2Gav5HzRkP81j4/edit?usp=sharing) and editing the yellow-highlighted cells.
+通过复制 [**激励计算器**](https://docs.google.com/spreadsheets/d/1iA3DvXMiAql6bf1mGHHxfGLICm0wZ2Gav5HzRkP81j4/edit?usp=sharing) 并编辑黄色高亮显示的单元格，了解我们的每日挖矿盈利能力。

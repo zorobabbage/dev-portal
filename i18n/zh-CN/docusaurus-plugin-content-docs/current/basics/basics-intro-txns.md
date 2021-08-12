@@ -1,6 +1,6 @@
 ---
 id: basics-intro-txns
-title: Transactions
+title: 交易
 keywords: 
 - transactions 
 - types
@@ -10,20 +10,12 @@ description: Transaction types
 
 ---
 
-To interact with an account (externally-owned or contract), one has to
-issue transactions. Each transaction is a data package signed by an
-externally-owned account. 
+要与帐户（外部拥有的或合约）进行交互，必须发出交易。 每笔交易都是一个由外部账户签名的数据包。
 
-## Usage of Transactions
+## 交易的使用
 
-1. The simplest usage of a transaction is to transfer native assets (such as
-   $ZIL) from one externally-owned account to another externally-owned account
-    or a contract account.
+1. 交易的最简单用法是将本地资产（例如 $ZIL）从一个外部拥有的账户转移到另一个外部拥有的账户或合约账户。
 
-2. A transaction is issued when an externally-owned account deploys a contract
-   on the network. 
+2. 当一个外部账户在网络上部署一个合约时，就会发出一笔交易。
 
-3. A transaction may also be issued to call a function in the smart contract
-   associated to a contract account which may in turn trigger calls to other
-    contracts creating a call graph. Note that calls from one contract account to another
-    happens via inter-contract message calls and are not using transactions per se.
+3. 还可以发出交易以调用智能合约中与合约账户相关联的函数，这又可以触发对其他合约的调用，从而创建调用曲线图。 请注意，从一个合约账户到另一个合约账户的调用是通过合约间消息调用发生的，而不是使用交易本身。
