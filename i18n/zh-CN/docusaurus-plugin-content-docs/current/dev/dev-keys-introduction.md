@@ -1,6 +1,6 @@
 ---
 id: dev-keys-introduction
-title: Introduction
+title: 介绍
 keywords: 
 - key management
 - private key
@@ -11,11 +11,11 @@ description: Zilliqa User Key Management
 ---
 
 ---
-## Getting Started with Key Management
-The following section describes a few key management strategies that you can use on the client-side of your Decentralised Application on Zilliqa.
+## 密钥管理入门
+以下部分描述了一些你可以在 Zilliqa 上的去中心化应用程序的客户端使用的密钥管理策略。
 
-The following key management strategies will be discussed:
+将讨论以下密钥管理策略：
 
 - [ZilPay](dev-keys-zilpay.md)
-- [Keystore file & Private Key](dev-keys-pkey.md)
-- Ledger (Documentation coming soon)
+- [密钥库文件和私钥](dev-keys-pkey.md)
+- Ledger (文档即将推出)

@@ -1,6 +1,6 @@
 ---
 id: dev-started-env
-title: Development Environments
+title: 开发环境
 keywords: 
 - development environments
 - isolated server
@@ -15,28 +15,28 @@ description: Zilliqa Development Environments - Testnet, Mainnet & Isolated Serv
 
 ---
 
-## Zilliqa Mainnet
+## Zilliqa 主网
 
 |          | URL(s) |
 |:---------|:-------|
 | **API URL** | `https://api.zilliqa.com/` |
-| **Block Explorer** | [**Link**](https://viewblock.io/zilliqa) |
+| **区块浏览器** | [**Link**](https://viewblock.io/zilliqa) |
 | **WebSocket endpoint** | `wss://api-ws.zilliqa.com` |
 | **Chain ID** | 1 |
 
 
-## Developer Testnet
+## 开发者测试网
 
 |          | URL(s) |
 |:---------|:-------|
 | **API URL** | `https://dev-api.zilliqa.com/` |
-| **Faucet** | [**Link**](https://dev-wallet.zilliqa.com) |
-| **Block Explorer** | [**Link**](https://viewblock.io/zilliqa?network=testnet) |
+| **水龙头** | [**Link**](https://dev-wallet.zilliqa.com) |
+| **区块浏览器** | [**Link**](https://viewblock.io/zilliqa?network=testnet) |
 | **WebSocket endpoint** | `wss://dev-ws.zilliqa.com` |
 | **Chain ID** | 333 |
 
-## Isolated Server
-Zilliqa Isolated Server is a test server for dApp developers to quickly test their applications. Transactions are validated immediately, hence improving the productivity for dApp developers.
+## 隔离服务器
+Zilliqa 隔离服务器是一个测试服务器，供 dApp 开发人员快速测试他们的应用程序。 交易会立即得到验证，从而提高 dApp 开发人员的生产力。
 
 |          | URL(s) |
 |:---------|:-------|

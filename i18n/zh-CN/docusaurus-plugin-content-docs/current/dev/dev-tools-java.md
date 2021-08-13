@@ -15,13 +15,13 @@ description: Zilliqa Java SDK LaksaJ
 ---
 
 
-## Source Code
+## 源代码
 
-The Github repository can be found at [https://github.com/FireStack-Lab/LaksaJ](https://github.com/FireStack-Lab/LaksaJ)
+Github 仓库可以在 [https://github.com/FireStack-Lab/LaksaJ](https://github.com/FireStack-Lab/LaksaJ) 找到
 
-## Getting Started (Installation and Packages Explained)
+## 入门（安装和软件包说明）
 
-You can get start with the installation by using Maven, Gradle or manually building the `jar` file.
+你可以使用 Maven、Gradle 或手动构建 `jar` 文件来开始安装。
 
 ## Maven
 ```xml
@@ -42,27 +42,27 @@ dependencies {
 
 ```
 
-## Manually Build the Jar File
+## 手动构建 Jar 文件
 
-First clone the `laksaj` repository
+首先克隆 `laksaj` 仓库
 ```bash
 git clone https://github.com/FireStack-Lab/LaksaJ.git
 ```
 
-Next, build `jar` using following command
+接下来，使用以下命令构建 `jar`
 
 ```
 gradle build -x test
 ```
 
-## Methods and APIs
+## 方法和 API
 
-### Account API
+### 账户 API
 
 - fromFile
 - toFile
 
-### Wallet API
+### 钱包 API
 
 - createAccount
 - addByPrivateKey addByKeyStore
@@ -71,14 +71,14 @@ gradle build -x test
 - signTransaction (default account)
 - signTransactionWith (specific account)
 
-### TransactionFactory Transaction
+### TransactionFactory 交易
 
 - sendTransaction
 - trackTx
 - confirm
 - isPending isInitialised isConfirmed isRejected
 
-### ContractFactory Contract
+### ContractFactory 合约
 
 - deploy
 - call
@@ -87,7 +87,7 @@ gradle build -x test
 - getAddressForContract
 
 
-### Crypto API
+### 加密 API
 
 - getDerivedKey (PBKDF2 and Scrypt)
 - generatePrivateKey
@@ -102,7 +102,7 @@ gradle build -x test
 
 ### JSON-RPC API
 
-#### Blockchain-Related Methods
+#### 区块链相关方法
 
 - getNetworkId
 - getBlockchainInfo
@@ -124,7 +124,7 @@ gradle build -x test
 - getPrevDifficulty
 - getPrevDSDifficulty
 
-#### Transaction-Related Methods
+#### 交易相关方法
 
 - createTransaction
 - getTransaction
@@ -134,7 +134,7 @@ gradle build -x test
 - getNumTxnsDSEpoch
 - getMinimumGasPrice
 
-#### Contract-Related Methods
+#### 合约相关方法
 
 - getSmartContractCode
 - getSmartContractInit
@@ -142,18 +142,18 @@ gradle build -x test
 - getSmartContracts
 - getContractAddressFromTransactionID
 
-#### Account-Related Methods
+#### 账户相关方法
 
 - getBalance
 
-### Validation
+### 验证
 
 - isAddress
 - isPublicjKey
 - isPrivateKey
 - isSignature
 
-### Util
+### 实用程序
 
 - byteArrayToHexString
 - hexStringToByteArray
@@ -169,9 +169,9 @@ gradle build -x test
 - fromBech32Address toBech32Address
 
 
-## Demo
+## 演示
 
-### Generate Large Amount of Addresses
+### 生成大量地址
 
 ```java
 
@@ -204,7 +204,7 @@ public class GenerateAddress {
 
 ```
 
-### Validate an Address
+### 验证地址
 
 ```java
 package com.firestack.example;
@@ -220,7 +220,7 @@ public class ValidateAddress {
 }
 ```
 
-### Validate Checksum Address 
+### 验证校验和地址
 
 ```java
 package com.firestack.example;
@@ -236,7 +236,7 @@ public class ValidChecksumAddress {
 }
 ```
 
-### Transaction Operations (Construct a Transaction, Calculate Transaction Fee, Do Serialization, Sign a Transaction, Broadcast)
+### 交易操作（构建交易、计算交易费用、序列化、签署交易、广播）
 
 ```java
 package com.firestack.example;
@@ -360,7 +360,7 @@ public class TransactionOperation {
 
 ```
 
-### Know a Smart Contract Deposit
+### 了解智能合约存款
 
 ```java
 

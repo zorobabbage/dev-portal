@@ -14,131 +14,110 @@ description: Guide on Building on Ceres
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
 
-Ceres is a one-stop local development application for developers looking to build on top of Zilliqa. 
-It is a simple to use graphical interface that has multiple Zilliqa development tools. 
-Development tools that come with Ceres currently are [Isolated server](#isolated-server), [Devex](#devex) developer block explorer and [Scilla server](#scilla-server). 
-Ceres allows developers to run these tools locally on their machine which allows them to: run a local Zilliqa blockchain network,
-deploy contracts locally, test their contracts using a testing library and view these transactions on a network explorer.
+Ceres 是一站式本地开发应用程序，适用于希望在 Zilliqa 上构建应用的开发人员。 它是一个简单易用的图形界面，具有多个 Zilliqa 开发工具。 目前 Ceres 自带的开发工具有 [隔离服务器](#isolated-server)、[Devex](#devex) 开发者区块浏览器和 [Scilla 服务器](#scilla-server)。 Ceres 允许开发人员在他们的机器上本地运行这些工具，这使他们能够：运行本地 Zilliqa 区块链网络，在本地部署合约，使用测试库测试他们的合约并在网络浏览器上查看这些交易。
 
 ![Docusaurus with Keytar](/img/dev/tools/ceres.png)
 
-## Installation
+## 安装
 
-### System Requirements
+### 系统要求
 
 | MacOS / Linux              | Windows                                      |
 | --------------------- | --------------------------------------------- |
-| **[NodeJS](https://nodejs.org/en/) v12 or newer**   | **[NodeJS](https://nodejs.org/en/) v12 or newer**                  |
+| **[NodeJS](https://nodejs.org/en/) v12 更高版本**   | **[NodeJS](https://nodejs.org/en/) v12 更高版本**                  |
 | **[Docker](https://www.docker.com/get-started)**|**[Docker](https://www.docker.com/get-started)**                |
 |   | **WSL 2.0**                      |
 
-You would also need the following ports to be free on your system: 
+你还需要以下端口在你的系统上可用：
 
-* Ports 5555, 5556 for Isolated Server
-* Port 5557 for Network Explorer
-* Port 4000 for Scilla Server
+* 端口 5555、5556 用于隔离服务器
+* 用于网络资源管理器的端口 5557
+* Scilla 服务器的 4000 端口
 
-### Download Ceres
+### 下载 Ceres
 
-You can download the Ceres application by clicking on the icon that matches your operating system below.
+你可以通过单击下面与你的操作系统相匹配的图标来下载 Ceres 应用程序。
 
 | MacOS | Windows   | Linux |
 | --------- | ------ | -------- |
 | [<img alt="Download Mac" src={useBaseUrl('img/dev/tools/downloadMAC.png')} width="80" height="80"/>](https://github.com/Zilliqa/ceres/releases/latest/download/Ceres-0.2.5.dmg)   | [<img alt="Download Windows" src={useBaseUrl('img/dev/tools/downloadWindows.png')} width="80" height="80" />](https://github.com/Zilliqa/ceres/releases/latest/download/Ceres.Setup.0.2.5.exe) | [<img alt="Download Linux" src={useBaseUrl('img/dev/tools/downloadLinux.png')} width="80" height="80" />](https://github.com/Zilliqa/ceres/releases/latest/download/Ceres-0.2.5.AppImage)|
 
-Keep track of Ceres releases on github [here](https://github.com/Zilliqa/ceres/releases).
+在 github [此处](https://github.com/Zilliqa/ceres/releases) 上跟踪 Ceres 发布。
 
 
-## Available Services
+## 可用服务
 
-### Isolated Server
+### 隔离服务器
 
-Zilliqa Isolated Server is a test server for dApp developers to quickly test their applications. 
-It allows developers to spin up a simulated blockchain locally where transactions are validated immediately, hence improving the productivity for dApp developers. 
+Zilliqa 隔离服务器是一个测试服务器，供 dApp 开发人员快速测试他们的应用程序。 它允许开发人员在本地启动模拟区块链，立即验证交易，从而提高 dApp 开发人员的生产力。
 
-Isolated server runs 2 containers that are tied together:
-1. Server Container (http://localhost:5555) is the local Zilliqa blockchain network and it comes with 10 pre-loaded accounts.
-2. Faucet Container (http://localhost:5556) is a faucet for the above server, you can query the faucet to get $ZILs to an account.
+隔离服务器运行 2 个绑定在一起的容器：
+1. 服务器容器（http://localhost:5555）是本地的 Zilliqa 区块链网络，它带有 10 个预加载帐户。
+2. 水龙头容器（http://localhost:5556）是上面服务器的一个水龙头，可以通过查询水龙头为一个账户获取 $ZILs。
 
-To start the isolated server, you need to click on “Isolated server” from the Ceres’ home screen and then click on 
-“Download and install”. After downloading is finished, you need to click on to Start Service - you have now successfully started 
-the isolated server and faucet.
+要启动隔离服务器，你需要在 Ceres 的主屏幕上单击“Isolated server”，然后单击“Download and install”。 下载完成后，你需要点击启动服务——你现在已经成功启动了隔离服务器和水龙头。
 
 <img alt="Isolated Server" src={useBaseUrl('img/dev/tools/isolatedStartService.png')} />
 
-#### Using Isolated server during dApp development
-To interact with the local blockchain network with your dApp, you would need to set the value of the RPC server URL when
-initialising a new Zilliqa object to point to the isolated server.
+#### 在 dApp 开发期间使用隔离服务器
+要使你的 dApp 与本地区块链网络进行交互，你需要在初始化新的 Zilliqa 对象以指向隔离服务器时设置 RPC 服务器 URL 的值。
 
 `const zilliqa = new Zilliqa('http://localhost:5555'); //Example code in js`
 
-Also, you would need to change the Chain ID to reflect the value relevant for the isolated server i.e. 222. 
+此外，你需要更改Chain ID 以反映与隔离服务器相关的值，即 222。
 
-Switching from testing on isolated server to pushing your dApp to production on Zilliqa testnet or mainnet is simple, 
-you just need to change the value of the RPC server URL and Chain ID to the one specific to your network as mentioned [here](https://dev.zilliqa.com/docs/apis/api-introduction).
+从隔离服务器上的测试切换到将你的 dApp 推送到 Zilliqa 测试网或主网上的生产很简单，你只需要将 RPC 服务器 URL 和Chain ID 的值更改为特定于你网络的值，如 [此处](https://dev.zilliqa.com/docs/apis/api-introduction)。
 
 ### Devex
 
-Devex is a developer-focused lightweight blockchain explorer that shows data on the local blockchain network running on the 
-isolated server. Devex runs on the port 5557. You can access it from any browser on http://localhost:5557.
+Devex 是一个以开发人员为中心的轻量级区块链浏览器，可显示在隔离服务器上运行的本地区块链网络上的数据。 Devex 在端口 5557 上运行。你可以在任何浏览器访问它 http://localhost:5557。
 
-To start the explorer, you need to click on “Network explorer” from the Ceres’ home screen and then click on 
-“Download and install”. After downloading is finished, you need to click on to Start Service - 
-you have now successfully started the network explorer.
+要启动浏览器，你需要在 Ceres 的主屏幕上单击 “Network explorer”，然后单击 “Download and install”。 下载完成后，你需要点击启动服务——你现在已经成功启动了网络浏览器。
 
 <img alt="Devex" src={useBaseUrl('img/dev/tools/explorerStartService.png')} />
 
-### Scilla Server
+### Scilla 服务器
 
-Scilla server runs Scilla binaries locally and exposes API endpoints for `scilla-checker` and `scilla-runner`. 
-The scilla-server provides the functionality of `scilla-runner` and `scilla-checker` as a JSON-RPC server.
-Scilla server accepts contract execution requests and executes them, providing a JSON output within the
-server process itself. 
+Scilla 服务器在本地运行 Scilla 二进制文件，并为 `scilla-checker` 和 `scilla-runner` 公开 API 端点。 scilla-server 提供了 `scilla-runner` 和 `scilla-checker` 作为 JSON-RPC 服务器的功能。 Scilla 服务器接受合约执行请求并执行它们，在服务器进程本身内提供 JSON 输出。
 
-Scilla Server runs on port 4000. You can call it's API on http://localhost:4000.
+Scilla 服务器在端口 4000 上运行。你可以在 http://localhost:4000 上调用它的 API。
 
-To start the server, you need to click on “Scilla” from the Ceres’ home screen and then click on “Download and install”.
-After downloading is finished, you need to click on to Start Service - you have now successfully started the Scilla server.
+要启动服务器，您需要在 Ceres 的主屏幕上单击 “Scilla”，然后单击 “Download and install”。 下载完成后，你需要点击启动服务——你现在已经成功启动了 Scilla 服务器。
 
 <img alt="Scilla Server" src={useBaseUrl('img/dev/tools/scillaStartService.png')} />
 
-## Using Ceres with a dApp
+## 将 Ceres 与 dApp 结合使用
 
-After you are done with installation of Ceres and all the available services, you can start using Ceres for your dApp development.
+完成 Ceres 和所有可用服务的安装后，你可以开始使用 Ceres 进行 dApp 开发了。
 
-In this section, we will deploy a fungible token (ZRC-2) smart contract using the Zilliqa IDE which would be connected to your 
-local Zilliqa blockchain network. We will also use the local faucet & network explorer in the process. 
-Note : Make sure that you have Isolated server and network explorer services of Ceres running before proceeding further.
+在本节中，我们将使用 Zilliqa IDE 部署同质化代币 (ZRC-2) 智能合约，该合约将连接到你本地的 Zilliqa 区块链网络。 我们还将在此过程中使用本地水龙头和网络浏览器。 注意：在继续之前，请确保你已运行 Ceres 的隔离服务器和网络浏览器服务。
 
-### Deploying contract on local network
+### 在本地网络上部署合约
 
-Step 1 : Visit the [Scilla IDE](https://ide.zilliqa.com/), start a new file and write your contract code in it. 
-Alternatively, you can choose one of the already available contracts from the left tab, in this example we will be selecting the Fungible Token contract from the left tab.
+第 1 步：访问 [Scilla IDE](https://ide.zilliqa.com/)，创建一个新文件并在其中编写你的合约代码。或者，你可以从左侧选项卡中选择已经可用的合约之一，在本例中，我们将从左侧选项卡中选择 Fungible Token 合约。
 
-Step 2 : Go to the networks tab and click on “Add Network” to add your local blockchain network to the IDE by filling in
-details of your network.
+第 2 步：转到网络选项卡，然后单击 “Add Network”，通过填写你的网络详细信息将你的本地区块链网络添加到 IDE。
 
 <img alt="Add Custom Network" src={useBaseUrl('img/dev/tools/customNetworkDetails.png')} />
 
 :::note
-Network ID for the isolated server is 222, refer https://dev.zilliqa.com/docs/apis/api-blockchain-get-network-id/ to 
-know about the id of your Zilliqa network.
+隔离服务器的网络 ID 为 222，参考 https://dev.zilliqa.com/docs/apis/api-blockchain-get-network-id/ 了解你的 Zilliqa 网络的 ID。
 :::
 
-Step 3: Select an account that you will eventually use to deploy the contract. In this example, we are using a keystore file but you can use ledger or Zilpay, which is a Zilliqa wallet available as a chrome extension similar to metamask.
+第 3 步：选择你最终将用于部署合约的帐户。 在这个例子中，我们使用了一个密钥库文件，但你可以使用 ledger 或 Zilpay，这是一个 Zilliqa 钱包，可用作类似于 metamask 的 chrome 扩展。
 
-Step 4 : Paste your account address and request funds from the faucet available on Ceres.
+第 4 步：粘贴你的帐户地址并从 Ceres 上可用的水龙头请求资金。
 
 <img alt="Faucet Request" src={useBaseUrl('img/dev/tools/faucetRequest.png')} />
 
-Step 5: Click on “Deploy”, enter the initialization params and finally deploy the contract!
+第 5 步：点击 “Deploy”，输入初始化参数，最后部署合约！
 
 <img alt="Deploy Contract" src={useBaseUrl('img/dev/tools/deployContract.png')} />
 
 <img alt="Deploy Success" src={useBaseUrl('img/dev/tools/deploySuccess.png')} />
 
-Step 6: You can click on the transaction ID link and you will be redirected to Devex page, alternatively you can also visit http://localhost:5557 (local network explorer) and you will find your contract creation transaction there as well.
+第 6 步：您可以点击交易 ID 链接，你将被重定向到 Devex 页面，或者你也可以访问 http://localhost:5557（本地网络浏览器），你也会在那里找到你的合约创建交易。
 
 <img alt="Devex" src={useBaseUrl('img/dev/tools/deployDevex.png')} />
 
-Voila! Your contract is now deployed on the local network and can be accessed under the "Contracts" tab on the left side of the IDE.
+瞧！ 你的合约现已部署在本地网络上，可以在 IDE 左侧的 "Contracts" 选项卡下访问。

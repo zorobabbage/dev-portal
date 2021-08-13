@@ -13,65 +13,63 @@ description: Zilliqa Hello World Example
 ---
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-In this section, we will deploy and interact with a `Hello World` smart contract onto the Zilliqa testnet using [Neo-Savant web IDE](https://ide.zilliqa.com/#/) and [ZilPay wallet](https://zilpay.xyz/).
+在本节中，我们将使用 [Neo-Savant web IDE](https://ide.zilliqa.com/#/) 和 [ZilPay 钱包](https://zilpay.xyz/) 在Zilliqa 测试网上部署一个名为 `Hello World` 的智能合约，并与其进行交互。
 
-## Create Testnet Wallet using ZilPay
+## 使用 ZilPay 创建测试网钱包
 
-ZilPay is an [open source](https://github.com/zilpay/zil-pay) browser add-on that manages a user’s Zilliqa wallet and can be used on Chrome, Firefox and Opera browsers.
-It does not store any user's private keys on the server. Instead, they are password protected and stored on browser storage.
-It is a non-custodial wallet, meaning, only the user has full access and responsibility for their private key.
+ZilPay 是一个 [开源](https://github.com/zilpay/zil-pay) 浏览器插件，用于管理用户的 Zilliqa 钱包，可用于 Chrome、Firefox 和 Opera 浏览器。 它不会在服务器上存储任何用户的私钥。 相反，它们受密码保护并储存在浏览器存储中。 它是一个非托管钱包，这意味着只有用户才能完全访问并对其私钥负责。
 
-To create a ZilPay wallet:
-1. Visit ZilPay's [website](https://zilpay.xyz/) and download the extension for your respective browser.
-2. Open the extension, create a new wallet by verifying your 12 words recovery phrase and selecting a password for your wallet.
+创建 ZilPay 钱包：
+1. 访问 ZilPay 的 [网站](https://zilpay.xyz/) 并下载适用于你自己浏览器的扩展程序。
+2. 打开扩展程序，通过验证你的 12 位助记词并为你的钱包选择密码来创建一个新钱包。
 :::note
-Please store your 12 words recovery phrase securely
+请一定保管好你的 12 位助记词
 :::
-3. Click on the `network change` button (shown below) and select the `network` as testnet.
+3. 点击`network change`按钮（如下图），选择`network`作为 testnet。
 
 <img alt="Change Network Button" src={useBaseUrl('img/dev/getting-started/zilpay-change-network-btn.png')} />
 
-Voila! You have now successfully set up a testnet ZilPay wallet.
+瞧！ 你现在已经成功设置了一个测试网 ZilPay 钱包。
 
-## Request Testnet $ZIL from Faucet
+## 从水龙头请求测试网 $ZIL
 
-Deploying a contract to zilliqa's testnet will consume gas. As such you will need testnet $ZIL in your ZilPay account to pay for the gas.
+将合约部署到 zilliqa 的测试网将消耗 gas。 因此，你需要在 ZilPay 帐户中使用测试网 $ZIL 来支付 gas。
 
-To request for testnet $ZIL from the faucet,
-1. Visit [Nucleus wallet testnet faucet](https://dev-wallet.zilliqa.com/faucet)
-2. Enter and submit your ZilPay address to the faucet, you will receive 300 testnet $ZIL shortly. This will take about 30s to 1 min, as the transactions will need to be confirmed on the blockchain.
+从水龙头请求测试网 $ZIL，
+1. 访问[Nucleus钱包测试网龙头](https://dev-wallet.zilliqa.com/faucet)
+2. 输入并提交你的 ZilPay 地址到水龙头，你将很快收到300个测试网 $ZIL。 这需要大约 30 秒到 1 分钟，因为交易需要在区块链上确认。
 
 <img alt="Nucleus Wallet Faucet" src={useBaseUrl('img/dev/getting-started/nucleus-faucet.png')} />
 
 
-## Deploying Contract on Testnet
+## 在测试网上部署合约
 
-To deploy the `Hello World` contract on the Zilliqa testnet, we will use the Scilla web IDE, [Neo-Savant IDE](https://ide.zilliqa.com/).
+为了在 Zilliqa 测试网上部署 `Hello World` 合约，我们将使用 Scilla Web IDE，即 [Neo-Savant IDE](https://ide.zilliqa.com/)。
 
-1. Change the `network` to testnet and import your wallet by connecting with Zilpay.
+1. 将`network`改为 testnet，连接 Zilpay 导入钱包。
 
 <img alt="IDE Step1" src={useBaseUrl('img/dev/getting-started/neo-savant-step1.png')} />
 
-2. Select the `Hello World` contract under the files tab and click on `Check` button to use the [typechecker](https://scilla.readthedocs.io/en/latest/scilla-checker.html) to check for any syntax errors in your contract.
+2.在 files 选项卡下选择 `Hello World` 合约，点击 `Check` 按钮使用[类型检查器](https://scilla-docs-zh-cn.readthedocs.io/zh_CN/latest/scilla-checker.html)检查合约中的语法错误。
 
 <img alt="IDE Step2" src={useBaseUrl('img/dev/getting-started/neo-savant-step2.png')} />
 
-3. Once the typechecker result is passed, click on `Deploy` button to deploy the contract to testnet. Use your wallet address (Base16 format) for the "owner" initialisation parameter.
+3. 类型检查器结果通过后，点击 `Deploy` 按钮将合约部署到测试网。 使用你的钱包地址（Base16 格式）作为“owner”的初始化参数。
 
 <img alt="IDE Step3" src={useBaseUrl('img/dev/getting-started/neo-savant-step3.png')} />
 
-Yay! Your contract is now deployed on the testnet and can be accessed under the "Contracts" tab on the left side of the IDE.
+好极了！ 你的合约现已部署在测试网上，可以在 IDE 左侧的“Contracts”选项卡下访问。
 
 :::tip
-To convert from `Bech32` address format into base16 address format, you can use the address converter in the IDE. Click on `Tools > Address converter`.
+要将 `Bech32` 地址格式转换为 base16 地址格式，可以使用 IDE 中的地址转换器。 点击 `Tools >Address converter`。
 :::
 
 
-## Understanding the Hello World Contract
+## 理解 Hello World 合约
 
-The Hello World contract written in the scilla smart contract programming language essentially consists of two transitions. The transitions of a scilla contract define the public interface for the contract and are a way to define how the state of the contract may change.<br/>
-The two transitions in the Hello World are:
-1. `setHello()` - `setHello` transition updates the value of the mutable variable - 'welcomeMsg' to the value of the transition parameter.
+用 scilla 智能合约编程语言编写的 Hello World 合约实际上由两个 transition 组成。 scilla 合约的 transition 定义了合约的公共接口，并且是一种定义合约状态如何改变的方式。<br/>
+Hello World 中的两个 transition 是：
+1. `setHello()` - transition `setHello` 将可变变量 - 'welcomeMsg' 的值更新为 transition 参数的值。
 ```ocaml
 transition setHello (msg : String)
   is_owner = builtin eq owner _sender;
@@ -88,7 +86,7 @@ end
 
 ```
 
-2. `getHello()` - `getHello` transition fetches the value of the mutable variable - 'welcomeMsg' and emits it as an entry of an emitted event.
+2. `getHello()` - transition  `getHello` 获取可变变量的值 - 'welcomeMsg' 并将其作为触发事件的条目发出。
 ```ocaml
 transition getHello ()
     r <- welcome_msg;
@@ -98,30 +96,30 @@ end
 
 ```
 
-## Front-End Contract Interaction Using zilliqa-js
+## 使用 zilliqa-js 进行前端合约交互
 
-Let's interact with the `Hello World` contract using a simple front-end.
+让我们使用一个简单的前端与 `Hello World` 合约进行交互。
 
-Clone the following repository and follow the installation steps: [Hello World Front-End](https://github.com/Zilliqa/dev-portal-examples/tree/master/hello-world).
+克隆以下仓库并按照安装步骤操作：[Hello World 前端](https://github.com/Zilliqa/dev-portal-examples/tree/master/hello-world)。
 
 ```bash
 git clone https://github.com/Zilliqa/dev-portal-examples.git
 ```
 
-The above repository builds on the create-react-app starter kit. If you don't have experience working with React, this guide would still be useful for you as the zilliqa-js part of the code is VanillaJS and you can use that as it is in the framework of your choice.
+上面的仓库建立在 create-react-app 入门工具包上。 如果你没有使用 React 的经验，本指南仍然对你有用，因为代码的 zilliqa-js 部分是 VanillaJS，你可以在你选择的框架中使用它。
 
-## Change Contract State Using ZilPay
+## 使用 ZilPay 更改合约状态
 
-After following the installation steps, you need to run the code locally by using the command
+完成安装步骤后，需要使用命令在本地运行代码
 ``` npm start ```
 
-On successfully running the web application locally on your system, enter the address of your Hello World contract deployed on the testnet and connect your ZilPay wallet with the front-end by clicking on the **Connect** button.
+在你的本地系统成功运行 Web 应用程序后，输入部署在测试网上的 Hello World 合约的地址，并通过单击 **Connect** 按钮将你的 ZilPay 钱包与前端连接。
 
-To call the transitions from the front-end using ZilPay:
+使用 ZilPay 从前端调用 transition：
 
-1. `setHello()` - Upon clicking the **Set Hello** button and approving the transaction via ZilPay, the `setHello()` transition will be called and the value of the `welcomeMsg` mutable variable in the contract code will be updated with the new message.
+1. `setHello()` - 单击 **Set Hello** 按钮并通过 ZilPay 确认交易后，将调用 transition  `setHello()`，并且合约代码中的 `welcomeMsg` 可变变量的值将用新消息更新。
 
-The following code snippet achieves this functionality:
+以下代码片段实现了此功能：
 
 ```javascript
 
@@ -160,11 +158,11 @@ The following code snippet achieves this functionality:
     }
   }
 ```
-2. `getHello()` - Upon clicking the 'Get Hello' button and approving the transaction via ZilPay, the `getHello()` transition will be called and the value of the `welcomeMsg` mutable variable is emitted as part of a contract event.
+2. `getHello()` - 单击“Get Hello”按钮并通过 ZilPay 确认交易后，将调用 transition  `getHello()`，并将 `welcomeMsg` 可变变量的值作为合约的一部分来触发事件。
 
-We will use the Zilliqa WebSocket Server (ZWS) to subscribe to all new event logs generated for our Hello World contract. This allows us to update the Welcome Msg on the web application as soon as the `getHello()` transaction gets confirmed and an event is emitted.
+我们将使用 Zilliqa WebSocket 服务器 (ZWS) 订阅我们的 Hello World 合约生成的所有新事件日志。 这允许我们在 `getHello()` 交易得到确认并发出事件后立即更新 Web 应用程序上的欢迎消息。
 
-The following code snippet achieves this functionality:
+以下代码片段实现了此功能：
 
 ```javascript
 
@@ -230,7 +228,7 @@ The following code snippet achieves this functionality:
   }
 ```
 
-## View Receipt on ViewBlock Explorer
-[ViewBlock explorer](https://viewblock.io/zilliqa?network=testnet) is a block explorer that supports both Zilliqa mainnet and testnet. It allows you to look at the status of your transaction, current status of the Zilliqa network, contract source code etc.
+## 在 ViewBlock Explorer 上查看数据
+[ViewBlock 浏览器](https://viewblock.io/zilliqa?network=testnet)是一款同时支持 Zilliqa 主网和测试网的区块浏览器。 它允许你查看交易状态、Zilliqa 网络的当前状态、合约源代码等。
 
-For example, this is the ViewBlock's [transaction link](https://viewblock.io/zilliqa/tx/c4030c73d6dae558ff0c9d98237101e342888115f13219a00bb14a8ee46fa3be?network=testnet) for a getHello() transition transaction.
+例如，这是 transition getHello() 在 ViewBlock 上的交易：[交易链接](https://viewblock.io/zilliqa/tx/c4030c73d6dae558ff0c9d98237101e342888115f13219a00bb14a8ee46fa3be?network=testnet)。

@@ -13,49 +13,48 @@ description: gozilliqa
 ---
 
 ---
-## Introduction
+## 介绍
 [gozilliqa](https://github.com/Zilliqa/gozilliqa-sdk) is a Golang library for interacting with the Zilliqa network. It can create wallets, deploy contracts, and invoke transitions to interact with smart contracts on the Zilliqa network.
 
-## Source Code
+## 源代码
 
-The github repository can be found at [https://github.com/Zilliqa/gozilliqa-sdk](https://github.com/Zilliqa/gozilliqa-sdk)
+可以在 [https://github.com/Zilliqa/gozilliqa-sdk](https://github.com/Zilliqa/gozilliqa-sdk) 找到 github 仓库
 
-## Releases
+## 发行版本
 
-All releases of gozilliqa can be found at [https://github.com/Zilliqa/gozilliqa-sdk/releases](https://github.com/Zilliqa/gozilliqa-sdk/releases)
+gozilliqa 的所有版本都可以在 [https://github.com/Zilliqa/gozilliqa-sdk/releases](https://github.com/Zilliqa/gozilliqa-sdk/releases) 找到
 
-## Getting gozilliqa
+## 获取 gozilliqa
 
-Run the following to clone the repository to your local machine
+运行以下命令将仓库克隆到本地计算机
 ```
 git clone https://github.com/Zilliqa/gozilliqa-sdk.git
 ```
 
-> If you wish to use the release version, please switch your branch to the particular release version. You can find out more information about the releases at [https://github.com/Zilliqa/gozilliqa-sdk/releases](https://github.com/Zilliqa/gozilliqa-sdk/releases)
+> 如果你希望使用发布版本，请将您的分支切换到特定的发布版本。 你可以在 [https://github.com/Zilliqa/gozilliqa-sdk/releases](https://github.com/Zilliqa/gozilliqa-sdk/releases) 找到有关发布的更多信息
 
-## Installation
+## 安装
 
-This SDK is using `go mod` to manager it's dependent libraries, so if you do want to work on the source code of this repository, make sure you have the minimal `golang` version that supports `go mod` and enable it.
+这个 SDK 使用 `go mod` 来管理它的依赖库，所以如果你确实想处理这个仓库的源代码，请确保你有支持 `go mod` 的最小 `golang` 版本并启用它。
 
-Install the dependent libraries:
+安装依赖库：
 
 ```go
 go get ./...
 ```
 
-The SDK itself cannot be built into a binary as it does not contains any `main` function, you can directly add it to your own project as a library. Also, we recommend that you can run the `golang uint test` or go through 
-the section `quick start` first to get a basic understanding before you start to use this SDK.
+SDK 本身不能内置到二进制文件中，因为它不包含任何 `main` 函数，你可以将其作为库直接添加到你自己的项目中。 此外，我们建议你在开始使用此 SDK 之前，可以先运行 `golang uint test` 或先阅读 `quick start` 部分以获得基本的了解。
 
-## Methods and APIs
+## 方法和 API
 
-##### Account API
+##### 账户 API
 
 - fromFile
 - toFile
 - newHDAccount (with default derivation path "m/44'/313'/0'/0/${index}")
 - newHDAccountWithDerivationPath
 
-##### Wallet API
+##### 钱包 API
 
 - createAccount
 - addByPrivateKey addByKeyStore
@@ -64,14 +63,14 @@ the section `quick start` first to get a basic understanding before you start to
 - signTransaction (default account)
 - signTransactionWith (specific account)
 
-##### TransactionFactory Transaction
+##### TransactionFactory 交易
 
 - sendTransaction
 - trackTx
 - confirm
 - isPending isInitialised isConfirmed isRejected
 
-##### ContractFactory Contract
+##### ContractFactory 合约
 
 - deploy
 - call
@@ -80,7 +79,7 @@ the section `quick start` first to get a basic understanding before you start to
 - getAddressForContract
 
 
-##### Crypto API
+##### 加密 API
 
 - getDerivedKey (PBKDF2 and Scrypt)
 - generatePrivateKey
@@ -94,7 +93,7 @@ the section `quick start` first to get a basic understanding before you start to
 
 ##### JSON-RPC API
 
-Blockchain-related methods
+区块链相关方法
 
 - getNetworkId
 - getBlockchainInfo
@@ -116,7 +115,7 @@ Blockchain-related methods
 - getPrevDifficulty
 - getPrevDSDifficulty
 
-Transaction-related methods
+交易相关方法
 
 - createTransaction
 - getTransaction
@@ -126,7 +125,7 @@ Transaction-related methods
 - getNumTxnsDSEpoch
 - getMinimumGasPrice
 
-Contract-related methods
+合约相关方法
 
 - getSmartContractCode
 - getSmartContractInit
@@ -134,18 +133,18 @@ Contract-related methods
 - getSmartContracts
 - getContractAddressFromTransactionID
 
-Account-related methods
+账户相关方法
 
 - getBalance
 
-##### Validation
+##### 验证
 
 - isAddress
 - isPublicjKey
 - isPrivateKey
 - isSignature
 
-##### Util
+##### 实用程序
 
 - byteArrayToHexString
 - hexStringToByteArray
@@ -161,11 +160,11 @@ Account-related methods
 
 
 
-## Demo
-Golang code for zilliqa-js methods found in [ZRC-2 Wallet Repository](https://github.com/arnavvohra/dev-portal-examples/tree/master/zrc-2-wallet)
+## 演示
+在 [ZRC-2 钱包仓库](https://github.com/arnavvohra/dev-portal-examples/tree/master/zrc-2-wallet) 中可以找到 zilliqa-js 方法的 Golang 代码
 
 
-##### Decrypt Private Key from a Keystore File
+##### 从密钥库文件解密私钥
 
 ```go
 func TestKeystore_DecryptPrivateKey(t *testing.T) {
@@ -182,7 +181,7 @@ func TestKeystore_DecryptPrivateKey(t *testing.T) {
 	}
 }
 ```
-#### Get User's $Zil Balance
+#### 获取用户的 $Zil 余额
 
 ```go
 func TestGetBalance() {
@@ -193,7 +192,7 @@ func TestGetBalance() {
 }
 ```
 
-##### Send a Transfer Transaction
+##### 发送转账交易
 
 ```go
 func TestSendTransaction(t *testing.T) {

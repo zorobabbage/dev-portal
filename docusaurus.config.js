@@ -7,7 +7,7 @@ module.exports = {
   organizationName: 'zorobabbage', // Usually your GitHub org/user name.
   projectName: 'dev-portal', // Usually your repo name.
   i18n: {
-    defaultLocale: 'en',
+    defaultLocale: 'zh-CN',
     locales: ['en', 'zh-CN'],
     localeConfigs: {
       'en': {

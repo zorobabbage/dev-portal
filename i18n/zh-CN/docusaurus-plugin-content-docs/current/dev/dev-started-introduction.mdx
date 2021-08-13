@@ -1,6 +1,6 @@
 ---
 id: dev-started-introduction
-title: Introduction
+title: 介绍
 keywords: 
 - getting started
 - dapp development
@@ -11,34 +11,34 @@ description: Zilliqa developer getting started
 ---
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-## Getting Started with dApp Development
+## dApp 开发入门
 
-This section aims to give developers an idea on how to get started with development on Zilliqa.
+本节旨在让开发人员了解如何开始在 Zilliqa 上进行开发。
 
-We try to make this guide concise, but yet easy enough for a developer with no experience in blockchain development. As many applications developers are `javascript` developers, we will use `javascript` in code snippet examples. Zilliqa Research currently actively maintains an official SDK in Javascript [`zilliqa-js`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library) which we'll be using in our examples.
+我们试图使本指南简洁，从而使其对于没有区块链开发经验的开发人员来说足够简单。 由于许多应用程序开发人员都是 `javascript` 开发人员，所以我们将在代码片段示例中使用 `javascript`。 Zilliqa 研究院目前在 [`zilliqa-js`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library) 中积极维护官方 Javascript SDK，我们将在示例中使用它。
 
-### What are dApps?
+### 什么是 dApp？
 
-Decentralised Apps ("dApps") are applications that interact with smart contracts on the blockchain. As Zilliqa blockchain is a decentralised network that is not hosted by a single entity, application that sits on the blockchain is _decentralised_.
+去中心化应用程序（“dApps”）是与区块链上的智能合约交互的应用程序。 由于 Zilliqa 区块链是一个不由单个实体托管的分散网络，因此位于区块链上的应用程序是 _去中心化的_。
 
-An application can have a user-facing components ("client"), which could be a web application or mobile app. These applications can interact with smart contracts on the Zilliqa blockchain.
+应用程序可以具有面向用户的组件（“客户端”），可以是 Web 应用程序或移动应用程序。 这些应用程序可以与 Zilliqa 区块链上的智能合约进行交互。
 
 <img alt="Overview" src={useBaseUrl('img/dev/dapps-overview.png')} />
 
-The entry to Zilliqa blockchain lies on the RPC interface. SDKs are not compulsory for you to interact with the blockchain, but they do make your life easier.
+Zilliqa 区块链的入口在于 RPC 接口。 SDK 不是你与区块链交互的强制性要求，但它们确实让你的开发更加轻松。
 
-Saw the `0x1`, `0x2` on the entities on the blockchain? Those are [addresses](#addresses). 
+看到区块链实体上的 `0x1`、`0x2` 了吗？ 这些是[地址](#addresses)。
 
-Addresses are an identifier to an entity on the blockchain. An entity on the blockchain can be either a user or a contract. 
+地址是区块链上实体的标识符。 区块链上的实体可以是用户或合约。
 
-### Addresses
+### 地址
 
-Zilliqa currently supports two address formats.
+Zilliqa 目前支持两种地址格式。
 
-* `ByStr20`: 20 byte hexadecimal string (e.g. `0x573EC96638C8bB1c386394602E1460634F02aDdA`)
-* `bech32`: A [bech32](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-1.md) with a human-readable prefix of `zil` (e.g. `zil12ulvje3ceza3cwrrj3szu9rqvd8s9tw69c978p`)
+* `ByStr20`：20 字节的十六进制字符串（例如`0x573EC96638C8bB1c386394602E1460634F02aDdA`）
+* `bech32`：一个 [bech32](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-1.md) 带有一个可读性更强的 `zil` 前缀（例如 `zil12ulvje3ceza3cwrrj3szu9rqvd8s9tw69c978p`）
 
-The reason behind this design is to prevent confusion with Ethereum addresses. For more detailed explanation on the address, refer to [this post](https://blog.zilliqa.com/zilliqa-migrates-to-new-address-format-bf1fa6d7e41d)
+这种设计背后的原因是为了防止与以太坊地址混淆。 更详细的地址解释请参考 [本帖](https://blog.zilliqa.com/zilliqa-migrates-to-new-address-format-bf1fa6d7e41d)
 
 ```javascript
 const { toBech32Address, toChecksumAddress } = require("@zilliqa-js/crypto");
@@ -54,13 +54,13 @@ const bech32_address = toBech32Address(address);
 // returns zil12ulvje3ceza3cwrrj3szu9rqvd8s9tw69c978p
 ```
 
-We __strongly recommend__ that developers use `bech32` formatted addresses for token transfers. This prevents users from mistaking Zilliqa addresses from Ethereum addresses. All wallets and exchanges that deal with token transfers currently use the `bech32` standard for security purposes.
+我们__强烈建议__开发人员使用 `bech32` 格式的地址进行代币传输。 这可以防止用户将 Zilliqa 地址误认为以太坊地址。 出于安全目的，所有处理代币转移的钱包和交易所目前都使用 `bech32` 标准。
 
-`ByStr20` checksummed addresses are supported by [RPC](https://apidocs.zilliqa.com), SDKs and `scilla` contracts.
+[RPC](https://apidocs.zilliqa.com)、SDK 和 `scilla` 合约均支持 `ByStr20` 地址校验。
 
-How do you know if an address is a smart contract or an account? One way to go about it is to send a [`GetSmartContractInit`](https://apidocs.zilliqa.com/#getsmartcontractcode) POST request to check.
+怎么知道一个地址是智能合约还是账户？ 一种方法是发送 [`GetSmartContractInit`](https://apidocs.zilliqa.com/#getsmartcontractcode) POST 请求进行检查。
 
-In Javascript, you can do the following:
+在 Javascript 中，你可以执行以下操作：
 
 ```javascript
 const { Zilliqa } = require("@zilliqa-js/zilliqa");

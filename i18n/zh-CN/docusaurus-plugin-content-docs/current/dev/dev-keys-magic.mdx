@@ -12,26 +12,26 @@ description: Zilliqa Magic Integration Email Login Without Private Key
 
 ---
 
-[Magic](https://docs.magic.link/) is a developer SDK that you can integrate into your application to enable passwordless authentication using magic links - similar to Slack and Medium.
+[Magic](https://docs.magic.link/) 是一个开发人员 SDK，你可以将其集成到你的应用程序中以使用魔术链接启用无密码身份验证 - 类似于 Slack 和 Medium。
 
-When users want to sign up or log in to your application:
+当用户想要注册或登录你的应用程序时：
 
-1. User requests a magic link sent to their email address
-2. User clicks on that magic link
-3. User is securely logged into the application
+1. 用户请求一个魔法链接发送到他们的电子邮件地址
+2. 用户点击那个魔法链接
+3. 用户已安全登录应用程序
 
-If it's a web application, users are logged into the original tab, even if the user clicked on the magic link on a different browser or mobile device!
+如果是 Web 应用程序，即使用户在不同的浏览器或移动设备上单击魔法链接，用户也会登录到原始选项卡！
 
 :::note
-You can skip straight to our reference example:
+你可以直接跳到我们的参考示例：
 
-👉 [Magic Zilliqa Integration](https://github.com/Zilliqa/dev-portal-examples)
+👉 [Magic Zilliqa 集成](https://github.com/Zilliqa/dev-portal-examples)
 :::
 
 
-## Installation
+## 安装
 
-Magic interacts with the Zilliqa blockchain via Magic's extension NPM package @magic-ext/zilliqa. The Zilliqa extension also lets you interact with the blockchain using methods from Zilliqa's Javascript SDK.
+Magic 通过 Magic 的扩展 NPM 包 @magic-ext/zilliqa 与 Zilliqa 区块链交互。 Zilliqa 扩展还允许你使用 Zilliqa 的 Javascript SDK 中的方法与区块链进行交互。
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -60,10 +60,10 @@ yarn add @magic-ext/zilliqa
 
 </Tabs>
 
-## Initializing Extension
+## 初始化扩展
 
-To initialize the magic extension, you would need to specify the Zilliqa RPC Node URL which can be found [here](/docs/dev/dev-started-env). 
-You would need to specify your API Key for Magic, which you'll get by signing up on Magic's [dashboard](https://dashboard.magic.link/signup) - if you face any issues, refer to Magic's [documentation](https://dashboard.magic.link/signup).
+要初始化魔法扩展，你需要指定 Zilliqa RPC 节点 URL，可以在 [此处](dev-started-env) 找到该 URL。
+你需要为 Magic 指定 API 密钥，你可以通过在 Magic 的 [dashboard](https://dashboard.magic.link/signup) 上注册来获得该密钥 - 如果你遇到任何问题，请参阅 Magic 的 [文档](https://dashboard.magic.link/signup)。
 
 <Tabs
   defaultValue="js"
@@ -92,11 +92,11 @@ const magic = new Magic('YOUR_API_KEY', {
 </Tabs>
 
 
-## Get User Wallet
+## 获取用户钱包
 
-### Get Wallet
+### 获取钱包
 
-Using getWallet function to get a Zilliqa wallet for the current user.
+使用 getWallet 函数为当前用户获取 Zilliqa 钱包。
 
 <Tabs
   defaultValue="js"
@@ -129,23 +129,23 @@ console.log('Zilliqa wallet: ', wallet);
 </Tabs>
 
 
-## Send Transaction
+## 发送交易
 
-### Getting Test ZIL
+### 获取测试 ZIL
 
-Before you can send transaction on the Zilliqa blockchain, you'll need to acquire some test ZIL (Zilliqa's native cryptocurrency for test network).
+在你可以在 Zilliqa 区块链上发送交易之前，你需要获得一些测试 ZIL（Zilliqa 用于测试网络的本地加密货币）。
 
-1. Go to our [Magic Example](https://github.com/Zilliqa/dev-portal-examples/tree/master/magic-example) application
-2. Login with your email address
-3. Copy your Zilliqa public address
-4. Go to the ZIL Faucet
-5. Paste your copied Zilliqa public address in the text input
-6. You can receive 300 test ZIL
-7. Now you can use your test ZIL in our example app
+1. 转到我们的 [Magic Example](https://github.com/Zilliqa/dev-portal-examples/tree/master/magic-example) 应用程序
+2. 使用你的电子邮件地址登录
+3. 复制你的 Zilliqa 公共地址
+4. 前往 ZIL 水龙头
+5. 在输入框中粘贴你复制的 Zilliqa 公共地址
+6. 可获得300个测试 ZIL
+7. 现在你可以在我们的示例应用程序中使用你的测试 ZIL
 
-### Call Extension Method
+### 调用扩展方法
 
-To send a standard Zilliqa blockchain transaction, you can call the magic.zil.sendTransaction method.
+要发送标准的 Zilliqa 区块链交易，你可以调用 magic.zil.sendTransaction 方法。
 
 <Tabs
   defaultValue="js"
@@ -199,23 +199,23 @@ console.log('send transaction', tx)
 
 
 
-## Deploy Smart Contract
+## 部署智能合约
 
-### Getting Test ZIL
+### 获取测试 ZIL
 
-Before you can send transaction on the Zilliqa blockchain, you'll need to acquire some test ZIL (Zilliqa's native cryptocurrency for test network).
+在你可以在 Zilliqa 区块链上发送交易之前，你需要获得一些测试 ZIL（Zilliqa 用于测试网络的本地加密货币）。
 
-1. Go to our [Magic Example](https://github.com/Zilliqa/dev-portal-examples/tree/master/magic-example) application
-2. Login with your email address
-3. Copy your Zilliqa public address
-4. Go to the ZIL Faucet
-5. Paste your copied Zilliqa public address in the text input
-6. You can receive 300 test ZIL
-7. Now you can use your test ZIL in our example app
+1. 转到我们的 [Magic Example](https://github.com/Zilliqa/dev-portal-examples/tree/master/magic-example) 应用程序
+2. 使用你的电子邮件地址登录
+3. 复制你的 Zilliqa 公共地址
+4. 前往 ZIL 水龙头
+5. 在输入框中粘贴你复制的 Zilliqa 公共地址
+6. 可获得300个测试 ZIL
+7. 现在你可以在我们的示例应用程序中使用你的测试 ZIL
 
-### Call Extension Method
+### 调用扩展方法
 
-To deploy a smart contract, you can call the magic.zilliqa.deployContract method.
+要部署智能合约，你可以调用 magic.zilliqa.deployContract 方法。
 
 <Tabs
   defaultValue="js"

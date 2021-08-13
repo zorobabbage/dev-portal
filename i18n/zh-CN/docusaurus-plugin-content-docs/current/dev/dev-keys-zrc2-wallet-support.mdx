@@ -1,6 +1,6 @@
 ---
 id: dev-keys-zrc2-wallet-support
-title: ZRC-2 Wallet Support
+title: ZRC-2 钱包支持
 keywords: 
 - key management
 - zrc2
@@ -14,40 +14,38 @@ description: Integrating ZRC-2 Fungible Tokens Support into Wallets and dApps
 
 ---
 
-This guide is meant for wallet developers looking to add support for [ZRC-2 tokens](https://github.com/Zilliqa/ZRC/blob/master/zrcs/zrc-2.md) in their wallet.
-Since most of the wallet front-ends are built using a JavaScript framework, most developers would find the code found in the `js` tab to be relevant to them. We have included code snippets for some other languages as well in case you want to handle these functionalities
-at the backend.
+本指南适用于希望在其钱包中添加对 [ZRC-2 代币](https://github.com/Zilliqa/ZRC/blob/master/zrcs/zrc-2.md) 支持的钱包开发人员。 由于大多数钱包前端都是使用 JavaScript 框架构建的，因此大多数开发人员会发现在 `js` 选项卡中找到与他们相关的代码。 我们还包含了一些其他语言的代码片段，以便你在后端处理这些功能。
 
 :::note
-It is assumed that you have already installed language-specific Zilliqa SDKs, e.g., zilliqa-js, laksaj, pyzil, gozilliqa.
+假设你已经安装了特定语言的 Zilliqa SDK，例如 zilliqa-js、laksaj、pyzil、gozilliqa。
 :::
 
-## Introduction to ZRC-2
+## ZRC-2 简介
 
-[ZRC-2](https://github.com/Zilliqa/ZRC/blob/master/zrcs/zrc-2.md) is the formal standard for Fungible Token in Zilliqa. It is an open standard for creating currencies on the Zilliqa blockchain.
+[ZRC-2](https://github.com/Zilliqa/ZRC/blob/master/zrcs/zrc-2.md) 是 Zilliqa 中同质化代币的正式标准。 它是在 Zilliqa 区块链上创建货币的开放标准。
 
-The ZRC-2 standard allows for functionalities like 
-- Minting/burning tokens
-- Transferring tokens from one account to another
-- Querying account token balance
-- Querying total token balances
-- Approving third party to spend a certain amount of tokens
-- Etc.
+ZRC-2 标准允许使用以下功能
+- 铸造/销毁代币
+- 将代币从一个账户转移到另一个账户
+- 查询账户代币余额
+- 查询总代币余额
+- 批准第三方花费一定数量的代币
+- 等等。
 
-## Examples of ZRC-2 
+## ZRC-2 示例
 
-- [$XSGD](https://www.zilliqa.com/xsgd) - the first Singapore dollar-pegged stablecoin built by [Xfers](https://www.xfers.com/)
-- [$gZIL](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-11.md#governance-tokens-aka-gzil) - Governance ZIL token earned through Zilliqa Seed Node Staking Program
+- [$XSGD](https://www.zilliqa.com/xsgd) - [Xfers](https://www.xfers.com/) 构建的第一个与新加坡元挂钩的稳定币
+- [$gZIL](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-11.md#governance-tokens-aka-gzil) - 通过 Zilliqa 种子节点质押计划获得的 ZIL 治理代币
 
-## Getting Testnet ZRC-2 Tokens
-- [$XSGD faucet](https://faucet.xfers.com/) by Xfers
-- [Stake testnet $ZIL and earn testnet $gZIL](https://testnet-stake.zilliqa.com/)
+## 获取测试网 ZRC-2 代币
+- [$XSGD 水龙头](https://faucet.xfers.com/) 由Xfers发布
+- [质押测试 $ZIL 并赚取测试网 $gZIL](https://testnet-stake.zilliqa.com/)
 
-## ZRC-2 Specification
+## ZRC-2 规格
 
-ZRC-2 fungible tokens contract consists of the following components in smart contracts as per the [specification](https://github.com/Zilliqa/ZRC/blob/master/zrcs/zrc-2.md#iv-specification).
+根据[规范](https://github.com/Zilliqa/ZRC/blob/master/zrcs/zrc-2.md#iv-specification)，ZRC-2 同质化代币合约由智能合约中的以下组件组成。
 
-### Error Codes
+### 错误代码
 | Name                        | Type    | Code | Mandatory?                           |
 | --------------------------- | ------- | ---- | ------------------------------------- |
 | `CodeIsSender`              | `Int32` | `-1` | <center> :heavy_check_mark: </center> |
@@ -56,7 +54,7 @@ ZRC-2 fungible tokens contract consists of the following components in smart con
 | `CodeNotOwner`              | `Int32` | `-4` | <center> :x: </center>                |
 | `CodeNotApprovedOperator`   | `Int32` | `-5` | <center> :x: </center>                |
 
-### Immutable Variables
+### 不可变变量
 | Name                | Type           | Mandatory?                           |
 | ------------------- | -------------- | ------------------------------------- |
 | `contract_owner`    | `ByStr20`      | <center> :heavy_check_mark: </center> |
@@ -66,7 +64,7 @@ ZRC-2 fungible tokens contract consists of the following components in smart con
 | `init_supply`       | `Uint128`      | <center> :heavy_check_mark: </center> |
 | `default_operators` | `List ByStr20` | <center> :x: </center>                |
 
-### Mutable Variables
+### 可变变量
 
 | Name                        | Type                                | Mandatory?                           |
 | --------------------------- | ----------------------------------- | ------------------------------------- |
@@ -76,7 +74,7 @@ ZRC-2 fungible tokens contract consists of the following components in smart con
 | `operators`                 | `Map ByStr20 (Map ByStr20 Unit)`    | <center> :x: </center>                |
 | `revoked_default_operators` | `Map ByStr20 (Map ByStr20 Unit)`    | <center> :x: </center>                |
 
-### Transitions and Events
+### transition 和事件
 
 | Name                  | Events                                | Mandatory?                           |
 | --------------------- | ------------------------------------- | ------------------------------------- |
@@ -91,15 +89,14 @@ ZRC-2 fungible tokens contract consists of the following components in smart con
 | `TransferFrom()`      | `TransferFromSuccess`, `Error`        | <center> :heavy_check_mark: </center> |
 | `OperatorSend()`      | `OperatorSendSuccess`, `Error`        | <center> :x: </center>                |
 
-## Checking if Contract is Compliant with ZRC-2 Standard
+## 检查合约是否符合 ZRC-2 标准
 
-In order to check if the address entered by the user is a ZRC-2 compliant contract, we need to look at the contract code and check if it has the required properties.
- 
-### Check Immutable Variables
+为了检查用户输入的地址是否是符合 ZRC-2 的合约，我们需要查看合约代码并检查它是否具有所需的属性。
 
-For immutable variables, we'll use the `GetSmartContractInit` method of the Zilliqa API to get the immutable variables of the contract.
-The address of the ZRC-2 contract referred below is `0x173Ca6770Aa56EB00511Dac8e6E13B3D7f16a5a5`.
-#### Example Request
+### 检查不可变变量
+
+对于不可变变量，我们将使用 Zilliqa API 的 `GetSmartContractInit` 方法来获取合约的不可变变量。下面提到的 ZRC-2 合约的地址是`0x173Ca6770Aa56EB00511Dac8e6E13B3D7f16a5a5`。
+#### 请求示例
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -171,7 +168,7 @@ func GetSmartContractInit() {
 </TabItem>
 </Tabs>
 
-#### Example Response
+#### 响应示例
 
 ```json
 {
@@ -232,12 +229,12 @@ func GetSmartContractInit() {
 }
 ```
 
-The response received consists of the `type`, `value`, and `vname` for each immutable variable.
+收到的响应由每个不可变变量的 `type`、`value` 和 `vname` 组成。
 
-To check whether a contract is compliant with the ZRC-2 standard's immutable variables requirement, see if the contract implements the [mandatory immutable variables](#immutable-variables).
+要检查合约是否符合 ZRC-2 标准的不可变变量要求，请查看合约是否实现了[强制性不可变变量](#immutable-variables)。
 
 :::note
-This code snippet is in JavaScript but the same logic can be applied in other languages.
+此代码片段使用 JavaScript，但相同的逻辑可以应用于其他语言。
 :::
 
 ```js 
@@ -251,12 +248,11 @@ let isZRC2 = vNameArray.includes("name") && vNameArray.includes("symbol") && vNa
 console.log(isZRC2);
 ```
 
-### Check Mutable Variables
+### 检查可变变量
 
-For mutable variables, we'll use the `GetSmartContractState` method of the Zilliqa API to get the mutable variables of the contract.
-The address of the ZRC2 contract referred below is `0x173Ca6770Aa56EB00511Dac8e6E13B3D7f16a5a5`.
+对于可变变量，我们将使用 Zilliqa API 的 `GetSmartContractState` 方法来获取合约的可变变量。 下面提到的 ZRC2 合约的地址是`0x173Ca6770Aa56EB00511Dac8e6E13B3D7f16a5a5`。
 
-#### Example Request
+#### 请求示例
 
 <Tabs
   defaultValue="cURL"
@@ -324,7 +320,7 @@ func GetSmartContractState() {
 </TabItem>
 </Tabs>
 
-#### Example Response
+#### 响应示例
 
 ```json
 {
@@ -351,12 +347,12 @@ func GetSmartContractState() {
     }
 }
 ```
-The response received above consists of the mutable variables `total_supply`, `balances`, and `allowances`.
+上面收到的响应由可变变量 `total_supply`、`balances` 和 `allowances` 组成。
 
-To check whether a contract is compliant with the ZRC-2 standard's mutable variables requirement, see if the contract implements the [mandatory mutable variables](#mutable-variables).
+要检查合约是否符合 ZRC-2 标准的可变变量要求，请查看合约是否实现了[强制性可变变量](#mutable-variables)。
 
 :::note
-This code snippet is in JavaScript but the same logic can be applied in other languages.
+此代码片段使用 JavaScript，但相同的逻辑可以应用于其他语言。
 :::
 
 ```js 
@@ -370,19 +366,17 @@ let isZRC2 = vNameArray.includes("total_supply") && vNameArray.includes("balance
 console.log(isZRC2);
 ```
 
-### Check Transitions, Events, and Error Codes
+### 检查 Transition、事件和错误代码
 
-Currently, you need to look at the smart contract code manually and check for transitions, events, and error codes in a contract. To check whether a contract is compliant with the ZRC-2 standard's error codes - as well transitions and events - requirement, see if the contract implements the [mandatory error codes](#error-codes) and [mandatory transitions and events](#transitions-and-events).
+目前，你需要手动查看智能合约代码并检查合约中的 Transition、事件和错误代码。 要检查合约是否符合 ZRC-2 标准的错误代码 - 以及 Transition 和事件 - 的要求，请查看合约是否实现了[强制性错误代码](#error-codes) 和 [强制性转换和事件](#immutable-variables)。
 
-## Integrating with ZRC-2 Fungible Tokens Contract
+## 与 ZRC-2 同质化代币合约集成
 
-### Fetch Token Supply
+### 获取代币供应量
 
-In a ZRC-2 fungible tokens contract, the mutable field `total_supply` stores the value of the current total supply. 
-We'll use the `GetSmartContractState` method of the Zilliqa API to get the mutable variables of the contract.
-The address of the ZRC-2 contract referred below is `0x173Ca6770Aa56EB00511Dac8e6E13B3D7f16a5a5`.
+在 ZRC-2 同质化代币合约中，可变字段 `total_supply` 存储当前的总供应量。 我们将使用 Zilliqa API 的 `GetSmartContractState` 方法来获取合约的可变变量。 下面提到的 ZRC-2 合约的地址是`0x173Ca6770Aa56EB00511Dac8e6E13B3D7f16a5a5`。
 
-#### Example Request
+#### 请求示例
 
 <Tabs
   defaultValue="cURL"
@@ -450,7 +444,7 @@ func GetSmartContractState() {
 </TabItem>
 </Tabs>
 
-#### Example Response
+#### 响应示例
 
 ```json
 {
@@ -478,20 +472,18 @@ func GetSmartContractState() {
 }
 ```
 
-If the response json received above is stored in the variable `smartContractState`, total supply would then be:
+如果上面收到的响应 json 存储在变量 `smartContractState` 中，则总供应量将是：
 
 ```js 
 let smartContractState = await zilliqa.blockchain.getSmartContractState(contractAddress);
 let totalSupply = smartContractState.result.total_supply;  // Total Supply  
 ```
 
-### Fetch Token Balance
+### 获取代币余额
 
-In a ZRC-2 fungible tokens contract, the mutable field `balances` (with data type `Map`) stores the mapping between addresses and their 
-corresponding token balances. We'll use the `GetSmartContractState` method of the Zilliqa API to get the mutable variables of the contract.
-The address of the ZRC-2 contract referred below is `0x173Ca6770Aa56EB00511Dac8e6E13B3D7f16a5a5`.
+在 ZRC-2 同质化代币合约中，可变字段 `balances`（数据类型为 `Map`）存储地址与其对应的代币余额之间的映射。 我们将使用 Zilliqa API 的 `GetSmartContractState` 方法来获取合约的可变变量。 下面提到的 ZRC-2 合约的地址是`0x173Ca6770Aa56EB00511Dac8e6E13B3D7f16a5a5`。
 
-#### Example Request
+#### 请求示例
 
 <Tabs
   defaultValue="cURL"
@@ -559,7 +551,7 @@ func GetSmartContractState() {
 </TabItem>
 </Tabs>
 
-#### Example Response
+#### 响应示例
 
 ```json
 {
@@ -587,17 +579,17 @@ func GetSmartContractState() {
 }
 ```
 
-If the value of user's address is stored in the variable `userAddress`, and the response json received above is stored in the variable `smartContractState`, a user's token balance would then be:
+如果用户地址的值存储在变量 `userAddress` 中，并且上面收到的响应 json 存储在变量 `smartContractState` 中，那么用户的代币余额将是：
 
 ```js 
 smartContractState.result.balances[userAddress]
 ```
 
-### Transfer Token
+### 代币转账
 
-ZRC-2 contracts have the `transfer` transition that allows users to transfer tokens to another address by specifying the receiving address and amount.
+ZRC-2 合约具有 transition  `transfer`，允许用户通过指定接收地址和金额将代币转移到另一个地址。
 
-The code snippet below illustrates how one can transfer ZRC-2 tokens to another address.
+下面的代码片段说明了如何将 ZRC-2 代币转移到另一个地址。
 
 <Tabs
   defaultValue="js"
@@ -703,14 +695,13 @@ wallet := account.NewWallet()
 </TabItem>
 </Tabs>
 
-### Adding Token Allowance
+### 增加代币额度
 
-The Zilliqa blockchain allows transactions with smart contracts and those smart contracts can be facilitated by third parties like a DEX or a protocol relayer – permissions have to be granted to the third party by token owners before those smart contracts can execute.
-Token allowance permission gives the dApp contract the right to transfer the user's ZRC-2 token if the current approved allowance is equal to or more than `amount` requested to being transferred. The approval is done by calling `IncreaseAllowance` transition.
+Zilliqa 区块链允许使用智能合约进行交易，并且这些智能合约可以由 DEX 或协议中继器等第三方促进——在这些智能合约可以执行之前，代币所有者必须向第三方授予权限。 如果当前批准的配额等于或大于请求转移的 `amount`，则代币配额许可赋予 dApp 合约转移用户 ZRC-2 代币的权利。 批准是通过调用 transition `IncreaseAllowance` 完成的。
 
-In the example below, the allowance amount is the same as the entire token supply. This is done so that the approval needs to only be done once per token contract, reducing the number of approval transactions required for users conducting multiple swaps. 
+在下面的示例中，配额量与整个代币供应量相同。 这样做是为了使每个代币合约只需进行一次批准，从而减少用户进行多次交换所需的批准交易数量。
 
-However, you can make this value to be specific as well. Non-custodial control of the token should be ensured by the dApp contract itself, which does not allow for the transfer of tokens unless explicitly invoked by the sender.
+但是，你也可以将此值设为特定值。 代币的非托管控制应由 dApp 合约本身来确保，除非发送方明确调用，否则不允许转移代币。
 
 <Tabs
   defaultValue="js"
@@ -773,12 +764,9 @@ let increaseAllowance = async function (contractAddress, spenderAddress){
 
 
 
-### Calling TransferFrom 
+### 调用 TransferFrom 
 
-`TransferFrom` transition moves a given amount of tokens from one address to another using the allowance mechanism. 
-The caller must be an `approved_spender`, refer the section on [Adding Token Allowance](dev-keys-zrc2-wallet-support#adding-token-allowance) 
-if you want to add an address to become an approved_sender.
-Balance of recipient will increase and the balance of `token_owner` will decrease.                                                           
+transition  `TransferFrom` 使用限额机制将给定数量的代币从一个地址移动到另一个地址。 调用者必须是一个 `approved_spender`，如果你想添加一个地址成为一个 approved_sender，请参考 [添加代币额度](dev-keys-zrc2-wallet-support#adding-token-allowance) 部分。 接收者的余额会增加，`token_owner` 的余额会减少。
 
 <Tabs
   defaultValue="js"
@@ -840,26 +828,25 @@ let transferFrom = async function (contractAddress, userAddress, receiverAddress
 
 
 
-## Tracking Incoming ZRC-2 Deposit
+## 跟踪传入的 ZRC-2 存款
 
-Please check the [Tracking Incoming ZRC-2 Deposit](../exchanges/exchange-managing-zrc2-tokens#tracking-incoming-zrc-2-deposit) subsection
-under exchanges section to track any new incoming deposit of a specific ZRC-2 token.
-
-
-## Getting your Token Listed
-
-You can get your token listed on various Zilliqa ecosystem products to allow for easier recognition by your community.
-
-### Listing on [Zilswap](https://zilswap.io/)
-
-To add your token to the token listed on Zilswap, please refer the README.md file on this [repository](https://github.com/Switcheo/zilswap-token-list).
-
-[Zilpay wallet](https://zilpay.xyz/) also refers to the listed tokens list on Zilswap when deciding which tokens to add to their default list.
-
-### Listing on [Viewblock](https://viewblock.io/zilliqa)
-
-To add your token to [Viewblock tokens listing page](https://viewblock.io/zilliqa/tokens), please refer to the README.md file on this [repository](https://github.com/Ashlar/cryptometa.git). Viewblock will assign a score to your token based on the stated token listing criteria.
+请检查交易所部分下的 [跟踪传入 ZRC-2 存款](../exchanges/exchange-managing-zrc2-tokens#tracking-incoming-zrc-2-deposit) 小节以跟踪任何新传入的特定 ZRC-2 代币。
 
 
-## Other References
-- [Sample codes for various ZRC-2 operations](https://github.com/Zilliqa/ZRC/tree/master/example/zrc2)
+## 上架代币
+
+你可以在各种 Zilliqa 生态系统产品上上架代币，以便你的社区更容易识别。
+
+### 上架 [Zilswap](https://zilswap.io/)
+
+要将你的代币上架到 Zilswap 上，请参阅此 [GitHub仓库](https://github.com/Switcheo/zilswap-token-list) 上的 README.md 文件。
+
+[Zilpay 钱包](https://zilpay.xyz/) 在决定将哪些代币添加到其默认列表时，也会参考 Zilswap 上上架的代币列表。
+
+### 上架 [Viewblock](https://viewblock.io/zilliqa)
+
+要将你的代币上架到 [Viewblock 代币列表页面](https://viewblock.io/zilliqa/tokens)，请参阅此 [GitHub仓库](https://github.com/Ashlar/cryptometa) 上的 README.md 文件 .git）。 Viewblock 将根据规定的代币列表标准为你的代币打分。
+
+
+## 其他参考
+- [其他 ZRC-2 操作的示例代码](https://github.com/Zilliqa/ZRC/tree/master/example/zrc2)

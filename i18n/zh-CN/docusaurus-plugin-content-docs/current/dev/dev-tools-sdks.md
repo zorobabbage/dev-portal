@@ -1,6 +1,6 @@
 ---
 id: dev-tools-sdks
-title: Other SDKs
+title: 其他 SDK
 keywords: 
 - sdks
 - other
@@ -25,13 +25,11 @@ description: Zilliqa Community Maintained SDKs
 
 ---
 
-Zilliqa has a number of SDKs implemented in various programming languages. If yours is not
-listed here, please [create a PR](https://github.com/Zilliqa/dev-portal/pulls)
-on this repository.
+Zilliqa 拥有许多以各种编程语言实现的 SDK。 如果这里没有列出你需要的，请在这个仓库上[创建一个 PR](https://github.com/Zilliqa/dev-portal/pulls)。
 
-[zilliqa-js](https://github.com/Zilliqa/Zilliqa-Javascript-Library), [gozilliqa (formerly laksago)](https://github.com/Zilliqa/gozilliqa-sdk) and [laksaj](https://github.com/FireStack-Lab/LaksaJ) are active SDKs maintained by the Zilliqa core team but the zilliqa community members also actively maintain multiple SDKs.
+[zilliqa-js](https://github.com/Zilliqa/Zilliqa-Javascript-Library), [gozilliqa (以前的 laksago)](https://github.com/Zilliqa/gozilliqa-sdk) 和 [laksaj]( https://github.com/FireStack-Lab/LaksaJ) 是由 Zilliqa 核心团队维护的活跃 SDK，但 zilliqa 社区成员也积极维护多个 SDK。
 
-## SDKs Maintained By the Community
+## 社区维护的 SDK
 
 **JavaScript/TypeScript**
 - [zilliqa-js/viewblock](https://github.com/Ashlar/zilliqa-js-viewblock)
@@ -53,9 +51,9 @@ on this repository.
 **Dart**
 - [laksadart](https://github.com/FireStack-Lab/LaksaDart)
 
-## SDKs Discontinued
+## 不再维护的 SDK
 
-Listed below are SDKs not longer maintained
+下面列出的是不再维护的 SDK
 
 **Go**
 - [zilean](https://github.com/GincoInc/zillean)

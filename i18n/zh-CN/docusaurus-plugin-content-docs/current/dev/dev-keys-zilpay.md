@@ -16,32 +16,29 @@ description: Zilpay Zilliqa Browser Extension Wallet
 
 ---
 
-ZilPay is an [open source](https://github.com/zilpay/zil-pay) browser add-on that manages a user’s Zilliqa wallet and can be used on Chrome, Firefox and Opera browsers.
-It does not store any user's private keys on a remote server. Instead they are password protected and stored on browser storage.
-It is a non-custodial wallet, meaning, the user has full access and responsibility for their private key. 
+ZilPay 是一个[开源](https://github.com/zilpay/zil-pay) 浏览器插件，用于管理用户的 Zilliqa 钱包，可用于 Chrome、Firefox 和 Opera 浏览器。 它不会在远程服务器上存储任何用户的私钥。 相反，它们受密码保护并存储在浏览器存储中。 它是一个非托管钱包，这意味着用户对他们的私钥有完全的访问权和责任。
 
-## Detecting ZilPay
+## 检测 ZilPay
 
-ZilPay injects a global API into websites visited by its users at 
-    ```window.zilPay```. This API allows websites to request user login, load data from the blockchain and prompt the user to sign messages and transactions.
+ZilPay 使用 ```window.zilPay``` 将全局 API 注入其用户访问的网站。 该 API 允许网站请求用户登录、从区块链加载数据并提示用户签署消息和交易。
 
-To check if the user has ZilPay installed, here is a sample code
+要检查用户是否安装了 ZilPay，这里有一个示例代码
  ```typescript
  (typeof window.zilPay !== 'undefined') { /* do something */ }
  ```
 
-## Connecting Your dApp With ZilPay
+## 将你的 dApp 与 ZilPay 连接起来
 
-You need to ask once for the user's permission to connect your dApp to their ZilPay wallet. The following is a sample code for requesting the permission
+你需要询问用户是否允许将你的 dApp 连接到他们的 ZilPay 钱包。 以下是请求权限的示例代码
 ```typescript
 window.zilPay.wallet.connect()
 ```
-This is a promise-returning method that resolves with a `Boolean` value. `true` value indicates that the user accepts your connect request and `false` value indicates rejection.
+这是一个返回 promise 的方法，它使用 `Boolean` 值进行解析。 `true` 值表示用户接受你的连接请求，而 `false` 值表示拒绝。
 
-## Accessing User Accounts
-Once you have connected to a user's ZilPay wallet, you can check the current account information through ```window.zilPay.wallet.defaultAccount```.
+## 访问用户帐户
+连接到用户的 ZilPay 钱包后，您可以通过 ```window.zilPay.wallet.defaultAccount``` 查看当前账户信息。
 
-If you will like to be notified when the user changes the account or network, you can subscribe to relevant events
+如果你希望在用户更改帐户或网络时收到通知，你可以订阅相关事件
 ```typescript
 window.zilPay.wallet.observableAccount().subscribe(function (account) {
     // ... When the user changes account
@@ -51,10 +48,10 @@ window.zilPay.wallet.observableNetwork().subscribe(function (net) {
 });
 ```
 
-## API Reference
-ZilPay provides a set of documentation for your references
-- [Provider API](https://zilpay.xyz/Documentation/zilliqa-provider/)
-- [Blockchain related APIs](https://zilpay.xyz/Documentation/zilliqa-api-blockchain/)
-- [Crypto related APIs](https://zilpay.xyz/Documentation/zilliqa-api-crypto/)
-- [Utils related APIs](https://zilpay.xyz/Documentation/zilliqa-api-utils/)
-- [Contract related APIs](https://zilpay.xyz/Documentation/zilliqa-contracts/)
+## API 参考
+ZilPay 提供了一组文档供你参考
+- [提供者 API](https://zilpay.xyz/Documentation/zilliqa-provider/)
+- [区块链相关 API](https://zilpay.xyz/Documentation/zilliqa-api-blockchain/)
+- [加密相关 API](https://zilpay.xyz/Documentation/zilliqa-api-crypto/)
+- [Utils 相关 API](https://zilpay.xyz/Documentation/zilliqa-api-utils/)
+- [合约相关 API](https://zilpay.xyz/Documentation/zilliqa-contracts/)

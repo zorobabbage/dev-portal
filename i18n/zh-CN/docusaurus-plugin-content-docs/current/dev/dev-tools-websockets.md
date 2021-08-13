@@ -1,6 +1,6 @@
 ---
 id: dev-tools-websockets
-title: WebSocket Server
+title: WebSocket 服务器
 keywords: 
 - websockets
 - txblock
@@ -13,32 +13,32 @@ description: Zilliqa Websockets
 
 ---
 
-This page describes the protocol - between the Zilliqa WebSocket Server and the SDK client - for querying subscription and message pushing.
+本页面介绍了 Zilliqa WebSocket 服务器 和 SDK 客户端之间的协议，用于查询订阅和消息推送。
 
-## Introduction
+## 介绍
 
-Zilliqa WebSocket Server provides WebSocket service, enabling dApp developers or other builders on Zilliqa blockchain to subscribe to specific topics (e.g., a new block has been produced, the payment transaction has been confirmed, events issued by smart contracts). With the WebSocket service, developers no longer need to poll the blockchain routinely to get specific information.
+Zilliqa WebSocket Server 提供 WebSocket 服务，使 Zilliqa 区块链上的 dApp 开发者或其他构建者能够订阅特定主题（例如，新区块已产生、支付交易已确认、智能合约发出的事件）。 使用 WebSocket 服务，开发人员不再需要定期轮询区块链以获取特定信息。
 
-| Network | Endpoint |
+| 网络 | Endpoint |
 | ------- | ---- |
-| Mainnet | wss://api-ws.zilliqa.com |
-| Testnet | wss://dev-ws.zilliqa.com |
+| 主网 | wss://api-ws.zilliqa.com |
+| 测试网 | wss://dev-ws.zilliqa.com |
 
-## Feature Workflow
+## 功能工作流
 
-Clients can subscribe to or unsubscribe from certain topics by sending a query. If the query fails, clients will normally be informed immediately through a relevant error message. For every Tx block, the subscribed content will be sent out by the server to each client in one message. This message (herein referred to as the **notification**) includes an array that contains all the updates to subscribed topics.
+客户端可以通过发送查询来订阅或取消订阅某些主题。 如果查询失败，通常会立即通过相关错误消息通知客户端。 对于每个 Tx 块，订阅的内容将由服务器在一条消息中发送给每个客户端。 此消息（此处称为**通知**）包括一个数组，其中包含对订阅主题的所有更新。
 
-## Supported Query
+## 支持的查询
 
-The following types of data are currently supported for querying:
+目前支持查询以下类型的数据：
 
-- **New TxBlock**. This includes the recently generated Tx block and hashes of all the transactions processed within this block.
-- **Event log**. This includes all the event logs generated for the specified contract address.
-- **Unsubscribe**. This tells the server to unsubscribe the client from a certain topic.
+- **新的 TxBlock**。 这包括最近生成的 Tx 块和该块内处理的所有交易的哈希值。
+- **事件日志**。 这包括为指定的合约地址生成的所有事件日志。
+- **取消订阅**。 这告诉服务器取消客户端对某个主题的订阅。
 
-## Exception Handling
+## 异常处理
 
-An **error message** will usually be sent to the client if a query fails:
+如果查询失败，通常会向客户端发送**错误消息**：
 
 ```json
 {
@@ -47,15 +47,15 @@ An **error message** will usually be sent to the client if a query fails:
 }
 ```
 
-The following error message applies to all kinds of invalid queries:
+以下错误消息适用于所有类型的无效查询：
 
-- **invalid query field**. This informs the client that the query is invalid, cannot be found, empty, malformed, or not available.
+- **invalid query field**。 这会通知客户端查询无效、无法找到、为空、格式错误或不可用。
 
-## Message Encoding
+## 消息编码
 
-For convention, we still use JSON as our encoding format.
+按照惯例，我们仍然使用 JSON 作为我们的编码格式。
 
-The epoch message will be presented in this way:
+epoch 消息会以这种方式呈现：
 
 ```json
 {
@@ -128,11 +128,11 @@ The epoch message will be presented in this way:
 }
 ```
 
-The following sections provide the details for each subscription topic.
+以下部分提供了每个订阅主题的详细信息。
 
-### Subscribe New Block
+### 订阅新区块
 
-#### Query Message
+#### 查询消息
 
 ```json
 {
@@ -140,15 +140,15 @@ The following sections provide the details for each subscription topic.
 }
 ```
 
-#### Response Message
+#### 回应消息
 
-Once successfully subscribed, the server will echo the query message to the client. Otherwise, the server will return an error message.
+成功订阅后，服务器将向客户端回显查询消息。 否则，服务器将返回错误消息。
 
-#### Error Messages Specific to this Topic
+#### 特定于本主题的错误消息
 
-None
+无
 
-#### Sample Notification
+#### 通知示例
 
 ```json
 {
@@ -198,9 +198,9 @@ None
 }
 ```
 
-### Subscribe Event Log
+### 订阅事件日志
 
-#### Query Message
+#### 查询消息
 
 ```json
 {
@@ -212,14 +212,14 @@ None
 }
 ```
 
-#### Response Message
+#### 回应消息
 
-Once successfully subscribed, the server will echo the query message to the client. Otherwise, the server will return an error message.
+成功订阅后，服务器将向客户端回显查询消息。 否则，服务器将返回错误消息。
 
-#### Error Messages Specific to this Topic
+#### 特定于本主题的错误消息
 
-- **invalid addresses field**. This tells the client that the addresses field is invalid, meaning it could not be found or is either malformed or empty.
-- **no contract found in list**. This tells the client that the addresses provided are all non-contracts.
+- **invalid addresses field**。 这告诉客户端地址字段无效，这意味着它无法找到或者格式错误或为空。
+- **no contract found in list**。 这告诉客户端提供的地址都是非合约的。
 
 #### Sample Notification
 
@@ -252,29 +252,29 @@ Once successfully subscribed, the server will echo the query message to the clie
 }
 ```
 
-Notice that for address `0x1111111111111111111111111111111111111111` is not presented in the message since it doesn't have any event log released in this epoch.
+请注意，对于地址 `0x111111111111111111111111111111111111111` 的地址没有出现在消息中，因为它没有在这个时期发布任何事件日志。
 
-### Subscribe Transaction Log
+### 订阅交易日志
 
-#### Query Message
+#### 查询消息
 
 ```json
 {"query" : "TxnLog" , "addresses" : ["0x42fb82623b9ea0b9dbf41e74304a39908a378cfd"]}
 ```
 
-#### Response Message
+#### 回应消息
 
-Once successfully subscribed, the server will echo the query message to the client. Otherwise, the server will return an error message.
+成功订阅后，服务器将向客户端回显查询消息。 否则，服务器将返回错误消息。
 
-#### Error Messages Specific to this Topic
+#### 特定于本主题的错误消息
 
-- **invalid hex address** . This tells if the address field is a proper 32 byte address.
+- **invalid hex address**。 这表明地址字段不是正确的 32 字节地址。
 
-- **invalid addresses field**. This tells the client that the addresses field is invalid, meaning it could not be found or is either malformed or empty.
+- **invalid addresses field**。 这告诉客户端地址字段无效，这意味着它无法找到或者格式错误或为空。
 
-- **no valid address found in list**. This tells the client that the addresses provided are all invalid.
+- **no valid address found in list**。 这告诉客户端提供的地址都是无效的。
 
-#### Sample Notification
+#### 通知示例
 
 ```json
 {
@@ -302,9 +302,9 @@ Once successfully subscribed, the server will echo the query message to the clie
 ```
 
 
-### Unsubscribe
+### 取消订阅
 
-#### Query Message
+#### 查询消息
 
 ```json
 {
@@ -313,15 +313,15 @@ Once successfully subscribed, the server will echo the query message to the clie
 }
 ```
 
-#### Response Message
+#### 响应消息
 
-Once successfully unsubscribed, the server will echo the query message to the client. Otherwise, the server will return an error message.
+一旦成功取消订阅，服务器将向客户端回显查询消息。 否则，服务器将返回错误消息。
 
-#### Error Messages Specific to this Topic
+#### 特定于本主题的错误消息
 
-- **invalid type field**. This tells the client that the type field is invalid, meaning it could not be found or is either malformed or empty.
+- **invalid type field**。 这告诉客户端类型字段无效，这意味着它无法找到或者格式错误或为空。
 
-#### Sample Notification
+#### 通知示例
 
 ```json
 {
@@ -330,9 +330,9 @@ Once successfully unsubscribed, the server will echo the query message to the cl
 }
 ```
 
-## Example
+## 例子
 
-Client subscribe NewBlock:
+客户端订阅 NewBlock：
 
 ```json
 {
@@ -340,7 +340,7 @@ Client subscribe NewBlock:
 }
 ```
 
-Client subscribe EventLog:
+客户端订阅事件日志：
 
 ```json
 {
@@ -352,7 +352,7 @@ Client subscribe EventLog:
 }
 ```
 
-Client unsubscribe NewBlock:
+客户端取消订阅 NewBlock：
 
 ```json
 {
@@ -361,7 +361,7 @@ Client unsubscribe NewBlock:
 }
 ```
 
-Notification:
+通知：
 
 ```json
 {
@@ -450,13 +450,13 @@ Notification:
 
 ```
 
-After the above message, during the next Tx block, the client will no longer receive a `NewBlock` in the notification.
+上述消息后，在下一个 Tx 块期间，客户端将不再收到通知中的 `NewBlock`。
 
-## Example using zilliqa-js
+## 使用 zilliqa-js 的示例
 
-Our [Zilliqa-JavaScript-Library](https://github.com/Zilliqa/Zilliqa-JavaScript-Library) provides an easier way to subscribe to topics.
+我们的 [Zilliqa-JavaScript-Library](https://github.com/Zilliqa/Zilliqa-JavaScript-Library) 提供了一种更简单的订阅主题的方法。
 
-### Subscribe New Block
+### 订阅新区块
 
 ```js
 const { Zilliqa } = require('@zilliqa-js/zilliqa');
@@ -494,7 +494,7 @@ async function test() {
 test();
 ```
 
-### Subscribe Event Log
+### 订阅事件日志
 
 ```js
 const { Zilliqa } = require('@zilliqa-js/zilliqa');

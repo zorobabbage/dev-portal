@@ -15,24 +15,22 @@ description: Zilliqa Websockets
 ---
 
 ---
-## Introduction
-[zilliqa-js](https://github.com/Zilliqa/Zilliqa-JavaScript-Library) is a Javascript library that allows you to interact with the Zilliqa network nodes - create wallets, deploy contracts, and invoke transitions to interact with smart contracts.
+## 介绍
+[zilliqa-js](https://github.com/Zilliqa/Zilliqa-JavaScript-Library) 是一个 Javascript 库，允许你与 Zilliqa 网络节点进行交互——创建钱包、部署合约和调用 transition 以与智能合约交互。
 
-## Source Code
+## 源代码
 
-The Github repository can be found at [https://github.com/Zilliqa/Zilliqa-JavaScript-Library](https://github.com/Zilliqa/Zilliqa-JavaScript-Library)
+Github 仓库可以在 [https://github.com/Zilliqa/Zilliqa-JavaScript-Library](https://github.com/Zilliqa/Zilliqa-JavaScript-Library) 找到
 
-## Releases
+## 发行版本
 
-All releases of zilliqa-js can be found at [https://www.npmjs.com/package/@zilliqa-js/zilliqa](https://www.npmjs.com/package/@zilliqa-js/zilliqa)
+zilliqa-js 的所有版本都可以在 [https://www.npmjs.com/package/@zilliqa-js/zilliqa](https://www.npmjs.com/package/@zilliqa-js/zilliqa) 找到
 
-Release note can be found at [https://github.com/Zilliqa/Zilliqa-JavaScript-Library/releases](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/releases)
+发行说明可以在 [https://github.com/Zilliqa/Zilliqa-JavaScript-Library/releases](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/releases) 找到
 
-## Installation
+## 安装
 
-It is recommended that developers install the JavaScript client by making use
-of the umbrella package `@zilliqa-js/zilliqa`. This takes care of bootstrapping the various modules, which are then accessible as members of the
-`Zilliqa` class.
+建议开发者使用伞包 `@zilliqa-js/zilliqa` 安装 JavaScript 客户端。 它会引导各种模块，然后可以作为 `Zilliqa` 类的成员访问这些模块。
 
 ```shell
 yarn add @zilliqa-js/zilliqa
@@ -42,26 +40,25 @@ yarn add tslib
 yarn add bn.js
 ```
 
-## Methods and APIs
+## 方法和 API
 
-The following table provides a description of each module of zilliqa-js and what you may want to use it for. Visit the relevant link of each module to find the detailed description about the methods and apis supported by that module.
+下表提供了 zilliqa-js 的每个模块的描述以及不可能想要使用它的目的。访问每个模块的相关链接，可以找到该模块支持的方法和 api 的详细说明。
 
-| package                  | description                                                                                                                                                               | dependencies                                                                            |
-| ---                      | ---                                                                                                                                                                       | ---                                                                                     |
-| [`@zilliqa-js/core`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-core)      | Core abstractions and base classes, such as `HTTPProvider` and network logic for interfacing with the Zilliqa JSON-RPC.                                                   | none                                                                                    |
-| [`@zilliqa-js/account`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-account)     | `Wallet`, `Account` and `Transaction` abstractions live in this package.                                                                                                  | `@zilliqa-js/core`, `@zilliqa-js/crypto`, `@zilliqa-js/util`, `@zilliqa-js/proto`       |
-| [`@zilliqa-js/blockchain`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-blockchain) | Main interface to the Zilliqa `JSON-RPC`.                                                                                                                                 | none                                                                                    |
-| [`@zilliqa-js/contract`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-contract)   | Exposes a `Contracts` module that takes care of smart contract deployment and interaction.                                                                                | `@zilliqa-js/account`, `@zilliqa-js/blockchain`, `@zilliqa-js/core`, `@zilliqa-js/util` |
-| [`@zilliqa-js/crypto`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-crypto)     | Exposes several loosely-coupled cryptographic convenience functions for working with the Zilliqa blockchain and its cryptographic primitives, such as Schnorr signatures. | `@zilliqa-js/util`                                                                      |
-| [`@zilliqa-js/proto`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-proto)      | Protobuf source files and corresponding generated JS modules.                                                                                                             | none                                                                                    |
-| [`@zilliqa-js/util`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-util)       | Miscellaneous functions that take care of serialisation/deserialisation and validation.                                                                                   | none                                                                                    |
-| [`@zilliqa-js/viewblock`](https://github.com/Ashlar/zilliqa-js-viewblock)       | Library interfacing with ViewBlock's APIs                                                                                   | `@zilliqa-js/crypto`                                                                                    |
+| package | 描述 | 依赖 |
+| --- | --- | --- |
+| [`@zilliqa-js/core`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-core)      | 核心抽象和基类，例如 `HTTPProvider` 和用于与 Zilliqa JSON-RPC 接口交互的网络逻辑。                                                   | 无                                                                                    |
+| [`@zilliqa-js/account`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-account)     | `Wallet`、`Account` 和 `Transaction` 抽象存在于这个包中。                                                                                                  | `@zilliqa-js/core`, `@zilliqa-js/crypto`, `@zilliqa-js/util`, `@zilliqa-js/proto`       |
+| [`@zilliqa-js/blockchain`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-blockchain) | Zilliqa `JSON-RPC` 的主接口。                                                                                                                                | 无                                                                                    |
+| [`@zilliqa-js/contract`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-contract)   | 暴露一个 `Contracts` 模块，负责智能合约的部署和交互。                                                                                | `@zilliqa-js/account`, `@zilliqa-js/blockchain`, `@zilliqa-js/core`, `@zilliqa-js/util` |
+| [`@zilliqa-js/crypto`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-crypto)     | 暴露了几个松散耦合的加密便利函数，用于处理 Zilliqa 区块链及其加密原语，例如 Schnorr 签名。 | `@zilliqa-js/util`                                                                      |
+| [`@zilliqa-js/proto`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-proto)      | Protobuf 源文件和相应生成的 JS 模块。                                                                                                             | 无                                                                                    |
+| [`@zilliqa-js/util`](https://github.com/Zilliqa/Zilliqa-JavaScript-Library/tree/dev/packages/zilliqa-js-util)       | 处理序列化/反序列化和验证的杂项功能。                                                                                   | 无                                                                                    |
+| [`@zilliqa-js/viewblock`](https://github.com/Ashlar/zilliqa-js-viewblock)       | 与 ViewBlock 的 API 接口交互的库                                                                                   | `@zilliqa-js/crypto`                                                                                    |
 
-## Demo - ZRC-2 Wallet
-For this demo, we'll be looking at the zilliqa-js related code of a simple ZRC-2 wallet, [ZRC-2](https://github.com/Zilliqa/ZRC/blob/master/zrcs/zrc-2.md) is a standard for fungible tokens on Zilliqa. 
-The full code can be found at [ZRC-2 Wallet Repository](https://github.com/arnavvohra/dev-portal-examples/tree/master/zrc-2-wallet). This repository is written in React but the zilliqa-js methods & APIs can be used with any javascript framework.
+## 演示 - ZRC-2 钱包
+对于这个演示，我们将查看一个简单的 ZRC-2 钱包的 zilliqa-js 相关代码，[ZRC-2](https://github.com/Zilliqa/ZRC/blob/master/zrcs/zrc- 2.md) 是 Zilliqa 上同质化代币的标准。 完整代码可以在 [ZRC-2 钱包仓库](https://github.com/arnavvohra/dev-portal-examples/tree/master/zrc-2-wallet) 中找到。 这个仓库是用 React 编写的，但是 zilliqa-js 方法和 API 可以与任何 javascript 框架一起使用。
 
-#### Generating Private Key and Address from Encrypted Wallet and a Passphrase
+#### 从加密钱包和密码短语生成私钥和地址
 ```javascript
 import { decryptPrivateKey, getAddressFromPrivateKey} from '@zilliqa-js/crypto';
 let keystore = JSON.parse(this.state.encryptedWallet);
@@ -69,7 +66,7 @@ const pk = await decryptPrivateKey(this.state.passphrase, keystore);
 const address =  getAddressFromPrivateKey(pk);
 ```
 
-#### Getting User's $ZIL Balance
+#### 获取用户的 $ZIL 余额
 ```javascript
 const {Zilliqa} = require('@zilliqa-js/zilliqa');
 const zilliqa = new Zilliqa('https://dev-api.zilliqa.com');
@@ -80,7 +77,7 @@ if(balanceState){
 }
 ```
 
-#### Getting User's Token Balance
+#### 获取用户的代币余额
 ```javascript
 let userAddress = localStorage.getItem("userAddress");//userAddress is retrieved from localStorage in this example
 const {Zilliqa} = require('@zilliqa-js/zilliqa');
@@ -94,7 +91,7 @@ if(smartContractState){
 }
 ```
 
-#### Sending Tokens to Another Address by Calling 'Transfer' Transition of the ZRC-2 Contract
+#### 通过调用 ZRC-2 合约的 Transition  “Transfer” 将代币发送到另一个地址
 
 ```javascript
 sendTransaction = async() => {

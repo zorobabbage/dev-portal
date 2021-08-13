@@ -1,6 +1,6 @@
 ---
 id: dev-upgrade-v8
-title: v8.0.0 Upgrade Notice
+title: v8.0.0 升级通知
 keywords: 
 - upgrade
 - v8.0.0
@@ -10,64 +10,63 @@ description: Zilliqa v8.0.0 upgrade notice
 
 ---
 
-Zilliqa version `8.0.0` consists of numerous significant changes. This page summarizes some of the major changes that developers and exchanges will need to take note of. The full release note of `v8.0.0` is available [here](https://github.com/Zilliqa/Zilliqa/releases/tag/v8.0.0).
+Zilliqa 8.0.0 版包含许多重大更改。 此页面总结了开发人员和交易所需要注意的一些主要变化。 `v8.0.0` 的完整发行说明可在 [此处](https://github.com/Zilliqa/Zilliqa/releases/tag/v8.0.0) 获得。
 
-## Upgrade Duration
+## 升级时间
 
-|               | Date/Time                       |
+|               | 日期/时间                       |
 |-------------- | ------------------------------- |
-| Upgrade start | Tuesday 11th May 2021 05:00 UTC |
-| Upgrade end   | Tuesday 11th May 2021 11:00 UTC |
+| 升级开始 | 2021 年 5 月 11 日星期二 05:00 UTC |
+| 升级结束   | 2021 年 5 月 11 日星期二 11:00 UTC |
 
-## Core Protocol Updates
+## 核心协议更新
 
-### 1) Faster block production rate
+### 1) 更快的出块速度
 
-We have made some changes to our pBFT (Practical Byzantine Fault Tolerance) consensus and transaction dispatching and processing implementation. This allows for faster block production rate.
+我们对我们的 pBFT（实用拜占庭容错）共识和交易调度以及处理实现进行了一些更改。 这允许更快的块生产速度。
 
-|| Before `v8.0.0` | `v8.0.0` |
+|| `v8.0.0` 之前 | `v8.0.0` |
 | --------------- | -------------- | ------- |
-| Peak final block production time | 40 seconds     | 29 seconds |
-| Expected Tx block count per 24 hours | ~1600 Tx blocks | ~2200 Tx blocks |
+| 最终区块产生最大时间 | 40 秒     | 29 秒 |
+| 每 24 小时的预期 Tx 块数 | ~1600 Tx 区块 | ~2200 Tx 区块 |
 
-References:
-- [`ZIP-14 - Revised pBFT Consensus`](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-14.md)
-- [`Revised pBFT consensus with txn processing implementation`](https://github.com/Zilliqa/Zilliqa/pull/2216)
+参考：
+- [`ZIP-14 - 修订后的 pBFT 共识`](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-14.md)
+- [`经过修改的 pBFT 共识与 txn 处理实现`](https://github.com/Zilliqa/Zilliqa/pull/2216)
 
-### 2) Block reward adjustment 
+### 2) 区块奖励调整
 
-Faster block production rate will result in an increase in inflation rate. Zilliqa `v8.0.0` will not include any adjustment to the current inflation rate. Instead, in order to preserve the current inflation rate, the reward allocated per DS epoch will be decreased from 275,000 $ZIL per DS block to 176,000 $ZIL per DS block. We will update the `COINBASE_REWARD_PER_DS`as follows:
+更快的区块生产速度将导致通货膨胀率的增加。 Zilliqa `v8.0.0` 将不包括对当前通货膨胀率的任何调整。 相反，为了保持当前的通货膨胀率，每个 DS 时期分配的奖励将从每个 DS 块 275,000 $ZIL 减少到每个 DS 块 176,000 $ZIL。 我们将对 `COINBASE_REWARD_PER_DS` 进行如下更新：
 
-|| Before `v8.0.0` | `v8.0.0` |
+|| `v8.0.0` 之前 | `v8.0.0` |
 | --------------- | -------------- | ------- |
 | `COINBASE_REWARD_PER_DS` | 275000000000000000 | 176000000000000000 |
 
-Please note that this change is considered an interim change. If the block production rate deviates from the expected value significantly, a new governance proposal can be introduced to adjust the value in subsequent Mainnet upgrades.
+请注意，此更改被视为临时更改。 如果出块率明显偏离预期值，可以引入新的治理提案，在后续的主网升级中调整该值。
 
-### 3) Payment transaction gas unit increase from 1 to 50 
+### 3）支付交易 gas 单位从1增加到50
 
-As per [ZIP-18](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-18.md), which passed Zilliqa governance vote, the gas unit of payment transaction will be adjusted from 1 to 50 gas unit. We will update `NORMAL_TRAN_GAS` as follows:
+根据通过 Zilliqa 治理投票的 [ZIP-18](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-18.md)，支付交易的 gas 单位将从1调整到 50 gas 单位。 我们将对 `NORMAL_TRAN_GAS` 进行如下更新：
 
-|| Before `v8.0.0` | `v8.0.0` |
+|| `v8.0.0` 之前 | `v8.0.0` |
 | --------------- | -------------- | ------- |
 | `NORMAL_TRAN_GAS` | 1 | 50 |
 
 
-When handling payment transactions, developers and exchanges will need to call `CreateTransaction` with `gasLimit` set to at least `50` instead of `1` from `v8.0.0` onwards. As a result of this change, the minimal cost of a payment transaction fee will increase from 0.002 $ZIL to 0.1 $ZIL assuming the lowest gas price. 
+从 `v8.0.0` 开始，在处理支付交易时，开发者和交易所需要调用 CreateTransaction 并将 `gasLimit` 设置为至少 `50` 而不是 `1`。 由于这一变化，支付交易费用的最低成本将从 0.002 $ZIL 增加到 0.1 $ZIL（假设最低 gas 价格）。
 
 :::important
-1. Smart contract transaction gas unit remains unchanged.
-2. Developers and exchanges may proceed to make the `gasLimit` change above even before `v8.0.0` is deployed. Until the deployment, the payment transaction fee will continue to be 0.002 $ZIL, with or without the `gasLimit` change.
+1. 智能合约交易 gas 单位不变。
+2. 开发者和交易所可能会在部署了 `v8.0.0` 之前继续对 `gasLimit` 进行更改。 在部署之前，无论是否有 `gasLimit` 变化，支付交易费用将继续为 0.002 $ZIL。
 :::
 
-### 4) Deprecation and removal of `GetPendingTxn` and `GetPendingTxns` API
+### 4) 弃用和移除 `GetPendingTxn` 和 `GetPendingTxns` API
 
-Since `v7.0.0`, we have released a new API [`GetTransactionStatus`](https://dev.zilliqa.com/docs/apis/api-transaction-get-transaction-status) which 
-tracks transaction status during the transactional lifetime. `GetPendingTxn` and `GetPendingTxns` will be removed with effect from `v8.0.0`.
+从 `v7.0.0` 开始，我们发布了一个新的 API [`GetTransactionStatus`](https://dev.zilliqa.com/docs/apis/api-transaction-get-transaction-status)，它在交易处理期间跟踪交易状态的生命周期。 `GetPendingTxn` 和 `GetPendingTxns` 将从 `v8.0.0` 中删除。
 
-### 5) Non-interactive mode support for seed nodes
+### 5) 对种子节点的非交互模式支持
 
-Seed node operators will now have the option of invoking `launch.sh` in non-interactive mode. Operators will need to configure the following environment variables when using non-interactive mode.
+种子节点操作员现在可以选择在非交互模式下调用 `launch.sh`。 操作员在使用非交互模式时需要配置以下环境变量。
 
 ```
 NONINTERACTIVE="true"
@@ -76,71 +75,69 @@ IP_WHITELISTING="N" #optional
 ```
 
 :::note
-If `IP_WHITELISTING` is set to `N`, the script assumes the existence of the whitelisted keypair file called "whitelistkey.txt", and further assumes "mykey.txt" as the whitelisted key if "whitelistkey.txt" does not exist.
+如果 `IP_WHITELISTING` 设置为 `N`，则脚本假定存在名为“whitelistkey.txt”的列入白名单的密钥对文件，如果“whitelistkey.txt”不存在，则进一步假定“mykey.txt”作为列入白名单的密钥。
 :::
 
-### 6) Bug fixes around mining node joining
+### 6) 修复挖矿节点加入问题
 
-We have fixed a few mining node joining issues. Special thanks to [K1-pool](https://k1pool.com/pool/zil) for reporting a few issues to us.
+我们修复了一些挖矿节点加入问题。 特别感谢 [K1-pool](https://k1pool.com/pool/zil) 向我们报告了一些问题。
 
-## Scilla Updates
+## Scilla 更新
 
-### 1) Scilla disambiguation fix
+### 1) Scilla 消歧修复
 
 :::warning
-To support Scilla features such as remote state read and external library, user-defined ADTs will need to be non-ambiguous starting from `v8.0.0`. This means 
-that when calling a contract transition that contains a user-defined ADT, the user-defined ADT will need to be prefixed with the contract address that defines 
-the type.
+为了支持远程状态读取和外部库等 Scilla 功能，从 `v8.0.0` 开始，用户自定义 ADT 必须是明确的。 这意味着在调用包含用户自定义 ADT 的合约 transition 时，用户自定义 ADT 将需要以定义类型的合约地址为前缀。
 :::
 
-For instance, let's assume a user-defined ADT named `SSNCycleInfo` is defined in a contract deployed at address `0xb55cc7894536ac015350790550b0c03f49eb8ebd`. When using the user-defined ADT, it will need to be prefixed with the contract address (i.e., `0xb55cc7894536ac015350790550b0c03f49eb8ebd.SSNCycleInfo`). If your contract transition has user-defined ADTs, you will need to modify the way you call the transition by appending the contract address prefix.
+例如，假设部署在地址 `0xb55cc7894536ac015350790550b0c03f49eb8ebd` 的合约中定义了一个名为 `SSNCycleInfo` 的用户自定义 ADT。 使用用户自定义 ADT 时，需要以合约地址为前缀（即`0xb55cc7894536ac015350790550b0c03f49eb8ebd.SSNCycleInfo`）。 如果你的合约 transition 具有用户自定义 ADT，则需要通过附加合约地址前缀来修改调用 transition 的方式。
 
-### 2) Introduction of new Scilla feature - remote state read
+### 2）引入Scilla 新功能——远程状态读取
 
-With effect from `v8.0.0`, a Scilla contract will be able to read the state of another contract by using the remote state read feature.
+从 `v8.0.0` 开始，Scilla 合约将能够使用远程状态读取功能读取另一个合约的状态。
 
-### 3) Smart contract parameters change
+### 3) 智能合约参数变化
 
-To support larger dApps and the need for more contract calls, we will adjust the following constant values
+为了支持更大的 dApp 和更多合约调用的需求，我们将调整以下常量值
 
-|| Before `v8.0.0` | `v8.0.0` |
+|| `v8.0.0` 之前 | `v8.0.0` |
 | --------------- | -------------- | ------- |
 | `MAX_CONTRACT_EDGES` | 10 | 20 |
 | `MAX_CODE_SIZE_IN_BYTES` | 51200 | 76800 |
 
-## Staking Updates
+## 质押更新
 
-As part of the `v8.0.0` rollout, the current Staking Phase 1.0 feature will be updated to the new Staking Phase 1.1.
+作为 `v8.0.0` 推出的一部分，当前的 Staking Phase 1.0 功能将更新为新的 Staking Phase 1.1。
 
-### 1) Staking contract migration
+### 1) 质押合约迁移
 
-Due to the Scilla disambiguation fix, we will be freezing the existing staking contract shortly before the `v8.0.0` network upgrade commences. The contract will be frozen permanently, and the contract states and funds will be migrated to a new contract.
+由于 Scilla 消歧修复，我们将在 `v8.0.0` 网络升级开始前不久冻结现有的质押合约。 合约将被永久冻结，合约状态和资金将迁移到新合约。
 
 :::important
-1. Migration to the new contract is expected to take up to 7 days
-2. During the migration, the existing contract will be paused and no staking activities such as stake withdrawal can be conducted
-3. Rewards for staking will be retroactively distributed after the staking contract migration
-4. For wallets, explorers and exchanges, please note that the contract address will be changed and you will need to update it on your end. We will provide the address once we have deployed the Mainnet contract
-5. We will make Staking Phase 1.1 available on the public testnet shortly to help you prepare for the staking contract migration
-6. For community members, please kindly wait for your wallet provider to update to the new staking contract if you encounter any staking issue
+1. 迁移到新合约预计最多需要7天
+2. 迁移过程中，现有合约将暂停，不能进行提币等质押活动
+3. 质押奖励将在质押合约迁移后进行追溯分配
+4. 钱包、浏览器、交易所请注意，合约地址将发生变化，你需要自行更新。 一旦我们部署了主网合约，我们将提供新的地址
+5. 我们将很快在公共测试网上提供 Staking Phase 1.1，以帮助你为质押合约迁移做好准备
+6. 对于社区成员，如果你遇到任何质押问题，请等待你的钱包提供商更新到新的质押合约
 :::
 
-### 2) Switching of staking wallet
+### 2) 质押钱包切换
 
-The new staking contract will also have a new `swap delegate` feature which allows a delegator to swap his wallet address with another address without incurring any unbonding period or rewards penalty.
+新的质押合约还将具有新的 `交换委托` 功能，允许委托人将他的钱包地址与另一个地址交换，而不会产生任何解绑期或奖励惩罚。
 
-### 3) Staking parameter adjustments
+### 3) 质押参数调整
 
-Due to faster block production rate after `v8.0.0`, we will be adjusting the following parameters to bring rewarding and unbonding timing back to parity.
+由于 `v8.0.0` 之后出块速度更快，我们将调整以下参数，使奖励和解绑时间恢复到同等水平。
 
-| Parameters                 | New value                        |
+| 参数                 | 新值                        |
 | -------------------------- | -------------------------------- |
-| Rewards per cycle          | 1,548,800  $ZIL                  |
-| Reward cycle               | 2,200 final blocks (~1 day)      |
-| Unbonding period           | 30,800 Final blocks (~2 weeks)   |
+| 每个周期的奖励          | 1,548,800  $ZIL                  |
+| 奖励周期               | 2,200 个完整块 (~1 day)      |
+| 解绑期           | 30,800 个完整块 (~2 weeks)   |
 
-Please note that this change is considered an interim change. If the block production rate deviates from the expected value significantly, a new governance proposal can be introduced to adjust the staking parameter accordingly.
+请注意，此更改被视为临时更改。 如果出块率明显偏离预期值，则可以引入新的治理提案来相应地调整质押参数。
 
-### 4) $gZIL ending period
+### 4) $gZIL 结束期
 
-`$gZIL` minting period has been set to end on block `1483713`. This value cannot be changed. With the changes to block time in `v8.0.0`, the ending wall clock may vary as a result.
+`$gZIL` 铸造期已设置为在区块高度 `1483713` 上结束。 此值无法更改。 随着 `v8.0.0` 中出块时间的变化，结束时间可能会因此而有所不同。
