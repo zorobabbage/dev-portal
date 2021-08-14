@@ -1,6 +1,6 @@
 ---
 id: dev-txn-receipt
-title: Receipt
+title: 回执
 keywords: 
 - receipt
 - transitions
@@ -12,9 +12,9 @@ description: Zilliqa Transaction Receipt
 ---
 
 ---
-After a transaction is confirmed in the blockchain, a transaction response would be returned along with a `receipt`.
+在区块链中确认交易后，将返回交易响应以及 `回执`。
 
-Example of a transaction response with the `receipt` structure:
+具有 `回执` 结构的交易响应示例：
 ```
 {
   "id": "1",
@@ -47,25 +47,25 @@ Example of a transaction response with the `receipt` structure:
   }
 }
 ```
-Depending on the type of transaction (e.g. payment, contract call, chain contract call) being processed, the `receipt` may return different data.
+根据正在处理的交易类型（例如付款、合约调用、链式合约调用），`回执` 可能会返回不同的数据。
 
-## Params
-This section lists all the _possible_  `receipt` returned values.
+## 参数
+本节列出了所有 _可能的_ `回执` 返回值。
 
-| Name             | Description                                                                |
+| 名称             | 描述                                                                |
 | ---------------- | ---------------------------------------------------------------------------|
-| `cumulative_gas` | The total amount of gas used when it is executed in the particular block   |
-| `epoch_num`      | The block number when this transaction is allocated to                     |
-| `errors`         | Contains the error code if the transaction has any errors                  |
-| `event_logs`     | Contains the parameters of the contract transition being invoked           |
-| `exceptions`     | Returns the exception messages if there is an error when invoking contract |
-| `transitions`    | Contains the parameters used to call the specific transition               |
-| `success`        | Returns true if the transaction is successfully executed, false otherwise  |
+| `cumulative_gas` | 在特定块中执行时使用的 gas 总量   |
+| `epoch_num` | 分配此交易时的区块高度 |
+| `errors` | 如果交易有任何错误，则包含错误代码 |
+| `event_logs` | 包含被调用的合约 transition 的参数 |
+| `exceptions` | 调用合约时出错返回异常信息 |
+| `transitions` | 包含用于调用特定 transition 的参数 |
+| `success` | 如果交易成功执行，则返回 true，否则返回 false |
 
-## Events
-`event_logs` are events created as a result of invoking the contract calls.
+# #事件
+`event_logs` 是触发合约调用而创建的事件。
 
-For instance, in the following sample contract code, calling `setHello` transition would trigger a "`setHello`" event name.
+例如，在下面的示例合约代码中，调用 transition `setHello` 将触发一个名为 `setHello ` 的事件。
 ```
 (* HelloWorld Sample *)
 
@@ -83,7 +83,7 @@ transition setHello (msg : String)
 end
 ```
 
-If we execute this transition, the returned `receipt` is as follows:
+如果我们执行这个 transition，返回的 `回执` 如下所示:
 ```
 {
     "id": "1",
@@ -113,12 +113,12 @@ If we execute this transition, the returned `receipt` is as follows:
 }
 ```
 
-Observed that the `setHello` event is returned as the `setHello` transition is successfully executed by the blockchain.
+注意，在区块链成功执行 transition `setHello` 时会返回 `setHello` 事件。
 
-## Transitions
-A `transitions` object is returned if the contract is invoking other procedures or another contract transition. A `transition` object provides details of the "transition chain" such as the address of the initiator, the tag (transition name), the recipient, the params .etc.
+## Transition
+如果合约正在调用其他 procedure 或另一个合约 transition，则返回 `transitions` 对象。`transition` 对象提供了 `transition chain` 的详细信息，比如发起者的地址、标签(transition 名称)、接收者、参数等。
 
-Example of a `transition` object:
+`transition` 对象示例:
 ```
 {
   "id": "1",
@@ -152,12 +152,12 @@ Example of a `transition` object:
   }
 }
 ```
-In the above example, from the `data` object we can observe the `sendFunds` transition is invoked here, presumably to send `50000000000000` to `0xc0e28525e9d329156e16603b9c1b6e4a9c7ed813`. Notice that in the `transitions` object,  the `onFundsReceived` procedure is subsequently invoked internally, and we can observe the recipient and amount is indeed the transmitted amount.
+在上面的例子中，从 `data` 对象我们可以观察到这里调用了 transition `sendFunds`，大意是将 `50000000000000` 发送到 `0xc0e28525e9d329156e16603b9c1b6e4a9c7ed813`。 请注意，在 `transitions` 对象中，随后会在内部调用 procedure `onFundsReceived`，我们可以观察到接收者和金额确实是传输的金额。
 
-## Exception
-A `exceptions` object is returned if the contract specifically raise an error when it encounters issues invoking the transition, for example, invoking a transfer transition without sufficient balance .etc. A `exceptions` object contains the `line` number of the contract that raised the error and the corresponding exception `message`.
+## 异常
+如果合约在遇到调用 transition 的问题时引发特别错误，则返回一个 `exceptions` 对象，例如，调用没有足够余额的转账 transition 等。 `exceptions` 对象包含引发错误的合约的 `line` 编号以及相应的异常 `message`。
 
-Example of an `exceptions` object:
+`exceptions` 对象示例：
 ```
 "receipt": {
     ... // others

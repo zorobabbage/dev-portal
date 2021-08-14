@@ -1,6 +1,6 @@
 ---
 id: dev-txn-broadcasting
-title: Broadcasting
+title: 广播
 keywords: 
 - broadcasting
 - create
@@ -9,19 +9,18 @@ keywords:
 description: Zilliqa Transaction Broadcasting
 ---
 ---
-After signing the transaction, we may broadcast the transaction to a seed node (e.g. https://dev-api.zilliqa.com) by creating a transaction object. The correct RPC API to use is `CreateTransaction`. 
-Refer to https://apidocs.zilliqa.com/#createtransaction for more information.
+签署交易后，我们可以通过创建交易对象将交易广播到种子节点（例如 https://dev-api.zilliqa.com）。 要使用正确的 RPC API `CreateTransaction`。有关更多信息，请参阅 https://apidocs.zilliqa.com/#createtransaction。
 
-The seed node performs some basic validation of the JSON payload it receives, and will attempt to verify the signature. Please note that it does not verify the correctness of the `nonce`. It is at all times the developer's responsiblity to correctly increment the nonce used in the transaction.
+种子节点对其接收的 JSON 有效负载执行一些基本验证，并尝试验证签名。 请注意，它不会验证 `nonce` 的正确性。 开发人员需要正确增加交易中使用的随机数。
 
-If `nonce` is incorrect, the transaction can silently fail. This means that the seed/lookup node will blindly forward the transaction to the correct shard, which may then reject the transaction with no error receipt.
+如果 `nonce` 不正确，交易可能会默认失败。 这意味着种子/查找节点将盲目地将交易转发到正确的分片，然后该分片可能会在没有错误接收的情况下拒绝交易。
 
 :::info
-The above applies only if we use JSON RPC API to create the transaction object. If SDKs are used to create the transaction object, then `nonce` management is not an issue as SDKs would automatically handle the nonce management.
+以上仅适用于我们使用 JSON RPC API 创建交易对象的情况。 如果使用 SDK 来创建交易对象，那么 `nonce` 管理就不存在问题，因为 SDK 会自动处理 nonce 管理。
 :::
 
-## Non-Contract Transaction Object
-Example of creating a __non-contract__ transaction object:
+## 非合约交易对象
+创建 __非合约__ 交易对象的示例：
 
 
 import Tabs from '@theme/Tabs';
@@ -175,11 +174,11 @@ public class TransactionOperation {
 </TabItem>
 </Tabs>
 
-## Contract Transaction Object
-The following is an example of creating a __contract__ transaction object. The difference between __contract__ and __non-contract__ transaction objects is the additional contract transitions such as `setHello` and its relevant params such as the `vname`, `type` and `value` as describe in the deployed contract.
-The other significant difference is the `gasLimit` field. For __contract__ transaction objects, the recommended `gasLimit` is between `10000` to `30000`.
+## 合约交易对象
+以下是创建 __合约__ 交易对象的示例。 __合约__ 和 __非合约__ 交易对象之间的区别在于附加的合约 transition（例如 `setHello`）及其相关参数（例如部署的合约中描述的 `vname`、`type` 和 `value`）。
+另一个显着的区别是 `gasLimit` 字段。 对于 __合约__ 交易对象，推荐的 `gasLimit` 在 `10000` 到 `30000` 之间。
 
-Example of creating a __contract__ transaction object:
+创建 __合约__ 交易对象的示例：
 
 <Tabs
   defaultValue="js"

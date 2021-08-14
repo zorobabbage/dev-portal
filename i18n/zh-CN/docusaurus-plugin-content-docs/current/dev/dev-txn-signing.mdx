@@ -1,6 +1,6 @@
 ---
 id: dev-txn-signing
-title: Signing
+title: 签名
 keywords: 
 - signing
 - transitions
@@ -8,12 +8,12 @@ keywords:
 description: Zilliqa Transaction Signing
 ---
 ---
-Before sending a transaction, one must first sign it with a __valid private key__. This can be done with one of the numerous SDKs provided by the Zilliqa team and community.
+在发送交易之前，必须首先使用 __合法私钥__ 对其进行签名。 这可以通过 Zilliqa 团队和社区提供的众多 SDK 之一来完成。
 
-Signing is done against the Protobuf-serialised version of the transaction's contents. This is the reason why all SDKs depend on Protobuf to function. This step is __transparent__ to you as a developer.
+签名是针对交易内容的 Protobuf 序列化版本完成的。 这就是所有 SDK 都依赖 Protobuf 来运行的原因。 作为开发人员，这一步对你来说是 __透明的__。
 
 
-Example of providing a private key:
+提供私钥的示例：
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

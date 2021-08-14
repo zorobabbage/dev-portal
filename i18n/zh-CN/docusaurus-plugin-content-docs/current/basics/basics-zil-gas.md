@@ -12,7 +12,7 @@ description: Zilliqa Gas
 
 ---
 
-## Gas Pricer
+## Gas 价格
 
 Zilliqa 的共识算法（即 PBFT）要求节点对每个区块以及其中的每个交易进行投票。 进入网络的每笔交易都有一个 gas 价格——这是发送者愿意支付给矿工以处理交易的一个 gas 单位的价格（以 ZIL 为单位）。
 

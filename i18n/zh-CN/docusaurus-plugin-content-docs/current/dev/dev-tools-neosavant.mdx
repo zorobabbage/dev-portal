@@ -22,73 +22,70 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 <img alt="Faucet" src={useBaseUrl('img/dev/tools/neosavant.png')} />
 
-A fully-fledged IDE used for writing, testing and deploying Scilla smart contracts painlessly. It can be tried out at https://ide.zilliqa.com/.
+一个成熟的 IDE，用于轻松编写、测试和部署 Scilla 智能合约。 可以在 https://ide.zilliqa.com/ 上试用。
 
-Neo-Savant helps Scilla developers to create and deploy Smart Contracts using an automated development environment, in-browser, with quick and intuitive controls.
+Neo-Savant 帮助 Scilla 开发人员使用浏览器内的自动化开发环境创建和部署智能合约，并提供快速直观的控件。
 
-### Features
-* Intuitive UI for easy deployment/contract invocation.
-* Multiple networks supported: Testnet, Mainnet and a Simulated Environment where you can test out contracts without spending $ZIL
-* Account management using Keystore, Ledger or ZilPay.
-* Simple, persistent file manager for managing your contracts that allows for renaming/deletion.
-* Possibility to import already deployed contracts and call their transitions.
-* Support for event in contracts, with automatic notifications in the UI.
-* Support for arbitrary gas price/gas limit in deployment/calls.
+### 特征
+* 直观的用户界面，便于部署/合约调用。
+* 支持多种网络：测试网、主网和模拟环境，你无需花费 ZIL 即可测试合约
+* 使用 Keystore、Ledger 或 ZilPay 进行帐户管理。
+* 简单、持久的文件管理器，用于管理合约，允许重命名/删除等。
+* 可以导入已经部署的合约并调用它们的 transition。
+* 支持合约中的事件，并在 UI 中自动通知。
+* 支持部署/调用中的任意 gas 价格和gas 限制。
 
-## VSCode Extension by [as1ndu](https://marketplace.visualstudio.com/publishers/as1ndu)
+## VSCode 扩展 [as1ndu](https://marketplace.visualstudio.com/publishers/as1ndu)
 
-### Installation
+### 安装
 
-**Method 1:** Install directly from [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=as1ndu.scilla)
-- Launch VS Code Quick Open (Ctrl+P),
-- Use the following command
+**方法一：**直接从 [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=as1ndu.scilla) 安装
+- 启动 VS Code 快速打开 (Ctrl+P)，
+- 使用以下命令
 ```
 ext install as1ndu.scilla
 ```
 
-**Method 2:** Manual install using VS Code extension package
-- Download the `.visx` file from the [releases tab](https://github.com/as1ndu/scilla/releases)
-- Using the Install from VSIX command in the Extensions view command drop-down,: Install from VSIX command in the Command Palette, point to the `.vsix` file.
+**方法二：** 使用VS Code扩展包手动安装
+- 从 [发布选项卡](https://github.com/as1ndu/scilla/releases) 下载 `.visx` 文件
+- 使用扩展视图命令下拉菜单中的从 VSIX 安装命令：在命令面板中的从 VSIX 安装命令，指向 `.vsix` 文件。
 
-### Features
-- Syntax highlighting
-- Code Snippets
-- Debugging (Error & Warnings)
-- Cash Flow Analysis (`ctrl + P` then `>` type `scilla` then select `Scilla: Cashflow Analyser`)
-- Gas Usage Reports (Enable it in extension settings)
-- Type info for variables (Hover over dotted lines to see they type information of a variable)
-- Configuration via Vscode's UI
+### 特征
+- 语法高亮
+- 代码片段
+- 调试（错误和警告）
+- 现金流分析（`ctrl + P` 然后 `>` 输入`scilla` 然后选择 `Scilla: Cashflow Analyser`）
+- gas 使用报告（需要在扩展设置中启用）
+- 输入变量信息（将鼠标悬停在虚线上以查看它们输入变量的信息）
+- 通过 Vscode 的 UI 进行配置
 
 ## Vim
-A vim plugin for editing Scilla contracts is provided.
+提供了一个用于编辑 Scilla 合约的 vim 插件。
 
-You can install the vim config files through Pathogen by:
+你可以通过以下方式通过 Pathogen 安装 vim 配置文件：
 ```
 git clone https://github.com/edisonljh/vim-scilla.git ~/.vim/bundle/vim-scilla
 ```
-Or through Vundle by adding the following line to your `~/.vimrc`:
+或者通过 Vundle 在你的 `~/.vimrc` 中添加以下内容：
 ```
 Plugin 'edisonljh/vim-scilla'
 ```
 
-If you are using [ALE](https://github.com/w0rp/ale), you can enable [scilla-checker](https://scilla.readthedocs.io/en/latest/scilla-checker.html) to show errors right inside vim.
+如果你正在使用 [ALE](https://github.com/w0rp/ale)，你可以启用 [scilla-checker](https://scilla.readthedocs.io/en/latest/scilla-checker.html) 在 vim 中显示错误。
 
-Here is how to enable it:
+以下是启用它的方法：
 
-1. Install [ALE](https://github.com/w0rp/ale) vim plugin
-2. Make `scilla-checker` executable available (https://github.com/Zilliqa/scilla#compiling-and-running)
-3. Set STDLIB dir in vimrc: `let g:ale_scilla_checker_libdir = '<path>/stdlib'`
-4. Set CHECKER in vimrc: ` let g:ale_scilla_checker_executable='<path>/scilla-checker'`
-5. Enable the linter in vimrc: `autocmd FileType scilla let b:ale_linters = ['checker']`
-6. Open any scilla file and ensure checker is working: `:ALEInfo`
-Repo: [vim-scilla](https://github.com/edisonljh/vim-scilla).
+1. 安装 [ALE](https://github.com/w0rp/ale) vim插件
+2. 使 `scilla-checker` 可执行文件可用 (https://github.com/Zilliqa/scilla#compiling-and-running)
+3. 在 vimrc 中设置 STDLIB 目录：`let g:ale_scilla_checker_libdir = '<path>/stdlib'`
+4. 在 vimrc 中设置 CHECKER：` let g:ale_scilla_checker_executable='<path>/scilla-checker'`
+5. 在 vimrc 中启用 linter：`autocmd FileType scilla let b:ale_linters = ['checker']`
+6. 打开任何 scilla 文件并确保检查器正在工作：`:ALEInfo`
+
+GitHub 地址：[vim-scilla](https://github.com/edisonljh/vim-scilla)。
 
 ## Emacs
-An emacs major mode for editing Scilla contracts is [provided](https://github.com/Zilliqa/scilla/blob/master/misc/emacs-mode/scilla-mode.el).
-Add the following line to your `.emacs` file to load this mode for files ending with `.scilla` and `.scillib`.
-For enabling flycheck mode for Scilla (see [INSTALL.md](https://github.com/Zilliqa/scilla/blob/master/INSTALL.md)). When `scilla-checker` is available,
-type reporting is also supported. The key binding `C-c C-t` will print the type of the variable on which
-the cursor currently is.
+编辑 Scilla 合约的 emacs 主要模式在 [这里](https://github.com/Zilliqa/scilla/blob/master/misc/emacs-mode/scilla-mode.el) 可以找到。将以下行添加到你的 `.emacs` 文件中，为以 `.scilla` 和 `.scillib` 结尾的文件加载此模式。为 Scilla 启用 flycheck 模式（参见 [INSTALL.md](https://github.com/Zilliqa/scilla/blob/master/INSTALL.md)）。当 `scilla-checker` 可用时，还支持类型报告。快捷键 `C-c C-t` 将打印光标当前所在变量的类型。
 
 ```
 ;; For enabling flycheck mode for Scilla.
