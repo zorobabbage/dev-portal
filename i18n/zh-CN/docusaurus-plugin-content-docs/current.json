@@ -123,8 +123,8 @@
     "message": "Zilliqa 种子节点质押",
     "description": "The label for category Zilliqa Seed Node Staking in sidebar StakingSidebar"
   },
-  "sidebar.StakingSidebar.category.Staking Phase 1": {
-    "message": "质押阶段 1 ",
+  "sidebar.StakingSidebar.category.Staking Phase 1.1": {
+    "message": "质押阶段 1.1 ",
     "description": "The label for category Staking Phase 1 in sidebar StakingSidebar"
   },
   "sidebar.StakingSidebar.category.Delegators": {
