@@ -1,6 +1,6 @@
 ---
 id: exchange-ip-whitelisting
-title: IP Whitelisting 
+title: IP 白名单 
 keywords:
 - exchanges
 - docker setup
@@ -8,29 +8,23 @@ keywords:
 description: Run seed node in IP Whitelisting mode. 
 ---
 
-In IP whitelisting mode, blockchain data is pushed directly to exchanges in periodic intervals.
-Exchange IP addresses must be whitelisted by Zilliqa Research to receive these data broadcasts.
+在 IP 白名单模式下，区块链数据每隔一段时间直接推送到交易所。 交易所 IP 地址必须由 Zilliqa Research 列入白名单才能接收这些数据广播。
 
-## Preparing the Machine
+## 准备机器
 
-Before you start, please ensure the steps below are done.
-1. Choose and note down a port you wish to reserve for your seed node to receive incoming blockchain data.
-1. Share the static IP address and port of the node with the Zilliqa support team for whitelisting.
-This step is critical, as failing to provide the correct IP and port will result in failure to receive blockchain data.
-The static IP address and port of choice have to be shared with the Zilliqa team in the KYC form.
+在开始之前，请确保已完成以下步骤。
+1. 选择并记下你希望为种子节点保留的端口，此端口接收传入的区块链数据。
+2. 与 Zilliqa 支持团队共享节点的静态 IP 地址和端口以进行白名单。 此步骤至关重要，因为未能提供正确的 IP 和端口将导致无法接收区块链数据。 静态 IP 地址和选择的端口必须以 KYC 形式与 Zilliqa 团队共享。
 
 :::important
-The port of choice must be opened to inbound connections. Otherwise, the seed node will be unreachable.
+选择的端口必须对入站连接开放。 否则，种子节点将无法访问。
 :::
 
-### Docker Setup
+### Docker 设置
 
-We highly recommend using [Docker](https://docker.com) to set up a seed node,
-as we provide a tested, production-ready image for your use. If you have not
-yet set up docker, please follow the instructions on the [official documentation](https://docs.docker.com/install/).
+我们强烈建议使用 [Docker](https://docker.com) 来设置种子节点，因为我们提供了一个经过测试的、可用于生产的映像供你使用。 如果你还没有设置 docker，请按照 [官方文档](https://docs.docker.com/install/)上的说明进行操作。
 
-Once you have set up Docker, you may proceed to download the configuration
-tarball for the Mainnet:
+设置 Docker 后，你可以继续下载主网的配置 tarball：
 
 ```sh
 # create a directory
@@ -48,15 +42,13 @@ $ tar -zxvf seed-configuration.tar.gz
 # config.xml
 ```
 
-### Native Setup
+### 本机设置
 
 :::note
-This approach has been tested on **Ubuntu 18.04** and involves compiling
-C++. We strongly recommend you consider using the Docker image provided above.
+此方法已在 **Ubuntu 18.04** 上进行了测试，涉及编译 C++。 我们强烈建议你考虑使用上面提供的 Docker 镜像。
 :::
 
-If you cannot or do not wish to use Docker, you may also build the Zilliqa
-binary from source and run it as such.
+如果你不能或不想使用 Docker，你也可以从源代码构建 Zilliqa 二进制文件并按原样运行它。
 
 ```sh
 # clone Zilliqa source files
@@ -104,8 +96,7 @@ $ pip3 install requests clint futures
 $ ./build.sh
 ```
 
-The build should exit with no errors. Once it is complete, download the
-configuration tarball:
+构建退出时，应该没有错误。 完成后，下载配置 tarball：
 
 ```sh
 # make a separate folder for keys and configuration
@@ -123,24 +114,19 @@ $ tar -zxvf seed-configuration.tar.gz
 # config.xml
 ```
 
-## Configuring the Node
+## 配置节点
 
-The node requires some configuration before it can successfully join the
-network. Most configuration is contained in `constants.xml`, which should be
-in the directory we extracted `seed-configuration.tar.gz` to. Minimally, the
-following changes are required:
+节点需要一些配置才能成功加入网络。 大多数配置包含在 `constants.xml` 中，它应该在我们提取 `seed-configuration.tar.gz` 的目录中。 至少需要进行以下更改：
 
-- Change the value of `ENABLE_WEBSOCKET` to `true` if your seed node will support
-  websockets (refer to the [Zilliqa Websocket Server](https://github.com/Zilliqa/dev-portal/tree/master/docs/api-websocket.md) documentation).
+- 如果你的种子节点支持 websockets，请将 `ENABLE_WEBSOCKET` 的值更改为 `true`（请参阅 [Zilliqa Websocket 服务器](https://github.com/Zilliqa/dev-portal/tree/master/docs/api-websocket.md) 文档）。
 
-## Joining the Network
+## 加入网络
 
 :::note
-Before proceeding with this step, make sure you have completed the necessary KYC (for an individual).
+在继续此步骤之前，请确保你已完成必要的 KYC（针对个人）。
 :::
 
-Once the preliminary steps have been completed, joining the network is relatively
-straightforward.
+一旦完成了初始步骤，加入网络就相对简单了。
 
 ```sh
 # NOTE: run only ONE of the following.
@@ -150,14 +136,11 @@ $ ./launch_docker.sh
 $ ./launch.sh
 ```
 
-You will be asked a series of questions. When asked to enter your IP address
-and listening port, please enter the values you provided us when you submitted
-the KYC form. This is crucial, as your node **will not work** with anything
-else.
+你会被问到一系列问题。 当要求输入你的 IP 地址和侦听端口时，请输入你在提交 KYC 表单时提供给我们的值。 这很重要，因为会因为匹配不到你提交的值而导致你的节点 ** 无法工作**。
 
-Sample instructions to be followed for launch are provided below.
+下面提供了启动时要遵循的示例说明。
 
-- launch_docker.sh
+- 启动 _docker.sh
 
 ```sh
 $ ./launch_docker.sh
@@ -178,13 +161,8 @@ Enter your listening port (default: 33133): <33133 or other selected port>
 Use IP whitelisting registration approach (default: Y): Y
 ```
 
-## Next Steps
+## 下一步
 
-If you have successfully completed the above steps, you should have
-a functioning seed node that exposes an RPC API on `localhost:4201`. You may
-further check the logs at `zilliqa-00001-log.txt`.
+如果你已成功完成上述步骤，你应该有一个正常运行的种子节点了，它在 `localhost:4201` 上公开了一个 RPC API。 你可以进一步检查 `zilliqa-00001-log.txt` 中的日志。
 
-The following articles in this series will demonstrate a simple set of
-functions that can be used as a starting point for exchange developers to implement
-their own custom business logic around the Zilliqa blockchain. You may find
-the full source code of the example app in the [same repository](https://github.com/Zilliqa/dev-portal/tree/master/examples/exchange).
+本系列的以下文章将演示一组简单的函数，这些函数可用作交易所开发人员围绕 Zilliqa 区块链实现自己的自定义业务逻辑的起点。 你可以在 [相同仓库](https://github.com/Zilliqa/dev-portal/tree/master/examples/exchange) 中找到示例应用程序的完整源代码。

@@ -1,6 +1,6 @@
 ---
 id: exchange-getting-started
-title: Hosting Seed Nodes
+title: 托管种子节点
 keywords: 
 - exchanges
 - ip whitelisting 
@@ -12,48 +12,32 @@ description: Getting Started For Exchanges
 
 ---
 
-:::danger $ZIL Disclaimer
-Please read [$ZIL disclaimer](https://www.zilliqa.com/disclaimer) before proceeding. 
+:::danger $ZIL 免责声明
+请在继续之前阅读 [$ZIL 免责声明](https://www.zilliqa.com/disclaimer)。 
 :::
 
-## Introduction
+＃＃ 介绍
 
-While it's possible to use the public endpoint provided by Zilliqa to interact
-with the blockchain, we recommend that all exchanges that wish to support
-trading on the mainnet set up seed nodes. This section walks you through the
-basic steps needed to get the seed node up and running.
+虽然可以使用 Zilliqa 提供的公共端点与区块链交互，但我们建议所有希望支持主网上交易的交易所设置种子节点。本节将引导你完成启动和运行种子节点所需的基本步骤。
 
-## Modes
+## 模式
 
-Running a seed node is possible through 3 different modes. Exchanges can use
-whichever mode is feasible for their case.
-- IP whitelisting
-- Key whitelisting (with and without open inbound port)
+可以通过 3 种不同的模式运行种子节点。交易所可以使用适合自身的任何模式。
+- IP白名单
+- 密钥白名单（有或者没有开放的入站端口）
 
-### IP Whitelisting Mode
+### IP 白名单模式
 
-In IP whitelisting mode, blockchain data is pushed directly to exchanges in
-periodic intervals. As seed nodes using this mode receive data directly and do
-not otherwise pull data from peers, exchanges must be whitelisted by Zilliqa to
-receive these data broadcasts. This requires a static, public IP address with
-minimally two open ports (inbound and outbound) at which it can be reached.
-The [IP Whitelisting](exchange-ip-whitelisting) section contains information
-about running a node in IP whitelisting mode.
+在 IP 白名单模式下，区块链数据每隔一段时间直接推送到交易所。由于使用此模式的种子节点直接接收数据并且不会从对等方拉取数据，因此 Zilliqa 必须将交易所列入白名单才能接收这些数据广播。这需要一个静态的公共 IP 地址，至少有两个开放端口（入站和出站）可以访问它。 [IP 白名单](exchange-ip-whitelisting) 部分包含有关在 IP 白名单模式下运行节点的信息。
 
-### Key Whitelisting Mode
+### 密钥白名单模式
 
-In key whitelisting mode, blockchain data is pulled by the seed from Zilliqa
-Research-hosted public seed nodes in periodic intervals. Exchanges using
-this mode generate a public-private key pair and share their public key with
-Zilliqa Research for whitelisting. At minimum, a port has to be opened for
-outbound traffic. Exchanges using this mode have the further option of
-configuring a second port for inbound traffic. The [Key Whitelisting](exchange-key-whitelisting-1)
-section contains information about running a node in key whitelisting mode.
+在密钥白名单模式下，区块链数据由来自 Zilliqa Research 托管的公共种子节点的种子定期提取。使用这种模式的交易所会生成一个公私钥对，并与 Zilliqa Research 共享他们的公钥以用于白名单。必须至少为出站流量打开一个端口。使用此模式的交易所还可以选择为入站流量配置第二个端口。 [密钥白名单](exchange-key-whitelisting-1) 部分包含有关在密钥白名单模式下运行节点的信息。
 
-## Minimum Hardware Requirements
-- x64 Linux operating system (e.g Ubuntu 18.04.5)
-- Recent dual core processor @ 2.2 GHZ. Examples: Intel Xeon (Skylake)
-- 8GB DRR3 RAM or higher
-- Public static IP address
-- 500GB Solid State Drive
-- 100MB/s upload and download bandwidth
+## 最低硬件要求
+- x64 Linux 操作系统（例如 Ubuntu 18.04.5）
+- 最新的双核处理器 @ 2.2 GHZ。如：Intel Xeon (Skylake)
+- 8GB DRR3 RAM 或更高版本
+- 公共静态 IP 地址
+- 500GB 固态硬盘
+- 100MB/s 上传下载带宽
