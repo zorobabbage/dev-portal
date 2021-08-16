@@ -1,6 +1,6 @@
 ---
 id: dev-rentonzilliqa-pages
-title: Pages
+title: 页面
 keywords:
     - react
     - rentonzilliqa
@@ -11,23 +11,23 @@ description: Building the Pages for the RentOnZilliqa frontend application
 
 ---
 
-In this section, we will build the pages for the frontend application.
+在本节中，我们将为前端应用程序构建页面。
 
-## App Component
+## App 组件
 
-We start with the `App` component.
+我们从 `App` 组件开始。
 
-We create the routes for our pages using [`react-router-dom`](https://www.npmjs.com/package/react-router-dom).
+我们使用 [`react-router-dom`](https://www.npmjs.com/package/react-router-dom) 为我们的页面创建路由。
 
-We setup the `Toaster` from [`react-hot-toast`](https://react-hot-toast.com).
+我们从 [`react-hot-toast`](https://react-hot-toast.com) 设置了 `Toaster`。
 
-With the `useEffect` hook, we set up the following:
+使用 `useEffect` 钩子，我们设置以下内容：
 
--   We check if ZilPay is available on the browser and store it in context using `setZilPay`. If ZilPay is not available, an error is conveyed.
--   We fetch the state of the contract and store it in context using `setContract`
--   Subscriptions are set up which allow us to
-    -   Update the contract state and block number when there is a block update using [`zilPay.wallet.observableBlock`](https://zilpay.github.io/zilpay-docs/zilliqa-provider/#methods)
-    -   Update the ZilPay account when it is changed using [`zilPay.wallet.observableAccount`](https://zilpay.github.io/zilpay-docs/zilliqa-provider/#methods)
+- 检查 ZilPay 在浏览器上是否可用，并使用 `setZilPay` 将其存储在上下文中。 如果 ZilPay 不可用，则会弹出错误。
+- 我们使用 `setContract` 获取合约的状态并将其存储在上下文中
+- 设置订阅，使我们能够
+     - 使用 [`zilPay.wallet.observableBlock`](https://zilpay.github.io/zilpay-docs/zilliqa-provider/#methods) 有区块更新时更新合约状态和区块高度
+     - 使用 [`zilPay.wallet.observableAccount`](https://zilpay.github.io/zilpay-docs/zilliqa-provider/#methods) 更改时更新 ZilPay 帐户
 
 ```tsx
 import React, { useEffect, useState } from "react";
@@ -154,7 +154,7 @@ export default App;
 
 ## `index.tsx`
 
-Next, we wrap the [`App`](#app) component with the [`ContextContainer`](dev-rentonzilliqa-scripting#contextcontainer) that we created earlier.
+接下来，我们用之前创建的 [`ContextContainer`](dev-rentonzilliqa-scripting#contextcontainer) 包裹 [`App`](#app) 组件。
 
 ```tsx
 import React from "react";
@@ -179,18 +179,18 @@ reportWebVitals();
 
 [/src/index.tsx](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/index.tsx)
 
-## Listings Page
+## 房源页面
 
-Now we get to the [Listings Page](dev-rentonzilliqa-frontend#listings-page).
+现在我们进入 [房源页面](dev-rentonzilliqa-frontend#listings-page)。
 
-When there is a change in the `contractState` or `blockNumber`, using the `useEffect` hook, we update the `listings` displayed on the page. We create a `hostedListings` object that filters out the listings that are hosted by the current user.
+当 `contractState` 或 `blockNumber` 发生变化时，使用 `useEffect` 钩子，我们更新页面上显示的 `listings`。 我们创建了一个 `hostedListings` 对象，用于过滤掉当前用户托管的房源。
 
-The listings are presented using the [`ListingCard`](dev-rentonzilliqa-components#listingcard) component.
+房源使用 [`ListingCard`](dev-rentonzilliqa-components#listingcard) 组件呈现。
 
-Using the `useState` hook, we create `boolean` state variables for showing and hiding the modals as required. The modals are conditionally mounted based on these variables. To trigger the modals, we set up `onClick` listeners as follows:
+使用 `useState` 钩子，我们创建 `boolean` 状态变量以根据需要显示和隐藏模态。 基于这些变量有条件地安装模态。 为了触发模态，我们设置 `onClick` 监听器如下：
 
--   On a "New Listing" [`Button`](dev-rentonzilliqa-components#button), which triggers the [`CreateListing`](dev-rentonzilliqa-modals#create-listing-modal) Modal
--   On each Listing Card, which triggers the [`ManageListing`](dev-rentonzilliqa-modals/#manage-listing-modal) Modal
+- 在 `新建房源` [`Button`](dev-rentonzilliqa-components#button) 上，触发 [`CreateListing`](dev-rentonzilliqa-modals#create-listing-modal) 模态
+- 在每个列表卡上，触发 [`ManageListing`](dev-rentonzilliqa-modals/#manage-listing-modal) 模态
 
 ```tsx
 import React, { useEffect, useState } from "react";
@@ -335,15 +335,15 @@ export default Listings;
 
 <br/>
 
-## Individual Listing Page
+## 房源详情页面
 
-This component presents a detailed view of the individual listing on the [Listing Page](dev-rentonzilliqa-frontend#listing-page).
+此组件在 [房源页面](dev-rentonzilliqa-frontend#listing-page) 上呈现单个房源的详细视图。
 
-The description, rooms, amenities, map, and description are presented in a detailed manner. The [`ListingIcons`](dev-rentonzilliqa-components#listing-icons) are used to provide a clear view of the Rooms and Amenities sections.
+描述、房间、设施、地图都以详细的方式呈现。 [`ListingIcons`](dev-rentonzilliqa-components#listing-icons) 用于提供房间和便利设施部分的清晰视图。
 
-Users can book the listing within this component, which uses the [`bookListingTransition`](dev-rentonzilliqa-scripting#booklistingtransition) function.
+用户可以在此组件中预订房源，该组件使用 [`bookListingTransition`](dev-rentonzilliqa-scripting#booklistingtransition) 函数。
 
-The embed url for the Map is built using the [Google Maps Plus Code](https://maps.google.com/pluscodes/) and the [Google Maps API Key](https://developers.google.com/maps/documentation/embed/get-api-keys).
+地图的嵌入网址是使用 [Google Maps Plus Code](https://maps.google.com/pluscodes/) 和 [Google Maps API Key](https://developers.google.com/maps/documentation/embed/get-api-keys)。
 
 ```tsx
 import React, { useEffect, useState } from "react";

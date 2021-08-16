@@ -1,6 +1,6 @@
 ---
 id: dev-rentonzilliqa-frontend
-title: Introduction to the frontend
+title: 前端介绍
 keywords:
     - react
     - rentonzilliqa
@@ -12,30 +12,30 @@ description: Creating the RentOnZilliqa frontend application
 
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
-In this section, we will build the frontend application for accessing RentOnZilliqa.
+在本节中，我们将构建用于访问 RentOnZilliqa 的前端应用程序。
 
-## Technology
+## 技术
 
-The frontend is built using [Create React App](https://github.com/facebook/create-react-app) with [TypeScript](https://www.typescriptlang.org) enabled. We rely on [Tailwind CSS](https://tailwindcss.com) for styling the application. The setup for these is freely available on the respective documentations.
+前端是使用 [Create React App](https://github.com/facebook/create-react-app) 构建的，并启用了 [TypeScript](https://www.typescriptlang.org)。 我们依靠 [Tailwind CSS](https://tailwindcss.com) 为应用程序设置样式。 这些设置可在相应的文档中免费获得。
 
-Using [ZilPay](https://zilpay.io), we will connect the frontend elements to the transitions and state of the Smart Contract.
+使用 [ZilPay](https://zilpay.io)，我们将前端元素连接到智能合约的 transition 和状态。
 
-## Pages
+## 页面
 
-The frontend will consist of a homepage which shows all the available listings. Details about each listing will be displayed on a separate listing page.
+前端将包含一个显示所有可用房源的主页。 每个房源的详细信息将显示在单独的房源页面上。
 
-### Listings Page
+### 房源页面
 
-This page lists all the houses that have been posted on the platform. For users with a host account, it also shows the listings managed by them.
+此页面列出了所有已发布在平台上的房屋。 对于拥有房东帐户的用户，还会显示由他们管理的房源。
 
 | <img alt="Listings Page" width="1600" src={useBaseUrl("img/dev/rentonzilliqa/listings.png")} /> |
 | ----------------------------------------------------------------------------------------------- |
 
 <br />
 
-### Individual Listing Page
+### 房源详情页面
 
-This page presents the details about the listing. Users can make a reservation for the listing from this page.
+此页面显示有关房源的详细信息。 用户可以从该页面预订房源。
 
 | <img alt="Individual Listing Page" width="1600" src={useBaseUrl("img/dev/rentonzilliqa/listing-1.png")} /> |
 | ---------------------------------------------------------------------------------------------------------- |
@@ -43,37 +43,29 @@ This page presents the details about the listing. Users can make a reservation f
 
 <br />
 
-## Modals
+## 模态
 
-Most actions, including account and listing creation, booking, etc., will be accessible via modals.
+大多数操作，包括帐户和房源创建、预订等，都可以通过模态访问。
 
-### Account creation and ZilPay
+### 帐户创建和 ZilPay
 
-On the [Listings Page](#listings-page), the user can create an account. This is done via a modal, which provides options to connect ZilPay and the form for account creation.
+在 [房源页面](#listings-page)，用户可以创建一个帐户。 这是通过模态完成的，它提供了连接 ZilPay 和帐户创建表单的选项。
 
 | <img alt="Account Modal" width="1600" src={useBaseUrl("img/dev/rentonzilliqa/account.png")} /> |
 | ---------------------------------------------------------------------------------------------- |
 
 <br />
 
-### Creating and Managing Listings
+## 构建前端
 
-From the [Listings Page](#listings-page), a host user can create listings and manage existing listings via modals.
+在接下来的部分中，我们将在以下阶段构建前端：
 
-| <img alt="Create Listing Modal" width="1600" src={useBaseUrl("img/dev/rentonzilliqa/create-listing.png")} /> |
-| ------------------------------------------------------------------------------------------------------------ |
-| <img alt="Update Listing Modal" width="1600" src={useBaseUrl("img/dev/rentonzilliqa/update-listing.png")} /> |
+- [组件](dev-rentonzilliqa-library.md)
+- [脚本](dev-rentonzilliqa-scripting.md)
+- [模态](dev-rentonzilliqa-modals.md)
+- [页面](dev-rentonzilliqa-pages.md)
 
-## Building the Frontend
-
-In the coming sections, we will build the frontend in the following stages:
-
--   [Components](dev-rentonzilliqa-library.md)
--   [Scripting](dev-rentonzilliqa-scripting.md)
--   [Modals](dev-rentonzilliqa-modals.md)
--   [Pages](dev-rentonzilliqa-pages.md)
-
-## Built by Quinence
+## 由 Quinence 构建
 
 <img
     alt="Quinence Logo"
@@ -81,4 +73,4 @@ In the coming sections, we will build the frontend in the following stages:
     width="60"
 />
 
-[Quinence - Digital product specialists from Singapore](https://quinence.com).
+[Quinence - 来自新加坡的数字产品专家](https://quinence.com)。

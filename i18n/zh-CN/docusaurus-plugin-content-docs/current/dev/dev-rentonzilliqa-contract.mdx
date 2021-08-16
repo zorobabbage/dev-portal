@@ -1,6 +1,6 @@
 ---
 id: dev-rentonzilliqa-contract
-title: Introduction
+title: 介绍
 keywords:
     - scilla
     - contract
@@ -10,40 +10,40 @@ description: The Scilla Contract for the RentOnZilliqa Application
 
 ---
 
-In this section, we will go through the process of writing the Scilla Contract for RentOnZilliqa. The contract will be deployed using the [Scilla IDE](https://ide.zilliqa.com).
+在本节中，我们将介绍为 RentOnZilliqa 编写 Scilla 合约的过程。合约将使用 [Scilla IDE](https://ide.zilliqa.com) 进行部署。
 
-## Contract Planning
+## 合约规划
 
-The logic of the contract is planned with the point of view of a renting platform. As such, we act as the renting platform and hence the owner of the contract. We collect a fixed commission from every rental transaction on the contract. The source code for the contract [can be found here](https://github.com/Quinence/zilliqa-fullstack-app-rentOnZilliqa/blob/main/src/scilla/RentOnZilliqa.scilla).
+合约的逻辑是从租赁平台的角度来规划的。因此，我们充当租赁平台，即合约的所有者。我们从合约上的每笔租赁交易中收取固定佣金。合约的源代码 [可以在这里找到](https://github.com/Quinence/zilliqa-fullstack-app-rentOnZilliqa/blob/main/src/scilla/RentOnZilliqa.scilla)。
 
-### Listings
+### 列表
 
-Listings are the houses that can be posted on the platform, which are subsequently made available to the renters.
+房源是可以在平台上发布的房屋，随后可供租房者使用。
 
-We allow the creation of user accounts to facilitate using the platform. The accounts can have one of two roles:
+我们允许创建用户帐户以方便使用该平台。帐户可以具有以下两种角色之一：
 
--   A Renter Account
--   A Host Account
+- 租客账户
+- 房东帐户
 
-### Renter Accounts
+### 租户帐户
 
-Renter Accounts can rent listings that are created on the platform. When the correct amount is sent for booking an available listing, the listing is made available to the renter account.
+租客账户可以租用在平台上创建的房源。当为预订可用房源发送正确的金额时，房源将提供给租户帐户。
 
-### Host Accounts
+### 房东帐户
 
-Host Accounts can create and manage listings on the platform. They can collect revenue from their listings. Hosts can also rent listings as long as they do not own the listing.
+房东帐户可以在平台上创建和管理房源。他们可以从他们的房源中收取收入。房东也可以租用房源，只要他们不拥有房源。
 
-Our contract has one immutable variable, i.e., `owner` of type `ByStr20`. We use this to store the wallet address of the contract owner.
+我们的合约有一个不可变变量，即 `ByStr20` 类型的 `owner`。我们用它来存储合约所有者的钱包地址。
 
-### The Notion of Time
+### 时间的概念
 
-Since listings can be rented for a limited amount of time, we need to devise a way of tracking the passage of time. We do this by measuring the change in the `BLOCKNUMBER`. In the following sections, we will see in detail how this is achieved.
+由于房源可以租用有限的时间，因此我们需要设计一种跟踪时间流逝的方法。我们通过监听 `BLOCKNUMBER` 的变化来做到这一点。在以下部分中，我们将详细了解这是如何实现的。
 
-## Building the Contract
+## 构建合约
 
-In the coming sections, we will build the contract. We will go through the following stages in detail:
+在接下来的部分中，我们将构建合约。我们将详细经历以下阶段：
 
--   [Library](dev-rentonzilliqa-library.md)
--   [Mutable Variables](dev-rentonzilliqa-mutable-variables.md)
--   [Procedures](dev-rentonzilliqa-procedures.md)
--   [Transitions](dev-rentonzilliqa-transitions.md)
+- [库](dev-rentonzilliqa-library.md)
+- [可变变量](dev-rentonzilliqa-mutable-variables.md)
+- [Procedure](dev-rentonzilliqa-procedures.md)
+- [Transition](dev-rentonzilliqa-transitions.md)

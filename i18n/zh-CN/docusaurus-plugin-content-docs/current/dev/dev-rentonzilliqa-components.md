@@ -1,6 +1,6 @@
 ---
 id: dev-rentonzilliqa-components
-title: Components
+title: 组件
 keywords:
     - react
     - rentonzilliqa
@@ -11,13 +11,13 @@ description: Creating the React Components for the RentOnZilliqa frontend applic
 
 ---
 
-In this section, we will build all the components that will be used on the frontend application.
+在本节中，我们将构建在前端应用程序上使用的所有组件。
 
-## General Components
+## 通用组件
 
 ### Button
 
-We start with a basic Button component in [`/src/components/componentButton.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentButton.tsx) with a bunch of options for modifying it based on the usage.
+我们从 [`/src/components/componentButton.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentButton.tsx) 中的一个基本按钮组件开始，此组件提供了各种自定义选项。
 
 ```tsx
 import React from "react";
@@ -66,9 +66,9 @@ export default Button;
 
 <br/>
 
-### Header
+### Header 
 
-We then create a Header component in [`/src/components/componentHeader.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentHeader.tsx) to be used on all pages.
+然后我们在 [`/src/components/componentHeader.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentHeader.tsx) 中创建一个 Header 组件，并将其作为在所有页面上使用的头部组件。
 
 ```tsx
 import React from "react";
@@ -111,13 +111,13 @@ export default Header;
 
 ### Modal
 
-We create a Modal component at [`/src/components/componentModal.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentModal.tsx). Most transitions take place via a modal. This component takes care of the basic Modal functionality and styling.
+我们在 [`/src/components/componentModal.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentModal.tsx) 创建了一个 Modal 组件。 大多数 transition 通过模态来产生作用。 该组件负责基本的 Modal 功能和样式。
 
-The `title`; main button set to `buttonText`; dismiss button; and overlay are part of this component.
+`title`; 主按钮设置为 `buttonText`； 关闭按钮； 和遮罩层都是这个组件的一部分。
 
-The `children` passed to this component are the content in the modal.
+传递给这个组件的 `children` 是模态中的内容。
 
-The `onClick` function will be called when the main button is clicked.
+`onClick` 函数将在主按钮被点击时被调用。
 
 ```tsx
 import React, { useEffect } from "react";
@@ -222,7 +222,7 @@ export default Modal;
 
 ### ListingCard
 
-We create a ListingCard component at [`/src/components/componentListingCard.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentListingCard.tsx). This component creates the listing card used on the listings page.
+我们在 [`/src/components/componentListingCard.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentListingCard.tsx) 创建了一个 ListingCard 组件。 此组件创建在房源页面上使用的列表卡。
 
 ```tsx
 import React from "react";
@@ -286,11 +286,11 @@ export default ListingCard;
 
 <br/>
 
-## Form Components
+## 表单组件
 
 ### Input
 
-We create an Input component at [`/src/components/componentInput.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentInput.tsx). This works with state variables which will be created with the `useState` hook in its Parent Component. We accept the `name` for the input field. The input `type` and `unit` are also accepted as optional props.
+我们在 [`/src/components/componentInput.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentInput.tsx) 创建一个 Input 组件。 这适用于将在其父组件中使用 `useState` 钩子创建的状态变量。 我们接受输入字段的 `name`。 输入的 `type` 和 `unit` 也被接受为可选的 props。
 
 ```tsx
 import React from "react";
@@ -334,7 +334,7 @@ export default Input;
 
 ### CheckBox
 
-We create a CheckBox component at [`/src/components/componentCheckBox.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentCheckBox.tsx). This component is used within the modals. The CreateAccount modal uses it for user role selection. It is also used for selecting amenities in the CreateListing and ManageListing Modals.
+我们在 [`/src/components/componentCheckBox.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentCheckBox.tsx) 创建一个 CheckBox 组件。 该组件在模态中使用。 CreateAccount 模态将其用于用户角色选择。 它还用于在 CreateListing 和 ManageListing 模态中选择便利设施。
 
 ```tsx
 import React from "react";
@@ -386,7 +386,7 @@ export default CheckBox;
 
 ### AmenitiesInput
 
-We create an AmenitiesInput component at [`/src/components/componentAmenitiesInput.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentAmenitiesInput.tsx). It groups multiple checkboxes for collecting the amenities' availability in the CreateListing and ManageListing modals. We create this component to clean up the code.
+我们在 [`/src/components/componentAmenitiesInput.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentAmenitiesInput.tsx) 创建了一个 AmenitiesInput 组件。 它对多个复选框进行分组，以在 CreateListing 和 ManageListing 模态中收集便利设施的可用性。 我们创建这个组件来简化代码。
 
 ```tsx
 import React, { useEffect, useState } from "react";
@@ -476,11 +476,11 @@ export default AmenitiesInput;
 
 <br/>
 
-## SVG Components
+## SVG 组件
 
 ### Tick
 
-This Tick component at [`/src/components/componentTick.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentTick.tsx) is used to make the SVG easily available for the [CheckBox](#checkbox) component.
+这个位于 [`/src/components/componentTick.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentTick.tsx) 的 Tick 组件用于制作 SVG，它可轻松用于 [CheckBox](#checkbox) 组件。
 
 ```tsx
 import React from "react";
@@ -513,11 +513,11 @@ export default Tick;
 
 <br/>
 
-### Listing Icons
+### 房源 Icons
 
-This [`/src/components/componentListingIcons.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentListingIcons.tsx) file contains several SVG components for use on the listing page as well as the listing management modals.
+这个 [`/src/components/componentListingIcons.tsx`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/components/componentListingIcons.tsx) 文件包含几个 SVG 组件，用于房源页面以及房源管理模态。
 
-It includes icons for:
+这个组件包含以下：
 
 -   `Wifi`
 -   `Kitchen`

@@ -1,6 +1,6 @@
 ---
 id: dev-rentonzilliqa-transitions
-title: Transitions
+title: Transition
 keywords:
     - scilla
     - transitions
@@ -10,26 +10,26 @@ description: The Transitions of the Scilla Contract for the RentOnZilliqa Applic
 
 ---
 
-We finally get to the transitions in the Smart Contract. We group the transitions in the following types. [The source code](https://github.com/Quinence/zilliqa-fullstack-app-rentOnZilliqa/blob/main/src/scilla/RentOnZilliqa.scilla).
+我们终于进入了智能合约中的 transition。 我们将 transition 分为以下类型。 [源代码](https://github.com/Quinence/zilliqa-fullstack-app-rentOnZilliqa/blob/main/src/scilla/RentOnZilliqa.scilla)。
 
--   [User Transitions](#user-transitions)
--   [Listing Transitions](#listing-transitions)
--   [Owner Transitions](#owner-transitions)
+- [用户 Transition](#user-transitions)
+- [列表 Transition](#listing-transitions)
+- [所有者 Transition](#owner-transitions)
 
-## User Transitions
+## 用户 Transition
 
 ### `create_user`
 
-This transition accepts the `name` and `role` of the new user.
+此 transition 接受新用户的 `name` 和 `role`。
 
-If the user already exists, the [`user_exists`](dev-rentonzilliqa-library#account-codes) message is sent back.
+如果用户已经存在，则返回消息 [`user_exists`](dev-rentonzilliqa-library#account-codes)。
 
-If not, the [`user_name`](dev-rentonzilliqa-mutable-variables#user-details-fields) and [`user_role`](dev-rentonzilliqa-mutable-variables#user-details-fields) fields are set. The [`user_created`](dev-rentonzilliqa-library#account-codes) message is sent back.
+如果不存在，则设置字段 [`user_name`](dev-rentonzilliqa-mutable-variables#user-details-fields) 和 [`user_role`](dev-rentonzilliqa-mutable-variables#user-details-fields)。消息 [`user_created`](dev-rentonzilliqa-library#account-codes) 被发回。
 
-| Arguments | Description                                       | Type     |
+| 参数 | 描述                                       | 类型     |
 | --------- | ------------------------------------------------- | -------- |
-| `name`    | The name of the user                              | `String` |
-| `role`    | The role of the user<br/>(`0`: Renter, `1`: Host) | `Uint32` |
+| `name`    | 用户名                             | `String` |
+| `role`    | 用户角色<br/>(`0`：租户，`1`：房东) | `Uint32` |
 
 ```ocaml
 transition create_user (name: String, role: Uint32)
@@ -47,38 +47,38 @@ end
 
 <br />
 
-## Listing Transitions
+## 房源 Transition
 
-This group of transitions is used in the transitions that a host account user may use to manage their listings.
+这组 transition 用于房东帐户用户管理其列表的 transition。
 
 ### `create_listing`
 
-This transition is used by a host user to create a listing.
+房东用户使用此 transition 来创建房源。
 
-The [`user_role`](dev-rentonzilliqa-mutable-variables#user-details-fields) is checked.
+[`user_role`](dev-rentonzilliqa-mutable-variables#user-details-fields) 被检查。
 
-The [`listing_id_generator`](dev-rentonzilliqa-mutable-variables#owner-fields) is used to set a new id for the listing, after which it is incremented.
+[`listing_id_generator`](dev-rentonzilliqa-mutable-variables#owner-fields) 用于为房源设置一个新的递增 id。
 
-The [`set_listing_details`](dev-rentonzilliqa-procedures#set_listing_details) procedure is called to create the listing, and some of the listing fields are initialised, including [`listing_host`](dev-rentonzilliqa-mutable-variables#listing-details-fields), [`listing_rented_till`](dev-rentonzilliqa-mutable-variables#user-details-fields), and [`listing_accumulated_rent`](dev-rentonzilliqa-mutable-variables#user-details-fields).
+调用 procedure  [`set_listing_details`](dev-rentonzilliqa-procedures#set_listing_details) 来创建房源，并初始化一些列表字段，包括 [`listing_host`](dev-rentonzilliqa-mutable-variables#listing-details-fields)、[`listing_rented_till`](dev-rentonzilliqa-mutable-variables#user-details-fields) 和 [`listing_accumulated_rent`](dev-rentonzilliqa-mutable-variables#user-details-fields)。
 
-The [`listing_created`](dev-rentonzilliqa-library#host-account-codes) message is sent on success.
+成功时，发送消息 [`listing_created`](dev-rentonzilliqa-library#host-account-codes)。
 
-On failure, the [`user_is_renter`](dev-rentonzilliqa-library#renter-account-codes) or [`user_does_not_exist`](dev-rentonzilliqa-library#account-codes) messages are sent back.
+失败时，发送消息 [`user_is_renter`](dev-rentonzilliqa-library#renter-account-codes) 或 [`user_does_not_exist`](dev-rentonzilliqa-library#account-codes)。
 
-| Arguments     | Description                                                                                   | Type      |
+| 参数     | 描述                                                                                   | 类型      |
 | ------------- | --------------------------------------------------------------------------------------------- | --------- |
-| `name`        | The name of the listing                                                                       | `String`  |
-| `description` | The description of the listing                                                                | `String`  |
-| `price`       | The price of the listing                                                                      | `Uint128` |
-| `rooms`       | The number of rooms in the listing                                                            | `Uint32`  |
-| `bathrooms`   | The number of bathrooms in the listing                                                        | `Uint32`  |
-| `image`       | A URL to an image of the listing                                                              | `String`  |
-| `location`    | A [Google Maps Plus Code](https://maps.google.com/pluscodes/) for the location of the listing | `String`  |
-| `wifi`        | The availability of WiFi at the listing                                                       | `String`  |
-| `laundry`     | The availability of a Landry at the listing                                                   | `String`  |
-| `hvac`        | The availability of an HVAC at the listing                                                    | `String`  |
-| `tv`          | The availability of a TV at the listing                                                       | `String`  |
-| `kitchen`     | The availability of a Kitchen at the listing                                                  | `String`  |
+| `name`        | 房源名称                                                                       | `String`  |
+| `description` | 房源说明                                                               | `String`  |
+| `price`       | 房源价格                                                                      | `Uint128` |
+| `rooms`       | 房源数量                                                            | `Uint32`  |
+| `bathrooms`   | 房源中的浴室数量                                                        | `Uint32`  |
+| `image`       | 房源图像的 URL                                                              | `String`  |
+| `location`    | 用于房源位置的 [Google Maps Plus Code](https://maps.google.com/pluscodes/) | `String`  |
+| `wifi`        | 房源中 WiFi 的可用性                                                        | `String`  |
+| `laundry`     | 房源中洗衣房的可用性                                                   | `String`  |
+| `hvac`        | 房源中 HVAC 的可用性                                                    | `String`  |
+| `tv`          | 房源中电视的可用性                                                       | `String`  |
+| `kitchen`     | 房源中厨房的可用性                                                  | `String`  |
 
 ```ocaml
 transition create_listing (
@@ -120,27 +120,27 @@ end
 
 ### `update_listing`
 
-This transition is used by the host user to update the [Listing Details](dev-rentonzilliqa-mutable-variables#listing-details-fields) for the given listing.
+房东用户使用此 transition 来更新给定房源的 [房源详细信息](dev-rentonzilliqa-mutable-variables#listing-details-fields)。
 
-The `_sender` wallet address is checked if it is indeed the host of the listing.
+检查 `_sender` 钱包地址是否确实是房源的房东。
 
-The [`set_listing_details`](dev-rentonzilliqa-procedures#set_listing_details) procedure is used to update the details.
+procedure  [`set_listing_details`](dev-rentonzilliqa-procedures#set_listing_details) 用于更新详细信息。
 
-| Arguments     | Description                                                                                   | Type      |
+| 参数     | 描述                                                                                   | 类型      |
 | ------------- | --------------------------------------------------------------------------------------------- | --------- |
-| `id`          | The ID of the listing                                                                         | `Uint128` |
-| `name`        | The name of the listing                                                                       | `String`  |
-| `description` | The description of the listing                                                                | `String`  |
-| `price`       | The price of the listing                                                                      | `Uint128` |
-| `rooms`       | The number of rooms in the listing                                                            | `Uint32`  |
-| `bathrooms`   | The number of bathrooms in the listing                                                        | `Uint32`  |
-| `image`       | A URL to an image of the listing                                                              | `String`  |
-| `location`    | A [Google Maps Plus Code](https://maps.google.com/pluscodes/) for the location of the listing | `String`  |
-| `wifi`        | The availability of WiFi at the listing                                                       | `String`  |
-| `laundry`     | The availability of a Landry at the listing                                                   | `String`  |
-| `hvac`        | The availability of an HVAC at the listing                                                    | `String`  |
-| `tv`          | The availability of a TV at the listing                                                       | `String`  |
-| `kitchen`     | The availability of a Kitchen at the listing                                                  | `String`  |
+| `id`          | 房源 ID                                                                         | `Uint128` |
+| `name`        | 房源名称                                                                       | `String`  |
+| `description` | 房源说明                                                               | `String`  |
+| `price`       | 房源价格                                                                      | `Uint128` |
+| `rooms`       | 房源数量                                                            | `Uint32`  |
+| `bathrooms`   | 房源中的浴室数量                                                        | `Uint32`  |
+| `image`       | 房源图像的 URL                                                              | `String`  |
+| `location`    | 用于房源位置的 [Google Maps Plus Code](https://maps.google.com/pluscodes/) | `String`  |
+| `wifi`        | 房源中 WiFi 的可用性                                                        | `String`  |
+| `laundry`     | 房源中洗衣房的可用性                                                   | `String`  |
+| `hvac`        | 房源中 HVAC 的可用性                                                    | `String`  |
+| `tv`          | 房源中电视的可用性                                                       | `String`  |
+| `kitchen`     | 房源中厨房的可用性                                                  | `String`  |
 
 ```ocaml
 transition update_listing (
@@ -169,17 +169,17 @@ end
 
 ### `delete_listing`
 
-This transition is used by the host user to delete a particular listing.
+房东用户使用此 transition 来删除特定房源。
 
-The `_sender` wallet address is checked if it is indeed the host of the listing.
+检查 `_sender` 钱包地址是否确实是房源的房东。
 
-It checks if the accumulated rent for the listing is empty.
+它检查房源的累计租金是否为空。
 
-The [`delete_listing_by_id`](dev-rentonzilliqa-procedures#delete_listing_by_id) procedure is used to delete the listing.
+procedure  [`delete_listing_by_id`](dev-rentonzilliqa-procedures#delete_listing_by_id) 用于删除房源。
 
-| Arguments | Description           | Type      |
+| 参数     | 描述                                                                                   | 类型      |
 | --------- | --------------------- | --------- |
-| `id`      | The ID of the listing | `Uint128` |
+| `id`      | 房源 ID | `Uint128` |
 
 ```ocaml
 transition delete_listing (id: Uint128)
@@ -216,15 +216,15 @@ end
 
 ### `book_listing`
 
-This transition is used by a renter user to book a listing.
+租户用户使用此 transition 来预订房源。
 
-The `_sender` wallet address is checked to ensure it is not the host of the listing.
+检查 `_sender` 钱包地址以确保它不是房源的房东。
 
-The [`check_listing_available`](dev-rentonzilliqa-procedures#check_listing_available), [`check_amount_and_book`](dev-rentonzilliqa-procedures#check_amount_and_book), and [`book_listing_by_id`](dev-rentonzilliqa-procedures#book_listing_by_id) procedures are used in sequence to book the listing.
+[`check_listing_available`](dev-rentonzilliqa-procedures#check_listing_available)、[`check_amount_and_book`](dev-rentonzilliqa-procedures#check_amount_and_book) 和 [`book_listing_by_id`](dev-rentonzilliqa-procedures #check_listing_available) 是预订房源依次使用的 procedure。
 
-| Arguments | Description           | Type      |
+| 参数     | 描述                                                                                   | 类型      |
 | --------- | --------------------- | --------- |
-| `id`      | The ID of the listing | `Uint128` |
+| `id`      | 房源 ID | `Uint128` |
 
 ```ocaml
 transition book_listing (id: Uint128)
@@ -254,15 +254,15 @@ end
 
 ### `claim_rent`
 
-This transition is used by a host user to claim the accumulated rent from a listing that they own.
+房东用户使用此 transition 从他们拥有的房源中提取累积租金。
 
-The `_sender` wallet address is checked to ensure it is not the host of the listing.
+检查 `_sender` 钱包地址以确保它确实是房源的房东。
 
-The [`claim_rent_by_id`](dev-rentonzilliqa-procedures#claim_rent_by_id) procedure is used to claim the rent.
+procedure  [`claim_rent_by_id`](dev-rentonzilliqa-procedures#claim_rent_by_id) 用于提取租金。
 
-| Arguments | Description           | Type      |
+| 参数     | 描述                                                                                   | 类型      |
 | --------- | --------------------- | --------- |
-| `id`      | The ID of the listing | `Uint128` |
+| `id`      | 房源 ID | `Uint128` |
 
 ```ocaml
 transition claim_rent (id: Uint128)
@@ -290,17 +290,17 @@ end
 
 <br />
 
-## Owner Transitions
+## 所有者 Transition
 
-This group of transitions is used by the owner to manage the platform.
+所有者使用这组 transition 来管理平台。
 
 ### `claim_commission`
 
-This transition is used to claim the commission collected on the platform.
+此 transition 用于提取在平台上收取的佣金。
 
-The `_sender` wallet address is checked to ensure it is the owner of the contract.
+检查 `_sender` 钱包地址以确保它是合约的所有者。
 
-The `_balance` from the contract is sent to the owner via a message.
+合约中的 `_balance` 通过消息发送给所有者。
 
 ```ocaml
 transition claim_commission ()
@@ -319,15 +319,15 @@ end
 
 ### `update_commission`
 
-This transition is used to update the commission collected from each rental.
+此 transition 用于更新从每次租赁中收取的佣金。
 
-The `_sender` wallet address is checked to ensure it is the owner of the contract.
+检查 `_sender` 钱包地址以确保它是合约的所有者。
 
-The [`owners-commission`](dev-rentonzilliqa-mutable-variables#owner-fields) field is updated to `new_commission`.
+[`owners-commission`](dev-rentonzilliqa-mutable-variables#owner-fields) 字段更新为 `new_commission`。
 
-| Arguments        | Description                    | Type      |
+| 参数        | 描述                    | 类型      |
 | ---------------- | ------------------------------ | --------- |
-| `new_commission` | A new value for the commission | `Uint128` |
+| `new_commission` | 佣金的新值 | `Uint128` |
 
 ```ocaml
 transition update_commission (new_commission: Uint128)
@@ -346,15 +346,15 @@ end
 
 ### `update_night_duration`
 
-This transition is used to update the night duration value that is added to the `BLOCKNUMBER` to create the notion of time.
+此 transition 用于更新添加到 `BLOCKNUMBER` 以创建时间概念的夜间持续时间值。
 
-The `_sender` wallet address is checked to ensure it is the owner of the contract.
+检查 `_sender` 钱包地址以确保它是合约的所有者。
 
-The [`night_duration`](dev-rentonzilliqa-mutable-variables#owner-fields) field is updated to `new_night_duration`.
+[`night_duration`](dev-rentonzilliqa-mutable-variables#owner-fields) 字段更新为 `new_night_duration`。
 
-| Arguments            | Description                    | Type     |
+| 参数            | 描述                    | 类型     |
 | -------------------- | ------------------------------ | -------- |
-| `new_night_duration` | A new value for the commission | `Uint32` |
+| `new_night_duration` | 夜间持续时间的新值 | `Uint32` |
 
 ```ocaml
 transition update_night_duration (new_night_duration: Uint32)

@@ -60,7 +60,7 @@
     "description": "The label for category Transaction Lifecycle in sidebar DevelopersSidebar"
   },
   "sidebar.DevelopersSidebar.category.Educational Resources": {
-    "message": "教育资源",
+    "message": "学习资源",
     "description": "The label for category Educational Resources in sidebar DevelopersSidebar"
   },
   "sidebar.DevelopersSidebar.category.Sample app – RentOnZilliqa": {

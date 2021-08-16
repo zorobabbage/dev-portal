@@ -1,6 +1,6 @@
 ---
 id: dev-rentonzilliqa-mutable-variables
-title: Mutable Variables
+title: 可变变量
 keywords:
     - scilla
     - mutable
@@ -11,50 +11,50 @@ description: The Fields of the Scilla Contract for the RentOnZilliqa Application
 
 ---
 
-In this section, we look at the mutable fields declared in the contract. [The source code](https://github.com/Quinence/zilliqa-fullstack-app-rentOnZilliqa/blob/main/src/scilla/RentOnZilliqa.scilla).
+在本节中，我们查看合约中声明的可变字段。 [源代码](https://github.com/Quinence/zilliqa-fullstack-app-rentOnZilliqa/blob/main/src/scilla/RentOnZilliqa.scilla)。
 
-## Declaring the Mutable Fields
+## 声明可变字段
 
-The fields can be grouped into the following types based on their purpose.
+这些字段可以根据其用途分为以下类型。
 
-### Owner Fields
+### 所有者字段
 
-These fields can be modified by the owner of the contract. They dictate the behavior of the platform.
+合约的所有者可以修改这些字段。 它们决定了平台的行为。
 
-| Field                  | Description                                                                | Type      | Initial value |
+| 字段                  | 描述                                                                | 类型      | 默认值 |
 | ---------------------- | -------------------------------------------------------------------------- | --------- | ------------- |
-| `owners_comission`     | The commission collected by the platform owner on every rental             | `Uint128` | `10`          |
-| `night_duration`       | The change in `BLOCKNUMBER` that is understood to be a night               | `Uint32`  | `10`          |
-| `listing_id_generator` | A variable that is incremented to generate sequential IDs for new listings | `Uint128` | `zero`        |
+| `owners_commission` | 平台所有者每次租赁收取的佣金 | `Uint128` | `10` |
+| `night_duration` | 可以理解为一夜的 `BLOCKNUMBER` 变化 | `Uint32` | `10` |
+| `listing_id_generator` | 生成新房源的顺序 ID 的一个递增变量 | `Uint128` | `zero` |
 
-### User Details Fields
+### 用户详细信息字段
 
-These `Map` fields are dictionaries that are used to store details about the user accounts created on the platform. The `key` for each of them is the Wallet Address of the user.
+这些 `Map` 字段是字典，用于存储有关在平台上创建的用户帐户的详细信息。 他们每个人的 `key` 是用户的钱包地址。
 
-| Field       | Description                                       | Type                 | Initial value        |
+| 字段       | 描述                                       | 类型                 | 默认值        |
 | ----------- | ------------------------------------------------- | -------------------- | -------------------- |
-| `user_name` | The name of the user                              | `Map ByStr20 String` | `Emp ByStr20 String` |
-| `user_role` | The role of the user<br/>(`0`: Renter, `1`: Host) | `Map ByStr20 Uint32` | `Emp ByStr20 Uint32` |
+| `user_name` | 用户名                           | `Map ByStr20 String` | `Emp ByStr20 String` |
+| `user_role` | 用户角色<br/>(`0`：租户，`1`：房东) | `Map ByStr20 Uint32` | `Emp ByStr20 Uint32` |
 
-### Listing Details Fields
+### 房源详细信息字段
 
-These `Map` fields are dictionaries that are used to store details about each listing. The `key` for each of them is the ID as explained with the `listing_id_generator` in the [Owner Fields](#owner-fields). The `value` is the listing information corresponding to the field.
+这些 `Map` 字段是用于存储每个房源的详细信息的字典。 它们中的每一个的 `key` 是如 [所有者字段](#owner-fields) 中的 `listing_id_generator` 所解释的 ID。 `value` 是字段对应的房源信息。
 
-| Field                      | Value description                                                                             | Type                  | Initial value         |
+| 字段                      | Value 描述                                                                             | 类型                  | 默认值         |
 | -------------------------- | --------------------------------------------------------------------------------------------- | --------------------- | --------------------- |
-| `listing_host`             | The wallet address of the host account that created the listing                               | `Map Uint128 ByStr20` | `Emp Uint128 ByStr20` |
-| `listing_renter`           | The wallet address of the current renter of the listing                                       | `Map Uint128 ByStr20` | `Emp Uint128 ByStr20` |
-| `listing_rented_till`      | The `BLOCKNUMBER` until which the listing is rented                                           | `Map Uint128 BNum`    | `Emp Uint128 BNum`    |
-| `listing_name`             | The name of the listing                                                                       | `Map Uint128 String`  | `Emp Uint128 String`  |
-| `listing_description`      | The description of the listing                                                                | `Map Uint128 String`  | `Emp Uint128 String`  |
-| `listing_price`            | The price of the listing                                                                      | `Map Uint128 Uint128` | `Emp Uint128 Uint128` |
-| `listing_rooms`            | The number of rooms in the listing                                                            | `Map Uint128 Uint32`  | `Emp Uint128 Uint32`  |
-| `listing_bathrooms`        | The number of bathrooms in the listing                                                        | `Map Uint128 Uint32`  | `Emp Uint128 Uint32`  |
-| `listing_image`            | A URL to an image of the listing                                                              | `Map Uint128 String`  | `Emp Uint128 String`  |
-| `listing_location`         | A [Google Maps Plus Code](https://maps.google.com/pluscodes/) for the location of the listing | `Map Uint128 String`  | `Emp Uint128 String`  |
-| `listing_wifi`             | The availability of WiFi at the listing                                                       | `Map Uint128 String`  | `Emp Uint128 String`  |
-| `listing_laundry`          | The availability of a Landry at the listing                                                   | `Map Uint128 String`  | `Emp Uint128 String`  |
-| `listing_hvac`             | The availability of an HVAC at the listing                                                    | `Map Uint128 String`  | `Emp Uint128 String`  |
-| `listing_tv`               | The availability of a TV at the listing                                                       | `Map Uint128 String`  | `Emp Uint128 String`  |
-| `listing_kitchen`          | The availability of a Kitchen at the listing                                                  | `Map Uint128 String`  | `Emp Uint128 String`  |
-| `listing_accumulated_rent` | The rent accumulated for the listing                                                          | `Map Uint128 Uint128` | `Emp Uint128 Uint128` |
+| `listing_host`             | 创建房源的房东帐户的钱包地址                             | `Map Uint128 ByStr20` | `Emp Uint128 ByStr20` |
+| `listing_renter`           | 房源当前租户的钱包地址                                     | `Map Uint128 ByStr20` | `Emp Uint128 ByStr20` |
+| `listing_rented_till`      | 该房源被租用时的 `BLOCKNUMBER`                                          | `Map Uint128 BNum`    | `Emp Uint128 BNum`    |
+| `listing_name`             | 房源名称                                                                      | `Map Uint128 String`  | `Emp Uint128 String`  |
+| `listing_description`      | 房源描述                                                               | `Map Uint128 String`  | `Emp Uint128 String`  |
+| `listing_price`            | 房源价格                                                                      | `Map Uint128 Uint128` | `Emp Uint128 Uint128` |
+| `listing_rooms`            | 房源数量                                                           | `Map Uint128 Uint32`  | `Emp Uint128 Uint32`  |
+| `listing_bathrooms`        | 房源中的浴室数量                                                       | `Map Uint128 Uint32`  | `Emp Uint128 Uint32`  |
+| `listing_image`            | 房源图像的 URL                                                              | `Map Uint128 String`  | `Emp Uint128 String`  |
+| `listing_location`         | 用于房源位置的 [Google Maps Plus Code](https://maps.google.com/pluscodes/) | `Map Uint128 String`  | `Emp Uint128 String`  |
+| `listing_wifi`             | 房源中 WiFi 的可用性                                                       | `Map Uint128 String`  | `Emp Uint128 String`  |
+| `listing_laundry`          | 房源中洗衣房的可用性                                                  | `Map Uint128 String`  | `Emp Uint128 String`  |
+| `listing_hvac`             | 房源中 HVAC 的可用性                                                    | `Map Uint128 String`  | `Emp Uint128 String`  |
+| `listing_tv`               | 房源中电视的可用性                                                      | `Map Uint128 String`  | `Emp Uint128 String`  |
+| `listing_kitchen`          | 房源中厨房的可用性                                                 | `Map Uint128 String`  | `Emp Uint128 String`  |
+| `listing_accumulated_rent` | 房源累计租金                                                          | `Map Uint128 Uint128` | `Emp Uint128 Uint128` |

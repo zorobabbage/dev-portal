@@ -1,6 +1,6 @@
 ---
 id: dev-rentonzilliqa-scripting
-title: Scripting
+title: 脚本
 keywords:
     - scripting
     - rentonzilliqa
@@ -10,11 +10,11 @@ description: Connecting the RentOnZillqa frontend application with the Scilla co
 
 ---
 
-In this section, we prepare the TypeScript for connecting the frontend with the Scilla contract. As discussed, we use [ZilPay](https://zilpay.io) to access the Zilliqa JS utilities, which in turn allows us to interface with the deployed contract.
+在本节中，我们准备用于连接前端与 Scilla 合约的 TypeScript。 如前所述，我们使用 [ZilPay](https://zilpay.io) 来访问 Zilliqa JS 实用程序，这反过来又允许我们与已部署的合约进行交互。
 
-## Environment Variables
+## 环境变量
 
-We store the address of the smart contract in an environment variable in an [`.env`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/.env) file. We also store a [Google Maps API Key](https://developers.google.com/maps/documentation/embed/get-api-key) for embedding a Map on the Individual Listing page.
+我们将智能合约的地址存储在 [`.env`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/.env) 文件中的环境变量中。 我们还存储了一个 [Google Maps API Key](https://developers.google.com/maps/documentation/embed/get-api-key)，用于在房源详情页面上嵌入地图。
 
 ```
 REACT_APP_SMART_CONTRACT_ADDRESS=zil1tug5k2la6xrjqc78ysfacskgt2m72uzdwmd86z
@@ -23,13 +23,13 @@ REACT_APP_MAPS_API_KEY=XXXXXXXXXXXXXXXX
 
 <br/>
 
-## Helper Functions
+## 辅助函数
 
-We create a bunch of helper functions to facilitate the contract connection. We will define them in the [`/src/functions/`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/functions/) directory.
+我们创建了大量辅助函数来促进合约连接。 我们将在 [`/src/functions/`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/functions/) 目录中定义它们。
 
 ### `ContextContainer`
 
-We use [`unstated-next`](https://github.com/jamiebuilds/unstated-next) to create a Context Provider for the application. We use this to make some objects available across all the components of the application. We will see how this is used in the coming sections.
+我们使用 [`unstated-next`](https://github.com/jamiebuilds/unstated-next) 为应用程序创建一个 Context Provider。 我们使用它使一些对象在应用程序的所有组件中可用。 我们将在接下来的部分中看到它是如何使用的。
 
 ```ts
 import { useState } from "react";
@@ -73,9 +73,9 @@ export default ContextContainer;
 
 ### `getCallParameters`
 
-This function returns an object with the parameters required for calling transitions.
-An optional `amountValue` argument can be used when sending messages with a non-zero amount.
-The values are converted to the appropriate units using [`zilPay.utils`](https://zilpay.github.io/zilpay-docs/zilliqa-api-utils/#window-zilpay-utils).
+此函数返回一个对象，其中包含调用 transition 所需的参数。
+发送非零金额的消息时，可以使用可选的 `amountValue` 参数。
+这些值使用 [`zilPay.utils`](https://zilpay.github.io/zilpay-docs/zilliqa-api-utils/#window-zilpay-utils) 将其转换为适当的单位。
 
 ```ts
 const getCallParameters = (zilPay: any, amountValue: string = "0") => {
@@ -103,7 +103,7 @@ export default getCallParameters;
 
 ### `getCurrentUser`
 
-This function fetches the wallet address of the active ZilPay user. It gets the `name` and `role` of the user from the contract state.
+此函数获取激活的 ZilPay 用户的钱包地址。 它从合约状态中获取用户的 `name` 和 `role`。
 
 ```ts
 const getCurrentUser = (contractState: any, zilPay: any) => {
@@ -123,7 +123,7 @@ export default getCurrentUser;
 
 ### `getCurrentEpochNumber`
 
-This function fetches the current mini epoch suing ZilPay.
+此函数获取调起 ZilPay 的当前最小时期。
 
 ```ts
 const getCurrentEpochNumber = async (zilPay: any) => {
@@ -140,9 +140,9 @@ export default getCurrentEpochNumber;
 
 ### `formatListings`
 
-This function takes the multiple Map objects in the contract state and returns a handy user object.
-It checks if the current ZilPay user's wallet address matches that of the host of the listing.
-It also checks the rented status of the listing. Prices and rent are converted from `Qa`. Amenities are converted to `boolean`.
+该函数采用合约状态下的多个 Map 对象并返回一个方便的用户对象。
+它检查当前 ZilPay 用户的钱包地址是否与列房源房东的地址匹配。
+它还检查房源的租用状态。 价格和租金从 `Qa` 转换而来。 便利设施被转换为 `boolean`。
 
 ```ts
 const formatListings = (
@@ -212,11 +212,9 @@ export default formatListings;
 
 ### `transitionMessageAlert`
 
-This function creates a toast using [`react-hot-toast`](https://react-hot-toast.com),
-It uses [`zilPay.wallet`](https://zilpay.github.io/zilpay-docs/getting-started/#basic-considerations) to subscribe to transactions.
-It updates toast with the status of the transaction and shows a message as per the [Messages Codes](dev-rentonzilliqa-library#message-codes) we defined earlier.
+此函数使用 [`react-hot-toast`](https://react-hot-toast.com) 创建一个 toast，它使用 [`zilPay.wallet`](https://zilpay.github.io/zilpay -docs/getting-started/#basic-lookingations) 订阅交易。 使用交易状态更新 toast 并根据我们之前定义的 [消息 code](dev-rentonzilliqa-library#message-codes) 显示一条消息。
 
-Note that in this function, we use another helper function, `decodeMessage`, to get a human-readable message from the message code. This function is quite basic and hence not included here. You can take a look at [`/src/functions/decodeMessage.ts`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/functions/decodeMessage.ts). It also includes a `decodeZilPayError` function that we will use in the coming sections.
+请注意，在此函数中，我们使用另一个辅助函数 `decodeMessage`，从消息代码中获取人类可读的消息。 由于此功能非常基础，因此这里不做展示。 你可以看看 [`/src/functions/decodeMessage.ts`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/functions/decodeMessage.ts)。 它还包括一个我们将在接下来的部分中使用的 `decodeZilPayError` 函数。
 
 ```ts
 import toast from "react-hot-toast";
@@ -257,13 +255,13 @@ export default transitionMessageAlert;
 
 <br/>
 
-## Transition Functions
+## Transition 函数
 
-We finally come to the Transition Functions that simply call the contract transitions using [`zilPay.contract`](https://zilpay.github.io/zilpay-docs/zilliqa-contracts/#window-zilpay-contracts). The [`transitionMessageAlert`](#transitionmessagealert) is also setup after the transitions are triggered.
+我们终于来到了使用 [`zilPay.contract`](https://zilpay.github.io/zilpay-docs/zilliqa-contracts/#window-zilpay-contracts) 调用合约 transition 的 Transition 函数。 [`transitionMessageAlert`](#transitionmessagealert) 也会在触发 transition 后设置。
 
-The following functions are created at [`/src/functions/`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/functions/) for calling their respective transitions.
+以下函数在 [`/src/functions/`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/functions/) 创建，用于调用各自的 transition。
 
-| Function                                                                                                                          | Transition                                                       |
+| 函数                                                                                                                          | Transition                                                       |
 | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | [`createUserTransition`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/functions/createUserTransition.ts)       | [`create_user`](dev-rentonzilliqa-transitions#create_user)       |
 | [`createListingTransition`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/functions/createListingTransition.ts) | [`create_listing`](dev-rentonzilliqa-transitions#create_listing) |
@@ -272,7 +270,7 @@ The following functions are created at [`/src/functions/`](https://github.com/Qu
 | [`bookListingTransition`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/functions/bookListingTransition.ts)     | [`book_listing`](dev-rentonzilliqa-transitions#book_listing)     |
 | [`claimRentTransition`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/functions/claimRentTransition.ts)         | [`claim_rent`](dev-rentonzilliqa-transitions#claim_rent)         |
 
-Let us see the [`createUserTransition`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/functions/createUserTransition.ts) function as an example. We use the [`decodeZilPayError`](#transitionmessagealert) we defined earlier.
+让我们以 [`createUserTransition`](https://github.com/Quinence/zilliqa-fullstack-app/blob/main/src/functions/createUserTransition.ts) 函数为例。 我们使用我们之前定义的 [`decodeZilPayError`](#transitionmessagealert)。
 
 ```ts
 import getCallParameters from "./getCallParameters";

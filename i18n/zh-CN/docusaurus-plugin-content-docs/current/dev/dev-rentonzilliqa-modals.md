@@ -1,6 +1,6 @@
 ---
 id: dev-rentonzilliqa-modals
-title: Modals
+title: 模态
 keywords:
     - react
     - rentonzilliqa
@@ -11,16 +11,16 @@ description: Creating the Modals for the RentOnZilliqa frontend application
 
 ---
 
-In this section, we will create the Modals for the frontend application. We use the [`Modal`](dev-rentonzilliqa-components/#modal) component that we created earlier.
+在本节中，我们将为前端应用程序创建模态。 我们使用之前创建的 [`Modal`](dev-rentonzilliqa-components/#modal) 组件。
 
-## Create Account Modal
+## 创建帐户模态
 
-We start with [Create Account Modal](dev-rentonzilliqa-frontend#account-creation-and-zilpay) that will be used to connect to the ZilPay wallet as well as access the smart contract.
+我们从 [创建帐户模态](dev-rentonzilliqa-frontend#account-creation-and-zilpay) 开始，它将用于连接到 ZilPay 钱包以及访问智能合约。
 
-It uses [`Input`](dev-rentonzilliqa-components/#input) and [`Button`](dev-rentonzilliqa-components/#button) components.
-It uses [`CheckBox`](dev-rentonzilliqa-components/#checkbox) for selecting the user role. A button is presented for connecting ZilPay when required.
+使用 [`Input`](dev-rentonzilliqa-components/#input) 和 [`Button`](dev-rentonzilliqa-components/#button) 组件。
+使用 [`CheckBox`](dev-rentonzilliqa-components/#checkbox) 来选择用户角色。 需要时会显示一个用于连接 ZilPay 的按钮。
 
-The [`createAccountTransition`](#createaccounttransition) function is used.
+使用了 [`createAccountTransition`](#createaccounttransition) 函数。
 
 ```tsx
 import React, { useEffect, useState } from "react";
@@ -139,14 +139,14 @@ export default CreateAccountModal;
 
 <br/>
 
-## Create Listing Modal
+## 创建房源模态
 
-We now get to the [Create Listing Modal](dev-rentonzilliqa-frontend#creating-and-managing-listings) that will be used by host users to post new listings.
+我们现在进入 [创建房源模态](dev-rentonzilliqa-frontend#creating-and-managing-listings)，房东用户将使用它来发布新房源。
 
-It uses [`Input`](dev-rentonzilliqa-components/#input) and [`Button`](dev-rentonzilliqa-components/#button) components.
-It uses [`AmenitiesInput`](dev-rentonzilliqa-components/#amenitiesinput) for selecting the available amenities. A button is presented for connecting ZilPay when required.
+使用 [`Input`](dev-rentonzilliqa-components/#input) 和 [`Button`](dev-rentonzilliqa-components/#button) 组件。
+使用 [`AmenitiesInput`](dev-rentonzilliqa-components/#amenitiesinput) 来选择可用的便利设施。 需要时会显示一个用于连接 ZilPay 的按钮。
 
-The [`createListingTransition`](#createlistingtransition) function is used.
+使用了 [`createListingTransition`](#createlistingtransition) 函数。
 
 ```tsx
 import React, { useEffect, useState } from "react";
@@ -295,14 +295,14 @@ export default CreateListingModal;
 
 <br/>
 
-## Manage Listing Modal
+## 管理房源模态
 
-We now get to the [Create Listing Modal](dev-rentonzilliqa-frontend#creating-and-managing-listings) that will be used by host users to post new listings.
+我们现在进入 [管理房源模态](dev-rentonzilliqa-frontend#creating-and-managing-listings)，房东用户将使用它来管理房源。
 
-It uses [`Input`](dev-rentonzilliqa-components/#input) and [`Button`](dev-rentonzilliqa-components/#button) components.
-It uses [`AmenitiesInput`](dev-rentonzilliqa-components/#amenitiesinput) for selecting the available amenities. A button is presented for connecting ZilPay when required.
+使用 [`Input`](dev-rentonzilliqa-components/#input) 和 [`Button`](dev-rentonzilliqa-components/#button) 组件。
+使用 [`AmenitiesInput`](dev-rentonzilliqa-components/#amenitiesinput) 来选择可用的便利设施。 需要时会显示一个用于连接 ZilPay 的按钮。
 
-The [`deleteListingTransition`](#createlistingtransition), [`updateListingTransition`](#updatelistingtransition), and [`claimRentTransition`](#claimrenttransition) functions are called as required.
+根据需要调用 [`deleteListingTransition`](#createlistingtransition)、[`updateListingTransition`](#updatelistingtransition) 和 [`claimRentTransition`](#claimrenttransition) 函数。
 
 ```tsx
 import React, { useEffect, useState } from "react";
