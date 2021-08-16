@@ -1,6 +1,6 @@
 ---
 id: mining-additional-info
-title: Additional Information
+title: 补充信息
 keywords: 
 - mining
 - pow
@@ -16,31 +16,31 @@ description: Mining Additional Informantion
 
 ![Zilliqa Epoch Architecture](https://i.imgur.com/Da4t6FW.png)
 
-At the start of each DS Epoch, all mining candidates will run the Proof-of-Work (Ethash algorithm) cycle for a `60` seconds window to compete to join the Zilliqa network.
+在每个 DS Epoch 开始时，所有挖矿候选者都将以`60` 秒为一个窗口周期运行工作量证明（Ethash 算法），以竞争加入 Zilliqa 网络。
 
-- Nodes that fulfilled the `DS_POW_DIFFICULTY` parameter will qualify to join as DS nodes.
-- Nodes that fulfilled the `POW_DIFFICULTY` parameter will qualify to join as shard nodes.
+- 满足 `DS_POW_DIFFICULTY` 参数的节点将有资格作为 DS 节点加入。
+- 满足 `POW_DIFFICULTY` 参数的节点将有资格作为分片节点加入。
 
-There are a total of `100` TX epochs (each 1-2 min) within each DS Epoch (2-3 hrs). Every 100th TX epoch is known as the **Vacuous epoch**.
+每个 DS 时期（2-3 小时）内总共有 100 个 TX 时期（每 1-2 分钟）。每 100 个 TX 时期被称为 **Vacuous epoch**。
 
-The vacuous epoch is solely for:
+真空时期仅用于：
 
-- Distributing the coinbase rewards to all nodes.
-- Processing of the upgrade mechanism (as there are no forks in pBFT).
-- Writing of persistent state storage (updating of the nodes’ levelDB).
+- 将 coinbase 奖励分配给所有节点。
+- 升级机制的处理（因为 pBFT 中没有分叉）。
+- 写入持久状态存储（更新节点的 levelDB）。
 
-During a vacuous epoch, the network does not process any transactions.
+在一个真空时期，网络不处理任何交易。
 
-## Proof-of-Work Algorithm
+## 工作量证明算法
 
-Zilliqa uses [**Ethash**](https://github.com/ethereum/wiki/wiki/Ethash) for its PoW algorithm. Hence, Zilliqa uses a DAG in its proof-of-work algorithm, which is generated at an incremental rate for each **DS epoch**. The bootstrap DAG size will be roughly `1.02GB`.
+Zilliqa 使用 [**Ethash**](https://github.com/ethereum/wiki/wiki/Ethash) 作为其 PoW 算法。因此，Zilliqa 在其工作量证明算法中使用 DAG，该算法在每个 **DS 时期** 以递增速率生成。 bootstrap DAG 大小大约为 `1.02GB`。
 
-Refer to the [Core Protocol Documentation](../contributors/core-pow.md) for more details on the Zilliqa PoW algorithm.
+有关 Zilliqa PoW 算法的更多详细信息，请参阅 [核心协议文档](../contributors/core-pow.md)。
 
-## Network Difficulty
+## 网络难度
 
-Refer to the [Core Protocol Documentation](../contributors/core-difficulty-adjustment.mdx) for more details on the difficulty adjustment algorithm.
+有关难度调整算法的更多详细信息，请参阅 [核心协议文档](../contributors/core-difficulty-adjustment.mdx)。
 
-## Network Reward Mechanism
+## 网络奖励机制
 
-Refer to [Zilliqa Architecture - Reward mechanism](../basics/basics-zil-reward.md).
+参考 [Zilliqa 架构-奖励机制](../basics/basics-zil-reward.md)。

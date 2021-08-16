@@ -1,6 +1,6 @@
 ---
 id: mining-zilclient
-title: Running the Zilliqa Client
+title: 运行 Zilliqa 客户端
 keywords: 
 - mining steps
 - client setup
@@ -12,24 +12,24 @@ description: Running the Zilliqa Client Mining
 ---
 ## Hardware Requirements
 
-The [**Zilliqa Client**](https://github.com/Zilliqa/zilliqa) is officially supported on Ubuntu 18.04 OS.
+[**Zilliqa 客户端**](https://github.com/Zilliqa/zilliqa) 在 Ubuntu 18.04 操作系统上得到官方支持。
 
-The **minimum** requirements for running the **Zilliqa Client** are:
-- x64 Linux operating system (e.g Ubuntu 18.04.5)
-- Recent dual-core processor @ 2.2 GHZ. Examples: Intel Xeon (Skylake)
-- 4GB DRR3 RAM or higher
-- NAT environment **OR** Public static IP address
-- Any GPUs with at least 2 GB RAM
-- 100MB/s upload and download bandwidth
+运行 **Zilliqa 客户端** 的**最低**要求是：
+- x64 Linux 操作系统（例如 Ubuntu 18.04.5）
+- 最新的双核处理器 @ 2.2 GHZ。 如：Intel Xeon (Skylake)
+- 4GB DRR3 RAM 或更高版本
+- NAT 环境 **或者** 公共静态 IP 地址
+- 任何具有至少 2 GB RAM 的 GPU
+- 100MB/s 上传下载带宽
 
 :::info
-Hashing rate of the network is currently very high. A single GPU will be insufficient. You will need to setup [mining proxy](mining-proxy.mdx) connecting to multiple GPUs.
+目前网络的哈希率非常高。 单个 GPU 是不够的。 你需要设置 [挖矿代理](mining-proxy.mdx) 连接到多个 GPU。
 :::
 
-## Network Setup for Zilliqa Client
+## Zilliqa 客户端的网络设置
 
 :::note
-If you are using a home router, you are most probably in a NAT environment.
+如果你使用的是家用路由器，那么你很可能处于 NAT 环境中。
 :::
 
 If you are in a NAT environment, you can either:
@@ -39,61 +39,61 @@ If you are in a NAT environment, you can either:
 
 If you have a public IP address, you can skip this network setup section entirely.
 
-### Option 1a
+### 选项 1a
 
-Port forward to port `33133` for both external port (port range) and internal port (local port). You will also have to select the option for **BOTH** TCP and UDP protocol in your router menu when port forwarding. <br/>An example of this process can be found [**HERE**](https://www.linksys.com/us/support-article?articleNum=136711). After port forwarding, you may check if you have successfully port forwarded with this [**Open Port Check Tool**](https://www.yougetsignal.com/tools/open-ports/).
+端口转发到端口 `33133`，用于外部端口（端口范围）和内部端口（本地端口）。 端口转发时，你还必须在路由器菜单中为 TCP 和 UDP 协议选项选择 **BOTH**。 <br/>可以在 [**此处**](https://www.linksys.com/us/support-article?articleNum=136711) 找到此过程的示例。 端口转发后，你可以使用此 [**Open Port Check Tool**](https://www.yougetsignal.com/tools/open-ports/) 检查是否成功进行了端口转发。
 
-### Option 1b
+### 选项 1b
 
-Enable UPnP mode on your home router. Please Google how to access your home router setting to enable UPnP, an example can be found [**HERE**](https://routerguide.net/how-to-enable-upnp-for-rt-ac66u/). You can check if you have enabled it UPnP by installing the following tool:
+在你的家庭路由器上启用 UPnP 模式。 请搜索如何访问你的家庭路由器设置以启用 UPnP，可以 [**在这**](https://routerguide.net/how-to-enable-upnp-for-rt-ac66u/) 找到示例。 你可以通过安装以下工具来检查是否已启用 UPnP：
    ```shell
    sudo apt-get install miniupnpc
    ```
-Then type the following in the command line:
+然后在命令行中输入以下内容：
    ```shell
    upnpc -s
    ```
-You should get a message showing either:
+你应该收到一条消息，显示如下：
 
    - "List of UPNP devices found on the network : ..."
-   - **OR** "No IGD UPnP Device found on the network !".
+   - **或者** "No IGD UPnP Device found on the network !".
 
-The first message means UPnP mode has been enabled successfully, while the latter means the enabling of UPnP mode has failed. If you receive the latter message, proceed with using [**Option 1a**](#option-1a) instead.
+第一条消息表示 UPnP 模式已成功启用，而后者则表示 UPnP 模式启用失败。 如果你收到后一条消息，请继续使用 [**选项 1a**](#option-1a)。
 
-## Mining Steps
+## 挖矿步骤
 
-1. Create a single local or remote CPU node instance with Ubuntu 18.04 OS installed following instructions [**HERE**](http://releases.ubuntu.com/bionic/).
+1. 按照 [**这里**](http://releases.ubuntu.com/bionic/) 的说明创建一个安装了 Ubuntu 18.04 操作系统的本地或远程 CPU 节点实例。
 
-2. Install Docker CE for Ubuntu on your CPU node instance by following instructions [**HERE**](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
+2. 按照 [**这里**](https://docs.docker.com/install/linux/docker-ce/ubuntu/) 的说明在你的 CPU 节点实例上安装 Docker CE for Ubuntu。
 
-3. Make a new directory in your Desktop and change directory to it:
+3. 在你的桌面上创建一个新目录并将目录更改为：
 
     ```shell
     cd ~/Desktop && mkdir join && cd join
     ```
 
-4. Get the joining configuration files:
+4. 获取加入配置文件：
 
     ```shell
     wget https://mainnet-join.zilliqa.com/configuration.tar.gz
     tar zxvf configuration.tar.gz
     ```
 
-5. Find out your current IP address in the command prompt and record it down:
+5. 在命令提示符中找出你当前的 IP 地址并记录下来：
 
     ```shell
     curl https://ipinfo.io/ip
     ```
 
 :::note
-Please consult the previous section if you are in a NAT environment.
+如果你是在 NAT 环境中，请参考前面的章节。
 :::
 
-6. Edit your _constant.xml_ file in your configuration folder:
+6. 编辑配置文件夹中的 _constant.xml_ 文件：
 
-    * Set `GETWORK_SERVER_MINE` to `true`.
-    * Set `GETWORK_SERVER_PORT` to the port you will be using to GetWork. (default is `4202`)
-    * Set the following mining parameters to `false`:
+     * 将 `GETWORK_SERVER_MINE` 设置为 `true`。
+     * 将 `GETWORK_SERVER_PORT` 设置为你将用于 GetWork 的端口。 （默认为 `4202`）
+     * 将以下挖掘参数设置为 `false`：
 
         ```shell
         <CUDA_GPU_MINE>false</CUDA_GPU_MINE>
@@ -102,7 +102,7 @@ Please consult the previous section if you are in a NAT environment.
         <REMOTE_MINE>false</REMOTE_MINE>
         ```
         
-7. Install the python dependencies:
+7. 安装 python 依赖项：
     
     ```shell
     sudo apt install python-pip
@@ -110,57 +110,57 @@ Please consult the previous section if you are in a NAT environment.
     pip install request requests clint futures
     ```
 
-8. Run the shell script in your command prompt to launch your docker image:
+8. 在你的命令提示符中运行 shell 脚本以启动你的 docker 镜像：
 
     ```shell
     ./launch_docker.sh
     ```
 
-9. You will be prompted to enter some information as shown below:
+9. 系统将提示你输入一些信息，如下所示：
 
     :::note
-    **DO NOT** duplicate your IP address and use different ports to create different CPU nodes. You will be blacklisted by the network and hence not be able to receive any rewards.
+    **不要**使用不同端口的同一个 IP 地址来创建不同的 CPU 节点。 如果这样做了，你将被网络列入黑名单，因此无法获得任何奖励。
     :::
 
-    - `Assign a name to your container (default: zilliqa):` <br/> [Press **Enter** to skip if using default]
+    - `Assign a name to your container (default: zilliqa):` <br/> [如果使用默认值按 **Enter** 跳过]
 
-    - `Enter your IP address ('NAT' or *.*.*.*):` <br/> [Key in your IP address as found in step 5 **OR** `NAT` if you chose [Option 1b](mining-zilclient#option-1b) for network setup]
+    - `Enter your IP address ('NAT' or *.*.*.*):` <br/> [请输入你在第 5 步中找到的 IP 地址**或** `NAT`（如果你选择 [选项 1b](mining-zil client#option-1b) 进行网络设置） ]
 
-    - `Enter your listening port (default: 33133):` <br/> [Press **Enter** to skip if using default]
+    - `Enter your listening port (default: 33133):` <br/> [如果使用默认值按 **Enter** 跳过]
 
-## Monitoring Progress
+## 监控进度
 
-You are now a miner in the Zilliqa Mainnet. You can monitor your progress on your CPU node by using:
+你现在是 Zilliqa 主网的矿工了。 你可以使用以下方法监控 CPU 节点上的进度：
 
 ```shell
 tail -f zilliqa-00001-log.txt
 ```
 
-## Checking Your Generated Keypairs
+## 检查你生成的密钥对
 
-To check your locally generated public and private key pairs in your _mykey.txt_ file, you can enter the following in your command prompt on your CPU node:
+要检查 _mykey.txt_ 文件中本地生成的公钥和私钥对，你可以在 CPU 节点的命令提示符中输入以下内容：
 
 ```shell
 less mykey.txt
 ```
 
-The first hex string is your **public key**, and the second hex string is your **private key**.
+第一个十六进制字符串是你的 **公钥**，第二个十六进制字符串是你的 **私钥**。
 
 :::note
-This key pair is generated locally on your disk. Do remember to keep your private key somewhere safe!
+此密钥对在你的磁盘上本地生成。 请记住将你的私钥保存在安全的地方！
 :::
 
-## Checking Your $ZIL Balance
+## 检查你的 $ZIL 余额
 
-To check your balance for mining, input the address located in your _myaddr.txt_ file in the search bar of https://viewblock.io/zilliqa:
+要查看你的挖矿余额，请在 https://viewblock.io/zilliqa 的搜索栏中输入位于你的 _myaddr.txt_ 文件中的地址：
 
 ```shell
 less myaddr.txt
 ```
 
-## Stopping the Mining Process
+## 停止挖矿过程
 
-To stop the mining client, stop the docker container running the **Zilliqa Client** on the CPU node:
+要停止挖矿客户端，请停止在 CPU 节点上运行 **Zilliqa 客户端** 的 docker 容器：
 
 ```shell
 sudo docker stop zilliqa

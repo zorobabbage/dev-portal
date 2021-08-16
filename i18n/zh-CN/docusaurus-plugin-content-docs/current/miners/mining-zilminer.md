@@ -1,6 +1,6 @@
 ---
 id: mining-zilminer
-title: Running ZILMiner for Mining Rigs
+title: 为矿机运行 ZILMiner
 keywords: 
 - mining steps
 - driver setup for zilminer
@@ -11,59 +11,59 @@ description: Running ZILMiner for Mining Rigs
 ---
 
 ---
-## Hardware Requirements
+## 硬件要求
 
-The [**ZilMiner**](https://github.com/DurianStallSingapore/ZILMiner) software is officially supported on both Ubuntu and Windows OS.
+[**ZilMiner**](https://github.com/DurianStallSingapore/ZILMiner) 软件在 Ubuntu 和 Windows 操作系统上都得到官方支持。
 
-Both **AMD** (with OpenCL) and **Nvidia** (with OpenCL or CUDA) GPUs are supported for the Zilliqa PoW process.
+Zilliqa PoW 过程支持 **AMD**（使用 OpenCL）和 **Nvidia**（使用 OpenCL 或 CUDA）GPU。
 
-The **minimum** requirements for running **ZilMiners** are:
-- x64 Operating system (Ubuntu or Windows)
-- Dual-core processor or later
-- 4GB DDR3 RAM or higher
-- Any GPUs with at least 2 GB RAM
+运行 **ZilMiners** 的**最低**要求是：
+- x64 操作系统（Ubuntu 或 Windows）
+- 双核处理器或更高版本
+- 4GB DDR3 内存或更高版本
+- 任何具有至少 2 GB RAM 的 GPU
 
-## GPU Driver Setup for ZilMiner
+## ZilMiner 的 GPU 驱动程序设置
 
-### OpenCL Driver Setup (for AMD/Nvidia GPUs)
+### OpenCL 驱动程序设置（适用于 AMD/Nvidia GPU）
 
-If you wish to use OpenCL supported GPUs for PoW, please run the following to install the OpenCL developer package:
+如果你希望将 OpenCL 支持的 GPU 用于 PoW，请运行以下命令来安装 OpenCL 开发包：
 
    ```shell
    sudo apt install ocl-icd-opencl-dev
    ```
 
-You may need to reboot your PC for the installation to take effect. After reboot, check if your drivers are installed properly with the following command:
+你可能需要重新启动 PC 才能使安装生效。 重新启动后，使用以下命令检查你的驱动程序是否正确安装：
 
    ```shell
    clinfo
    ```
 
-### CUDA Driver Setup (for Nvidia GPUs only)
+### CUDA 驱动程序设置（仅适用于 Nvidia GPU）
 
-If you wish to use CUDA supported GPU for PoW, please download and install CUDA package from the [**NVIDIA official webpage**](https://developer.nvidia.com/cuda-downloads). You may need to reboot your PC for the installation to take effect.
+如果你希望使用支持 CUDA 的 GPU 进行 PoW，请从 [**NVIDIA 官方网页**](https://developer.nvidia.com/cuda-downloads) 下载并安装 CUDA 软件包。 你可能需要重新启动 PC 才能使安装生效。
 
-## Mining Steps
+## 挖矿步骤
 
-1. Install **ZilMiner** on your GPU rigs:
+1. 在你的 GPU 设备上安装 **ZilMiner**：
 
-    - **For Windows OS:** [**DOWNLOAD THE LATEST RELEASE HERE**](https://github.com/DurianStallSingapore/ZILMiner/releases/)
-    - **For Ubuntu OS:** [**DOWNLOAD THE LATEST RELEASE HERE**](https://github.com/DurianStallSingapore/ZILMiner/releases/)
+     - **对于 Windows 操作系统：** [**在此处下载最新版本**](https://github.com/DurianStallSingapore/ZILMiner/releases/)
+     - **对于 Ubuntu 操作系统：** [**在此处下载最新版本**](https://github.com/DurianStallSingapore/ZILMiner/releases/)
 
-2. Setup your **ZilMiner** on your GPU rigs with the following command:
+2. 使用以下命令在 GPU 设备上设置 **ZilMiner**：
 
     ```shell
     zilminer -P zil://wallet_address.worker_name@zil_node_ip:get_work_port
     ```
 :::note
-You have to change the *wallet_address*, *worker_name*, *zil_node_ip*, and *get_work_port* accordingly.
+你必须相应地更改 *wallet_address*、*worker_name*、*zil_node_ip* 和 *get_work_port*。
 :::
 
-    - For `wallet_address` : You can input any arbitrary Zilliqa address. This is only used by the pool master for accounting purposes. If you are mining solo, you can ignore this parameter.
-    - For `worker_name` : You can input any arbitrary worker name you desire.
-    - For `zil_node_ip` : Please input the IP address of the CPU node running the Zilliqa Client.
-    - For `get_work_port` : Please input the port used in `GETWORK_SERVER_PORT`. Default is `4202`.
+- 对于 `wallet_address`：你可以输入任意 Zilliqa 地址。 这仅是矿池主用于记帐目的。 如果是单人挖矿，可以忽略这个参数。
+     - 对于 `worker_name`：你可以输入任何你想要的任意工人名称。
+     - 对于 `zil_node_ip`：请输入运行 Zilliqa 客户端的 CPU 节点的 IP 地址。
+     - 对于 `get_work_port`：请输入`GETWORK_SERVER_PORT` 中使用的端口。 默认值为 `4202`。
 
-## Stopping the Mining Process
+## 停止挖矿过程
 
-To stop mining, you will need to kill your **ZilMiner** process on your GPU rigs.
+要停止挖矿，你需要终止 GPU 设备上的 **ZilMiner** 进程。

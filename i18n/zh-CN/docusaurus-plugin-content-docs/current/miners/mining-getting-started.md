@@ -1,6 +1,6 @@
 ---
 id: mining-getting-started
-title: Getting Started
+title: 入门
 keywords: 
 - proxy mining
 - participating as miner
@@ -10,33 +10,33 @@ description: Mining Getting Started
 ---
 
 ---
-## Participating as a Miner
+## 以矿工身份参与
 
-There are theoretically multiple ways to participate in the Zilliqa Mainnet as a miner.
+理论上有多种方式可以作为矿工参与 Zilliqa 主网。
 
-1. Operating Zilliqa Client using the default settings for CPU mining
-1. Operating Zilliqa Client using OpenCL or CUDA settings for GPU mining
-1. Operating a proxy mining setup using Zilliqa Client, ZilMiner, and Zilliqa Mining Proxy
-1. Participating in mining pools
+1. 使用默认 CPU 挖矿设置运行 Zilliqa 客户端
+2. 使用 OpenCL 或 CUDA 设置操作 Zilliqa 客户端进行 GPU 挖掘
+3. 使用 Zilliqa 客户端、ZilMiner 和 Zilliqa 挖矿代理 操作代理挖矿设置
+4. 参与矿池
 
-However, at the present level of mining difficulty in the Mainnet, the first two ways are no longer possible.
+但是，以目前主网的挖矿难度，前两种方式已经不可能了。
 
 :::note
-Mining difficulty on the Mainnet is high. Hence, it will not be feasible to mine using CPU or a single GPU (i.e, options 1 and 2 above).
+主网上的挖矿难度很高。 因此，使用 CPU 或单个 GPU 进行挖矿是不可行的（即上面的选项 1 和 2）。
 
-To enter the shard network requires >300 modern GPUs. As such, it will be advisable to participate in a mining pool if you do not have a sufficient amount of GPUs.
+进入分片网络需要 >300 个现代 GPU。 因此，如果你没有足够数量的 GPU，建议你加入矿池。
 :::
 
-### Proxy Mining
+### 代理挖矿
 
-To proceed with proxy mining:
+继续代理挖掘：
 
-1. An introduction to proxy mining is provided [here](mining-proxy.mdx)
-1. The Zilliqa Client instructions can be found [here](mining-zilclient.md)
-1. The ZilMiner instructions can be found [here](mining-zilminer.md)
+1. 代理挖矿介绍在 [这里](mining-proxy.mdx)
+2. Zilliqa 客户端说明可以在 [这里](mining-zilclient.md) 找到
+3. ZilMiner 指令可以在 [这里](mining-zilminer.md) 找到
 
-### Mining Pools
+### 矿池
 
-Zilliqa's use of Ethereum's Ethash algorithm for PoW allows existing mining pool operators to easily integrate mining on Zilliqa, giving retail miners another way to participate in the Zilliqa Mainnet.
+Zilliqa 使用以太坊的 Ethash 算法进行 PoW，允许现有矿池运营商轻松地在 Zilliqa 上集成挖矿，为零售矿工提供另一种参与 Zilliqa 主网的方式。
 
-The Zilliqa page on [MiningPoolStats](https://miningpoolstats.stream/zilliqa) has a list of mining pools that support Zilliqa. Please refer to the pool's website for specific instructions on how to participate.
+[MiningPoolStats](https://miningpoolstats.stream/zilliqa) 上的 Zilliqa 页面列出了支持 Zilliqa 的矿池。 有关如何参与的具体说明，请参阅矿池网站。
