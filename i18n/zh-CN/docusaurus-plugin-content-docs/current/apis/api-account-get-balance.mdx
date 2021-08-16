@@ -4,11 +4,11 @@ title: GetBalance
 ---
 
 ---
-- Returns the current `balance` of an account, measured in the smallest accounting unit **Qa** (or 10^-12 **Zil**). This is represented as a `String`.
+- 返回账户的当前 `余额`，以最小计算单位 **Qa**（或 10^-12 **Zil**）衡量。 表示为一个 `String`。
 
-- Returns the current `nonce` of an account. This is represented as a `Number`.
+- 返回帐户的当前 `nonce`。 表示为一个 `Number`。
 
-### Example Request
+### 请求示例
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -82,7 +82,7 @@ func TestGetBalance() {
 
 </Tabs>
 
-### Example Response
+### 响应示例
 
 ```json
 {
@@ -95,20 +95,20 @@ func TestGetBalance() {
 }
 ```
 
-### HTTP Request
+### HTTP 请求
 
 | Chain(s)              | URL(s)                       |
 | --------------------- | ---------------------------- |
-| **Zilliqa mainnet**   | https://api.zilliqa.com/     |
-| **Developer testnet** | https://dev-api.zilliqa.com/ |
-| **Local testnet**     | http://localhost:4201/       |
-| **Isolated server**   | https://zilliqa-isolated-server.zilliqa.com/ |
+| **Zilliqa 主网**   | https://api.zilliqa.com/     |
+| **开发者测试网** | https://dev-api.zilliqa.com/ |
+| **本地测试网**     | http://localhost:4201/       |
+| **隔离服务器**   | https://zilliqa-isolated-server.zilliqa.com/ |
 
-### Arguments
+### 参数
 
-| Parameter | Type   | Required | Description                                                                                       |
+| 参数 | 类型   | 是否必填 | 描述                                                                                       |
 | --------- | ------ | -------- | ------------------------------------------------------------------------------------------------- |
-| `id`      | string | Required | `"1"`                                                                                             |
-| `jsonrpc` | string | Required | `"2.0"`                                                                                           |
-| `method`  | string | Required | `"GetBalance"`                                                                                    |
-| `params`  | string | Required | An User's account address of 20 bytes. <br/> Example: `"1eefc4f453539e5ee732b49eb4792b268c2f3908"` |
+| `id`      | string | 必填 | `"1"`                                                                                             |
+| `jsonrpc` | string | 必填 | `"2.0"`                                                                                           |
+| `method`  | string | 必填 | `"GetBalance"`                                                                                    |
+| `params`  | string | 必填 | 20 个字节的用户帐户地址。 <br/> 如：`"1eefc4f453539e5ee732b49eb4792b268c2f3908"` |

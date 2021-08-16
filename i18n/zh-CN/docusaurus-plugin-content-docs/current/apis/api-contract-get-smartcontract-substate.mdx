@@ -4,9 +4,9 @@ title: GetSmartContractSubState
 ---
 
 ---
-Returns the state (or a part specified) of a smart contract address, represented in a JSON format.
+返回智能合约地址的状态（或指定的部分），以 JSON 格式表示。
 
-### Example Request
+### 请求示例
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -82,7 +82,7 @@ func GetSmartContractSubState() {
 </TabItem>
 </Tabs>
 
-### Example Response
+### 响应示例
 
 ```json
 {
@@ -96,34 +96,34 @@ func GetSmartContractSubState() {
 }
 ```
 
-### HTTP Request
+### HTTP 请求
 
 | Chain(s)              | URL(s)                       |
 | --------------------- | ---------------------------- |
-| **Zilliqa mainnet**   | https://api.zilliqa.com/     |
-| **Developer testnet** | https://dev-api.zilliqa.com/ |
-| **Local testnet**     | http://localhost:4201/       |
-| **Isolated server**   | https://zilliqa-isolated-server.zilliqa.com/ |
+| **Zilliqa 主网**   | https://api.zilliqa.com/     |
+| **开发者测试网** | https://dev-api.zilliqa.com/ |
+| **本地测试网**     | http://localhost:4201/       |
+| **隔离服务器**   | https://zilliqa-isolated-server.zilliqa.com/ |
 
-### Arguments
+### 参数
 
-| Parameter | Type   | Required | Description                  |
+| 参数 | 类型   | 是否必填 | 描述                  |
 | --------- | ------ | -------- | ---------------------------- |
-| `id`      | string | Required | `"1"`                        |
-| `jsonrpc` | string | Required | `"2.0"`                      |
-| `method`  | string | Required | `"GetSmartContractSubState"` |
-| `params`  | array  | Required | State params                 |
+| `id`      | string | 必填 | `"1"`                        |
+| `jsonrpc` | string | 必填 | `"2.0"`                      |
+| `method`  | string | 必填 | `"GetSmartContractSubState"` |
+| `params`  | array  | 必填 | 状态参数                 |
 
-### State Params
+### 状态参数
 
-| Parameter       | Type       | Required     | Description                                                           |
+| Parameter       | Type       | 必填     | Description                                                           |
 | --------------- | ---------- | ------------ | --------------------------------------------------------------------- |
-| `Address`       | string     | Required     | A smart contract address of 20 bytes.                                 |
-| `Variable Name` | string     | Can be empty | Name of the variable in the Smart Contract                            |
-| `Indices`       | JSON Array | Can be empty | If the variable is of map type, you can specify an index (or indices) |
+| `Address`       | string     | 必填     | 一个 20 字节的智能合约地址。 |
+| `Variable Name` | string     | 可能为空 |  智能合约中的变量名称 |
+| `Indices`       | JSON Array | 可能为空 |  如果变量是映射类型，你可以指定一个索引（或多个索引） |
 
-The `params` is a JSON array. 
+`params` 是一个 JSON 数组。
 
-Example: `"params"`:`["fe001824823b12b58708bf24edd94d8b5e1cfcf7","admins",[\"0x9bfec715a6bd658fcb62b0f8cc9bfa2ade71434a\""]]`
+示例：`"params"`:`["fe001824823b12b58708bf24edd94d8b5e1cfcf7","admins",["0x9bfec715a6bd658fcb62b0f8cc9bfa2ade71434a"]]`
 
-_Note: If Variable Name and Indices Array are both empty, the response would be same as GetSmartContractState_
+_注意：如果变量名和索引数组都为空，则响应与 GetSmartContractState 相同_

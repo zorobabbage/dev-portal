@@ -4,20 +4,20 @@ title: GetNetworkId
 ---
 
 ---
-Returns the `CHAIN_ID` of the specified network. This is represented as a `String`. 
+返回指定网络的 `CHAIN_ID`。 表示为一个 `String`。
 
-See table below for the `CHAIN_ID` for different chains:
+不同链的 `CHAIN_ID` 见下表：
 
 | Chain(s)              | `CHAIN_ID` |
 | --------------------- | ---------- |
-| **Zilliqa mainnet**   | `1`        |
-| **Developer testnet** | `333`      |
-| **Isolated server**   | `222`      |
+| **Zilliqa 主网**   | `1`        |
+| **开发者测试网** | `333`      |
+| **隔离服务器**   | `222`      |
 
 
-**NOTE:** `CHAIN_ID` from `2` to `9` are reserved for Zilliqa Core use.
+**注意：** 从 `2` 到 `9` 的 `CHAIN_ID` 作为保留，供 Zilliqa 核心使用。
 
-### Example Request
+### 请求示例
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -96,7 +96,7 @@ func GetNetworkId() {
 </Tabs>
 
 
-### Example Response
+### 响应示例
 
 
 ```json
@@ -107,20 +107,20 @@ func GetNetworkId() {
 }
 ```
 
-### HTTP Request
+### HTTP 请求
 
 | Chain(s)              | URL(s)                       |
 | --------------------- | ---------------------------- |
-| **Zilliqa mainnet**   | https://api.zilliqa.com/     |
-| **Developer testnet** | https://dev-api.zilliqa.com/ |
-| **Local testnet**     | http://localhost:4201/       |
-| **Isolated server**   | https://zilliqa-isolated-server.zilliqa.com/ |
+| **Zilliqa 主网**   | https://api.zilliqa.com/     |
+| **开发者测试网** | https://dev-api.zilliqa.com/ |
+| **本地测试网**     | http://localhost:4201/       |
+| **隔离服务器**   | https://zilliqa-isolated-server.zilliqa.com/ |
 
-### Arguments
+### 参数
 
-| Parameter | Type   | Required | Description       |
+| 参数 | 类型   | 是否必填 | 描述       |
 | --------- | ------ | -------- | ----------------- |
-| `id`      | string | Required | `"1"`             |
-| `jsonrpc` | string | Required | `"2.0"`           |
-| `method`  | string | Required | `"GetNetworkId"`  |
-| `params`  | string | Required | Empty string `""` |
+| `id`      | string | 必填 | `"1"`             |
+| `jsonrpc` | string | 必填 | `"2.0"`           |
+| `method`  | string | 必填 | `"GetNetworkId"`  |
+| `params`  | string | 必填 | 空字符串 `""` |

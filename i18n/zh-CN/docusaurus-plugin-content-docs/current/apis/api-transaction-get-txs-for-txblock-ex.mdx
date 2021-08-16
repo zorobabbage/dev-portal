@@ -4,15 +4,15 @@ title: GetTransactionsForTxBlockEx
 ---
 
 ---
-This API behaves similar to [GetTransactionsForTxBlock](api-transaction-get-txs-for-txblock.mdx) except it returns the transactions in batches (or pages) of 2,500.
+此 API 的行为类似于 [GetTransactionsForTxBlock](api-transaction-get-txs-for-txblock.mdx)，但它以 2,500 个批次（或页面）的形式返回交易。
 
-The number of pages available is defined by the `NumPages` header value in the [GetTxBlock](api-blockchain-get-tx-block.mdx) or [GetLatestTxBlock](api-blockchain-get-latest-tx-block.mdx) response. Page indexing is zero-based and indicated in the request after the block number.
+可用页数由 [GetTxBlock](api-blockchain-get-tx-block.mdx) 或 [GetLatestTxBlock](api-blockchain-get-latest-tx-block.mdx) 中的 `NumPages`  header 值定义 ） 回复。 页面索引是从零开始的，并在请求中的区块高度之后展示。
 
-For example, to retrieve all the transactions for a block with `NumPages=3`, one must call `GetTransactionsForTxBlockEx` three times with page number 0, 1, and 2.
+例如，要检索具有 `NumPages=3` 的区块的所有交易，必须使用页码 0、1 和 2 调用 `GetTransactionsForTxBlockEx` 三次。
 
-This API is available from Zilliqa `V7.2.0` onwards.
+此 API 从 Zilliqa `V7.2.0` 开始可用。
 
-### Example Request
+### 请求示例
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -39,7 +39,7 @@ curl -d '{
 
 </Tabs>
 
-### Example Response
+### 响应示例
 
 ```json
 {
@@ -71,27 +71,27 @@ curl -d '{
 
 ```
 
-### HTTP Request
+### HTTP 请求
 
 | Chain(s)              | URL(s)                       |
 | --------------------- | ---------------------------- |
-| **Zilliqa mainnet**   | https://api.zilliqa.com/     |
-| **Developer testnet** | https://dev-api.zilliqa.com/ |
-| **Local testnet**     | http://localhost:4201/       |
-| **Isolated server**   | https://zilliqa-isolated-server.zilliqa.com/ |
+| **Zilliqa 主网**   | https://api.zilliqa.com/     |
+| **开发者测试网** | https://dev-api.zilliqa.com/ |
+| **本地测试网**     | http://localhost:4201/       |
+| **隔离服务器**   | https://zilliqa-isolated-server.zilliqa.com/ |
 
-### Arguments
+### 参数
 
-| Parameter | Type   | Required | Description                     |
+| 参数 | 类型   | 是否必填 | 描述                     |
 | --------- | ------ | -------- | ------------------------------- |
-| `id`      | string | Required | `"1"`                           |
-| `jsonrpc` | string | Required | `"2.0"`                         |
-| `method`  | string | Required | `"GetTransactionsForTxBlockEx"` |
-| `params`  | array  | Required | Block parameters                |
+| `id`      | string | 必填 | `"1"`                           |
+| `jsonrpc` | string | 必填 | `"2.0"`                         |
+| `method`  | string | 必填 | `"GetTransactionsForTxBlockEx"` |
+| `params`  | array  | 必填 | 区块参数                |
 
-### Block Parameters
+### 区块参数
 
-| Parameter      | Type   | Required | Description                                              |
+| 参数 | 类型   | 是否必填 | 描述                                              |
 | -------------- | ------ | -------- | -------------------------------------------------------- |
-| `Block number` | string | Required | Specifed TX block number to return. Example: `"1002353"` |
-| `Page number`  | string | Required | Page number (zero-based). Example: `"2"`                 |
+| `Block number` | string | 必填 | 返回指定的 TX 区块高度。 如： `"1002353"` |
+| `Page number`  | string | 必填 | 页码（从零开始）。 如子： `"2"`                 |

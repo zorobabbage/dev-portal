@@ -1,6 +1,6 @@
 ---
 id: api-introduction
-title: Introduction
+title: 基本介绍
 keywords: 
 - api 
 - introduction
@@ -9,34 +9,34 @@ description: Zilliqa JSON RPC API
 
 ---
 
-[JSON-RPC](https://en.wikipedia.org/wiki/JSON-RPC) is a remote procedure call protocol encoded in JSON. You can use this API to access data from the Zilliqa nodes.
-The JSON-RPC API server runs on:
+[JSON-RPC](https://en.wikipedia.org/wiki/JSON-RPC) 是一种以 JSON 编码的远程 procedure 调用协议。 你可以使用此 API 从 Zilliqa 节点访问数据。
+JSON-RPC API 服务器运行在：
 
 | Chain(s)              | URL(s)                                        |
 | --------------------- | --------------------------------------------- |
-| **Zilliqa mainnet**   | https://api.zilliqa.com/                      |
-| **Developer testnet** | https://dev-api.zilliqa.com/                  |
-| **Local testnet**     | http://localhost:4201/                        |
-| **Isolated server**   | https://zilliqa-isolated-server.zilliqa.com/   |
+| **Zilliqa 主网**   | https://api.zilliqa.com/                      |
+| **开发者测试网** | https://dev-api.zilliqa.com/                  |
+| **本地测试网**     | http://localhost:4201/                        |
+| **隔离服务器**   | https://zilliqa-isolated-server.zilliqa.com/   |
 
-You can use the following block explorers for the various networks
+对应的区块浏览器如下所示
 
 | Chain(s)              | Explorer link                                                                                                             |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| **Zilliqa mainnet**   | https://viewblock.io/zilliqa <br/> https://devex.zilliqa.com/                                                             |
-| **Developer testnet** | https://viewblock.io/zilliqa?network=testnet <br/> https://devex.zilliqa.com/?network=https%3A%2F%2Fdev-api.zilliqa.com   |
-| **Local testnet**     | https://devex.zilliqa.com/?network=http%3A%2F%2Flocalhost%3A4201%2F                                                       |
-| **Isolated server**   | https://devex.zilliqa.com/?network=https%3A%2F%2Fzilliqa-isolated-server.zilliqa.com                                      |
+| **Zilliqa 主网**   | https://viewblock.io/zilliqa <br/> https://devex.zilliqa.com/                                                             |
+| **开发者测试网** | https://viewblock.io/zilliqa?network=testnet <br/> https://devex.zilliqa.com/?network=https%3A%2F%2Fdev-api.zilliqa.com   |
+| **本地测试网**     | https://devex.zilliqa.com/?network=http%3A%2F%2Flocalhost%3A4201%2F                                                       |
+| **隔离服务器**   | https://devex.zilliqa.com/?network=https%3A%2F%2Fzilliqa-isolated-server.zilliqa.com                                      |
 
 
 
-All API calls are POST requests.
+所有 API 调用都是 POST 请求。
 
-All requests follow the standard JSON-RPC format and include 4 variables in the data object:
+所有请求都遵循标准的 JSON-RPC 格式，并在数据对象中包含 4 个变量：
 
-| Data object | Example             |
+| 数据对象 | 示例             |
 | ----------- | :------------------ |
-| `id`        | e.g. `"1"`          |
-| `jsonrpc`   | e.g. `"2.0"`        |
-| `method`    | e.g. `"GetBalance"` |
-| `params`    | e.g. `["1"]`        |
+| `id`        | 例如 `"1"`          |
+| `jsonrpc`   | 例如 `"2.0"`        |
+| `method`    | 例如 `"GetBalance"` |
+| `params`    | 例如 `["1"]`        |

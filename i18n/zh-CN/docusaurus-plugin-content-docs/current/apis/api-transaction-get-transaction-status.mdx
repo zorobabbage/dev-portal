@@ -4,17 +4,17 @@ title: GetTransactionStatus
 ---
 
 ---
-Returns the status of a specified transaction. This API is available from Zilliqa `V7.0.0` onwards and supports all transaction statuses (unconfirmed, confirmed, and rejected).
+返回指定交易的状态。 该 API 从 Zilliqa `V7.0.0` 开始可用，支持所有交易状态（未确认、确认和拒绝）。
 
 :::note
-The `GetTransactionStatus` API relies on an off-chain transaction tracking solution, which may be periodically cleaned. We recommend to still primarily use `GetTransaction` for older (e.g., several days old) transactions, and only use `GetTransactionStatus` mainly for tracking the progress of ongoing transactions.
+`GetTransactionStatus` API 依赖于可能会定期清理的链下交易跟踪解决方案。 我们建议仍然使用 `GetTransaction` 来处理较旧的（例如，几天前的）交易，并且只将 `GetTransactionStatus` 用于跟踪正在进行的交易的进度。
 :::
 
 :::note
-The `GetTransactionStatus` API is available only on https://api.zilliqa.com/. It is disabled for community-hosted or private-hosted seed nodes.
+`GetTransactionStatus` API 仅在 https://api.zilliqa.com/ 上可用。 对于社区托管或私有托管的种子节点，它被禁用。
 :::
 
-### Example Request
+### 请求示例
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -40,7 +40,7 @@ curl -d '{
 
 </Tabs>
 
-### Example Response
+### 响应示例
 
 ```json
 {
@@ -70,64 +70,64 @@ curl -d '{
 }
 ```
 
-### Response Fields
+### 响应字段
 
-| Field               | Description                                     |
+| 字段               | 描述                                     |
 | ------------------- | ----------------------------------------------- |
-| `_id`               | Object ID (internal database field)             |
-| `epochInserted`     | Tx epoch when this transaction was first logged |
-| `epochUpdated`      | Tx epoch when this transaction was last updated |
-| `lastModified`      | Timestamp for this transaction's last update    |
-| `modificationState` | See next table below                            |
-| `status`            | See next table below                            |
-| Other fields        | Transaction-related fields                      |
+| `_id`               | 对象 ID（内部数据库字段） |
+| `epochInserted`     | 首次记录此事务时的 Tx 纪元 |
+| `epochUpdated`      | 上次更新此交易时的 Tx 纪元 |
+| `lastModified`      | 此交易上次更新的时间戳 |
+| `modificationState` | 见下表 |
+| `status`            | 见下表 |
+| 其他字段       | 交易相关字段 |
 
-### Status Codes
+### 状态码
 
-| `modificationState` | `status` | Description                                                               |
+| `modificationState` | `status` | 描述                                                               |
 | ------------------- | -------- | -------------------------------------------------------                   |
-| 0                   | 1        | Pending - Dispatched                                                      |
-| 1                   | 2        | Pending - Soft-confirmed (awaiting Tx block generation)                   |
-| 1                   | 4        | Pending - Nonce is higher than expected                                   |
-| 1                   | 5        | Pending - Microblock gas limit exceeded                                   |
-| 1                   | 6        | Pending - Consensus failure in network                                    |
-| 2                   | 3        | Confirmed                                                                 |
-| 2                   | 10       | Rejected - Transaction caused math error                                  | 
-| 2                   | 11       | Rejected - Scilla invocation error                                        |
-| 2                   | 12       | Rejected - Contract account initialization error                          |
-| 2                   | 13       | Rejected - Invalid source account                                         |
-| 2                   | 14       | Rejected - Gas limit higher than shard gas limit                          |
-| 2                   | 15       | Rejected - Unknown transaction type                                       |
-| 2                   | 16       | Rejected - Transaction sent to wrong shard                                |
-| 2                   | 17       | Rejected - Contract & source account cross-shard issue                    |
-| 2                   | 18       | Rejected - Code size exceeded limit                                       |
-| 2                   | 19       | Rejected - Transaction verification failed                                |
-| 2                   | 20       | Rejected - Gas limit too low                                              |
-| 2                   | 21       | Rejected - Insufficient balance                                           |
-| 2                   | 22       | Rejected - Insufficient gas to invoke Scilla checker                      |
-| 2                   | 23       | Rejected - Duplicate transaction exists                                   |
-| 2                   | 24       | Rejected - Transaction with same nonce but same/higher gas price exists   |
-| 2                   | 25       | Rejected - Invalid destination address                                    |
-| 2                   | 26       | Rejected - Failed to add contract account to state                        |
-| 2                   | 27       | Rejected - Nonce is lower than expected                                   |
-| 2                   | 255      | Rejected - Internal error                                                 |
+| 0                   | 1        | 待处理 - 已发送|
+| 1                   | 2        | 待处理 - 软确认（等待 Tx 块生成）|
+| 1                   | 4        | 待处理 - Nonce 高于预期|
+| 1                   | 5        | 待处理 - 超出微块 gas 限制|
+| 1                   | 6        | 待处理 - 网络中的共识失败|
+| 2                   | 3        | 确认|
+| 2                   | 10       | 拒绝 - 交易导致数学错误| 
+| 2                   | 11       | 拒绝 - Scilla 调用错误|
+| 2                   | 12       | 拒绝 - 合约账户初始化错误|
+| 2                   | 13       | 拒绝 - 源帐户无效|
+| 2                   | 14       | 拒绝 - gas 限制高于分片 gas 限制|
+| 2                   | 15       | 拒绝 - 未知的交易类型|
+| 2                   | 16       | 拒绝 - 交易发送到错误的分片|
+| 2                   | 17       | 拒绝 - 合约和源账户跨分片问题|
+| 2                   | 18       | 拒绝 - 代码大小超出限制|
+| 2                   | 19       | 拒绝 - 交易验证失败|
+| 2                   | 20       | 拒绝 - Gas 限制太低|
+| 2                   | 21       | 拒绝 - 余额不足|
+| 2                   | 22       | 拒绝 - 没有足够的 gas 来调用 Scilla 检查器|
+| 2                   | 23       | 拒绝 - 存在重复的交易|
+| 2                   | 24       | 拒绝 - 存在相同随机数但相同/更高 gas 价格的交易|
+| 2                   | 25       | 拒绝 - 无效的目标地址|
+| 2                   | 26       | 拒绝 - 无法将合约帐户添加到状态|
+| 2                   | 27       | 拒绝 - Nonce 低于预期|
+| 2                   | 255      | 拒绝 - 内部错误|
 
 :::warning
-The transaction pool is cleared by design **at the start of a new DS epoch**. Any transaction left in "Pending" state (e.g., "Pending - Dispatched", "Pending - Nonce is higher than expected", ...) after a new DS epoch has started will have most likely been dropped and will no longer be processed further at that point.
+交易池设计为**在新的 DS 纪元开始时清空**。 在新的 DS 纪元开始后，任何处于“待处理”状态的交易（例如，“待处理 - 已调度”、“待处理 - Nonce 高于预期”，...）很可能会被丢弃并且不再被进一步处理。
 :::
 
-### HTTP Request
+### HTTP 请求
 
 | Chain(s)              | URL(s)                       |
 | --------------------- | ---------------------------- |
-| **Zilliqa mainnet**   | https://api.zilliqa.com/     |
-| **Developer testnet** | https://dev-api.zilliqa.com/ |
+| **Zilliqa 主网**   | https://api.zilliqa.com/     |
+| **开发者测试网** | https://dev-api.zilliqa.com/ |
 
-### Arguments
+### 参数
 
-| Parameter | Type   | Required | Description                                              |
+| 参数 | 类型   | 是否必填 | 描述                                              |
 | --------- | ------ | -------- | -------------------------------------------------------- |
-| `id`      | string | Required | `"1"`                                                    |
-| `jsonrpc` | string | Required | `"2.0"`                                                  |
-| `method`  | string | Required | `"GetTransactionStatus"`                                 |
-| `params`  | string | Required | Transaction hash of 32 bytes of a specified transaction. |
+| `id`      | string | 必填 | `"1"`                                                    |
+| `jsonrpc` | string | 必填 | `"2.0"`                                                  |
+| `method`  | string | 必填 | `"GetTransactionStatus"`                                 |
+| `params`  | string | 必填 | 指定交易的 32 字节的交易哈希。 |

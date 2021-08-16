@@ -4,9 +4,9 @@ title: GetSmartContractInit
 ---
 
 ---
-Returns the initialization (immutable) parameters of a given smart contract, represented in a JSON format.
+返回给定智能合约的初始化（不可变）参数，以 JSON 格式表示。
 
-### Example Request
+### 请求示例
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -78,7 +78,7 @@ func GetSmartContractInit() {
 </TabItem>
 </Tabs>
 
-### Example Response
+### 响应示例
 
 ```json
 {
@@ -109,20 +109,20 @@ func GetSmartContractInit() {
 }
 ```
 
-### HTTP Request
+### HTTP 请求
 
 | Chain(s)              | URL(s)                       |
 | --------------------- | ---------------------------- |
-| **Zilliqa mainnet**   | https://api.zilliqa.com/     |
-| **Developer testnet** | https://dev-api.zilliqa.com/ |
-| **Local testnet**     | http://localhost:4201/       |
-| **Isolated server**   | https://zilliqa-isolated-server.zilliqa.com/ |
+| **Zilliqa 主网**   | https://api.zilliqa.com/     |
+| **开发者测试网** | https://dev-api.zilliqa.com/ |
+| **本地测试网**     | http://localhost:4201/       |
+| **隔离服务器**   | https://zilliqa-isolated-server.zilliqa.com/ |
 
-### Arguments
+### 参数
 
-| Parameter | Type   | Required | Description                                                                                      |
+| 参数 | 类型   | 是否必填 | 描述                                                                                      |
 | --------- | ------ | -------- | ------------------------------------------------------------------------------------------------ |
-| `id`      | string | Required | `"1"`                                                                                            |
-| `jsonrpc` | string | Required | `"2.0"`                                                                                          |
-| `method`  | string | Required | `"GetSmartContractInit"`                                                                         |
-| `params`  | string | Required | A smart contract address of 20 bytes. <br/> Example: `"fe001824823b12b58708bf24edd94d8b5e1cfcf7"` |
+| `id`      | string | 必填 | `"1"`                                                                                            |
+| `jsonrpc` | string | 必填 | `"2.0"`                                                                                          |
+| `method`  | string | 必填 | `"GetSmartContractInit"`                                                                         |
+| `params`  | string | 必填 | 一个 20 字节的智能合约地址。 <br/>如：`"fe001824823b12b58708bf24edd94d8b5e1cfcf7"` |

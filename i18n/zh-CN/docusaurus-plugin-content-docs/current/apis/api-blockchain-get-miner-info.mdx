@@ -4,15 +4,15 @@ title: GetMinerInfo
 ---
 
 ---
-Returns the mining nodes (i.e., the members of the DS committee and shards) at the specified DS block.
+返回指定 DS 区块的挖矿节点（即 DS 委员会成员和分片）。
 
-**Notes:**
+**注意：**
 
-1. Nodes owned by Zilliqa Research are omitted.
-2. `dscommittee` has no `size` field since the DS committee size is fixed for a given chain.
-3. For the Zilliqa mainnet, this API is only available from DS block 5500 onwards.
+1. 省略了 Zilliqa Research 拥有的节点。
+2. `dscommittee` 没有 `size` 字段，因为 DS 委员会的大小对于给定的链是固定的。
+3. 对于 Zilliqa 主网，此 API 仅从 DS 区块 5500 开始可用。
 
-### Example Request
+### 请求示例
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -43,7 +43,7 @@ curl -d '{
 
 </Tabs>
 
-### Example Response
+### 响应示例
 
 ```json
 {
@@ -89,20 +89,20 @@ curl -d '{
 }
 ```
 
-### HTTP Request
+### HTTP 请求
 
 | Chain(s)              | URL(s)                       |
 | --------------------- | ---------------------------- |
-| **Zilliqa mainnet**   | https://api.zilliqa.com/     |
-| **Developer testnet** | https://dev-api.zilliqa.com/ |
-| **Local testnet**     | http://localhost:4201/       |
-| **Isolated server**   | https://zilliqa-isolated-server.zilliqa.com/ |
+| **Zilliqa 主网**   | https://api.zilliqa.com/     |
+| **开发者测试网** | https://dev-api.zilliqa.com/ |
+| **本地测试网**     | http://localhost:4201/       |
+| **隔离服务器**   | https://zilliqa-isolated-server.zilliqa.com/ |
 
-### Arguments
+### 参数
 
-| Parameter | Type   | Required | Description                        |
+| 参数 | 类型   | 是否必填 | 描述                        |
 | --------- | ------ | -------- | ---------------------------------- |
-| `id`      | string | Required | `"1"`                              |
-| `jsonrpc` | string | Required | `"2.0"`                            |
-| `method`  | string | Required | `"GetMinerInfo"`                   |
-| `params`  | string | Required | DS block number. Example: `"5500"` |
+| `id`      | string | 必填 | `"1"`                              |
+| `jsonrpc` | string | 必填 | `"2.0"`                            |
+| `method`  | string | 必填 | `"GetMinerInfo"`                   |
+| `params`  | string | 必填 | DS 区块高度。 如： `"5500"` |

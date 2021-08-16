@@ -4,9 +4,9 @@ title: GetTransactionsForTxBlock
 ---
 
 ---
-Returns the validated transactions included within a specified final transaction block as an array of length _i_, where _i_ is the number of shards plus the DS committee. The transactions are grouped based on the group that processed the transaction. The first element of the array refers to the first shard. The last element of the array at index, _i_, refers to the transactions processed by the DS Committee.
+返回将包含在指定最终交易区块中的已验证交易作为长度为 _i_ 的数组，其中 _i_ 是加上 DS 委员会的分片数。 交易根据处理交易的组进行分组。 数组的第一个元素指第一个分片。 索引处数组的最后一个元素 _i_ 指的是 DS 委员会处理的交易。
 
-### Example Request
+### 请求示例
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -76,7 +76,7 @@ func GetTransactionsForTxBlock() {
 </TabItem>
 </Tabs>
 
-### Example Response
+### 响应示例
 
 ```json
 {
@@ -115,20 +115,20 @@ func GetTransactionsForTxBlock() {
 }
 ```
 
-### HTTP Request
+### HTTP 请求
 
 | Chain(s)              | URL(s)                       |
 | --------------------- | ---------------------------- |
-| **Zilliqa mainnet**   | https://api.zilliqa.com/     |
-| **Developer testnet** | https://dev-api.zilliqa.com/ |
-| **Local testnet**     | http://localhost:4201/       |
-| **Isolated server**   | https://zilliqa-isolated-server.zilliqa.com/ |
+| **Zilliqa 主网**   | https://api.zilliqa.com/     |
+| **开发者测试网** | https://dev-api.zilliqa.com/ |
+| **本地测试网**     | http://localhost:4201/       |
+| **隔离服务器**   | https://zilliqa-isolated-server.zilliqa.com/ |
 
-### Arguments
+### 参数
 
-| Parameter | Type   | Required | Description                                        |
+| 参数 | 类型   | 是否必填 | 描述                                        |
 | --------- | ------ | -------- | -------------------------------------------------- |
-| `id`      | string | Required | `"1"`                                              |
-| `jsonrpc` | string | Required | `"2.0"`                                            |
-| `method`  | string | Required | `"GetTransactionsForTxBlock"`                      |
-| `params`  | string | Required | Specifed TX block number to return. Example: `"2"` |
+| `id`      | string | 必填 | `"1"`                                              |
+| `jsonrpc` | string | 必填 | `"2.0"`                                            |
+| `method`  | string | 必填 | `"GetTransactionsForTxBlock"`                      |
+| `params`  | string | 必填 | 返回指定的 TX 区块高度。 如： `"2"` |

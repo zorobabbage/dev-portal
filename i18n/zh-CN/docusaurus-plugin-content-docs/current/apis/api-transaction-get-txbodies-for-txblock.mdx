@@ -4,9 +4,9 @@ title: GetTxnBodiesForTxBlock
 ---
 
 ---
-Returns the validated transactions (in verbose form) included within a specified final transaction block.
+返回包含在指定最终交易区块中的已验证交易（以详细形式）。
 
-### Example Request
+### 请求示例
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -76,7 +76,7 @@ func GetTxnBodiesForTxBlock() {
 </TabItem>
 </Tabs>
 
-### Example Response
+### 响应示例
 
 ```json
 {
@@ -119,20 +119,20 @@ func GetTxnBodiesForTxBlock() {
 }
 ```
 
-### HTTP Request
+### HTTP 请求
 
 | Chain(s)              | URL(s)                       |
 | --------------------- | ---------------------------- |
-| **Zilliqa mainnet**   | https://api.zilliqa.com/     |
-| **Developer testnet** | https://dev-api.zilliqa.com/ |
-| **Local testnet**     | http://localhost:4201/       |
-| **Isolated server**   | https://zilliqa-isolated-server.zilliqa.com/ |
+| **Zilliqa 主网**   | https://api.zilliqa.com/     |
+| **开发者测试网** | https://dev-api.zilliqa.com/ |
+| **本地测试网**     | http://localhost:4201/       |
+| **隔离服务器**   | https://zilliqa-isolated-server.zilliqa.com/ |
 
-### Arguments
+### 参数
 
-| Parameter | Type   | Required | Description                                        |
+| 参数 | 类型   | 是否必填 | 描述                                        |
 | --------- | ------ | -------- | -------------------------------------------------- |
-| `id`      | string | Required | `"1"`                                              |
-| `jsonrpc` | string | Required | `"2.0"`                                            |
-| `method`  | string | Required | `"GetTxnBodiesForTxBlock"`                         |
-| `params`  | string | Required | Specifed TX block number to return. Example: `"2"` |
+| `id`      | string | 必填 | `"1"`                                              |
+| `jsonrpc` | string | 必填 | `"2.0"`                                            |
+| `method`  | string | 必填 | `"GetTxnBodiesForTxBlock"`                         |
+| `params`  | string | 必填 | 返回指定的 TX 区块高度。 如： `"2"` |

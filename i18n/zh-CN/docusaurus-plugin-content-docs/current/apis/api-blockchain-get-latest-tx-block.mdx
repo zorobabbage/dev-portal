@@ -4,9 +4,9 @@ title: GetLatestTxBlock
 ---
 
 ---
-Returns the details of the most recent Transaction block.
+返回最近交易区块的详细信息。
 
-### Example Request
+### 请求示例
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -76,11 +76,10 @@ func GetLatestTxBlock() {
 </Tabs>
 
 
-### Example Response
+### 响应示例
 
 :::note
-  From Zilliqa `V7.2.0` onwards, an additional `NumPages` field is included in the `header` response section.
-  This field is used by [GetTransactionsForTxBlockEx](api-transaction-get-txs-for-txblock-ex.mdx) and [GetTxnBodiesForTxBlockEx](api-transaction-get-txbodies-for-txblock-ex.mdx).
+  从 Zilliqa `V7.2.0` 开始，`header` 响应部分中包含一个额外的 `NumPages` 字段。此字段由 [GetTransactionsForTxBlockEx](api-transaction-get-txs-for-txblock-ex.mdx) 和 [GetTxnBodiesForTxBlockEx](api-transaction-get-txbodies-for-txblock-ex.mdx) 使用。
 :::
 
 ```json
@@ -136,20 +135,20 @@ func GetLatestTxBlock() {
 }
 ```
 
-### HTTP Request
+### HTTP 请求
 
 | Chain(s)              | URL(s)                       |
 | --------------------- | ---------------------------- |
-| **Zilliqa mainnet**   | https://api.zilliqa.com/     |
-| **Developer testnet** | https://dev-api.zilliqa.com/ |
-| **Local testnet**     | http://localhost:4201/       |
-| **Isolated server**   | https://zilliqa-isolated-server.zilliqa.com/ |
+| **Zilliqa 主网**   | https://api.zilliqa.com/     |
+| **开发者测试网** | https://dev-api.zilliqa.com/ |
+| **本地测试网**     | http://localhost:4201/       |
+| **隔离服务器**   | https://zilliqa-isolated-server.zilliqa.com/ |
 
-### Arguments
+### 参数
 
-| Parameter | Type   | Required | Description          |
+| 参数 | 类型   | 是否必填 | 描述          |
 | --------- | ------ | -------- | -------------------- |
-| `id`      | string | Required | `"1"`                |
-| `jsonrpc` | string | Required | `"2.0"`              |
-| `method`  | string | Required | `"GetLatestTxBlock"` |
-| `params`  | string | Required | Empty string `""`    |
+| `id`      | string | 必填 | `"1"`                |
+| `jsonrpc` | string | 必填 | `"2.0"`              |
+| `method`  | string | 必填 | `"GetLatestTxBlock"` |
+| `params`  | string | 必填 | 空字符串 `""`    |

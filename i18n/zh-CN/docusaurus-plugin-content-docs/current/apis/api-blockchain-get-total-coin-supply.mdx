@@ -4,9 +4,9 @@ title: GetTotalCoinSupply
 ---
 
 ---
-Returns the total supply (ZIL) of coins in the network. This is represented as a `String`.
+返回网络中代币的总供应量 (ZIL)。  表示为一个 `String`。
 
-### Example Request
+### 请求示例
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -85,7 +85,7 @@ func GetTotalCoinSupply() {
 </TabItem>
 </Tabs>
 
-### Example Response
+### 响应示例
 
 ```json
 {
@@ -95,20 +95,20 @@ func GetTotalCoinSupply() {
 }
 ```
 
-### HTTP Request
+### HTTP 请求
 
 | Chain(s)              | URL(s)                       |
 | --------------------- | ---------------------------- |
-| **Zilliqa mainnet**   | https://api.zilliqa.com/     |
-| **Developer testnet** | https://dev-api.zilliqa.com/ |
-| **Local testnet**     | http://localhost:4201/       |
-| **Isolated server**   | https://zilliqa-isolated-server.zilliqa.com/ |
+| **Zilliqa 主网**   | https://api.zilliqa.com/     |
+| **开发者测试网** | https://dev-api.zilliqa.com/ |
+| **本地测试网**     | http://localhost:4201/       |
+| **隔离服务器**   | https://zilliqa-isolated-server.zilliqa.com/ |
 
-### Arguments
+### 参数
 
-| Parameter | Type   | Required | Description            |
+| 参数 | 类型   | 是否必填 | 描述            |
 | --------- | ------ | -------- | ---------------------- |
-| `id`      | string | Required | `"1"`                  |
-| `jsonrpc` | string | Required | `"2.0"`                |
-| `method`  | string | Required | `"GetTotalCoinSupply"` |
-| `params`  | string | Required | Empty string `""`      |
+| `id`      | string | 必填 | `"1"`                  |
+| `jsonrpc` | string | 必填 | `"2.0"`                |
+| `method`  | string | 必填 | `"GetTotalCoinSupply"` |
+| `params`  | string | 必填 | 空字符串 `""`      |
