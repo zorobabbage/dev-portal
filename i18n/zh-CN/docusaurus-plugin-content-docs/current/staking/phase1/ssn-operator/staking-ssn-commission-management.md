@@ -1,6 +1,6 @@
 ---
 id: staking-commission-management
-title: Commission Management
+title: 佣金管理
 keywords: 
 - staking
 - ssn
@@ -12,57 +12,57 @@ description: Commission management
 ---
 ---
 
-The operations available to delegators on the smart contract are as follows:
+委托人在智能合约上可用的操作如下：
 
-1. [Update commission rate](#update-commission-rate)
-1. [Withdraw commission](#withdraw-commission)
-1. [Update address for receiving commission](#update-address-for-receiving-commission)
+1. [更新佣金率](#update-commission-rate)
+2. [提现佣金](#withdraw-commission)
+3. [更新收款地址](#update-address-for-receiving-commission)
 
 :::info
-Commission and commission change rate in the staking smart contract are represented by `uint128`. The last 7 digits represent the decimal points. As such, if the percentage is 5.2%, then the value of the commission will be 5.2 x 10^7 represented as an integer).
+质押智能合约中的佣金和佣金变化率由 `uint128` 表示。最后 7 位数字代表小数点。因此，如果百分比为 5.2%，则佣金的值将是 5.2 x 10^7，以整数表示）。
 :::
 
-## Update Commission Rate
+## 更新佣金率
 
-### Description
+### 描述
 
-`UpdateComm` allows the SSN operator to update the commission to a new rate. The delta of rate changes must not exceed [max commission change rate](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-11.md#staking-parameters) (`maxcommchangerate`) per cycle. This is to prevent flash changing and allow for a more gradual adjustment of the commission rate. Finally, the new rate must be less than or equal to `maxcommchangerate`.
+`UpdateComm` 允许 SSN 运营商将佣金更新为新费率。每个周期的费率变化增量不得超过 [最大佣金变化率](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-11.md#staking-parameters) (`maxcommchangerate`)。这是为了防止快速变化而允许对佣金率进行更渐进式调整。最后，新汇率必须小于或等于 `maxcommchangerate`。
 
-### Pre-condition
+### 前提条件
 
-The node operator must not have change commission rate in the current cycle.
+节点运营商在当前周期内不得更改佣金率。
 
-### Parameter
+### 参数
 
-`new_rate`: the new commission rate
+`new_rate`：新的佣金率
 
 ### Transition
 
-```
+``
 transition UpdateComm(new_rate: Uint128)
-```
+``
 
-### Sample Code
+### 示例代码
 
-| Language | Link to Sample Code |
+| 语言 | 传送门 |
 | -------- | ------------------- |
-| NodeJS   | coming soon |
-| Java     | coming soon |
-| Golang   | coming soon |
+| NodeJS   | 即将推出 |
+| Java     | 即将推出 |
+| Golang   | 即将推出 |
 
-## Withdraw Commission 
+## 提取佣金
 
-### Description
+### 描述
 
-`WithdrawComm` allows the SSN operator to withdraw all the commission earned to the commission receiving address `rec_addr`.
+`WithdrawComm` 允许 SSN 运营商将赚取的所有佣金提取到佣金接收地址 `rec_addr`。
 
 :::info
-Regardless of whether the receiving address has been updated or not, this operation can only be called from the SSN operator address.
+不管接收地址有没有更新，这个操作只能从 SSN 运营商地址调用。
 :::
 
-### Parameters
+### 参数
 
-None
+无
 
 ### Transition
 
@@ -70,23 +70,23 @@ None
 transition WithdrawComm()
 ```
 
-### Sample Code
+### 示例代码
 
-| Language | Link to Sample Code |
+| 语言 | 传送门 |
 | -------- | ------------------- |
-| NodeJS   | coming soon |
-| Java     | coming soon |
-| Golang   | coming soon |
+| NodeJS   | 即将推出 |
+| Java     | 即将推出 |
+| Golang   | 即将推出 |
 
-## Update Address for Receiving Commission
+## 更新接收佣金地址
 
-### Description
+### 描述
 
-`UpdateReceivedAddr` changes the receiving commission address to a new address.
+`UpdateReceivedAddr` 将接收佣金地址更改为新地址。
 
-### Parameters
+### 参数
 
-`new_addr`: the new address for receiving commission when calling `WithdrawComm` transition
+`new_addr`：调用 transition `WithdrawComm` 时接收佣金的新地址
 
 ### Transition
 
@@ -94,10 +94,10 @@ transition WithdrawComm()
 transition UpdateReceivedAddr(new_addr: ByStr20)
 ```
 
-### Sample Code
+### 示例代码
 
-| Language | Link to Sample Code |
+| 语言 | 传送门 |
 | -------- | ------------------- |
-| NodeJS   | coming soon |
-| Java     | coming soon |
-| Golang   | coming soon |
+| NodeJS   | 即将推出 |
+| Java     | 即将推出 |
+| Golang   | 即将推出 |

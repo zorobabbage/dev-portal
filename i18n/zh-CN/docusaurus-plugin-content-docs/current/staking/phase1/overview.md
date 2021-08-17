@@ -1,6 +1,6 @@
 ---
 id: staking-phase1-overview
-title: Phase 1.1 Overview
+title: 阶段 1.1 概述
 keywords: 
 - staking
 - overview
@@ -11,39 +11,39 @@ keywords:
 description: Phase 1.1 Overview
 ---
 
-Welcome to phase 1.1 of the Zilliqa seed node staking program. We invite interested participants to read through the formal documentation for phase 1 in [Zilliqa Improvement Proposal 19](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-19.md).
+欢迎来到 Zilliqa 种子节点质押计划的阶段 1.1。我们邀请感兴趣的参与者通读 [Zilliqa 改进提案 19](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-19.md) 中阶段 1 的正式文档。
 
-Phase 1.1 builds on the design laid out in [ZIP-3](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-3.md) and [ZIP-11](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-11.md). 
+阶段 1.1 建立在 [ZIP-3](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-3.md) 和 [ZIP-11](https:// github.com/Zilliqa/ZIP/blob/master/zips/zip-11.md）。
 
-In phase 0, we introduced our staking program with a simple mechanism involving 3 different roles:
-1. SSN operator
-1. Verifier
-1. Contract admin
+在阶段 0，我们通过一个简单的机制引入了我们的质押程序，该机制涉及 3 个不同的角色：
+1. SSN 运营商
+2. 验证者
+3. 合约管理员
 
-The SSN operator takes on the dual roles of a staker and a seed node operator. As such, if the operator wishes to collect stake deposits from non-operator individuals, the operator would need to provide an out-of-band platform (such as a staking pool platform) to support deposit collection and rewards distribution. This form of staking may not be ideal for some, as they would need to trust this intermediary (i.e., the operator) for holding their stake deposit and distributing their rewards fairly.
+SSN 运营商承担着质押者和种子节点运营商的双重角色。因此，如果运营商希望向非运营商个人收取质押押金，则运营商需要提供另外的平台（如质押池平台）来支持押金收集和奖励分配。这种质押形式对某些人来说可能并不理想，因为他们需要信任这个中介（即运营商）来持有他们的质押存款并公平地分配他们的奖励。
 
-Phase 1 addresses these issues by introducing a new role called the **delegator**. The delegator can deposit its stake directly into the staking contract, as well as receive rewards directly from the contract. This removes the need to trust an intermediary. The role of the SSN operator has also been adjusted in phase 1. The SSN operator no longer needs to handle stake deposits and rewards. Instead, the operator can focus on overseeing the operation of its SSN, as well as managing the commission fees it receives from delegators.
+阶段 1 通过引入一个称为 **委托人** 的新角色来解决这些问题。委托人可以将其质押直接存入质押合约，也可以直接从合约中获得奖励。这消除了信任中介的需要。 SSN 运营商的角色也在阶段 1 进行了调整，SSN 运营商不再需要处理质押存款和奖励。相反，运营商可以专注于监督其 SSN 的运营，以及管理从委托人那里收到的佣金。
 
-Phase 1.1 adds new functionality to phase 1.1, namely the ability to transfer stake deposit from one address to another address. It also introduce code fixes for phase 1.
+阶段 1.1 为阶段 1 添加了新功能，即能够将质押存款从一个地址转移到另一个地址。它还介绍了阶段 1 的代码修复。
 
-## How to Proceed
+## 如何进行
 
-:::danger Disclaimer
-Please read our [Disclaimer](../staking-disclaimer) page carefully before participating in our staking program.
+:::danger 免责声明
+在参与我们的质押计划之前，请仔细阅读我们的 [免责声明](../staking-disclaimer) 页面。
 :::
 
-The next sections in this phase 1.1 documentation are organized as follows:
+此阶段 1.1 文档中的下一部分组织如下：
 
-1. The [General Information](staking-general-information) section contains useful details for anyone interested in the staking program
-1. The [Delegators](delegator/staking-delegator-overview) section targets the following audiences:
-   - Staking wallet builders
-   - Staking dashboard builders
-   - Delegators who want to build their own toolchains
-1. The [SSN Operators](ssn-operator/staking-ssn-before-you-start) section targets operators who wish to launch and maintain an SSN. These operators, which can be either custodial or non-custodial, include:
-   - Explorer and wallet providers
-   - Staking-as-a-Service providers
-   - API-as-a-Service providers
-   - Interested Zilliqa community members
-   - Exchanges who provide staking on their platform
+1. [一般信息](staking-general-information) 部分包含任何对质押程序感兴趣的人有用的详细信息
+2. [委托人](delegator/staking-delegator-overview) 部分针对以下受众：
+   - 质押钱包建设者
+   - 质押仪表盘建设者
+   - 想要构建自己的工具链的委托人
+3. [SSN 运营商](ssn-operator/staking-ssn-before-you-start) 部分针对希望启动和维护 SSN 的运营商。这些运营商可以是托管或非托管的，包括：
+   - 资源管理器和钱包提供商
+   - 质押即服务提供商
+   - API 即服务提供商
+   - 感兴趣的 Zilliqa 社区成员
+   - 在其平台上提供质押的交易所
 
-Zilliqa token holders who wish to stake can simply refer to [https://www.zilliqa.com/staking](https://www.zilliqa.com/staking) on how to stake and delegate their tokens.
+想要质押的 Zilliqa 代币持有者可以简单地参考 [https://www.zilliqa.com/staking](https://www.zilliqa.com/staking) 了解如何质押和委托他们的代币。

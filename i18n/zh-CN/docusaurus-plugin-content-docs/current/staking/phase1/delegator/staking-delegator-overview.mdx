@@ -1,6 +1,6 @@
 ---
 id: staking-delegator-overview
-title: Overview
+title: 概述
 keywords: 
 - staking
 - ssn
@@ -12,28 +12,28 @@ description: Overview
 ---
 ---
 
-The `Delegator` is a new role introduced since phase 1 of the Zilliqa seed node staking program. With the `Delegator`, there is a better separation of roles and privileges.
+`Delegator` 是自 Zilliqa 种子节点质押计划的阶段 1 以来引入的新角色。使用 `Delegator`，可以更好地分离角色和权限。
 
-Below we summarize the changes in the `SSN Operator` role between phases, as well as describe the role of the `Delegator`.
+下面我们总结了各个阶段之间 `SSN Operator` 角色的变化，并描述了`Delegator` 的角色。
 
-__`SSN operator` in phase 0__
-- Manages the SSN operation
-- Receives stake deposits from stakers via out-of-band platform
-- Deposits stake into the staking smart contract
-- Receives stake rewards from the contract on behalf of all stakers
-- Distributes stake rewards via out-of-band platform
-- Commission or fees charged may not be transparent
+__`SSN 运营商` 阶段 0__
+- 管理 SSN 操作
+- 通过带外平台从质押者那里接收质押存款
+- 将质押存入质押智能合约
+- 代表所有质押者从合约中获得质押奖励
+- 通过带外平台分配权益奖励
+- 收取的佣金或费用可能不透明
 
-__`SSN operator` in phase 1 and 1.1__
-- Manages the SSN operation
-- No longer able to stake deposit
-- Sets commission fees on-chain
-- Updates commission fees on-chain (with restriction on the max commission rate change per reward cycle)
-- Receives commission on-chain
+__`SSN 运营商` 在阶段 1 和 1.1__
+- 管理 SSN 操作
+- 不再能够质押存款
+- 在链上设置佣金
+- 更新链上佣金（限制每个奖励周期的最大佣金率变化）
+- 接收链上佣金
 
-__`Delegator` in phase 1 and 1.1__
-- Deposits stake directly into the staking smart contract
-- Able to delegate to one or more `SSN Operator`
-- Able to redelegate to another `SSN operator`
-- Withdraws rewards ($ZIL and $gZIL) on-chain
-- Withdraws stake deposit on-chain
+__`Delegator` 阶段 1 和 1.1__
+- 将质押直接存入质押智能合约
+- 能够委托给一个或多个 `SSN 运营商`
+- 能够重新委托给另一个 `SSN 运营商`
+- 在链上提取奖励（$ZIL 和 $gZIL）
+- 提取链上的押金

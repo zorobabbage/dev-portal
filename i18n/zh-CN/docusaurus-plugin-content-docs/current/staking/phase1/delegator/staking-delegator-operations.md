@@ -1,6 +1,6 @@
 ---
 id: staking-delegator-operations
-title: Smart Contract Operations
+title: 智能合约操作
 keywords: 
 - staking
 - ssn
@@ -12,34 +12,34 @@ description: Smart contract operations
 ---
 ---
 
-The operations available to the delegator on the smart contract are as follows:
+委托人在智能合约上可用的操作如下：
 
-1. [Delegate stake](#delegate-stake)
-1. [Withdraw stake rewards and gZIL](#withdraw-stake-rewards-and-gzil)
-1. [Withdraw stake amount](#withdraw-stake-amount)
-1. [Complete withdrawal](#complete-withdrawal)
-1. [Stake amount redelegation](#stake-amount-redelegation)
+1. [委托质押](#delegate-stake)
+2. [提取权益奖励和 gZIL](#withdraw-stake-rewards-and-gzil)
+3. [提现数量](#withdraw-stake-amount)
+4. [完全提现](#complete-withdrawal)
+5. [质押金额再委托](#stake-amount-redelegation)
 
-## Representation of Values in the Smart Contract
+## 智能合约中值的表示
 
-`_amount` and `amt` are represented in `Qa`, where 1 `ZIL` = 1 * 1E12 `Qa`.
+`_amount` 和 `amt` 用 `Qa` 表示，其中 1 `ZIL` = 1 * 1E12 `Qa`。
 
-## Delegate Stake
+## 委托质押
 
-### Description
+### 描述
 
-`DelegateStake` accepts $ZIL deposit and delegates stake to the SSN identified by `ssnaddr`.
+`DelegateStake` 接受 $ZIL 存款并将质押委托给由 `ssnaddr` 标识的 SSN。
 
-In case of failure to accept the stake, an `exception` will be thrown and the transaction will be reverted. This stake will be buffered if the SSN is already active else it will be added to the stake pool of the SSN. The transition should throw an error in case the amount being delegated is less than `mindelegstake`.
+如果无法接受质押，则会抛出 `异常` 并恢复交易。如果 SSN 已经处于活动状态，则此质押将被缓冲，否则它将被添加到 SSN 的质押池中。如果委托的金额小于 `mindelegstake`，则 transition 应该抛出错误。
 
 :::info
-Due to the non-custodial nature of the phase 1 staking program, only the owner of the wallet will be able to withdraw the stake amount and stake reward. The SSN operator will not have access to the fund.
+由于阶段 1 质押计划的非托管性质，只有钱包的所有者才能提取质押金额和质押奖励。 SSN 运营商将无法使用该资金。
 :::
 
-### Parameters
+### 参数
 
-`_amount`: the stake amount to be deposited into the smart contract  
-`ssnaddr`: the SSN to delegate to
+`_amount`：存入智能合约的质押金额
+`ssnaddr`：要委托的 SSN
 
 ### Transition
 
@@ -47,27 +47,27 @@ Due to the non-custodial nature of the phase 1 staking program, only the owner o
 transition DelegateStake(ssnaddr: ByStr20) 
 ```
 
-### Sample Code
+### 示例代码
 
-| Language | Link to Sample Code |
+| 语言 | 传送门 |
 | -------- | ------------------- |
-| NodeJS   | coming soon |
-| Java     | coming soon |
-| Golang   | coming soon |
+| NodeJS   | 即将推出 |
+| Java     | 即将推出 |
+| Golang   | 即将推出 |
 
-## Withdraw Stake Rewards and gZIL
+## 提取质押奖励和 gZIL
 
-### Description
+### 描述
 
-`WithdrawStakeRewards` withdraws the delegator's stake rewards ($ZIL and `gZIL`) from an SSN. If gZIL issuance is still ongoing, for every 1 $ZIL stake reward given, the delegator will receive 0.001 `gZIL`.
+`WithdrawStakeRewards` 从 SSN 中提取委托人的质押奖励（$ZIL 和 `gZIL`）。 如果 gZIL 的发行仍在进行中，每给予 1 $ZIL 质押奖励，委托人将获得 0.001 `gZIL`。
 
 :::info
-If the delegator delegates to multiple SSNs and wishes to withdraw all rewards from SSNs, the user will need to call this transition multiple times, specifying a different SSN address each time.
+如果委托人委托给多个 SSN 并希望从 SSN 中提取所有奖励，则用户将需要多次调用此 transition，每次指定不同的 SSN 地址。
 :::
 
-### Parameters
+### 参数
 
-`ssnaddr`: the address of the SSN from which the delegator wishes to withdraw the reward from
+`ssnaddr`：委托人希望从中提取奖励的 SSN 地址
 
 ### Transition
 
@@ -75,34 +75,33 @@ If the delegator delegates to multiple SSNs and wishes to withdraw all rewards f
 transition WithdrawStakeRewards(ssnaddr: ByStr20)
 ```
 
-### Sample Code
+### 示例代码
 
-| Language | Link to Sample Code |
+| 语言 | 传送门 |
 | -------- | ------------------- |
-| NodeJS   | coming soon |
-| Java     | coming soon |
-| Golang   | coming soon |
+| NodeJS   | 即将推出 |
+| Java     | 即将推出 |
+| Golang   | 即将推出 |
 
-## Withdraw Stake Amount
+## 提取质押金额
 
-### Description
+### 描述
 
-`WithdrawStakeAmt` is the first of two operations to withdraw the delegator's stake amount from an SSN. Upon successful calling of this transition, the withdrawn stake amount will enter an **unbonding** state. The delegator will need to wait for 24,000 blocks (~2 weeks) before the delegator can successfully invoke `CompleteWithdrawal` transition to complete the withdrawal back to the delegator's wallet. When the stake amount is in unbonding state, it will not be eligible for any new rewards ($ZIL and/or gZIL).
+`WithdrawStakeAmt` 是从 SSN 中提取委托人的质押数量的两个操作中的第一个。成功调用此 transition 后，提取的质押金额将进入**解除绑定**状态。委托人将需要等待 30,800 个区块（约 2 周），然后委托人才能成功调用 transition `CompleteWithdrawal` 以完成提款回委托人的钱包。当质押金额处于解绑状态时，将没有资格获得任何新奖励（$ZIL 和/或 gZIL）。
 
-For testnet, the unbonding period is 50 blocks instead of 24,00 blocks.
+对于测试网，解绑期是 50 个区块而不是 30,800 个区块。
 
 :::info
-If the delegator delegates to multiple SSNs and wishes to withdraw all rewards from SSNs, the user will need to call this transition multiple times, specifying a different SSN address each time.
+如果委托人委托给多个 SSN 并希望从 SSN 中提取所有奖励，则用户将需要多次调用此 transition，每次指定不同的 SSN 地址。
 :::
 
-### Pre-condition
-Thee delegator should not have any unclaimed stake reward or buffered depsoit.
-After withdrawal, the delegator remaining stake amount must be bigger than the min delegator stake amount specify in the contract i.e 10 ZIL
+### 前提条件
+委托人不应有任何无人认领的质押奖励或缓冲存款。提款后，委托人剩余质押金额必须大于合约中指定的最小委托人权益金额，即 10 ZIL
 
-### Parameters
+### 参数
 
-`ssnaddr`: the address of the SSN from which the delegator wishes to withdraw reward form
-`amt`: the amount of stake amount to withdraw from the delegation to a particular SSN
+`ssnaddr`：委托人希望从中提取奖励的 SSN 地址
+`amt`：从委托中提取到特定 SSN 的质押数量
 
 ### Transition
 
@@ -110,28 +109,28 @@ After withdrawal, the delegator remaining stake amount must be bigger than the m
  WithdrawStakeAmt(ssnaddr: ByStr20, amt: Uint128)
  ```
 
-### Sample Code
+### 示例代码
 
-| Language | Link to Sample Code |
+| 语言 | 传送门 |
 | -------- | ------------------- |
-| NodeJS   | coming soon |
-| Java     | coming soon |
-| Golang   | coming soon |
+| NodeJS   | 即将推出 |
+| Java     | 即将推出 |
+| Golang   | 即将推出 |
 
-## Complete Withdrawal
+## 完成提款
 
-### Description
+### 描述
 
-`CompleteWithdrawal` is the second of two operations required for the withdrawal of delegator's stake amount from a SSN, The delegator will first need to invoke `WithdrawStakeAmt` transition successfully, wait for 24,000 blocks (~2 weeks) for unbonding of stake amount to be over, and finally call `CompleteWithdrawal` in a separate transaction to complete the withdrawal and receive the stake amount back into the delegator's wallet.
+`CompleteWithdrawal` 是从 SSN 中提取委托人的质押数量所需的两个操作中的第二个，委托人首先需要成功调用 transition  `WithdrawStakeAmt`，等待 30,800 个区块（约 2 周）以解除抵押数量 结束，最后在单独的交易中调用 `CompleteWithdrawal` 完成提现，并将质押金额收回到委托人的钱包中。
 
-`CompleteWithdrawal` will iterate through all stake amount that has transitted to `unbonding` state, identify the amount that have completed the unbonding process and withdraw it back to delegator's wallet. This operation is agnostic to SSN.
+`CompleteWithdrawal` 将遍历所有已经转换到 `unbonding` 状态的质押金额，确定已经完成解绑过程的金额并将其撤回委托人的钱包。 此操作与 SSN 无关。
 
-### Pre-condition
-Thee delegator should not have any unclaimed stake reward or buffered depsoit.
+### 前提条件
+委托人不应有任何无人认领的质押奖励或缓冲存款。
 
-### Parameters
+### 参数
 
-None
+无
 
 ### Transition
 
@@ -139,25 +138,25 @@ None
  CompleteWithdrawal()
  ```
 
-### Sample code
+### 示例代码
 
-| Language | Link to Sample Code |
+| 语言 | 传送门 |
 | -------- | ------------------- |
-| NodeJS   | coming soon |
-| Java     | coming soon |
-| Golang   | coming soon |
+| NodeJS   | 即将推出 |
+| Java     | 即将推出 |
+| Golang   | 即将推出 |
 
-## Stake Amount Redelegation
+## 质押数量重新授权
 
-### Description
+### 描述
 
-`ReDelegateStake` allows the delegator to transfer the stake amount from one SSN to another SSN. The stake amount will not enter unbonding state. However, buffering of stake amount may still apply.
+`ReDelegateStake` 允许委托人将质押金额从一个 SSN 转移到另一个 SSN。 质押金额不会进入解绑状态。 但是，质押数量的缓冲可能仍然适用。
 
-### Parameters
+### 参数
 
-`ssnaddr`: the existing SSN where the stake amount will be withdrawn from and transferred to a new SSN
-`to_ssn`: the new SSN to accept the stake amount delegation
-`amount`: the amount of the stake amount to transfer to the new SSN
+`ssnaddr`: 现有的 SSN，其中的质押数量将从中提取并转移到新的 SSN
+`to_ssn`：接受质押金额委托的新 SSN 
+`amount`：要转移到新 SSN 的质押数量
 
 ### Transition
 
@@ -165,10 +164,10 @@ None
 transition ReDelegateStake(ssnaddr: ByStr20, to_ssn: ByStr20, amount: Uint128)
 ```
 
-### Sample Code
+### 示例代码
 
-| Language | Link to Sample Code |
+| 语言 | 传送门 |
 | -------- | ------------------- |
-| NodeJS   | coming soon |
-| Java     | coming soon |
-| Golang   | coming soon |
+| NodeJS   | 即将推出 |
+| Java     | 即将推出 |
+| Golang   | 即将推出 |

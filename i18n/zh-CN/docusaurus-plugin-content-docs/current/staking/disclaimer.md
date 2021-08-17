@@ -1,6 +1,6 @@
 ---
 id: staking-disclaimer
-title: Disclaimer
+title: 免责声明
 keywords: 
 - staking
 - disclaimer
@@ -8,12 +8,12 @@ keywords:
 description: Disclaimer
 ---
 
-By participating in the staking of ZILs (“Staking Program”), each participating individual and organization ("Participant") accepts and agrees that, to the extent permitted by law, [Zilliqa] disclaims all liability, damages, cost, loss or expense (including, without limitation, legal fees, costs and expenses) to it in respect of its involvement in the Staking Program. Each Participant should carefully consider all factors involved in participating in the Staking Program, including, but not limited to, those listed below and, to the extent necessary, consult an appropriate professional or other expert (including an expert in cryptographic tokens or blockchain-based software systems). If any of the following considerations are unacceptable to a Participant, that Participant should not be involved in the Staking Program. These considerations are not intended to be exhaustive and should be used as guidance only.
+通过参与 ZIL 的质押（“质押计划”），每个参与的个人和组织（“参与者”）接受并同意，在法律允许的范围内，[Zilliqa] 不承担任何责任、损害、成本、损失或费用（包括但不限于法律费用、成本和开支），就其参与质押计划而言。每个参与者都应仔细考虑参与质押计划所涉及的所有因素，包括但不限于以下所列因素，并在必要时咨询适当的专业人士或其他专家（包括加密代币或基于区块链的软件系统专家）。如果参与者不能接受以下任何考虑因素，则该参与者不应参与质押计划。这些注意事项并非详尽无遗，应仅用作指导。
 
-- The Staking Program is an open source protocol made available to the public, and Zilliqa expressly disclaims any liability in respect of any actions, programs, applications, developments, and operations of the Staking Program.
-- Hackers, individuals, other malicious groups or organisations may attempt to interfere with the Zilliqa Blockchain System, the ZILs and the Staking Program in a variety of ways such as cryptographic attacks, malware attacks, denial of service attacks, consensus-based attacks, Sybil attacks, smurfing and spoofing.
-- The regulatory status of cryptographic tokens, blockchain and distributed ledger technology as well as its applications are unclear or unsettled in many jurisdictions and it is difficult to predict how or whether governments or regulatory agencies may implement changes to law or apply existing regulation with respect to such technology and its applications, including the Zilliqa Blockchain System, the ZILs and the Staking Program.
-- The ZILs are not intended to represent any formal or legally binding investment. Cryptographic tokens that possess value in public markets, such as Ether and Bitcoin, have demonstrated extreme fluctuations in price over short periods of time on a regular basis. Participants should be prepared to expect similar fluctuations in the price of the ZILs and Participants may experience a complete and permanent loss of their initial purchase.
+- 质押计划是一个向公众开放的开源协议，Zilliqa 明确表示不对 质押计划的任何行动、程序、应用程序、开发和运营承担任何责任。
+- 黑客、个人、其他恶意团体或组织可能会尝试以多种方式干扰 Zilliqa 区块链系统、ZIL 和质押程序，例如密码攻击、恶意软件攻击、拒绝服务攻击、基于共识的攻击、女巫攻击、smurfing 和欺骗。
+- 加密代币、区块链和分布式账本技术及其应用的监管状况在许多司法管辖区尚不清楚或不稳定，难以预测政府或监管机构如何或是否会实施法律变更或适用现有监管此类技术及其应用，包括 Zilliqa 区块链系统、ZIL 和质押计划。
+- ZIL 不代表任何正式或具有法律约束力的投资。在公开市场上具有价值的加密代币，例如以太币和比特币，在短时间内经常表现出价格的极端波动。参与者应做好预期 ZIL 价格的类似波动的准备，参与者可能会经历其初始购买资产的完全和永久损失。
 
-The ZILs are not intended to be securities (or any other regulated instrument) under the laws of any jurisdiction where they are intended to be, or will be, purchased or sold and no action has been or will be taken in any jurisdiction by Zilliqa Research or any of its affiliates that would permit a public offering, or any other offering under circumstances not permitted by applicable law of the ZILs, in any country or jurisdiction where action for that purpose is required. Accordingly, the ZILs may not be offered or sold, directly or indirectly, by any holder, in or from any country or jurisdiction, except in circumstances which will result in compliance with all applicable rules and regulations of any such country or jurisdiction.
+根据任何司法管辖区的法律，ZIL 不打算成为证券（或任何其他受监管的工具），在其打算或将被购买或出售的任何司法管辖区，Zilliqa Research 已经或将不会在任何司法管辖区采取任何行动或其任何附属公司，在需要为此目的采取行动的任何国家或司法管辖区，允许公开发售，或在 ZIL 的适用法律不允许的情况下进行任何其他发售。因此，任何持有人不得在任何国家或司法管辖区或来自任何国家或司法管辖区直接或间接提供或出售 ZIL，除非在导致遵守任何此类国家或司法管辖区的所有适用规则和法规的情况下。
 

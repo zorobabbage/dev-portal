@@ -1,6 +1,6 @@
 ---
 id: staking-ssn-setup
-title: Setting up the SSN
+title: 设置 SSN
 keywords: 
 - staking
 - getting started
@@ -14,46 +14,45 @@ description: Setting up the SSN
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Default Port Requirements for SSNs
+## SSN 的默认端口要求
 
-| Type     | Default  | Purpose                                                  |
+| 类型 | 默认 | 目的                                                 |
 |----------|--------- | -------------------------------------------------------- |
-| Inbound  | 33133    | Protocol level port for receiving network data           |
-| Inbound  | 4201/443 | [API service](https://apidocs.zilliqa.com/#introduction) |
-| Inbound  | 4401     | [WebSocket service](../../../dev/dev-tools-websockets)   |
-| Inbound  | 4501     | Staking API service                                      |
-| Outbound | 443      | For getting initial node data for syncing                |
+| Inbound  | 33133    | 用于接收网络数据的协议级端口           |
+| Inbound  | 4201/443 | [API 服务](https://apidocs.zilliqa.com/#introduction) |
+| Inbound  | 4401     | [WebSocket 服务](../../../dev/dev-tools-websockets)   |
+| Inbound  | 4501     | 质押 API 服务                                     |
+| Outbound | 443      | 用于获取用于同步的初始节点数据               |
 
-## Preparing the Node
+## 准备节点
 
 :::info
-Mainnet has been upgraded to support staking phase 1. You can now start to run a staked seed node on mainnet.
-Smart contract enrollment will happen 1-2 days before staking phase 1 launch.
+主网已升级为支持质押阶段 1。你现在可以开始在主网上运行质押种子节点。智能合约注册将在阶段 1 启动前 1-2 天进行。
 :::
 
-Launching a seed node for staking is similar to launching a normal seed node, with some additional configuration steps.
+启动种子节点以进行质押类似于启动普通种子节点，但有一些额外的配置步骤。
 
-In this guide, we will walk you through the steps on how to set up the seed node via
+在本指南中，我们将引导你完成如何通过以下方式设置种子节点
 
 1. Docker
-1. Native build
+2. 原生构建
 
-You can go for either one of the options below (click to expand).
+你可以选择以下任一选项（单击以展开）。
 
 <Tabs
   defaultValue="docker"
   values={[
     { label: 'Docker', value: 'docker', },
-    { label: 'Native Build', value: 'manual', },
+    { label: '原生构建', value: 'manual', },
   ]
 }>
 <TabItem value="docker">
 
-### Launching the Node Using Docker
+### 使用 Docker 启动节点
 
-We highly recommend using [Docker](https://docker.com/) to set up a seed node, as we provide a tested, production-ready image for your use. If you have not yet set up Docker, please follow the instructions on the [official documentation](https://docs.docker.com/install/).
+我们强烈建议使用 [Docker](https://docker.com/) 来设置种子节点，因为我们提供了一个经过测试的、可用于生产的镜像供你使用。 如果你尚未设置 Docker，请按照 [官方文档](https://docs.docker.com/install/) 上的说明进行操作。
 
-Once you have set up Docker, you may proceed to download and uncompress the configuration tarball for the Mainnet:
+设置 Docker 后，你可以继续下载并解压缩主网的配置 tarball：
 
 <Tabs
   defaultValue="testnet"
@@ -88,44 +87,44 @@ $ tar -zxvf ssn-configuration.tar.gz
 </TabItem>
 </Tabs>
 
-The seed node requires some configuring before it can successfully join the network and be used for staking. Most configuration is contained in `constants.xml`, which should be in the directory you extracted ssn-configuration.tar.gz to. Minimally, the following changes are required:
+种子节点需要一些配置才能成功加入网络并用于质押。 大多数配置都包含在 `constants.xml` 中，它应该在你将 ssn-configuration.tar.gz 解压到的目录中。 至少需要进行以下更改：
 
-- **Optional:** Change the value of `SEED_PORT` to `33133` (default), or a port of your choice. If you do not select `33133`, be sure to note this down for the subsequent whitelisting step.
-  :::caution Important notice 
-  If you have used a port other than 33133, and have opted for IP-based whitelisting, please notify us immediately so that we can adjust our whitelisted port for you.
-  :::
-- **Optional:** Change the value of `ENABLE_WEBSOCKET` to `true` if your seed node will support WebSockets (refer to the [Zilliqa Websocket Server](../../../dev/dev-tools-websockets) documentation).
+- **可选：** 将 `SEED_PORT` 的值更改为 `33133`（默认值）或你选择的端口。 如果你不选择 `33133`，请务必在随后的白名单步骤中记下这一点。
+  :::caution 重要通知
+   如果你使用了 33133 以外的端口，并选择了基于 IP 的白名单，请立即通知我们，以便我们为你调整白名单端口。
+   :::
+- **可选：** 如果你的种子节点支持 WebSockets，请将 `ENABLE_WEBSOCKET` 的值更改为 `true`（请参阅 [Zilliqa Websocket 服务器](../../../dev/dev-tools- websockets) 文档）。
 
-Finally, launch the seed node:
+最后，启动种子节点：
 ```
 $ ./launch_docker.sh
 ```
 :::info
-A seed node needs a key pair to communicate with other nodes in the network. launch_docker.sh will automatically generate and use a key pair stored in the file mykey.txt in the same folder.
+种子节点需要密钥对才能与网络中的其他节点通信。 launch_docker.sh 将自动生成并使用存储在同一文件夹中的文件 mykey.txt 中的密钥对。
 :::
 
 :::caution
-We highly recommend to use another keypair for depositing stake, withdrawing stake and withdrawing reward.
+我们强烈建议使用另一个密钥对来存入质押、提取质押和提取奖励。
 :::
 
 </TabItem>
 <TabItem value="manual">
 
-### Launching the Node Using Native Build
+### 使用原生构建启动节点
 
-If you cannot or do not wish to use Docker, you may also build the Zilliqa binary from the source and run it as such.
+如果不能或不想使用 Docker，你也可以从源代码构建 Zilliqa 二进制文件并按原样运行它。
 
 :::caution
-This approach has only been tested on `Ubuntu 18.04.5 LTS` and involves compiling and building the `C++` codebase from scratch. We strongly recommend you consider launching the node using the Docker steps detailed in the other tab.
+这种方法仅在 `Ubuntu 18.04.5 LTS` 上进行过测试，涉及从头开始编译和构建 `C++` 代码库。 我们强烈建议你考虑使用另外选项卡中详述的 Docker 步骤启动节点。
 :::
 
-First, clone the Zilliqa repository:
+首先，克隆 Zilliqa 仓库：
 ```bash
 # clone Zilliqa source files
 $ git clone https://github.com/Zilliqa/Zilliqa.git && cd Zilliqa && git checkout <<release tag>> && cd Zilliqa
 ```
 
-Install system dependencies:
+安装系统依赖：
 ```bash
 # install system dependencies
 $ sudo apt-get update && sudo apt-get install \
@@ -158,15 +157,15 @@ $ pip install request requests clint futures
 $ pip3 install requests clint futures
 ```
 
-Build the staked seed node:
+构建质押种子节点：
 ```bash
 # Build the binary. This may take a while.
 $ ./build.sh
 ```
 
-The build should complete with no errors. Once it is done, download and uncompress the configuration tarball:
+构建完成时，应该没有错误。 完成后，下载并解压缩配置 tarball：
 
-You will also need to build Scilla. Build instruction can be found [here](https://github.com/Zilliqa/scilla#building-scilla).
+你还需要构建 Scilla。 构建说明可以在 [这里](https://github.com/Zilliqa/scilla#building-scilla) 找到。
 
 <Tabs
   defaultValue="testnet"
@@ -201,54 +200,54 @@ $ tar -zxvf ssn-configuration.tar.gz
 </TabItem>
 </Tabs>
 
-The staked seed node requires some configuring before it can successfully join the network and be used for staking. Most configuration is contained in `constants.xml`, which should be in the directory you extracted `ssn-configuration.tar.gz` to. Minimally, the following changes are required:
+被质押押的种子节点需要一些配置才能成功加入网络并用于质押。 大多数配置都包含在 `constants.xml` 中，它应该在你将 `ssn-configuration.tar.gz` 解压到的目录中。 至少需要进行以下更改：
 
-- **Optional:** Change the value of `SEED_PORT` to `33133` (default), or a port of your choice. If you do not select `33133`, be sure to note this down for the subsequent whitelisting step.
-  :::caution Important notice 
-  If you have used a port other than 33133, and have opted for IP-based whitelisting, please notify us immediately so that we can adjust our whitelisted port for you.
-  :::
-- Change the value of `ENABLE_WEBSOCKET` to `true` if your seed node will support WebSockets (refer to the [Zilliqa Websocket Server](../../../dev/dev-tools-websockets) documentation).
+- **可选：** 将 `SEED_PORT` 的值更改为 `33133`（默认值）或你选择的端口。 如果您不选择 `33133`，请务必在随后的白名单步骤中记下这一点。
+  :::caution 重要通知
+   如果你使用了 33133 以外的端口，并选择了基于 IP 的白名单，请立即通知我们，以便我们为你调整白名单端口。
+   :::
+- 如果你的种子节点支持 WebSockets，请将 `ENABLE_WEBSOCKET` 的值更改为 `true`（请参阅 [Zilliqa Websocket 服务器](../../../dev/dev-tools-websockets) 文档）。
 
-Finally, launch the seed node:
+最后，启动种子节点：
 ```bash
 $ ./launch.sh
 ```
 :::info
-A seed node needs a key pair to communicate with other nodes in the network. launch.sh will automatically generate and use a key pair stored in the file mykey.txt in the same folder
+种子节点需要密钥对才能与网络中的其他节点通信。 launch.sh 将自动生成并使用存储在同一文件夹中的文件 mykey.txt 中的密钥对。
 :::
 
 :::caution
-We highly recommend to use another keypair for depositing stake, withdrawing stake and withdrawing reward.
+我们强烈建议使用另一个密钥对来存入质押、提取质押和提取奖励。
 :::
 
 </TabItem>
 </Tabs>
 
-### Configuring Domain Name
+### 配置域名
 
-Once your seed node is fully set up, it is time to configure your domain name to point to the address of your seed node. 
+一旦你的种子节点完全设置，就可以配置你的域名以指向你的种子节点的地址。
 
-If your seed node is not behind a load balancer, you can set an `A record` in your domain registrar to point your domain/subdomain to your seed node’s IP address.
+如果你的种子节点没有负载均衡器，你可以在域名注册商中设置 `A 记录`，将你的域名/子域名指向你的种子节点的 IP 地址。
 
-If your seed node is behind a load balancer, you can set a `CNAME record` in your domain registrar to point your domain/subdomain to the hostname of your load balancer.
+如果你的种子节点有负载均衡器，你可以在域名注册商中设置 `CNAME 记录`，将你的域名/子域名指向负载均衡器的主机名。
 
-### SSL/TLS Configuration
+### SSL/TLS 配置
 
-As the staked seed nodes are for public consumption, we expect these nodes to have high availability and be secure and reliable. As such, all operators are required to support serving of API and raw data requests over SSL/TLS.
+由于质押的种子节点是供公众消费的，我们希望这些节点具有高可用性和安全可靠。因此，所有运营商都必须支持通过 SSL/TLS 提供 API 和原始数据请求。
 
-## Whitelisting and API Servicing
+## 白名单和 API 服务
 
-It is necessary for the staked seed node to be whitelisted by Zilliqa in phase 1 in order to receive data broadcasts about the blockchain and its state. 
-Currently, there are 2 forms of whitelisting supported:
+为了接收有关区块链及其状态的数据广播，Zilliqa 在阶段 1 必须将质押的种子节点列入白名单。
+目前，支持两种形式的白名单：
 
-1. Whitelisting via a static IP
-1. Whitelisting via public key of the SSN
+1.通过静态 IP 列入白名单
+2.通过 SSN 公钥加入白名单
 
-We recommend SSN operators to use the whitelisting by public key approach.
+我们建议 SSN 运营商使用公钥白名单方法。
 
-### Testing Your SSN's JSON-RPC Port
+### 测试你的 SSN 的 JSON-RPC 端口
 
-To check whether your node's JSON-RPC server is publicly available, you can use the following curl command.
+要检查你节点的 JSON-RPC 服务器是否公开可用，你可以使用以下 curl 命令。
 
 ```bash
 curl -d '{
@@ -259,36 +258,36 @@ curl -d '{
 }' -H "Content-Type: application/json" -X POST "<staked seed node address>"
 ```
 
-If you received the latest blockchain information (similar to the one below) from the staked seed node, your JSON-RPC service is running well.
+如果你从质押的种子节点收到最新的区块链信息（类似于下面的信息），则你的 JSON-RPC 服务运行良好。
 
 ```bash
 {"id":"1","jsonrpc":"2.0","result":{"CurrentDSEpoch":"4789","CurrentMiniEpoch":"478809","DSBlockRate":0.00013455546527607284,"NumDSBlocks":"4790","NumPeers":2400,"NumTransactions":"3091806","NumTxBlocks":"478809","NumTxnsDSEpoch":"185","NumTxnsTxEpoch":"0","ShardingStructure":{"NumPeers":[600,600,600]},"TransactionRate":0,"TxBlockRate":0.013450003515398927}}
 ```
 
-### Testing Your SSN's WebSocket Port
+### 测试你的 SSN 的 WebSocket 端口
 
-You can use an online WebSocket test utility to test whether your WebSocket is publicly accessible.
+你可以使用在线 WebSocket 测试实用程序来测试你的 WebSocket 是否可公开访问。
 
-1. Visit https://www.websocket.org/echo.html
-1. Under location, put your WebSocket URL link (e.g., `wss://<yourdomain here or ip:port>`)
-1. Click on connect
-1. If **“CONNECTED”** is shown in the log, your WebSocket port is publicly accessible
+1. 访问 https://www.websocket.org/echo.html
+2. 在 location 下，填入你的 WebSocket URL 链接（例如，`wss://<yourdomain here or ip:port>`）
+3. 点击 connect
+4. 如果日志中显示 **“CONNECTED”**，则你的 WebSocket 端口可公开访问
 
-## Advanced Setup
+## 高级设置
 
-Different node operators may wish to have a different setup to secure their SSN. It is possible as long as:
+不同的节点运营商可能希望有不同的设置来保护他们的 SSN。只要：
 
-1. JSON-RPC port (by default 4201) and WebSocket port are accessible by anyone without any restriction
-1. Staking API port (by default 4501) is accessible by the verifier to check the SSN
+1. JSON-RPC 端口（默认 4201）和 WebSocket 端口，任何人都可以访问，没有任何限制
+2. Staking API 端口（默认为 4501）可供验证者访问以检查 SSN
 
-SSN operators are allowed to:
+SSN 运营商可以：
 
-- Change the default port numbers (please inform us)
-- Add a load balancer in front of their node
-- Add additional services such as Cloudflare proxy in front of the node
-- Run more than 1 SSN node behind a load balancer (these will collectively be treated as a single SSN)
+- 更改默认端口号（请通知我们）
+- 在他们的节点前添加一个负载均衡器
+- 在节点前添加 Cloudflare 代理等附加服务
+- 在负载均衡器后面运行 1 个以上的 SSN 节点（这些将统称为单个 SSN）
 
-SSN operators are not allowed to:
+SSN 运营商不得：
 
-- Outsource API service to other node operators or Zilliqa seed nodes
-- Restrict or censor any API service to the public or any region
+- 将 API 服务外包给其他节点运营商或 Zilliqa 种子节点
+- 限制或审查任何面向公众或任何地区的 API 服务

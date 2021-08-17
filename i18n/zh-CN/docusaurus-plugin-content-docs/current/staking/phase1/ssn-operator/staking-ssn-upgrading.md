@@ -1,6 +1,6 @@
 ---
 id: staking-ssn-upgrading
-title: SSN Upgrading (WIP)
+title: SSN 升级 (WIP)
 keywords: 
 - staking
 - ssn
@@ -11,12 +11,12 @@ description: SSN Upgrading
 ---
 ---
 
-## Upgrading the Seed Node
+## 升级种子节点
 
 ### Docker
 
-Please refer to the section  [Preparing the node for docker build](staking-ssn-setup#launching-the-node-using-docker).
+请参考 [为docker构建准备节点](staking-ssn-setup#使用-docker-启动节点) 部分。
 
-### Native Build
+### 原生构建
 
-Please refer to the section  [Preparing the node for native build](staking-ssn-setup#launching-the-node-using-docker).
+请参考 [为本地构建准备节点](staking-ssn-setup#使用原生构建启动节点) 部分。

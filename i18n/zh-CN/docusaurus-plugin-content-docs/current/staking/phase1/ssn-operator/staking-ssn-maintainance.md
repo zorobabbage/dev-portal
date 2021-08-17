@@ -1,6 +1,6 @@
 ---
 id: staking-ssn-maintenance
-title: SSN Maintenance (WIP)
+title: SSN 维护 (WIP)
 keywords: 
 - staking
 - ssn
@@ -12,12 +12,12 @@ description: SSN Maintenance
 
 ---
 
-## How to Resync Node
-The node might go out of sync if it fails to receive new blocks from the network. In this case, the node would ideally automatically sync without any manual intervention.
+## 如何重新同步节点
+如果节点无法从网络接收新区块，它可能会失去同步。 在这种情况下，理想情况是节点将自动同步，无需任何人工干预。
 
-However, if the node is unable to resync on its own, it will need to be launched again in a fresh mode (i.e. clean start). Please refer to the section  [Preparing the node](staking-ssn-setup#preparing-the-node) at Getting started page
+但是，如果节点无法自行重新同步，则需要以全新模式（即干净启动）再次启动。 请参阅入门页面的 [准备节点](staking-ssn-setup#准备节点) 部分
 
 :::caution
-Make sure to back up your keys.
+确保备份您的密钥。
 :::
 

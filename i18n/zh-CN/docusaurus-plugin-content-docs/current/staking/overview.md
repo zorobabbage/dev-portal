@@ -1,6 +1,6 @@
 ---
 id: staking-overview
-title: Overview
+title: 概述
 keywords: 
 - staking
 - overview
@@ -9,32 +9,32 @@ keywords:
 - zilliqa
 description: Zilliqa Seed Node Staking Overview
 ---
-Welcome to the seed node staking section. Staking in Zilliqa has been implemented in several phases.
+欢迎来到种子节点质押部分。 Zilliqa 的质押已分几个阶段实施。
 
-## Phase 0
-Phase 0 is the initial, past phase of the seed node staking program. Phase 0 is formally described in [ZIP-3](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-3.md).
+## 阶段 0
+阶段 0 是种子节点质押计划的初始、过去阶段。阶段 0 在 [ZIP-3](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-3.md) 中有正式描述。
 
-The goals of phase 0 are:
-- Open up the seed nodes network to more operators
-- Introduce staking at the seed node operation level
+阶段 0 的目标是：
+- 向更多运营商开放种子节点网络
+- 在种子节点操作层面引入质押
 
-A seed node within the staking program is referred to as a **Staked Seed Node** or **SSN**.
+质押计划中的种子节点被称为 **Staked Seed Node** 或 **SSN**。
 
-## Phase 1
-Phase 1 is the past phase of SSN staking. Phase 1 is formally described in [ZIP-11](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-11.md).
+## 阶段1
+阶段 1 是 SSN 质押的过去阶段。 [ZIP-11](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-11.md) 中正式描述了阶段 1。
 
-Phase 1 introduces:
-- A mechanism for stake delegation, which removes the need to deposit $ZIL with an intermediary custodian
-- Uncapped staking
-- Stake rewards in the form of gZIL token, a ZRC-2 compliant governance token
-- Bonding of stake amount
+阶段 1 介绍：
+- 质押委托机制，无需向中间托管人存入 $ZIL
+- 无上限的质押
+- 以 gZIL 代币形式的质押奖励，一种符合 ZRC-2 的治理代币
+- 质押数量绑定
 
-## Phase 1.1
+## 阶段 1.1
 
-[Phase 1.1](phase1/staking-phase1-overview) is the current phase of SSN staking. It build on top of phase 1 staking and is formally described in [ZIP-19](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-19.md).
+[阶段 1.1](phase1/staking-phase1-overview) 是 SSN 质押的当前阶段。它建立在阶段 1 的质押之上，并在 [ZIP-19](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-19.md) 中有正式描述。
 
-Phase 1.1 consists of all features from phase 1 and further introduces
-- transfer stake deposit between accounts
-- remove of custom ADT in `AssignStakeRewards` transition
-- proper removal of empty map entries
-- changes to staking parameters in conjuction with changes in Zilliqa `v8.0.0`
+阶段 1.1 包含阶段 1 的所有功能，并进一步引入
+- 账户间转账存款
+- 在 transition `AssignStakeRewards` 中删除自定义 ADT
+- 正确删除空映射条目
+- 质押参数的变化与 Zilliqa `v8.0.0` 的变化相结合

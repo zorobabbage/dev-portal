@@ -1,6 +1,6 @@
 ---
 id: staking-delegator-reading-contract-states
-title: Reading Contract States
+title: 读取合约状态
 keywords: 
 - staking
 - ssn
@@ -11,24 +11,24 @@ keywords:
 description: Reading contract states
 ---
 
-In this section, we will cover a few read operations that are useful from a delegator's perspective. These are:
+在本节中，我们将介绍一些从委托人的角度来看很有用的读取操作。 这些是：
 
-- [Current list of SSNs](#getting-the-current-list-of-ssns)
-- [List of delegators for a SSN](#getting-the-list-of-delegators-for-a-ssn)
-- [Delegator's buffered deposit](#getting-the-delegators-buffered-deposit)
-- [Delegator's stake amount](#getting-the-delegators-stake-amount)
-- [Delegator's stake reward](#getting-the-delegators-stake-reward)
-- [Delegator's reward history](#getting-the-delegators-reward-history)
-- [Delegator's pending stake withdrawal request](#getting-the-delegators-pending-stake-withdrawal-request)
-- [Delegation history](#getting-delegation-history)
+- [当前 SSN 列表](#getting-the-current-list-of-ssns)
+- [SSN 的委托人列表](#getting-the-list-of-delegators-for-a-ssn)
+- [委托人的缓冲存款](#getting-the-delegators-buffered-deposit)
+- [委托人的质押数量](#getting-the-delegators-stake-amount)
+- [委托人的质押奖励](#getting-the-delegators-stake-reward)
+- [委托人的奖励历史](#getting-the-delegators-reward-history)
+- [委托人的待处理质押提取请求](#getting-the-delegators-pending-stake-withdrawal-request)
+- [委托历史](#getting-delegation-history)
 
-In order to read the above information from the smart contract, you should use the [`GetSmartContractSubState`](https://apidocs.zilliqa.com/#getsmartcontractsubstate) API by querying it from the `ssnlist` smart contract.
+为了从智能合约中读取上述信息，你应该使用 [`GetSmartContractSubState`](https://apidocs.zilliqa.com/#getsmartcontractsubstate) API 通过从 `ssnlist` 智能合约中查询。
 
-## Getting the Current List of SSNs
+## 获取当前的 SSN 列表
 
-### Inputs
+### 输入
 
-- Address of `ssnlist` smart contract
+- `ssnlist` 智能合约地址
 - `ssnlist`
 
 ```json 
@@ -40,11 +40,11 @@ curl -d '{
 }' -H "Content-Type: application/json" -X POST "<api endpoint>"
 ```
 
-### Output
+### 输出
 
-Map of SSN with the corresponding SSN data type
+SSN 与相应 SSN 数据类型的映射
 
-Map SSN address -> [SSN data type](https://github.com/Zilliqa/staking-contract/tree/spec/contracts#data-types)
+映射 SSN 地址 -> [SSN 数据类型](https://github.com/Zilliqa/staking-contract/tree/spec/contracts#data-types)
 
 ```json
 {
@@ -82,14 +82,14 @@ Map SSN address -> [SSN data type](https://github.com/Zilliqa/staking-contract/t
 }
 ```
 
-## Getting the List of Delegators for a SSN
+## 获取 SSN 的委托人列表
 
-### Inputs
-- Address of `ssnlist` smart contract
-- `ssn_deleg_amt`
-- Address of SSN
+### 输入
+- `ssnlist` 智能合约地址
+-`ssn_deleg_amt`
+- SSN 地址
 
-__Example__  
+__示例__
 ```bash
 curl -d '{
     "id": "1",
@@ -99,23 +99,23 @@ curl -d '{
 }' -H "Content-Type: application/json" -X POST "<api endpoint>"
 ```
 
-### Output
-Map `SSN addreess` -> Map `delegator address` `stake deposit amount`
+### 输出
+映射 `SSN 地址`-> 映射 `委托人地址` `质押存款金额`
 
-__Example__  
+__示例__
 ```json
 {"<ssn address>":{"<delegator address>":"<stake deposit amount>"}}
 ```
 
-## Getting the Delegator's Buffered Deposit
+## 获取委托人的缓冲存款
 
-### Inputs
+### 输入
 
-- Address of `ssnlist` smart contract
+- `ssnlist` 智能合约地址
 - `buff_deposit_deleg`
-- Address of delegator
+- 委托人地址
 
-__Example__  
+__示例__ 
 ```bash
 curl -d '{
 >     "id": "1",
@@ -125,30 +125,30 @@ curl -d '{
 > }' -H "Content-Type: application/json" -X POST "<api endpoint>"
 ```
 
-### Output
+### 输出
 
-Map of `ssn address` with the value being a map of `cycle number` and the `buffered deposit` at that particular `cycle number` 
+`ssn address` 的映射，其值为 `cycle number` 和该特定 `cycle number` 处的 `buffered deposit` 的映射
 
-Map `SSN address` -> Map `Cycle number` `buffered deposit amount in Qa` 
+映射 `SSN地址`->映射`周期数` `Qa为单位的缓冲存款金额`
 
 :::info
-Cycle number refers to the cycle number of the smart contract when the deposit was submitted to buffered deposit.
+周期数是指存款提交到缓冲存款时智能合约的周期数。
 :::
 
-__Example__  
+__示例__ 
 ```json
 {"<ssn address>":{"<cycle number>":"<deposit amount>"}}
 ```
 
-## Getting the Delegator's Stake Amount
+## 获取委托人的质押数量
 
-### Inputs
+### 输入
 
-- Address of `ssnlist` smart contract
+- `ssnlist` 智能合约地址
 - `deposit_amt_deleg`
-- Address of `delegator`
+- `委托人` 的地址
 
-__Example__  
+__示例__ 
 ```bash
 curl -d '{
 >     "id": "1",
@@ -158,33 +158,33 @@ curl -d '{
 > }' -H "Content-Type: application/json" -X POST "api endpoint"
 ```
 
-### Output
+### 输出
 
-Map consisting of SSN address and the corresponding delegated amount for a particular delegator
+由 SSN 地址和特定委托人的相应委托金额组成的映射
 
-Map `ssn address` -> `delegated amount`
+映射 `ssn地址`->`委托金额`
 ```json
 {"<ssn addr>":"<delegated amount>",
 "<ssn addr>":"<delegated amount>"}
 ```
 
-## Getting the Delegator's Stake Reward
+## 获得委托人的质押奖励
 
-Coming soon
+即将推出
 
-## Getting the Delegator's Reward History
+## 获取委托人的奖励历史
 
-Coming soon
+即将推出
 
-## Getting the Delegator's Pending Stake Withdrawal Request
+## 获取委托人的待处理质押提款请求
 
-### Inputs
+### 输入
 
-- Address of `ssnlist` smart contract
+- `ssnlist` 智能合约地址
 - `withdrawal_pending`
-- Address of `delegator`
+- `委托人` 的地址
 
-__Example__  
+__示例__ 
 ```bash
 curl -d '{
     "id": "1",
@@ -195,16 +195,16 @@ curl -d '{
 
 ```
 
-### Output
+### 输出
 
-Map consisting of the `epoch number` when the withdrawal was initiated and the corresponding `amount` to withdraw
+由发起提款时的 `纪元号` 和相应的提款 `金额` 组成的映射
 
-Map `epoch number` -> `Pending withdrawal amount`
+映射 `纪元号`->“待提款金额”
 ```json
 {"<epoch number>":"<amount (Qa) to be withdrawn>",
 "<epoch number>":"<amount (Qa) to be withdrawn>"}
 ```
 
-## Getting Delegation History
+## 获取委托历史
 
-Coming soon 
+即将推出
