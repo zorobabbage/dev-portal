@@ -1,6 +1,6 @@
 ---
 id: core-node-operation
-title: General Node Operation
+title: 一般节点操作
 keywords: 
 - core 
 - node 
@@ -9,27 +9,27 @@ description: Core protocol design - general node operation.
 ---
 
 ---
-A Zilliqa node requires the following information during launch:
+Zilliqa 节点在启动期间需要以下信息：
 
-- Schnorr key pair
-- IP address and listening port
-- Sync type
-- Whether to retrieve persistence from S3
+- Schnorr 密钥对
+- IP 地址和监听端口
+- 同步类型
+- 是否从 S3 检索持久性
 
-Most other operational parameters are defined in the file `constants.xml`.
+大多数其他操作参数在文件 `constants.xml` 中定义。
 
-During launch, a node will assume its [identity](../basics/basics-zil-nodes.mdx) as follows:
+在启动期间，节点将采用其如下 [身份](../basics/basics-zil-nodes.mdx) ：
 
-- New, shard, or DS node based on sync type and bootstrap conditions (e.g., `DSInstructionType::SETPRIMARY`)
-- DS or shard guard node if `GUARD_MODE=true` and public key is in `ds_guard` or `shard_guard` list in `constants.xml`
-- Lookup node if `LOOKUP_NODE_MODE=true`
-- Seed node if `LOOKUP_NODE_MODE=true` and `ARCHIVAL_LOOKUP=true`
+- 基于同步类型和引导条件的新节点、分片节点或 DS 节点（例如，`DSInstructionType::SETPRIMARY`）
+- 如果 `GUARD_MODE=true` 和公钥在 `constants.xml` 中的 `ds_guard` 或 `shard_guard` 列表中，则为 DS 或分片保护节点
+- 查找节点，如果 `LOOKUP_NODE_MODE=true`
+- 如果 `LOOKUP_NODE_MODE=true` 且 `ARCHIVAL_LOOKUP=true`，则为种子节点
 
-A node will generally do the following upon startup:
+节点在启动时通常会执行以下操作：
 
-- Start the incoming and outgoing message queue managing threads
-- Populate some information (e.g., key and IP, list of guard nodes, list of initial DS committee nodes)
-- Set up the persistence (e.g., retrieve data from AWS S3)
-- Sync up according to sync type specified, and continue operation from there
+- 启动传入和传出消息队列管理线程
+- 填充一些信息（例如，密钥和 IP、保护节点列表、初始 DS 委员会节点列表）
+- 设置持久性（例如，从 AWS S3 检索数据）
+- 根据指定的同步类型同步，并从那里继续操作
 
-Refer to the other sections for an in-depth description of the operation of the various features.
+有关各种功能操作的深入说明，请参阅其他部分。

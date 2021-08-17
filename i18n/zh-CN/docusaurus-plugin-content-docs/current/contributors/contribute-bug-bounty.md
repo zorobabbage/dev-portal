@@ -1,6 +1,6 @@
 ---
 id: contribute-bug-bounty
-title: Bug Bounty Program
+title: 漏洞赏金计划
 keywords: 
 - contribution
 - bug bounty
@@ -9,8 +9,8 @@ description: Contribution guide for bug bounty program.
 ---
 
 ---
-Developers can also contribute to the advancement of Zilliqa by reporting security bugs and vulnerabilities in our bug bounty program.
+开发人员还可以通过在我们的漏洞赏金计划中报告安全漏洞和普通漏洞，为 Zilliqa 的发展做出贡献。
 
-We reward contributions with payouts of up to $10,000 depending on the nature of the reported vulnerability. We have recently switched to a new bug bounty platform, HackerOne. We will be making the program public soon in 2021. 
+我们会根据所报告漏洞的性质奖励最高 10,000 美元的捐款。 我们最近切换到了一个新的漏洞赏金平台 HackerOne。 我们会在 2021 年公开该计划。
 
-If you need to report any vulnerability, please reach out to security[at]zilliqa.com and we will get you onboard to the private bounty program.
+如果你需要报告任何漏洞，请联系 security[at]zilliqa.com，我们会让你加入私人赏金计划。

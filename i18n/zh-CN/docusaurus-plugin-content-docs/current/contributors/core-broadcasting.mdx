@@ -1,6 +1,6 @@
 ---
 id: core-broadcasting
-title: Broadcasting
+title: 广播
 keywords: 
 - core
 - broadcasting
@@ -9,25 +9,24 @@ description: Core protocol design - broadcasting.
 ---
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-Gossip is used widely in the Zilliqa network for messaging. However, the gossip protocol by design needs the information of all peers that must eventually receive the rumor.
+Gossip 在 Zilliqa 网络中被广泛用于消息传递。然而，Gossip 协议的设计最终需要必须接收 rumor 的所有对等方的信息。
 
-This basic requirement for peer information is usually available to a node, except at the point when a new DS block has been mined. The DS block contains the peer information for all shards, which is extracted by each node to initialize its peer list and restart the gossip engine.
+节点信息的这种基本要求通常对节点可用，除非在挖掘新的 DS 区块时。 DS 区块包含所有分片的对等信息，由每个节点提取以初始化其对等列表并重新启动 gossip 引擎。
 
-However, distributing the DS block itself is a problem that has to be dealt with in a different manner. The solution employed is **tree-based cluster broadcasting**. At the start of a new DS epoch, before DS block distribution, shard nodes don't know the information of the other nodes in the same shard.
-Thus, we leverage clustered multicasting in order to broadcast the DS block to all the nodes within a shard.
+但是，分发 DS 区块本身是一个必须以不同方式处理的问题。采用的解决方案是 **tree-based的集群广播**。在新的 DS epoch 开始时，在 DS 区块分发之前，分片节点不知道同一分片中其他节点的信息。因此，我们利用集群多播将 DS 区块广播到分片内的所有节点。
 
-## Design
+## 设计
 
-1. Assume that we have `X` nodes in a shard. We form clusters - each of `Y` nodes - out of these shard nodes. Each cluster, in turn, has `Z` child clusters.
-1. Every node is assigned a sequence number `n` starting from `0`, such that `n/Y` represents the cluster it belongs to. For example, `2/10 = 0`, `11/10 = 1`.
-1. Therefore, we should have a total of `X/Y` clusters, indexed from `0` to `X/Y-1`. A node `n` belonging to cluster `n/Y` is at level `log_Z(n/Y)`.
-1. A node multicasts messages to nodes within the range `(n/Y * Z + 1)*Y` ~ `((n/Y * Z + Z + 1)* Y - 1)`. Bound checks on node index need to be done before multicasting. If the checks fail, we don’t broadcast.
+1. 假设我们在一个分片中有 `X` 个节点。我们从这些分片节点中形成集群——每个包含 `Y` 个节点。反过来，每个集群都有 `Z` 个子集群。
+2. 每个节点都被分配了一个从 `0` 开始的序列号 `n`，这样 `n/Y` 代表它所属的集群。例如，`2/10 = 0`、`11/10 = 1`。
+3. 因此，我们应该总共有 `X/Y` 个集群，索引从 `0` 到 `X/Y-1`。属于集群 `n/Y` 的节点 `n` 位于 `log_Z(n/Y)` 级别。
+4. 一个节点向 `(n/Y * Z + 1)*Y` ~ `((n/Y * Z + Z + 1)* Y - 1)` 范围内的节点多播消息。在多播之前需要对节点索引进行边界检查。如果检查失败，我们就不会广播。
 
 <img alt="Broadcasting Image 1" src={useBaseUrl('img/contributors/core/tree-based-cluster-broadcasting/broadcast.png')} />
 
-## Application
+## 应用
 
-These are the parameters that control the broadcasting of DS blocks from DS committee nodes to shard nodes according to the design above.
+这些是根据上述设计控制从 DS 委员会节点向分片节点广播 DS 区块的参数。
 
 ```xml
 <data_sharing>
@@ -38,7 +37,7 @@ These are the parameters that control the broadcasting of DS blocks from DS comm
 </data_sharing>
 ```
 
-- `BROADCAST_TREEBASED_CLUSTER_MODE`: Toggles between tree-based cluster broadcasting or pure multicasting.
-- `NUM_FORWARDED_BLOCK_RECEIVERS_PER_SHARD`: The number of shard nodes to initially receive the DS block from DS committee nodes.
-- `MULTICAST_CLUSTER_SIZE`: The number of nodes in each cluster.
-- `NUM_OF_TREEBASED_CHILD_CLUSTERS`: The number of child clusters for a given cluster.
+- `BROADCAST_TREEBASED_CLUSTER_MODE`：在 tree-based 的集群广播或纯多播之间切换。
+- `NUM_FORWARDED_BLOCK_RECEIVERS_PER_SHARD`：最初从 DS 委员会节点接收 DS 区块的分片节点数。
+- `MULTICAST_CLUSTER_SIZE`：每个集群中的节点数。
+- `NUM_OF_TREEBASED_CHILD_CLUSTERS`：给定集群的子集群数量。

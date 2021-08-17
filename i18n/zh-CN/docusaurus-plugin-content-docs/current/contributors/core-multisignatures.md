@@ -1,6 +1,6 @@
 ---
 id: core-multisignatures
-title: Multisignatures
+title: 多重签名
 keywords: 
 - core 
 - multisignatures
@@ -8,34 +8,34 @@ description: Core protocol design - multisignatures.
 ---
 
 ---
-The end result of any consensus round is basically the generation of an EC-Schnorr signature that is the product of co-signing the consensus data by 2/3+1 of the participants.
+任何共识轮次的最终结果基本上都是生成 EC-Schnorr 签名，这是 2/3+1 参与者共同签署共识数据的产物。
 
-This section briefly describes how multisignatures are implemented and used in the Zilliqa core. For more information on how multisignatures work, refer to the Zilliqa [whitepaper](https://docs.zilliqa.com/whitepaper.pdf).
+本节简要介绍如何在 Zilliqa 核心中实现和使用多重签名。有关多重签名如何工作的更多信息，请参阅 Zilliqa [白皮书](https://docs.zilliqa.com/whitepaper.pdf)。
 
-## Generating the Multisignature within Consensus
+## 在共识中生成多重签名
 
-1. Leader sends out announcement message, which includes the data to co-sign
-1. Backup generates a commit point and commit secret, and sends back the commit point
-1. Leader aggregates all the received commit points
-1. Leader generates and sends out `challenge = function(aggregated commit points, aggregated public keys, data to co-sign)`
-1. Backup re-generates the same challenge on its end and verifies equality
-1. Backup generates and sends back `response = function(commit secret, challenge, private key)`
-1. Leader verifies each response as `function(response, challenge, public key, commit point)`
-1. Leader generates and sends out `signature = function(challenge, aggregated responses)`
-1. Both leader and backups verify signature as `function(signature, data to co-sign, aggregated public keys)`
+1. Leader 发出公告消息，其中包含要联签的数据
+2. backup 生成 commit point 和 commit secret，然后发回 commit point
+3. Leader 汇总所有收到的 commit point
+4. Leader 生成并发出 `challenge = function(aggregated commit points, aggregated public keys, data to co-sign)`
+5. backup 在其末端重新生成相同的挑战并验证相等性
+6. backup 生成并发回 `response = function(commit secret,challenge,private key)`
+7. Leader 将每个响应验证为 `function(response, challenge, public key, commit point)`
+8.Leader 生成并发出 `signature = function(challenge, aggregated responses)`
+9. leader 和 backup 都验证签名为 `function(signature, data to co-sign,aggregated public keys)`
 
-## Implementation Details
+## 实现细节
 
-The cryptographic components needed for multisignatures are implemented across `Schnorr.h` and `MultiSig.h`.
+多重签名所需的加密组件在 `Schnorr.h` 和 `MultiSig.h` 中实现。
 
-One can think of `Schnorr::Sign` as being the unilateral equivalent of the co-signing that is achieved through the aggregation of each participant's `CommitPoint`, `Response`, and `PubKey` components, as well as the indirect use of each participant's `PrivKey` and `CommitSecret` in the process of generating those components.
+可以将 `Schnorr::Sign` 视为通过每个参与者的 `CommitPoint`、`Response` 和 `PubKey` 组件的聚合以及间接使用每个参与者在生成这些组件的过程中的 `PrivKey` 和 `CommitSecret`。
 
-In fact, you will notice that `MultiSig::MultiSigVerify` is implemented almost the same as `Schnorr::Verify` (with the exception of an added byte for domain separated hash function). This shows that while co-signing is done through some aggregation magic, in the end a multisignature is still a Schnorr signature and can be verified as such.
+事实上，你会注意到 `MultiSig::MultiSigVerify` 的实现与 `Schnorr::Verify` 几乎相同（除了为域名分离的哈希函数添加了一个字节）。这表明虽然联合签名是通过一些聚合魔法完成的，但最终多重签名仍然是 Schnorr 签名，可以这样验证。
 
-## Domain-separated Hash Functions
+## 域名分离的哈希函数
 
-Hashing operations within the consensus protocol are separated into three distinct domains. The "separation" refers to the integration of unique byte values into hash operations across different points of the consensus, to effectively carve out domains during the consensus.
+共识协议中的散列操作分为三个不同的域名。 “分离”是指在共识的不同点之间将唯一的字节值整合到哈希运算中，以在共识过程中有效地划分域。
 
-1. The first domain-separated hash function basically refers to the node submitting its PoW and its public key, or what we now refer to as the Proof-of-Possession (PoP) phase. While no behavioral change is done in the code for the PoW stage, we created a wrapper function `MultiSig::SignKey` to emphasize that by signing the public key, the node is effectively presenting proof of possessing the private key.
-1. The second domain-separated hash function refers to the backup having to send the hash of the commit point alongside the commit point itself. To achieve this, the data structure `CommitPointHash` was added to `MultiSig.h`. The commit point hash is generated over a single byte (`0x01`) plus the commit point.
-1. The third domain-separated hash function refers to the leader introducing another byte (`0x11`) into the hash operation during the generation of the challenge value.
+1. 第一个域名分离的哈希函数基本上是指节点提交其 PoW 及其公钥，或者我们现在所说的所有权证明（PoP）阶段。虽然在 PoW 阶段的代码中没有进行任何行为更改，但我们创建了一个包装函数`MultiSig::SignKey`，以强调通过签署公钥，节点有效地提供了拥有私钥的证明。
+2. 第二个域名分离散列函数是指 backup 必须将 commit point 的散列与 commit point 本身一起发送。为了实现这一点，数据结构`CommitPointHash` 被添加到 `MultiSig.h` 中。commit point 哈希是在单个字节（`0x01`）加上 commit point 生成的。
+3. 第三个域名分离的哈希函数是指 leader 在生成 challenge 值的过程中，在哈希运算中引入了另一个字节（`0x11`）。

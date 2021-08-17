@@ -1,6 +1,6 @@
 ---
 id: core-messaging-limits
-title: Messaging Limits
+title: 消息限制
 keywords: 
 - core 
 - messaging 
@@ -9,26 +9,26 @@ description: Core protocol design - messaging limits.
 ---
 
 ---
-The volume and size of peer-to-peer communication for a Zilliqa node is controlled by several factors at different parts of the stack.
+Zilliqa 节点的点对点通信的数量和大小由堆栈不同部分的几个因素控制。
 
-## Message Size
+## 消息大小
 
-- `MIN_READ_WATERMARK_IN_BYTES`: The minimum number of bytes read from the socket before we act on the data. It is basically the `lowmark` parameter required by the libevent function `bufferevent_setwatermark`.
-- `MAX_READ_WATERMARK_IN_BYTES`: The maximum number of bytes read from the socket before we stop accepting further input. It is basically the `highmark` parameter required by the libevent function `bufferevent_setwatermark`.
-- `MAX_GOSSIP_MSG_SIZE_IN_BYTES`: The maximum size of a socket message with start byte = `START_BYTE_GOSSIP`. If a message reaches this size, the sender is blacklisted.
+- `MIN_READ_WATERMARK_IN_BYTES`：在我们对数据采取行动之前从 socket 读取的最小字节数。它基本上是 libevent 函数 `bufferevent_setwatermark` 所需的 `lowmark` 参数。
+- `MAX_READ_WATERMARK_IN_BYTES`：在我们停止接受进一步输入之前从 socket 读取的最大字节数。它基本上是 libevent 函数 `bufferevent_setwatermark` 所需的 `highmark` 参数。
+- `MAX_GOSSIP_MSG_SIZE_IN_BYTES`：起始字节 = `START_BYTE_GOSSIP` 的 socket 消息的最大大小。如果消息达到此大小，则发送方将被列入黑名单。
 
-## Message Count
+## 消息计数
 
-- `MAXSENDMESSAGE`: The number of active threads for the outgoing message pool.
-- `MAXRECVMESSAGE`: The number of active threads for the incoming message pool.
-- `SENDQUEUE_SIZE`: The maximum size of the outgoing message queue (before transfer to the outgoing pool), beyond which any further messages are dropped.
-- `MSGQUEUE_SIZE`: The maximum size of the incoming message queue (before transfer to the incoming pool), beyond which any further messages are dropped.
+- `MAXSENDMESSAGE`：传出消息池的活动线程数。
+- `MAXRECVMESSAGE`：传入消息池的活动线程数。
+- `SENDQUEUE_SIZE`：传出消息队列的最大大小（在传输到传出池之前），超出该大小的任何其他消息都将被丢弃。
+- `MSGQUEUE_SIZE`：传入消息队列的最大大小（在传输到传入池之前），超过该大小的任何其他消息都将被丢弃。
 
-## Sending Frequency
+## 发送频率
 
-- `MAXRETRYCONN`: The maximum number of socket connection attempts to perform for sending messages to a peer.
-- `PUMPMESSAGE_MILLISECONDS`: The maximum wait time (minimum being 1 ms) before re-attempting socket connection.
+- `MAXRETRYCONN`：为向对等方发送消息而尝试执行的 socket 连接的最大次数。
+- `PUMPMESSAGE_MILLISECONDS`：重新尝试 socket 连接之前的最长等待时间（最短为 1 毫秒）。
 
-## Active Connections
+## 活跃连接
 
-- `MAX_PEER_CONNECTION`: The maximum number of active connections to a specific peer.
+- `MAX_PEER_CONNECTION`：到特定对等点的最大活跃连接数。
