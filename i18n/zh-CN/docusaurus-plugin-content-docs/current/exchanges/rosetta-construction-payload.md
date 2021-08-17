@@ -1,6 +1,6 @@
 ---
 id: rosetta-construction-payloads
-title: Payloads
+title: 有效载荷
 keywords: 
 - rosetta
 - middleware
@@ -14,13 +14,13 @@ description: Payloads
 
 ---
 
-## Generate an Unsigned Transaction and Signing Payloads
+## 生成未签名交易和签名有效负载
 
-Payloads is called with an array of operations and the response from `/construction/metadata`. It returns an unsigned transaction blob and a collection of payloads that must be signed by particular account using Zilliqa Schnorr signature algorithm. 
+有效载荷使用一系列操作被调用，响应来自`/construction/metadata`。 它返回一个未签名的交易 blob 和一组必须由特定帐户使用 Zilliqa Schnorr 签名算法签名的有效负载。
 
-Request:
+请求：
 
-`metadata` for `operation_identifier 1` is from `/construction/metadata`
+`operation_identifier 1` 的 `metadata` 来自 `/construction/metadata`
 ```json
 {
     "network_identifier": {
@@ -93,9 +93,9 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
+示例
 
 ```json
 {

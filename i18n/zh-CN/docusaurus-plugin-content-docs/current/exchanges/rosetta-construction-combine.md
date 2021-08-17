@@ -1,6 +1,6 @@
 ---
 id: rosetta-construction-combine
-title: Combine
+title: 结合
 keywords: 
 - rosetta
 - middleware
@@ -14,18 +14,18 @@ description: Combine
 
 ---
 
-## Create Network Transaction from Signature
+## 从签名创建网络交易
 
-Creates a Zilliqa payment transaction from an unsigned transaction and an array of provided signatures. The signed transaction returned from this method will thenbe sent to the `/construction/submit` endpoint by the caller.
+从未签名的交易和提供的签名数组创建 Zilliqa 支付交易。 从此方法返回的签名交易将被调用者发送到 `/construction/submit` 端点。
 
 :::info
-Before calling `/combine`, please call `/payloads` to have the `unsigned_transaction`. Next, use [goZilliqa SDK](https://github.com/Zilliqa/gozilliqa-sdk) or other Zilliqa's SDKs to craft a transaction object and sign the transaction object; Print out the __*signature*__ and __*transaction object*__ in __hexadecimals__ format. 
+在调用 `/combine` 之前，请先调用 `/payloads` 以获得 `unsigned_transaction`。 接下来，使用 [goZilliqa SDK](https://github.com/Zilliqa/gozilliqa-sdk) 或其他 Zilliqa 的 SDK 制作交易对象并签署交易对象； 以 __hexadecimals__ 格式打印 __*签名*__ 和 __*交易对象*__。
 :::
 
 
-Refer to the [`signRosettaTransaction.js`](https://github.com/Zilliqa/zilliqa-rosetta/blob/master/examples/signRosettaTransaction.js) for an example code on how to craft and sign a transaction object.
+有关如何制作和签署交易对象的示例代码，请参阅 [`signRosettaTransaction.js`](https://github.com/Zilliqa/zilliqa-rosetta/blob/master/examples/signRosettaTransaction.js)。
 
-Use them as request parameters as follows:
+将它们用作请求参数，如下所示：
 
 ```json
 {
@@ -51,7 +51,7 @@ Use them as request parameters as follows:
 ```
 
 
-Request:
+请求：
 
 ```json
 {
@@ -83,9 +83,9 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
+示例
 
 ```json
 {

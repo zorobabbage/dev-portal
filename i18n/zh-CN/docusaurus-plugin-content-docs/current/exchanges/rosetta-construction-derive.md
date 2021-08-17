@@ -1,6 +1,6 @@
 ---
 id: rosetta-construction-derive
-title: Derive
+title: 派生
 keywords: 
 - rosetta
 - middleware
@@ -14,11 +14,11 @@ description: Derive
 
 ---
 
-## Derive an Address from a Public Key
+## 从公钥派生地址
 
-Returns the address associated with the public key. Both `bech32` and checksummed `base16` format is returned.
+返回与公钥关联的地址。 返回 `bech32` 和校验和的 `base16` 格式。
 
-Request:
+请求：
 
 ```json
 {
@@ -36,9 +36,9 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
+示例
 
 ```json
 {

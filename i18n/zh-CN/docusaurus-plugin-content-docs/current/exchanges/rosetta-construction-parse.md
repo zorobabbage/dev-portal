@@ -1,6 +1,6 @@
 ---
 id: rosetta-construction-parse
-title: Parse
+title: 解析
 keywords: 
 - rosetta
 - middleware
@@ -14,15 +14,15 @@ description: Parse
 
 ---
 
-## Parse a Transaction
+## 解析交易
 
-Parse is called on either unsigned or signed transactions to understand the intent of the formulated transaction. This is run as a sanity check before signing (after `/construction/payloads`) and before broadcast (after `/construction/combine`).
+对未签名或已签名的交易调用解析以了解制定交易的意图。 这是在签名之前（在 `/construction/payloads` 之后）和广播之前（在 `/construction/combine` 之后）运行的完整性检查。
 
 :::info
-Set the `signed` flag accordingly to denote whether the transaction is signed or unsigned.
+相应地设置 `已签名` 标志以表示交易是已签名还是未签名。
 :::
 
-Request:
+请求：
 
 ```json
 {
@@ -35,9 +35,9 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
+示例
 
 ```json
 {

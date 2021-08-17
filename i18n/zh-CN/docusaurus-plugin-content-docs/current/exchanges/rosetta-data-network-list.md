@@ -1,6 +1,6 @@
 ---
 id: rosetta-data-network-list
-title: List
+title: 列表
 keywords: 
 - rosetta
 - middleware
@@ -15,12 +15,12 @@ description: List
 
 ---
 
-## Get List of Available Networks
+## 获取可用网络列表
 
-Returns a list of NetworkIdentifiers that the Rosetta server supports, namely `testnet` and `mainnet`.
+返回 Rosetta 服务器支持的 NetworkIdentifiers 列表，即 `testnet` 和 `mainnet`。
 
 
-Request:
+请求：
 
 ```json
 {
@@ -28,9 +28,9 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
+示例
 
 ```json
 {

@@ -1,6 +1,6 @@
 ---
 id: rosetta-setting-up-no-seed-node
-title: Setting up Zilliqa Rosetta connecting to public API endpoint
+title: 设置 Zilliqa Rosetta 连接到公共 API 端点
 keywords: 
 - rosetta
 - middleware
@@ -17,20 +17,20 @@ description: Setting up Zilliqa Rosetta connecting to public API endpoint
 
 ---
 
-Zilliqa rosetta standalone provide the option of connecting to public seed node service such `api.zilliqa.com` and `dev-api.zilliqa.com` instead of running seed node on your end. 
+Zilliqa rosetta Standalone 提供了连接到公共种子节点服务的选项，例如 `api.zilliqa.com` 和 `dev-api.zilliqa.com`，而不是在你那边运行种子节点。
 
-## Setup
-### Step 1: Download `Zilliqa-rosetta` latest release from https://github.com/Zilliqa/zilliqa-rosetta/releases. 
+## 设置
+### 第 1 步：从 https://github.com/Zilliqa/zilliqa-rosetta/releases 下载 `Zilliqa-rosetta` 最新版本。
 
-### Step 2: Build `Zilliqa-rosetta standalone` Docker image 
+### 第 2 步：构建 `Zilliqa-rosetta Standalone` Docker 镜像
 
-#### Running with the latest release of Zilliqa rosetta
+#### 使用最新版本的 Zilliqa rosetta 运行
 ```bash
 cd rosetta_standalone
 sh ./build_standalone.sh .sh
 ```
 
-#### Running with a specific release of Zilliqa rosetta
+#### 使用特定版本的 Zilliqa rosetta 运行
 ```bash
 docker build \
 --build-arg ROSETTA_COMMIT_OR_TAG=<ROSETTA_TAG> \
@@ -38,10 +38,10 @@ docker build \
 -t rosetta_standalone:1.0 .
 ```
 
-### Step 3: Configuring `Zilliqa-rosetta` (optional)
-By default, Zilliqa-rosetta standalone will connect to public endpoint of Zilliqa testnet and mainnet.
+### 第 3 步：配置 `Zilliqa-rosetta`（可选）
+默认情况下，Zilliqa-rosetta Standalone 将连接到 Zilliqa 测试网和主网的公共端点。
 
-If you need to connect to other Zilliqa endpoints, you can mdoify `Zilliqa-rosetta` configurations yaml. The format is as follows:
+如果你需要连接到其他 Zilliqa 端点，可以编辑 `Zilliqa-rosetta` 配置 yaml。 格式如下：
 
 ```yaml
 * rosetta:
@@ -60,27 +60,27 @@ If you need to connect to other Zilliqa endpoints, you can mdoify `Zilliqa-roset
     * node_version: zilliqa node verion
 ```
 
-Default configuration files for Zilliqa testnet and mainnet combined has been included in Rosetta root directory.
+Zilliqa 测试网和主网组合的默认配置文件已包含在 Rosetta 根目录中。
 
-| Network | Config file |
+| 网络 | 配置文件 |
 | ------- | ----------- |
-| Testnet, Mainnet | `config.local.yaml` |
+| 测试网, 主网 | `config.local.yaml` |
 
-### Step 4: Running `Zilliqa-rosetta`
+### 第 4 步：运行`Zilliqa-rosetta`
 
-#### Running Zilliqa rosetta standalone with default configuration
+#### 使用默认配置独立运行 Zilliqa rosetta
 ```bash
 run_standalone.sh
 ```
 
-#### Running Zilliqa rosetta standalone with custom configuration
+#### 使用自定义配置独立运行 Zilliqa rosetta
 ```bash
 docker run -d -p 8080:8080 -v <absolute directory of config.local.yaml>:/rosetta/config.local.yaml --name rosetta_standalone rosetta_standalone:1.0
 ```
 
 
-## Maintainance
-### Restarting Zilliqa Rosetta
+## 维护
+### 重启 Zilliqa Rosetta
 ```bash
 docker stop <container name>
 docker start <container name>

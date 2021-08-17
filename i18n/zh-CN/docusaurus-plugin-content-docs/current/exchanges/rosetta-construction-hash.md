@@ -1,6 +1,6 @@
 ---
 id: rosetta-construction-hash
-title: Hash
+title: 哈希
 keywords: 
 - rosetta
 - middleware
@@ -14,10 +14,10 @@ description: Hash
 
 ---
 
-## Get the Hash of a Signed Transaction
-Returns the transaction hash for a signed transaction.
+## 获取已签名交易的哈希值
+返回已签名交易的交易哈希。
 
-Request:
+请求：
 
 ```json
 {
@@ -29,9 +29,9 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
+示例
 
 ```json
 {

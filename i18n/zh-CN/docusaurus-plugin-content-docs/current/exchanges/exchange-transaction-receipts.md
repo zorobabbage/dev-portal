@@ -1,6 +1,6 @@
 ---
 id: exchange-transaction-receipts
-title: Understanding Transaction Receipts
+title: 了解存款交易
 keywords: 
 - transaction receipts
 - fields
@@ -12,21 +12,21 @@ description: Transaction Receipts Exchanges
 
 ---
 
-## Transaction Receipts
+## 存款交易
 
-Confirmed transactions come with a **receipt** under the **result** field when [fetching the transaction](https://apidocs.zilliqa.com/#gettransaction) in JSON format.
+当 [获取交易](https://apidocs.zilliqa.com/#gettransaction) 为JSON 格式时，已确认的交易在 **result** 字段下带有 **receipt**。
 
-## Basic Fields
+## 基本字段
 
-The following are the fields a **receipt** may have. These fields generally apply to both payment and contract transactions.
+以下是 **receipt** 可能具有的字段。 这些字段通常适用于付款和合约交易。
 
-| Field              | Type       | Description                                               |
-|:------------------ |:---------- |:--------------------------------------------------------- |
-| **cumulative_gas** | string     | The total gas consumed in this transaction                |
-| **epoch_num**      | string     | The epoch number in which this transaction was confirmed  |
-| **success**        | boolean    | The result of this transaction (`true` on success)          |
+| 字段 | 类型 | 说明 |
+|:------------------ |:---------- |:---------------- ----------------------------------------- |
+| **cumulative_gas** | string     | 本次交易消耗的 gas 总量|
+| **epoch_num** | string      | 确认此交易的纪元号 |
+| **success** | boolean     | 此交易的结果（成功时为 `true`）|
 
-For example:
+例如：
 
 ```
 "receipt": {
@@ -36,21 +36,21 @@ For example:
 },
 ```
 
-## Additional Fields
+## 补充字段
 
-For smart contract transactions, additional information relating to smart contract execution is contained in additional fields under the "**receipt**".
+对于智能合约交易，与智能合约执行相关的附加信息包含在 “**receipt**” 下的补充字段中。
 
-### Successful Transactions
+### 成功交易
 
-If a transaction is successful (i.e., the **success** field is `true`), these fields will be present:
+如果交易成功（即 **success** 字段为 `true`），将出现以下字段：
 
-| Field              | Type       | Description                                                                                  |
+| 字段 | 类型 | 描述                                                                                 |
 |:------------------ |:---------- |:-------------------------------------------------------------------------------------------- |
-| **accepted**       | boolean    | Indicates whether the last transition in this transaction incurred a **balance transfer**        |
-| **event_logs**     | json-array | A list of event logs emitted by the contract during processing. Each log contains:<ol><li>**_eventname**: [string] The name of the event</li><li>**address**: [string] The address of the contract that emitted this event</li><li>**params**: [json-array] A list of parameters under the transition. Each entry contains:<ul><li>**vname**: [string] The name of the variable</li><li>**type**: [string] The type of the variable</li><li>**value**: [string] The value of the variable</li></ul></li></ol>                                                                |
-| **transitions**    | json-array | A list of internal transitions invoked during the processing of the transaction by the Scilla interpreter. Each transition contains:<ol><li>**addr**: [string] The address of the contract account that emitted this transition</li><li>**depth**: [int] The depth of the current transition. The transitions directly emitted by the recipient in the transaction will be in depth 0. If those transitions in depth 0 invoked transitions from other contracts, those will be in depth 1. And so on and so forth.</li><li>**msg**: [json-object] The message field emitted by the Scilla interpreter, which includes:<ul><li>**_amount**: [string] The balance transferred from this transition</li><li>**_recipient**: [string] The recipient of this transition, which can either be a wallet account or contract account</li><li>**_tag**: [string] The contract-defined transition name</li><li>**params**: [json-array] A list of parameters under the transition. Each entry contains:<ul><li>**vname**: [string] The name of the variable</li><li>**type**: [string] The type of the variable</li><li>**value**: [string] The value of the variable</li></ul></li></ul></li></ol>             |
+| **accepted**       | boolean    | 此交易中的最后一次 transition 是否发生了**余额转移**|
+| **event_logs**     | json-array | 合约在处理过程中发出的事件日志列表。 每个日志包含：<ol><li>**_eventname**: [string] 事件名称</li><li>**address**: [string] 发出此事件的合约地址</li><li>**params**: [json-array] transition 下的参数列表。 每个条目包含：<ul><li>**vname**: [string] 变量名</li><li>**type**: [string] 变量类型</li><li>**value**: [string] 变量值</li></ul></li></ol>                                                                |
+| **transitions**    | json-array | Scilla 解释器在处理交易期间调用的内部 transaction 列表。 每个 transaction 包含：<ol><li>**addr**: [string] 发出此 transition 的合约账户的地址</li><li>**depth**: [int] 当前 transition 的深度。 交易中接收者直接发出的 transition 深度为 0。如果深度 0 中的 transition 调用了其他合约的 transition，则这些 transition 的深度为 1。依此类推。</li><li>**msg**: [json-object] Scilla 解释器发出的消息字段，其中包括：<ul><li>**_amount**: [string] 从本次 transition 转移的余额</li><li>**_recipient**: [string] 此 transition 的接收者，可以是钱包账户或合约账户</li><li>**_tag**: [string] 合约定义的 transition 名称</li><li>**params**: [json-array] transition 下的参数列表。 每个条目包含：<ul><li>**vname**: [string] 变量名</li><li>**type**: [string] 变量类型</li><li>**value**: [string] 变量值</li></ul></li></ul></li></ol>             |
 
-For example:
+例如:
 
 ```
 "receipt": {
@@ -96,16 +96,16 @@ For example:
 
 ```
 
-### Unsuccessful Transactions
+### 不成功的交易
 
-If a transaction is unsuccessful (i.e., the **success** field is `false`), no balance transfer will be executed. Additionally, these fields will be present:
+如果交易不成功（即 **success** 字段为 `false`），则不会执行余额转移。 此外，这些字段将出现：
 
-| Field              | Type        | Description                                                                                  |
+| 字段 | 类型 | 描述                                                                                  |
 |:------------------ |:----------- |:-------------------------------------------------------------------------------------------- |
-| **errors**         | json-object | An object containing a key-value field. The key [string] indicates the depth at which the error occurred. The value part is a JSON array that lists the error codes [int] reported. The list of possible error codes can be found [here](https://github.com/Zilliqa/Zilliqa/blob/8b088f8ea63f1aab43fde8bbb9741ecaf36b089b/src/libData/AccountData/TransactionReceipt.h#L32).                                  |
-| **exceptions**     | json-array  | A list of exceptions returned by the Scilla interpreter. Each exception contains:<ol><li>**line”**: [int] The line in the Scilla contract code where the exception was detected</li><li>**message**: [string] The message describing the exception</li></ol> |
+| **errors**         | json-object | 包含键值字段的对象。 键 [string] 表示错误发生的深度。 值部分是一个 JSON 数组，其中列出了报告的错误代码 [int]。 可以在 [这里](https://github.com/Zilliqa/Zilliqa/blob/8b088f8ea63f1aab43fde8bbb9741ecaf36b089b/src/libData/AccountData/TransactionReceipt.h#L32) 找到可能的错误代码列表.                                  |
+| **exceptions**     | json-array  | Scilla 解释器返回的异常列表。 每个异常包含：<ol><li>**line”**: [int] Scilla 合约代码中检测到异常的行</li><li>**message**: [string] 描述异常的消息</li></ol> |
 
-For example:
+例如:
 
 ```
 "receipt": {
@@ -134,16 +134,15 @@ For example:
   }
 ```
 
-## Recommended Steps for Exchanges Polling for Incoming $ZIL Deposit from Smart Contract Transactions
+## 交易所轮询来自智能合约交易的 $ZIL 存款的推荐步骤
 
-1. Confirm that the **success** field is set to `true`.
-1. Traverse the **transitions** JSON array. For each transition, for a successful deposit of `$ZIL` via the smart contract, the following must be fulfilled:
-   1. **_recipient** corresponds to a known deposit address controlled by the exchange.
-   2. **_tag** is either `AddFunds` or empty.
-   :::note
-    `_tag` can be found under `msg` field. If either `_tag` or `msg` is not present, there is no incoming deposit from this particular transition.
-   :::
-   3. **_amount** is non-zero.
-   4. Check the **_recipient** and **_amount** to complete the information on the balance transfer. In such a case, you can confirm that there is a deposit
-   to address **_recipient** with value **_amount** (in `Qa`).
-   5. Continue traversing the remaining transitions and checking for more deposits.
+1. 确认**success** 字段设置为 `true`。
+2. 遍历 **transitions** JSON 数组。 对于每次 transition，要通过智能合约成功存入`$ZIL`，必须满足以下条件：
+    1. **_recipient** 对应交易所控制的已知存款地址。
+    2. **_tag** 为 `AddFunds` 或为空。
+    :::note
+     `_tag` 可以在 `msg` 字段下找到。 如果 `_tag` 或 `msg` 不存在，则没有来自此特定 transition 的入金。
+    :::
+    3. **_amount** 非零。
+    4. 勾选 **_recipient** 和 **_amount**，完成余额转账信息。 在这种情况下，你可以确认在地址 **_recipient** 上有一份存款，其值为 **_amount**（单位 `Qa` ）。
+    5. 继续遍历剩余的 transition 并检查更多存款。

@@ -1,6 +1,6 @@
 ---
 id: exchange-key-whitelisting-2
-title: Key Whitelisting (option 2)
+title: 密钥白名单（选项 2）
 keywords:
 - exchanges
 - docker setup
@@ -8,21 +8,17 @@ keywords:
 description: Run seed node in key whitelisting mode (no open inbound port)
 ---
 
-In key whitelisting mode, blockchain data is pulled by the seed from Zilliqa Research-hosted public seed nodes in periodic intervals.
-Exchanges using this mode generate a public-private key pair and share their public key with Zilliqa Research for whitelisting.
+在密钥白名单模式下，区块链数据由来自 Zilliqa Research 托管的公共种子节点的种子定期提取。 使用这种模式的交易所会生成一个公私钥对，并与 Zilliqa Research 共享他们的公钥以用于白名单。
 
-This section describes Option 2 for key whitelisting mode, which uses `p2pseed-configuration.tar.gz` and does not require opening an inbound port.
+本节介绍密钥白名单模式的选项2，它使用`p2pseed-configuration.tar.gz`，不需要打开入站端口。
 
-## Preparing the Machine
+## 准备机器
 
-### Docker Setup
+### Docker 设置
 
-We highly recommend using [Docker](https://docker.com) to set up a seed node,
-as we provide a tested, production-ready image for your use. If you have not
-yet set up docker, please follow the instructions on the [official documentation](https://docs.docker.com/install/).
+我们强烈建议使用 [Docker](https://docker.com) 来设置种子节点，因为我们提供了一个经过测试的、可用于生产的镜像供你使用。 如果你还没有设置docker，请按照 [官方文档](https://docs.docker.com/install/) 上的说明进行操作。
 
-Once you have set up Docker, you may proceed to download the configuration
-tarball for the mainnet:
+设置 Docker 后，你可以继续下载主网的配置 tarball：
 
 ```sh
 # create a directory
@@ -40,7 +36,7 @@ $ tar -zxvf p2pseed-configuration.tar.gz
 # config.xml
 ```
 
-Once you have successfully uncompressed the tarball, you should generate a new keypair for whitelisting by Zilliqa Research:
+成功解压缩 tarball 后，你应该为 Zilliqa Research 的白名单生成一个新的密钥对：
 
 ```sh
 $ sudo docker run --rm zilliqa/zilliqa:<version> -c genkeypair
@@ -48,24 +44,19 @@ $ sudo docker run --rm zilliqa/zilliqa:<version> -c genkeypair
 # output will be <public key> <private key>
 ```
 
-The first value from the ouput is the public key and second value is the private key.
-The public key has to be shared in advance while submitting the KYC form.
-The private key is required to start the seed node.
+输出中的第一个值是公钥，第二个值是私钥。 在提交 KYC 表单时，必须提前共享公钥。 启动种子节点需要私钥。
 
 :::info
-Any number of seed nodes can use this key pair simultaneously.
-Hence, you only need to provide one key for whitelisting no matter how many seed nodes you will be operating.
+任意数量的种子节点可以同时使用这个密钥对。 因此，无论你将运行多少个种子节点，你只需要提供一个用于白名单的密钥。
 :::
 
-### Native Setup
+### 本机设置
 
 :::note
-This approach has been tested on **Ubuntu 18.04** and involves compiling
-C++. We strongly recommend you consider using the Docker image provided above.
+此方法已在 **Ubuntu 18.04** 上进行了测试，涉及编译 C++。 我们强烈建议你考虑使用上面提供的 Docker 镜像。
 :::
 
-If you cannot or do not wish to use Docker, you may also build the Zilliqa
-binary from source and run it as such.
+如果你不能或不想使用 Docker，你也可以从源代码构建 Zilliqa 二进制文件并按原样运行它。
 
 ```sh
 # clone Zilliqa source files
@@ -113,8 +104,7 @@ $ pip3 install requests clint futures
 $ ./build.sh
 ```
 
-The build should exit with no errors. Once it is complete, download the
-configuration tarball, and generate a keypair:
+构建退出时，应该没有错误。 完成后，下载配置 tarball：
 
 ```sh
 # make a separate folder for keys and configuration
@@ -136,24 +126,19 @@ $ ../Zilliqa/build/bin/genkeypair
 # output will be <public key> <private key>
 ```
 
-## Configuring the Node
+## 配置节点
 
-The node requires some configuration before it can successfully join the
-network. Most configuration is contained in `constants.xml`, which should be
-in the directory we extracted `p2pseed-configuration.tar.gz` to. Minimally, the
-following changes are required:
+节点需要一些配置才能成功加入网络。 大多数配置包含在 `constants.xml` 中，它应该在我们提取 `p2pseed-configuration.tar.gz` 的目录中。 至少需要进行以下更改：
 
-- Change the value of `ENABLE_WEBSOCKET` to `true` if your seed node will support
-  websockets (refer to the [Zilliqa Websocket Server](https://github.com/Zilliqa/dev-portal/tree/master/docs/api-websocket.md) documentation).
+- 如果你的种子节点支持 websockets，请将 `ENABLE_WEBSOCKET` 的值更改为 `true`（请参阅 [Zilliqa Websocket 服务器](https://github.com/Zilliqa/dev-portal/tree/master/docs/api-websocket.md) 文档）。
 
-## Joining the Network
+## 加入网络
 
 :::note
-Before proceeding with this step, make sure you have completed the necessary KYC (for individual).
+在继续此步骤之前，请确保你已完成必要的 KYC（针对个人）。
 :::
 
-Once the preliminary steps have been completed, joining the network is relatively
-straightforward.
+一旦完成了初始步骤，加入网络就相对简单了。
 
 ```sh
 # NOTE: run only ONE of the following.
@@ -163,13 +148,11 @@ $ ./launch_docker.sh
 $ ./launch.sh
 ```
 
-You will be asked a series of questions.
-When asked to enter the private key, please enter the value you provided us when you submitted
-the KYC form. This is crucial, as your node **will not work** with anything else.
+你会被问到一系列问题。 当要求输入你的 IP 地址和侦听端口时，请输入你在提交 KYC 表单时提供给我们的值。 这很重要，因为会因为匹配不到你提交的值而导致你的节点 ** 无法工作**。
 
-Sample instructions to be followed for launch are provided below.
+下面提供了启动时要遵循的示例说明。
 
-- launch_docker.sh
+- 启动 _docker.sh
 
 ```sh
 $ ./launch_docker.sh
@@ -188,13 +171,8 @@ Enter your IP address ('NAT' or *.*.*.*): <static ip address>
 Enter the private key (32-byte hex string) to be used by this node and whitelisted by upper seeds: <private key generated for key whitelisting>
 ```
 
-## Next Steps
+## 下一步
 
-If you have successfully completed the above steps, you should have
-a functioning seed node that exposes an RPC API on `localhost:4201`. You may
-further check the logs at `zilliqa-00001-log.txt`.
+如果你已成功完成上述步骤，你应该有一个正常运行的种子节点了，它在 `localhost:4201` 上公开了一个 RPC API。 你可以进一步检查 `zilliqa-00001-log.txt` 中的日志。
 
-The following articles in this series will demonstrate a simple set of
-functions that can be used as a starting point for exchange developers to implement
-their own custom business logic around the Zilliqa blockchain. You may find
-the full source code of the example app in the [same repository](https://github.com/Zilliqa/dev-portal/tree/master/examples/exchange).
+本系列的以下文章将演示一组简单的函数，这些函数可用作交易所开发人员围绕 Zilliqa 区块链实现自己的自定义业务逻辑的起点。 你可以在 [仓库](https://github.com/Zilliqa/dev-portal/tree/master/examples/exchange) 中找到示例应用程序的完整源代码。

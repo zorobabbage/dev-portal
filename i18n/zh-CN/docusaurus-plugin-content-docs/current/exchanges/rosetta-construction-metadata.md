@@ -1,6 +1,6 @@
 ---
 id: rosetta-construction-metadata
-title: Metadata
+title: 元数据
 keywords: 
 - rosetta
 - middleware
@@ -14,13 +14,13 @@ description: Metadata
 
 ---
 
-## Create a Request to Fetch Metadata
+## 创建一个获取元数据的请求
 
-Using the payload from `preprocess`, `metadata` return essential information required to construct a transaction. In Rosetta Zilliqa, information such as `nonce` and `version` is returned.
+使用来自 `预处理` 的有效载荷，`元数据` 返回构建交易所需的基本信息。 在 Rosetta Zilliqa 中，会返回诸如 `nonce` 和 `version` 之类的信息。
 
-Request:
+请求：
 
-`options` is from `/construction/preprocess`
+`options` 来自 `/construction/preprocess`
 ```json
 {
     "network_identifier": {
@@ -43,9 +43,9 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
+示例
 
 ```json
 {

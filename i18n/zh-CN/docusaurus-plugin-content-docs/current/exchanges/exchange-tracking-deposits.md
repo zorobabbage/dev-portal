@@ -1,6 +1,6 @@
 ---
 id: exchange-tracking-deposits
-title: Polling for Deposits
+title: 轮询充币
 keywords: 
 - track deposits
 - exchanges
@@ -11,28 +11,23 @@ description: Track Exchange Deposits
 
 ---
 
-Apart from sending transactions, an exchange also needs a way to listen for
-transactions sent to their addresses (deposits). We won't cover how this can
-be done for ERC20-like smart contracts on Zilliqa in this tutorial, but the
-same strategy can be applied.
+除了发送交易外，交易所还需要一种方法来侦听发送到其地址（存款）的交易。 我们不会在本教程中介绍如何在 Zilliqa 上为类似 ERC20 的智能合约完成此操作，但可以应用相同的策略。
 
 :::info
-The code in this tutorial is derived from the [example application](https://github.com/Zilliqa/dev-portal/blob/master/examples/exchange/src/cron/deposit.ts).
+本教程中的代码源自 [示例应用程序](https://github.com/Zilliqa/dev-portal/blob/master/examples/exchange/src/cron/deposit.ts)。
 :::
 
-## Setting Up
+## 配置
 
-To implement a simple and familiar polling mechanism in Node.js, we will use
-a few additional dependencies:
+为了在 Node.js 中实现一个简单而熟悉的轮询机制，我们将使用一些额外的依赖项：
 
 ```sh
 npm i node-cron p-map lodash
 ```
 
-## Implementing the Handler Function
+## 实现处理函数
 
-We will use a simple `class` called `DepositCron` to set up our cron job.
-We'll start by implementing a handler method, aptly named `handler`.
+我们将使用一个名为 `DepositCron` 的简单 `class` 来设置我们的 cron 作业。 我们将从实现一个处理程序方法开始，因此我们将其命名为 `handler`。
 
 ```ts
 import {flatten, range} from 'lodash';
@@ -77,24 +72,16 @@ export class DepositCron {
 }
 ```
 
-Let's unpack `handler`. We are taking several steps:
+我们来展开一下 `handler`。 我们采取几个步骤：
 
-1. Fetch the current `TxBlock`.
-2. We compare the value of the current `TxBlock` against the one we have
-   recorded using `lastFetchedTxBlock`.
-3. If there is a difference, we fetch all transactions that have been
-   processed between `lastFetchedTxBlock + 1` and the current `TxBlock`
-   - i.e., everyone transaction we have missed.
-4. We then call `svc.getDeposits` for every transaction processed in that span
-   of blocks. It compares the `toAddr` property of each transaction against
-   the `addresses` array we passed to the `constructor`, checking if it
-   contains our `toAddr`. If so, then a transaction to an address we are
-   interested in has occurred.
+1. 获取当前的 `TxBlock`。
+2. 我们将当前 `TxBlock` 的值与我们使用 `lastFetchedTxBlock` 记录的值进行比较。
+3. 如果有差异，我们获取在 `lastFetchedTxBlock + 1` 和当前 `TxBlock` 之间已经处理的所有交易 - 即我们错过的每个交易。
+4. 然后，我们为该区块范围内处理的每个交易调用 `svc.getDeposits`。 它将每个交易的 `toAddr` 属性与我们传递给 `constructor` 的 `addresses` 数组进行比较，检查它是否包含我们的 `toAddr`。 如果是，那么我们所关注的地址的交易就已经发生了。
 
-## Starting the Cron Job
+## 启动 Cron 作业
 
-So far we have no way of starting up or controlling our `CronJob`. We'll do that by
-implementing `start`, `stop`, and `nuke` methods.
+到目前为止，我们无法启动或控制我们的 `CronJob`。 我们将通过实现 `start`、`stop` 和 `nuke` 方法来做到这一点。
 
 ```ts
 import {flatten, range} from 'lodash';
@@ -152,7 +139,7 @@ export class DepositCron {
 }
 ```
 
-Now that we have our methods, we can use the cron job like so:
+现在我们有了方法，就可以像这样使用 cron 作业了：
 
 ```ts
 // app.ts

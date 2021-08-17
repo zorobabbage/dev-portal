@@ -1,6 +1,6 @@
 ---
 id: rosetta-data-block-transaction
-title: Transaction
+title: 交易
 keywords: 
 - rosetta
 - middleware
@@ -13,9 +13,9 @@ description: Transaction
 
 ---
 
-## Get a Block Transaction - Payment
+## 获取区块交易 - 付款
 
-Request:
+请求：
 
 ```json
 {
@@ -33,10 +33,10 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
-__Note__: The operation type is `transfer`.
+示例
+__注意__：操作类型为 `transfer`。
 
 ```json
 {
@@ -113,9 +113,9 @@ __Note__: The operation type is `transfer`.
 }
 ```
 
-*Get a Block Transaction - Contract Deployment*
+*获取区块交易 - 合约部署*
 
-Request:
+请求：
 
 ```json
 {
@@ -133,10 +133,10 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
-__Note__: The operation type is `contract_deployment`.
+示例
+__注意__：操作类型为 `contract_deployment`。
 
 ```json
 {
@@ -190,18 +190,16 @@ __Note__: The operation type is `contract_deployment`.
 }
 ```
 
-### Displaying Contract Calls Information for Block Transactions
-A contract call can be defined in the either one of the following two forms:
-1. An account has invoked a function in a contract
-2. An account has invoked a function in a contract which further invokes another function in a different contract (a.k.a Chain Calling)
+### 显示区块交易的合约调用信息
+合约调用可以定义为以下两种形式之一：
+1. 账户调用了合约中的函数
+2. 一个账户调用了合约中的一个函数，该函数进一步调用了另一个合约中的另一个函数（又名链式调用）
 
-Depending on the functions invoked by the contract, a contract call may perform additional smart contract deposits to some accounts.
-These smart contract deposits will be shown under the `operations []` idential to how typical payment transaction is displayed.
-Additional metadata information related to the transaction such as the *contract address* and *gas amount* are displayed only at the __final operation block__ to reduce cluttering of metadata.
+根据合约调用的功能，合约调用可能会向某些账户执行额外的智能合约存款。 这些智能合约存款将显示在 `operations []` 下，这与典型支付交易的显示方式相同。 *合约地址*和 *gas 数量*等与交易相关的额外元数据信息仅在 __final 操作块__ 中显示，以减少元数据的混乱。
 
-*Get a Block Transaction - Contract Call without Smart Contract Deposits*
+*获取区块交易 - 无需智能合约存款的合约调用*
 
-Request:
+请求：
 
 ```json
 {
@@ -219,10 +217,10 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
-__Note__: The operation type is `contract_call`.
+示例
+__注意__：操作类型是 `contract_call`。
 
 ```json
 {
@@ -293,9 +291,9 @@ __Note__: The operation type is `contract_call`.
 }
 ```
 
-*Get a Block Transaction - Contract Call with Smart Contract Deposits (With Chain Calls)*
+*获取区块交易 - 使用智能合约存款的合约调用（使用链式调用）*
 
-Request:
+请求：
 
 ```json
 {
@@ -313,16 +311,16 @@ Request:
 }
 ```
 
-Response:
+响应：
 
 
-Sample
-__Note__: The operation type is `contract_call`, follow by `contract_call_transfer` for subsequent operations with a smart contract deposits.
+示例
+__注意__：操作类型为 `contract_call`，后面跟着`contract_call_transfer`，用于后续智能合约充值操作。
 
 
-In the sample, the sequence of operations are as follows:
-- Initiator `zil16ura3fhsf84h60s7w6xjy4u2wxel892n7sq5dp` -> Contract `zil135gsjk2wqxwecn00axm2s40ey6g6ne8668046h` (invokes a contract call to add funds)
-- Contract `zil135gsjk2wqxwecn00axm2s40ey6g6ne8668046h` (`8d1109594e019d9c4defe9b6a855f92691a9e4fa`) -> Recipient `zil12n6h5gqhlpw87gtzlqe5sq5r7pq2spj8x2g8pe` (amount is deducted from contract balance and trasnferred to recipient)
+在示例中，操作顺序如下：
+- 发起者 `zil16ura3fhsf84h60s7w6xjy4u2wxel892n7sq5dp` -> 合约`zil135gsjk2wqxwecn00axm2s40ey6g6ne8668046h`（调用合约调用以增加资金）
+- 合约 `zil135gsjk2wqxwecn00axm2s40ey6g6ne8668046h`（`8d1109594e019d9c4defe9b6a855f92691a9e4fa`） -> 接收者 `zil12n6h5gqhlpw87gtzlqe5sq5r7pq2spj8x2g8pe`（金额从合约余额中扣除并转给接收者）
 
 ```json
 {

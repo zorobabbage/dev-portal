@@ -1,6 +1,6 @@
 ---
 id: exchange-account-management
-title: Account Management
+title: 帐户管理
 keywords: 
 - generating account
 - exporting account
@@ -11,10 +11,9 @@ description: Exchange Account Management
 
 ---
 
-## Generating Numerous Accounts
+## 生成大量帐户
 
-A common task for exchanges is to safely and predictably generate a large
-number of addresses. You can do so using one or more [BIP39 mnemonics](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki).
+交易所的一项常见任务是安全且可预测地生成大量地址。 你可以使用一个或多个 [BIP39 助记词](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)。
 
 ```ts
 export class ZilliqaService {
@@ -39,10 +38,9 @@ export class ZilliqaService {
 }
 ```
 
-## Exporting an Account
+## 导出帐户
 
-You may also wish to export a keypair to a portable format to use it somewhere else.
-We support a modified implementation of the [Web3 Secret Storage Definition](https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition).
+你可能还希望将密钥对导出为可移植格式，以便在其他地方使用。 我们支持 [Web3 机密存储定义](https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition) 的修改实现。
 
 ```typescript
 import { Zilliqa } from '@zilliqa-js/zilliqa';
@@ -81,18 +79,15 @@ export class ZilliqaService {
 }
 ```
 
-Now, you should be able to find your file containing your passphrase-encrypted
-private key at the path you specified. Remember to always keep this file, and
-especially your passphrase, secret!
+现在，你应该能够在指定的路径中找到包含密码短语加密私钥的文件。 请记住始终保密此文件，尤其是你的密码！
 
-## Importing an Account 
+## 导入账户
 
 :::caution
-Ethereum's implementation differs from Zilliqa's. You will **not** be able to decrypt a Zilliqa keystore file using web3 and vice-versa.
+以太坊的实现与 Zilliqa 的不同。 你将**不能**使用 web3 解密 Zilliqa 密钥库文件，反之亦然。
 :::
 
-At some stage, you may also need to import a keystore file you had previously
-exported. There is a convenient facility for that.
+在某个阶段，你可能还需要导入之前导出的密钥库文件。 对于这个，有一个很方面的实施方案。
 
 ```ts
 import pify from 'pify';
@@ -138,5 +133,4 @@ export class ZilliqaService {
 
   /* truncated */
 ```
-These two methods allow you to securely serialise and deserialise your
-accounts.
+这两种方法允许你安全地序列化和反序列化你的帐户。

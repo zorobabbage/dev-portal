@@ -1,6 +1,6 @@
 ---
 id: rosetta-data-account-balance
-title: Balance
+title: 余额
 keywords: 
 - rosetta
 - middleware
@@ -15,11 +15,11 @@ description: Balance
 
 ---
 
-## Get an Account Balance
+## 获取账户余额
 
-Return the account balance and nonce of a particular account. 
+返回特定帐户的帐户余额和随机数。
 
-Request:
+请求：
 
 ```json
 {
@@ -40,9 +40,9 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
+示例
 
 ```json
 {

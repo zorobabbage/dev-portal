@@ -1,6 +1,6 @@
 ---
 id: rosetta-data-block
-title: Block
+title: 区块
 keywords: 
 - rosetta
 - middleware
@@ -14,9 +14,9 @@ description: Block
 ---
 
 
-## Get a Block
+## 获取区块
 
-Request:
+请求：
 
 ```json
 {
@@ -31,9 +31,9 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
+示例
 
 ```json
 {

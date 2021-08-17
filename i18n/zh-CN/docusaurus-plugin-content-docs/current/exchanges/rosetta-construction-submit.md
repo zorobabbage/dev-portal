@@ -1,6 +1,6 @@
 ---
 id: rosetta-construction-submit
-title: Submit
+title: 提交
 keywords: 
 - rosetta
 - middleware
@@ -14,16 +14,16 @@ description: Submit
 
 ---
 
-## Submit a Signed Transaction
+## 提交签名交易
 
-Submit a signed transaction to the Zilliqa network. This call is non-blocking and will return immediately with a transaction hash.
+向 Zilliqa 网络提交已签名的交易。 这个调用是非阻塞的，并且会立即返回一个交易哈希。
 
 :::info
-Before calling `/submit`, please call `/combine` to obtain the `signed_transaction` required for the  request parameters.
+在调用 `/submit` 之前，请先调用 `/combine` 获取请求参数所需的`signed_transaction`。
 :::
 
 
-Request:
+请求：
 
 ```json
 {
@@ -35,9 +35,9 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
+示例
 
 ```json
 {

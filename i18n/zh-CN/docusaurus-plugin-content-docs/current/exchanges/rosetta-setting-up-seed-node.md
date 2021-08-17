@@ -1,6 +1,6 @@
 ---
 id: rosetta-setting-up-seed-node
-title: Setting up Zilliqa Rosetta with Seed node
+title: 使用种子节点设置 Zilliqa Rosetta
 keywords: 
 - rosetta
 - middleware
@@ -15,18 +15,18 @@ description: Setting up Zilliqa Rosetta with Seed node
 
 ---
 
-## Setup
+## 设置
 :::info
-Please note that whitelisting will be required for operating a Zilliqa seed node. Currently, whitelisting is granted on a case by case basis and usually for reason such as supporting exchange infrastracture. 
+请注意，操作 Zilliqa 种子节点需要白名单。 目前，白名单是根据具体情况授予的，通常是出于支持交易所基础设施等原因。
 :::
 
-### Step 1: Download `Zilliqa-rosetta` latest release from https://github.com/Zilliqa/zilliqa-rosetta/releases. 
+### 第 1 步：从 https://github.com/Zilliqa/zilliqa-rosetta/releases 下载 `Zilliqa-rosetta` 最新版本。
 
-### Step 2: Build `Zilliqa-rosetta` Docker image from Zilliqa and Scilla source code
+### 第 2 步：从 Zilliqa 和 Scilla 源代码构建 `Zilliqa-rosetta` Docker 镜像
 ```bash
 sh ./build_docker.sh
 ```
-If you need to build `Zilliqa-rosetta` with a specific Zilliqa and Scilla version, you can using the following
+如果你需要使用特定的 Zilliqa 和 Scilla 版本构建 `Zilliqa-rosetta`，可以使用以下命令
 ```bash
 docker build \
 --build-arg ROSETTA_COMMIT_OR_TAG=<ROSETTA_TAG> \
@@ -34,12 +34,12 @@ docker build \
 --build-arg COMMIT_OR_TAG=<ZILLIQA_TAG> \
 -t rosetta:1.0 .
 ```
-Please note compiling Zilliqa and Scilla may take some time. 
+请注意编译 Zilliqa 和 Scilla 可能需要一些时间。
 
-### Step 3: Create `config.yaml` for `Zilliqa-rosetta`. We have also provided a sample of [testnet](https://github.com/Zilliqa/zilliqa-rosetta/blob/master/testnet.config.local.yaml) and [mainnet](https://github.com/Zilliqa/zilliqa-rosetta/blob/master/mainnet.config.local.yaml) configuration. 
+### 第 3 步：为 `Zilliqa-rosetta` 创建 `config.yaml`。 我们还提供了 [测试网](https://github.com/Zilliqa/zilliqa-rosetta/blob/master/testnet.config.local.yaml) 和 [主网](https://github.com/Zilliqa/zilliqa-rosetta/blob/master/mainnet.config.local.yaml) 配置。
 
-### Step 4: Generation of keypair for whitelisting (only for public key whitelisting method)
-If you are using public key whtielisting method and wish to generate a keypair, you can do the following
+### 第 4 步：生成白名单的 keypair（只针对公钥白名单方式）
+如果你使用公钥白名单方法并希望生成密钥对，可以执行以下操作
 ```bash
 mkdir secrets
 
@@ -47,9 +47,9 @@ docker run --rm \
 --env GENKEYPAIR="true" \
 rosetta:1.0 > secrets/mykey.txt
 ```
-Remember to inform the Zilliqa team of your public key for whitelisting purpose
+请记住将你的公钥通知 Zilliqa 团队，以便用于白名单
 
-### Step 5:Running `Zilliqa-rosetta`
+### 第 5 步：运行 `Zilliqa-rosetta`
 ```bash
 docker run -d \
 --env BLOCKCHAIN_NETWORK="<NETWORK_TO_USE>" \
@@ -62,16 +62,16 @@ docker run -d \
 -p 4201:4201 -p 4301:4301 -p 4501:4501 -p 33133:33133 -p 8080:8080 \
 --name rosetta rosetta:1.0
 ```
-| Variable | Description |
+| 变量 | 描述 |
 | -------- | ----------- |
-| `NETWORK_TO_USE` | `testnet` or `mainnet` |
-| `SEED_NODE_HOST_IP` | Public IP for Zilliqa seed node |
-| `SEED_PRIVATE_KEY` | prviate key of the whitelisted keypair. Optional field |
-| `NAME_OF_THE_TESTNET` | Refer to [`network meta`](https://github.com/Zilliqa/zilliqa-rosetta/blob/master/network_meta.md) |
-| `NAME_OF_THE_PERSISTENCE_BUCKET` | Refer to [`network meta`](https://github.com/Zilliqa/zilliqa-rosetta/blob/master/network_meta.md) |
+| `NETWORK_TO_USE` | `测试网` or `主网` |
+| `SEED_NODE_HOST_IP` | Zilliqa 种子节点的公共 IP |
+| `SEED_PRIVATE_KEY` | 列入白名单的密钥对的私钥。 可选字段 |
+| `NAME_OF_THE_TESTNET` | 参考 [`network meta`](https://github.com/Zilliqa/zilliqa-rosetta/blob/master/network_meta.md)|
+| `NAME_OF_THE_PERSISTENCE_BUCKET` | 参考 [`network meta`](https://github.com/Zilliqa/zilliqa-rosetta/blob/master/network_meta.md) |
 
-## Maintanance
-### Restarting Zilliqa Rosetta
+## 维护
+### 重启 Zilliqa Rosetta
 ```bash
 docker stop <container name>
 docker start <container name>

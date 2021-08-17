@@ -1,6 +1,6 @@
 ---
 id: rosetta-unsupported-api
-title: Unsupported Rosetta API
+title: 不支持的 Rosetta API
 keywords: 
 - rosetta
 - middleware
@@ -14,12 +14,12 @@ description: Unsupported Rosetta API
 
 ---
 
-# Unsupported API
+# 不支持的 API
 
-Some of the API are not relevant or critical for interacting with Zilliqa blockchain. This list belows are the list of unsupported API
+某些 API 与 Zilliqa 区块链交互无关或无关紧要。 下面的这个列表是不支持的 API 列表
 
-| API | Reason |
+| API | 原因 |
 | --- | ------ |
-| /account/coins | Zilliqa is not UTXO-based chain |
-|Indexer APIs | Not yet implemented |
+| /account/coins | Zilliqa 不是基于 UTXO 的链 |
+|Indexer APIs | 尚未实现 |
 

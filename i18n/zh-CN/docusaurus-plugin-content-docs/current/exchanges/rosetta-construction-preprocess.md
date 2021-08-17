@@ -1,6 +1,6 @@
 ---
 id: rosetta-construction-preprocess
-title: Preprocess
+title: 预处理
 keywords: 
 - rosetta
 - middleware
@@ -14,12 +14,9 @@ description: Preprocess
 
 ---
 
-## Create a Request to Fetch Metadata
+预处理在 /construction/payloads 之前被调用，以构建对交易构建所需的元数据（例如 `nonce`）的请求。从 `preprocess` 返回的选项对象将被发送到 `/construction/metadata`。
 
-Preprocess is called prior to /construction/payloads to construct a request for metadata (such as `nonce`) that are needed for transaction construction.
-The options object returned from `preprocess` will be sent to the `/construction/metadata`.
-
-Request:
+请求：
 
 ```json
 {
@@ -81,9 +78,9 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
+示例
 
 ```json
 {

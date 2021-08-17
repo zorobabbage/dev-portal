@@ -22,7 +22,7 @@ description: Run seed node in IP Whitelisting mode.
 
 ### Docker 设置
 
-我们强烈建议使用 [Docker](https://docker.com) 来设置种子节点，因为我们提供了一个经过测试的、可用于生产的映像供你使用。 如果你还没有设置 docker，请按照 [官方文档](https://docs.docker.com/install/)上的说明进行操作。
+我们强烈建议使用 [Docker](https://docker.com) 来设置种子节点，因为我们提供了一个经过测试的、可用于生产的镜像供你使用。 如果你还没有设置 docker，请按照 [官方文档](https://docs.docker.com/install/) 上的说明进行操作。
 
 设置 Docker 后，你可以继续下载主网的配置 tarball：
 
@@ -165,4 +165,4 @@ Use IP whitelisting registration approach (default: Y): Y
 
 如果你已成功完成上述步骤，你应该有一个正常运行的种子节点了，它在 `localhost:4201` 上公开了一个 RPC API。 你可以进一步检查 `zilliqa-00001-log.txt` 中的日志。
 
-本系列的以下文章将演示一组简单的函数，这些函数可用作交易所开发人员围绕 Zilliqa 区块链实现自己的自定义业务逻辑的起点。 你可以在 [相同仓库](https://github.com/Zilliqa/dev-portal/tree/master/examples/exchange) 中找到示例应用程序的完整源代码。
+本系列的以下文章将演示一组简单的函数，这些函数可用作交易所开发人员围绕 Zilliqa 区块链实现自己的自定义业务逻辑的起点。 你可以在 [仓库](https://github.com/Zilliqa/dev-portal/tree/master/examples/exchange) 中找到示例应用程序的完整源代码。

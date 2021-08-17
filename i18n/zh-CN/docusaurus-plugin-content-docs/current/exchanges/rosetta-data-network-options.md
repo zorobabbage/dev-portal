@@ -1,6 +1,6 @@
 ---
 id: rosetta-data-network-options
-title: Options
+title: 选项
 keywords: 
 - rosetta
 - middleware
@@ -15,14 +15,14 @@ description: Options
 
 ---
 
-## Get Network Options
+## 获取网络选项
 
-Returns the 
-1) Version information of Zilliqa Rosetta and Zilliqa seed node. 
-2) Type of network operation supported by Zilliqa Rosetta
-3) List of errors code in Zilliqa Rosetta
+返回
+1) Zilliqa Rosetta 和 Zilliqa 种子节点的版本信息。
+2) Zilliqa Rosetta 支持的网络操作类型
+3) Zilliqa Rosetta 中的错误代码列表
 
-Request:
+请求：
 
 ```json
 {
@@ -34,9 +34,9 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
+示例
 
 ```json
 {

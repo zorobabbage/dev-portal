@@ -1,6 +1,6 @@
 ---
 id: rosetta-data-network-status
-title: Status
+title: 状态
 keywords: 
 - rosetta
 - middleware
@@ -15,13 +15,11 @@ description: Status
 
 ---
 
-## Get Network Status
+## 获取网络状态
 
-Returns the current 
-1) Genesis block number and hash
-2) Block number, hash and timestamp
+返回当前 1) 创世区块号和哈希 2) 区块号、哈希和时间戳
 
-Request:
+请求：
 
 ```json
 {
@@ -33,9 +31,9 @@ Request:
 }
 ```
 
-Response:
+响应：
 
-Sample
+示例
 
 ```json
 {

@@ -1,6 +1,6 @@
 ---
 id: rosetta-construction
-title: Introduction
+title: 介绍
 keywords: 
 - rosetta
 - middleware
@@ -14,12 +14,12 @@ description: Introduction
 ---
 
 
-## Construction
+## 构造
 
-Construction API enables developers to write to a blockchain (i.e. construct transactions) in a standard format. Implementations are stateless and can operate entirely offline, and support detached key generation and signing.
+构造 API 使开发人员能够以标准格式写入区块链（即构造交易）。 实现是无状态的，可以完全离线运行，并支持分离密钥生成和签名。
 
-### Construction Flow
-The construction flow is in this sequence:
+### 构造流程
+构造流程如下：
 1. [/construction/derive](rosetta-construction-derive)
 2. [/construction/preprocess](rosetta-construction-preprocess)
 3. [/construction/metadata](rosetta-construction-metadata)
@@ -30,49 +30,49 @@ The construction flow is in this sequence:
 8. [/construction/hash](rosetta-construction-hash)
 9. [/construction/submit](rosetta-construction-hash)
 
-### Flow of Operations
+### 操作流程
 
 ```
-                               Caller (i.e. Coinbase)                + Construction API Implementation
+                               调用者（如 Coinbase）                  + 构建 API 实现
                               +-------------------------------------------------------------------------------------------+
                                                                      |
-                               Derive Address   +----------------------------> /construction/derive
-                               from Public Key                       |
+                               从公钥           +----------------------------> /construction/derive
+                               从公钥派生地址                         |
                                                                      |
                              X                                       |
-                             X Create Metadata Request +---------------------> /construction/preprocess
-                             X (array of operations)                 |                    +
-    Get metadata needed      X                                       |                    |
-    to construct transaction X            +-----------------------------------------------+
+                             X 创建元数据请求           +---------------------> /construction/preprocess
+                             X （操作数组）                           |                    +
+    获取构建交易              X                                       |                    |
+    所需的元数据              X            +-----------------------------------------------+
                              X            v                          |
-                             X Fetch Online Metadata +-----------------------> /construction/metadata (online)
+                             X 获取在线元数据         +-----------------------> /construction/metadata (online)
                              X                                       |
                                                                      |
                              X                                       |
-                             X Construct Payloads to Sign +------------------> /construction/payloads
-                             X (array of operations)                 |                   +
+                             X 构建要签名的有效负载         +------------------> /construction/payloads
+                             X （操作数组）                           |                   +
                              X                                       |                   |
- Create unsigned transaction X          +------------------------------------------------+
+    创建未签名交易            X          +------------------------------------------------+
                              X          v                            |
-                             X Parse Unsigned Transaction +------------------> /construction/parse
-                             X to Confirm Correctness                |
+                             X 解析未签名交易               +------------------> /construction/parse
+                             X 以确认正确性                           |
                              X                                       |
                                                                      |
                              X                                       |
-                             X Sign Payload(s) +-----------------------------> /construction/combine
-                             X (using caller's own detached signer)  |                 +
+                             X 签名有效载荷             +-----------------------------> /construction/combine
+                             X （使用调用者自己的分离签名者）           |                 +
                              X                                       |                 |
-   Create signed transaction X         +-----------------------------------------------+
+    创建签名交易              X         +-----------------------------------------------+
                              X         v                             |
-                             X Parse Signed Transaction +--------------------> /construction/parse
-                             X to Confirm Correctness                |
+                             X 解析签名交易                 +--------------------> /construction/parse
+                             X 以确认正确性                           |
                              X                                       |
                                                                      |
                              X                                       |
-                             X Get hash of signed transaction +--------------> /construction/hash
-Broadcast Signed Transaction X to monitor status                     |
+                             X 获取已签名交易的哈希值           +--------------> /construction/hash
+    广播签名交易              X 以监控状态                             |
                              X                                       |
-                             X Submit Transaction +--------------------------> /construction/submit (online)
+                             X 提交交易                 +--------------------------> /construction/submit (online)
                              X                                       |
                                                                      +
 ```
