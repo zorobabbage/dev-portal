@@ -1,6 +1,6 @@
 ---
 id: core-pow
-title: PoW Algorithm
+title: 工作量证明算法
 keywords: 
 - core 
 - por 
@@ -11,53 +11,53 @@ description: Core protocol design - PoW algorithm.
 ---
 
 ---
-## Proof-of-Work
+## 工作量证明
 
-Proof-of-Work, or PoW, is the original consensus algorithm in a blockchain network. In other blockchains (e.g., Bitcoin and Ethereum), this algorithm is used to confirm transactions and produce new blocks in the chain. With PoW, miners compete against each other to complete transactions on the network and get rewarded.
+工作量证明或 PoW 是区块链网络中的原始共识算法。在其他区块链（例如比特币和以太坊）中，该算法用于确认交易并在链中生成新区块。通过 PoW，矿工们相互竞争以完成网络上的交易并获得奖励。
 
-In Zilliqa, PoW is used as a threshold the shard nodes need to meet to join the network. Afterwards, the nodes can start to sign transactions and get rewarded. So, in Zilliqa, completion of PoW doesn't actually mean the node can already get rewarded.
+在 Zilliqa 中，PoW 被用作分片节点加入网络所需满足的阈值。之后，节点可以开始签署交易并获得奖励。因此，在 Zilliqa 中，完成 PoW 并不意味着节点实际上已经可以获得奖励。
 
-## Why PoW is Needed
+## 为什么需要 PoW
 
-The main benefits of using PoW are the anti-DoS attacks defense and low impact of stake on mining possibilities.
+使用 PoW 的主要好处是抗 DoS 攻击防御以及质押对挖矿可能性的低影响。
 
-**Defense from DoS attacks**.  PoW imposes some limits on actions in the network. Firstly, it needs a lot of effort to be executed. Efficient attacks require a lot of computational power and a lot of time to do these calculations. Therefore, the attack is possible but also kind of useless since the costs are too high.
+**防御 DoS 攻击**。 PoW 对网络中的行为施加了一些限制。首先，它需要大量的努力来执行。有效的攻击需要大量的计算能力和大量的时间来进行这些计算。因此，攻击是可能的，但也是无用的，因为成本太高。
 
-**Mining possibilities**. It doesn’t matter how much money you have in your wallet. What matters is to have large computational power to solve the puzzles and form new blocks. Thus, the holders of huge amounts of money are not in charge of making decisions for the entire network.
+**挖矿可能性**。你钱包里有多少钱并不重要。重要的是要有强大的计算能力来解决难题并生成新的区块。因此，巨额资金的持有者并不负责整个网络的决策。
 
-## Ethash Algorithm
+## Ethash 算法
 
-The Zilliqa blockchain uses the Ethash algorithm, which is originally from Ethereum.
+Zilliqa 区块链使用最初来自以太坊的 Ethash 算法。
 
-Ethash is the proof-of-work function in Ethereum-based blockchain currencies. It uses Keccak, a hash function eventually standardized to SHA-3 (these two are different, and should not be confused).
+Ethash 是基于以太坊的区块链货币的工作量证明功能。它使用 Keccak，一种最终标准化为 SHA-3 的哈希函数（这两者是不同的，不应混淆）。
 
-Since version 1.0, Ethash has been designed to be ASIC-resistant via memory-hardness (i.e., harder to implement in special ASIC chips) and easily verifiable. It also uses a slightly modified version of earlier Dagger and Hashimoto hashes to remove computational overhead. Previously referred to as Dagger-Hashimoto, the Ethash function has evolved over time. Ethash uses an initial 1GB dataset known as the Ethash DAG and a 16MB cache for light clients to hold. These are regenerated every 30,000 blocks (known as an epoch). Miners grab slices of the DAG to generate mix-hashes using transaction and receipt data, along with a cryptographic nonce to generate a hash below a dynamic target difficulty.
+自 1.0 版以来，Ethash 已被设计为通过内存硬度（即更难在特殊 ASIC 芯片中实现）并且易于验证来形成 耐 ASIC 的特性。它还使用早期 Dagger 和 Hashimoto 哈希的略微修改版本来消除计算开销。 Ethash 功能以前称为 Dagger-Hashimoto，随着时间的推移不断发展。 Ethash 使用称为 Ethash DAG 的初始 1GB 数据集和 16MB 缓存供轻客户端保存。它们每 30,000 个区块（称为一个纪元）重新生成一次。矿工获取 DAG 的片段以使用交易和收据数据生成混合哈希，同时使用加密随机数生成低于动态目标难度的哈希。
 
-## PoW Modes
+## PoW 模式
 
-Zilliqa supports 5 modes of PoW. Some are suitable for local or small-scale testing, while other modes are intended for Mainnet mining.
+Zilliqa 支持 5 种 PoW 模式。一些适用于本地或小规模测试，而另一些模式则用于主网挖矿。
 
-### Light Dataset Mine
+### 轻型数据集挖矿
 
-This is the default mining mode if you don't change any parameters in `constants.xml`. It uses CPU to do PoW. It will generate the DAG data dynamically and doesn't store it in memory; hence, it is the slowest method, but it also doesn't require the 1GB RAM. It is suitable for local testing or small-scale cloud testing. It is not suitable for Mainnet mining.
+如果你不更改 `constants.xml` 中的任何参数，则这是默认的挖矿模式。它使用 CPU 来执行 PoW。它将动态生成 DAG 数据，不会将其存储在内存中；因此，它是最慢的方法，但它也不需要 1GB RAM。适用于本地测试或小规模云测试。不适合主网挖矿。
 
-### Full Dataset Mine
+### 完整数据集挖矿
 
-This mode will be enabled if `FULL_DATASET_MINE` is set to `true` in `constants.xml`. It uses CPU to do PoW. It is similar to the light dataset mine mode - the DAG is generated dynamically. However, after the DAG is generated, it is saved in memory. So, next time the same DAG needs to be used, it will be read out directly from memory. This method is faster than the light dataset mine mode, but it requires 1GB RAM on the hardware. It is suitable for local testing or small-scale cloud testing. It is not suitable for Mainnet mining.
+如果在 `constants.xml` 中将 `FULL_DATASET_MINE` 设置为 `true`，将启用此模式。它使用 CPU 来执行 PoW。它类似于轻型数据集挖矿模式——DAG 是动态生成的。但是，DAG 生成后，会保存在内存中。因此，下次需要使用相同的 DAG 时，将直接从内存中读出。这种方法比轻型数据集挖矿模式更快，但它需要硬件上的 1GB RAM。适用于本地测试或小规模云测试。不适合主网挖矿。
 
-### GPU Mine
+### GPU 挖矿
 
-This mode will be enabled if either `CUDA_GPU_MINE` or `OPENCL_GPU_MINE` is set to `true` in `constants.xml`. It uses GPU to do PoW. There are more parameters available for this mode in the `GPU` section in `constants.xml`. This mode uses GPU to generate the DAG, and the DAG is saved in GPU RAM. It requires that the GPU have at least 1GB RAM. Because a GPU has thousands of cores, the mining speed can be much faster than CPU mining. It is suitable for Mainnet mining, but only during the bootstrap phase; now the Mainnet difficulty is too high for a single machine to finish PoW within the required time. Hence it is now suitable only for test purposes.
+如果在 `constants.xml` 中将 `CUDA_GPU_MINE` 或 `OPENCL_GPU_MINE` 设置为 `true`，则将启用此模式。它使用 GPU 来执行 PoW。在 `constants.xml` 的 `GPU` 部分中有更多可用于此模式的参数。该模式使用 GPU 生成 DAG，DAG 保存在 GPU RAM 中。它要求 GPU 至少有 1GB RAM。由于 GPU 有数千个内核，因此挖矿速度可以比 CPU 挖矿快得多。适用于主网挖矿，但仅限于引导阶段；现在主网难度太高，单机无法在规定时间内完成 PoW。因此，它现在仅适用于测试目的。
 
-### Getwork Server Mine
+### Getwork 服务器挖矿
 
-This mode will be enabled if `GETWORK_SERVER_MINE` is set to `true` in `constants.xml`. The Zilliqa node will be used as a mining server, and other GPU machines can get work from this server and submit the result if the node's GPU machine can find a result. This mode can combine the hash power of multiple GPU machines together to finish a high-difficulty PoW job. But this setup is not easy to maintain if there are multiple Zilliqa nodes using this mode.
+如果在 `constants.xml` 中将 `GETWORK_SERVER_MINE` 设置为 `true`，将启用此模式。 Zilliqa 节点将作为挖矿服务器，如果该节点的 GPU 机器可以找到结果，其他 GPU 机器可以从该服务器获取工作并提交结果。这种模式可以将多台 GPU 机器的算力组合在一起，完成一个高难度的 PoW 工作。但是如果有多个 Zilliqa 节点使用这种模式，这种设置并不容易维护。
 
-### Remote Mine
+### 远程挖矿
 
-This mode will be enabled if `REMOTE_MINE` is set to `true` in `constants.xml`. Also, `MINING_PROXY_URL` needs to be set to the address of the mining proxy. In this mode, multiple Zilliqa nodes can send PoW work requests to the mining proxy, and the mining proxy dispatches the work packages to multiple mining machines. If a mining machine finds a result, it sends it to the mining proxy, and the mining proxy in turn sends it to the Zilliqa node. This mode can support multiple Zilliqa nodes and mining machines, but it requires running a mining proxy server separately.
+如果在 `constants.xml` 中将 `REMOTE_MINE` 设置为 `true`，将启用此模式。此外，`MINING_PROXY_URL` 需要设置为挖矿代理的地址。在这种模式下，多个 Zilliqa 节点可以向挖矿代理发送 PoW 工作请求，挖矿代理将工作包分派给多台矿机。如果矿机找到结果，则将其发送给挖矿代理，挖矿代理再将其发送到 Zilliqa 节点。这种模式可以支持多个 Zilliqa 节点和矿机，但需要单独运行一个挖矿代理服务器。
 
-## References
+## 参考
 
 1. [Ethash](https://en.wikipedia.org/wiki/Ethash)
-2. [Mining Proxy](https://github.com/DurianStallSingapore/Zilliqa-Mining-Proxy)
+2. [挖矿代理](https://github.com/DurianStallSingapore/Zilliqa-Mining-Proxy)

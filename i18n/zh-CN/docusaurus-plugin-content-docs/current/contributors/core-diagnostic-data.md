@@ -1,6 +1,6 @@
 ---
 id: core-diagnostic-data
-title: Diagnostic Data
+title: 诊断数据
 keywords: 
 - core
 - diagnostic
@@ -8,22 +8,22 @@ description: Core protocol design - diagnostic data.
 ---
 
 ---
-## Diagnostic Data
+## 诊断数据
 
-We store in LevelDB a limited amount of some operational data about the network that is intended for use when diagnosing any issues with the mainnet.
+我们在 LevelDB 中存储了数量有限的一些有关网络的操作数据，这些数据旨在用于诊断任何主网的问题。
 
-Globally, the amount of data stored is controlled by the constant `MAX_ENTRIES_FOR_DIAGNOSTIC_DATA`, which is usually set to either 25 or 50.
+在全局范围内，存储的数据量由常量`MAX_ENTRIES_FOR_DIAGNOSTIC_DATA` 控制，该常量通常设置为 25 或 50。
 
-This is the current data stored for diagnostic purposes:
+这是为诊断目的存储的当前数据：
 
-|LevelDB location           |Data stored                     |Storage timing     |Tool for data extraction|
+|LevelDB 位置 |数据存储 |存储时序 |数据提取工具|
 |---------------------------|--------------------------------|-------------------|------------------------|
-|persistence/diagnosticNodes|DS and shard peers              |Every vacuous epoch|getnetworkhistory       |
-|persistence/diagnosticCoinb|Coinbase values and distribution|Every DS block     |getrewardhistory        |
+|persistence/diagnosticNodes|DS 和分片对等体            |每一个空纪元|getnetworkhistory       |
+|persistence/diagnosticCoinb|Coinbase 的价值和分布|每个 DS 区块     |getrewardhistory        |
 
-To use the diagnostic tools:
+要使用诊断工具：
 
-1. Make sure there is a `persistence` subfolder in your current directory
-1. Make sure `persistence/diagnosticNodes` and `persistence/diagnosticCoinb` contain the data you want to extract
-1. Run `getnetworkhistory <name of output CSV file>` or `getrewardhistory <name of output CSV file>`
-1. Output CSV file will appear in the current directory. Use Excel or LibreOffice Calc to open it
+1. 确保你的当前目录中有一个 `persistence` 子文件夹
+2. 确保 `persistence/diagnosticNodes` 和 `persistence/diagnosticCoinb` 包含你要提取的数据
+3. 运行 `getnetworkhistory <输出 CSV 文件的名称>` 或 `getrewardhistory <输出 CSV 文件的名称>` 
+4. 输出 CSV 文件将出现在当前目录中。 使用 Excel 或 LibreOffice Calc 打开它

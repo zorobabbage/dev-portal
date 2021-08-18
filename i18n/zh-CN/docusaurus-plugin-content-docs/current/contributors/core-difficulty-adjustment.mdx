@@ -1,6 +1,6 @@
 ---
 id: core-difficulty-adjustment
-title: Difficulty Adjustment
+title: 难度调整
 keywords: 
 - core 
 - difficulty 
@@ -11,58 +11,58 @@ description: Core protocol design - difficulty adjustment.
 ---
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-Zilliqa has a dynamic difficulty level adjustment mechanism. The goal of this mechanism is to adjust the difficulty level according to the number of PoW submissions received.
+Zilliqa 具有动态难度级别调整机制。该机制的目标是根据收到的 PoW 提交数量调整难度级别。
 
-When the network receives a low number of PoW submissions, the mechanism will reduce the difficulty so that more nodes can join and maintain the network. On the other hand, when the network receives a high number of PoW submissions, the mechanism will increase the difficulty level, making it harder for Sybil attacks to be executed.
+当网络收到较少数量的 PoW 提交时，该机制会降低难度，以便更多节点可以加入和维护网络。另一方面，当网络收到大量 PoW 提交时，该机制会增加难度级别，使得 Sybil 攻击更难执行。
 
-## Adjustment Procedure
+## 调整程序
 
-1. When we bootstrap the system, every node reads the initial difficulty level from `constants.xml`. After that, the nodes will update the difficulty level at the first transaction epoch of each DS epoch
-1. At the beginning of each DS epoch, every DS node receives PoW submissions and records them. When the DS leader proposes the next DS block, it calls `CalculateNewDifficulty()` and `CalculateNewDSDifficulty()` to calculate the new difficulty levels. These difficulty levels are placed in the `m_dsDifficulty` and `m_difficulty` fields in the DS block. Finally, the DS leader announces the DS block to start the consensus
-1. The DS backup nodes receive the announcement, and calculate the new difficulty by similarly calling `CalculateNewDifficulty()` and `CalculateNewDSDifficulty()` then comparing the results with those proposed by the DS leader
-1. Once the DS committee completes consensus over the DS block containing the new difficulty level, the committee broadcasts the block to the shards. The shard nodes accept the new difficulty and use it to do PoW for the next DS epoch
-1. New nodes that are not part of the network can get the latest difficulty from the lookup nodes by retrieving the latest DS block
+1. 当我们引导系统时，每个节点从 `constants.xml` 读取初始难度级别。之后，节点将在每个 DS 纪元的第一个交易纪元更新难度级别
+2. 在每个 DS 纪元开始时，每个 DS 节点都会收到 PoW 提交并记录它们。当 DS leader 提议下一个 DS 区块时，它会调用 `CalculateNewDifficulty()` 和 `CalculateNewDSDifficulty()` 来计算新的难度级别。这些难度级别位于 DS 区块中的 `m_dsDifficulty` 和 `m_difficulty` 字段中。最后，DS leader 宣布 DS 区块开始共识
+3. DS 备份节点收到公告，同样通过调用 `CalculateNewDifficulty()` 和 `CalculateNewDSDifficulty()` 计算新的难度，然后将结果与 DS leader 提出的结果进行比较
+4. 一旦 DS 委员会完成对包含新难度级别的 DS 区块的共识，委员会将该区块广播到分片。分片节点接受新的难度并用它为下一个 DS 纪元做 PoW
+5. 不属于网络的新节点可以通过检索最新的 DS 区块从查询节点中获得最新的难度
 
-## Adjustment Formula and Parameters
+## 调整公式和参数
 
-There are 4 parameters in `constants.xml` that are used to calculate the difficulty:
+`constants.xml` 中有 4 个参数用于计算难度：
 
-- `POW_CHANGE_TO_ADJ_DIFF`
-- `POW_CHANGE_TO_ADJ_DS_DIFF`
-- `EXPECTED_SHARD_NODE_NUM`
+-`POW_CHANGE_TO_ADJ_DIFF`
+-`POW_CHANGE_TO_ADJ_DS_DIFF`
+-`EXPECTED_SHAD_NODE_NUM`
 - `NUM_DS_ELECTION`
 
-Additionally, there are two dynamic parameters that are used to calculate the difficulty:
+此外，还有两个动态参数用于计算难度：
 
-- The number of shard PoW submissions
-- The number of DS PoW submissions
+- 分片 PoW 提交的数量
+- DS PoW 提交的数量
 
-The basic formulas used to calculate the new difficulty are:
+用于计算新难度的基本公式是：
 
 ```C++
 New shard difficulty = Current Difficulty + (Shard PoW Submissions - EXPECTED_SHARD_NODE_NUM) / POW_CHANGE_TO_ADJ_DIFF
 New DS difficulty = Current DS Difficulty + (DS PoW Submissions - NUM_DS_ELECTION) / POW_CHANGE_TO_ADJ_DS_DIFF
 ```
 
-The rationale of the formulas is when there are more PoW submissions than the expected number, increase the difficulty. When there are less PoW submissions than the expected number, decrease the difficulty.
+公式的基本原理是当 PoW 提交数量超过预期数量时，增加难度。当 PoW 提交少于预期数量时，降低难度。
 
-## Difficulty Subdivision
+## 难度细分
 
-When the difficulty increases by one, the required hash power to finish PoW will be doubled. When the difficulty is already very high, adjusting the difficulty by doubling the hash power causes a lot of miners to fail to do PoW. This in turn affects the stability and throughput of the blockchain.
+当难度增加 1 时，完成 PoW 所需的算力将增加一倍。当难度已经很高的时候，通过加倍算力来调整难度会导致很多矿工做不到 PoW。这反过来又会影响区块链的稳定性和吞吐量。
 
-To address this situation, we added a threshold to **subdivide** the difficulty. There are two constant parameters `POW_BOUNDARY_N_DIVIDED_START` and `POW_BOUNDARY_N_DIVIDED` defined for this purpose. When the current difficulty exceeds `POW_BOUNDARY_N_DIVIDED_START`, every difficulty level will subdivide to `POW_BOUNDARY_N_DIVIDED` sub-levels. The required hash power increase will only be by `1/POW_BOUNDARY_N_DIVIDED` of the current hash power. This makes the hash power increase more smoothly in increments.
+为了解决这种情况，我们添加了一个阈值来**细分**难度。为此定义了两个常量参数 `POW_BOUNDARY_N_DIVIDED_START` 和 `POW_BOUNDARY_N_DIVIDED`。当当前难度超过 `POW_BOUNDARY_N_DIVIDED_START` 时，每个难度级别都会细分为 `POW_BOUNDARY_N_DIVIDED` 子级别。所需的哈希算力仅增加当前哈希算力的 `1/POW_BOUNDARY_N_DIVIDED`。这使得哈希能力以增量方式更平滑地增加。
 
-The rationale behind this is we changed the method to calculate the target boundary from `POW_BOUNDARY_N_DIVIDED_START`. When the difficulty is below `POW_BOUNDARY_N_DIVIDED_START`, we put one more `0` at the MSB of the target boundary every time we increase the difficulty. On the other hand, if the difficulty exceeds `POW_BOUNDARY_N_DIVIDED_START`, we put `0`s at the LSB of the target boundary.
+这背后的基本原理是我们改变了计算从`POW_BOUNDARY_N_DIVIDED_START` 开始的目标边界的方法。当难度低于 `POW_BOUNDARY_N_DIVIDED_START` 时，我们每次增加难度都会在目标边界的 MSB 处多加一个 `0`。另一方面，如果难度超过`POW_BOUNDARY_N_DIVIDED_START`，我们将 `0` 放在目标边界的 LSB。
 
-This process is implemented in the function `DifficultyLevelInIntDevided()`.
+这个过程是在函数 `DifficultyLevelInIntDevided()` 中实现的。
 
-The graphs below illustrate the benchmarks of the hash power required if `POW_BOUNDARY_N_DIVIDED_START` is 32 and `POW_BOUNDARY_N_DIVIDED_START` is 1, 2, 4, 6, and 8.
+下图说明了 `POW_BOUNDARY_N_DIVIDED_START` 为 32 且 `POW_BOUNDARY_N_DIVIDED_START` 为 1、2、4、6 和 8 时所需散列功率的基准。
 
 <img alt="Difficulty Adjustment Image 1" src={useBaseUrl('img/contributors/core/difficulty-adjustment/image01.png')} />
 
 <img alt="Difficulty Adjustment Image 2" src={useBaseUrl('img/contributors/core/difficulty-adjustment/image02.png')} />
 
 
-## References
+## 参考
 
-1. [Difficulty divide](https://mybinder.org/v2/gh/deepgully/jupyter/master?filepath=Zilliqa%2Fdifficulty.ipynb)
+1. [难度划分](https://mybinder.org/v2/gh/deepgully/jupyter/master?filepath=Zilliqa%2Fdifficulty.ipynb)

@@ -1,6 +1,6 @@
 ---
 id: core-guard-mode
-title: Guard Mode
+title: 守卫模式
 keywords: 
 - core 
 - guard 
@@ -10,75 +10,75 @@ description: Core protocol design - guard mode.
 ---
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-Guard mode is a special operating mode in Zilliqa that can be used to maintain stability of the Mainnet until the protocol has been made perfectly robust. Guard mode ensures the following:
+守卫模式是 Zilliqa 中的一种特殊操作模式，可用于维持主网的稳定性，直到协议变得非常健壮。守卫模式可确保以下内容：
 
-- A maximum of `n` nodes (e.g., 2/3) in the DS committee are nodes operated by Zilliqa Research
-- A maximum of `n` nodes (e.g., 1/3) across all shards are nodes operated by Zilliqa Research
-- DS leader selection (in either normal or view change situations) will only include nodes operated by Zilliqa Research
+- DS 委员会中最多有 n 个节点（例如 2/3）是由 Zilliqa Research 运营的节点
+- 所有分片中最多有 n 个节点（例如 1/3）是由 Zilliqa Research 运营的节点
+- DS leader 选择（在正常或视图更改情况下）将仅包括由 Zilliqa Research 运营的节点
 
 :::note
-Guard mode is designed to be toggleable and does not interfere with the standard protocol whether or not it is enabled.
+守卫模式设计为​​可切换，无论是否启用都不会干扰标准协议。
 :::
 
-## Terminology
+## 术语
 
-- DS guard - DS node operated by Zilliqa Research
-- Shard guard - Shard node operated by Zilliqa Research
+- DS 守卫 - 由 Zilliqa Research 运营的 DS 节点
+- 分片守卫 - 由 Zilliqa Research 运营的分片节点
 
-## Configuration
+## 配置
 
-1. To enable guard mode, set `GUARD_MODE` to `true` in `constants.xml`
-1. Add `n` DS guard public keys to the `ds_guard.DSPUBKEY` section in `constants.xml`
-1. Add `n` shard guard public keys to the `shard_guard.SHARDPUBKEY` section in `constants.xml`
-1. Adjust `SHARD_GUARD_TOL` in `constants.xml` to control the maximum percentage of shard guards in each shard
+1. 要启用守卫模式，请在 `constants.xml` 中将 `GUARD_MODE` 设置为 `true`
+2. 在 `constants.xml` 中的 `ds_guard.DSPUBKEY` 部分添加 `n` DS 守卫公钥
+3. 在 `constants.xml` 中的 `shard_guard.SHARPUBKEY` 部分添加 `n` 分片守卫公钥
+4. 调整 `constants.xml` 中的 `SHARD_GUARD_TOL` 控制每个分片中分片守卫的最大百分比
 
-## Normal Operation
+## 普通操作
 
-A DS guard is designed to be statically placed inside the DS committee. Given `n` DS guards, the first `n` slots in the DS committee will be allocated for those DS guards. While in guard mode, these positions do not change or shift during each DS consensus or view change.
+DS 守卫设计为静态放置在 DS 委员会内。给定 n 个 DS 守卫，DS 委员会中的前 n 个插槽将分配给这些 DS 守卫。在守卫模式下，这些位置在每次 DS 共识或视图更改期间不会更改或移动。
 
 <table>
   <tr>
-    <th colspan="2">DS Committee</th>
+    <th colspan="2">DS 委员会</th>
   </tr>
   <tr>
-    <td>1 ... n = DS guards (operated by Zilliqa Research)</td>
-    <td>n+1 ... m = non-guard nodes</td>
+    <td>1 ... n = DS 守卫（由 Zilliqa Research 运营）</td>
+    <td>n+1 ... m = 非守卫节点</td>
   </tr>
 </table>
 
-The DS leader is selected from these DS guards by doing `mod n` rather than `mod m`.
+DS leader 是通过执行 `mod n` 从这些 DS 守卫中选出的，而不是执行 `mod m`。
 
-A non-guard node joins the DS committee via [PoW](core-pow.md) as usual. If selected, it is inserted in the committee starting at index `n+1`. Following the [DS MIMO](core-ds-mimo.md) convention, the last few DS nodes (non-guards) are ejected from the DS committee to preserve the committee size.
+一个非守卫节点像往常一样通过 [PoW](core-pow.md) 加入 DS 委员会。如果被选中，它将被插入到委员会中，从索引 `n+1` 开始。遵循 [DS 多进多出](core-ds-mimo.md) 约定，最后几个 DS 节点（非守卫）从 DS 委员会中剔除以保持委员会的规模。
 
 :::note
-The DS reputation feature (starting Zilliqa version 5.0.0) also impacts DS committee member placement. Please refer to both [DS MIMO](core-ds-mimo.md) and [DS Reputation](core-ds-reputation.md) sections for more information on how the DS committee membership is managed.
+DS 声望功能（从 Zilliqa 5.0.0 版开始）也会影响 DS 委员会成员的设置。请参阅 [DS 多进多出](core-ds-mimo.md) 和 [DS 声望](core-ds-reputation.md) 部分，了解有关如何管理 DS 委员会成员资格的更多信息。
 :::
 
-## View Change Operation
+## 查看更改操作
 
-When a view change occurs, it is likely that the DS leader (a DS guard) is faulty or the network failed to agree with what the DS leader proposed. In such a case, the view change candidate leader will be selected from among the `n` DS guards by doing `mod n` rather than `mod m`.
+当发生视图变化时，很可能是 DS leader（DS 守卫）有问题或网络未能同意 DS leader 的提议。在这种情况下，将通过执行 `mod n` 从 `n` 个 DS 守卫中选择视图更改候选 leader，而不是执行 `mod m` 。
 
-Upon view change completion, there is no shifting of the DS guard nodes, i.e., the DS guards stay in place (even the faulty ones). The shard nodes who receive the generated VC block will also not adjust these nodes in their own view of the DS committee.
+视图更改完成后，DS 守卫节点不会发生移动，即 DS 守卫保持原位（即使是故障节点）。收到生成的 VC 块的分片节点也不会在 DS 委员会自己的视图中调整这些节点。
 
-After the view change, the DS committee updates their `m_consensusLeaderID` to the new leader and the protocol resumes.
+视图更改后，DS 委员会将其 `m_consensusLeaderID` 更新为新的leader，协议恢复。
 
-## Shard Guard Design
+## 分片守卫设计
 
-Shard guards are placed within shards in a manner such that there is a sufficient number of these Zilliqa-operated nodes in every shard. Shard guards are special as:
+分片守卫以某种方式放置在分片中，以便在每个分片中都有足够数量的这些 Zilliqa 操作的节点。分片守卫很特别，因为：
 
-- They only do PoW with difficulty 1
-- They cannot join the DS committee (hence, they only perform PoW to enter a shard)
-- Their PoW submissions are given priority by the DS committee over normal shard nodes' submissions
+- 他们只做难度为 1 的 PoW
+- 他们不能加入 DS 委员会（因此，他们只能执行 PoW 以进入分片）
+- 他们的 PoW 提交被 DS 委员会优先于普通分片节点的提交
 
-After the PoW window is over, the DS committee will begin to compose the sharding structure. The DS leader, as per the protocol, will trim the list of nodes such that each shard will be expected to have exactly `COMM_SIZE` number of nodes. In guard mode, shard guards are given priority during the trimming, which means non-guard nodes are trimmed away first. With the trimmed list, the DS leader will then randomly assign each node (shard guard and non-shard guard) to its respective shard.
+PoW 窗口结束后，DS 委员会将开始编写分片结构。根据协议，DS leader 将切除节点列表，以便每个分片都将具有精确的 `COMM_SIZE` 节点数。在守卫模式下，在切除过程中会优先考虑分片守卫，这意味着首先切除掉非守卫节点。使用切除后的列表，DS leader 将随机分配每个节点（分片守卫和非分片守卫）到其各自的分片。
 
-## Shard Rebalancing
+## 分片重新平衡
 
-When determining the shard composition - particularly in the event that the number of shards in the new DS epoch is lower than in the previous one - we must ensure that the newly composed shards will not be entirely made up of guards.
+在确定分片组成时——特别是在新 DS纪元的分片数量低于前一纪元的情况下——我们必须确保新组成的分片不会完全由守卫组成。
 
-To do this, we trim the overall number of shard guards to 1/3 of the expected population (e.g., 600 out of 1800), and then complete the count with non-shard guards. However, in the event when there is not enough nodes to make up the EXPECTED_SHARD_NODE_NUM, the additional shard guards will fill up the gaps.
+为此，我们将分片守卫的总数减少到预期数量的 1/3（例如，1800 个中有 600 个），然后使用非分片守卫完成计数。但是，如果没有足够的节点来组成 EXPECTED_SHARD_NODE_NUM，额外的分片守卫将填补空白。
 
-Keywords to look for in the logs:
+要在日志中查找的关键字：
 
 ```console
 DS leader:
@@ -88,17 +88,17 @@ Example:
 trimmedGuardCount: 40 trimmedNonGuardCount: 80 Total number of accepted soln: 120
 ```
 
-## Shard Leader Selection
+## 分片 Leader 选举
 
-A best effort approach for selecting a shard guard as the shard leader was introduced in [PR 1513](https://github.com/Zilliqa/Zilliqa/pull/1513).
+[PR 1513](https://github.com/Zilliqa/Zilliqa/pull/1513) 中尝试介绍了一种选择分片守卫作为分片 Leader。
 
-Whether or not guard mode is enabled, the basic formula for calculating the new shard leader is:
+无论是否开启守卫模式，计算新分片 leader 的基本公式都是：
 
 ```console
 Leader index = last block hash % shard size
 ```
 
-In guard mode, the calculation is invoked repeatedly as follows:
+在守卫模式下，计算被重复调用如下：
 
 ```console
 Leader index = last block hash % shard size
@@ -108,89 +108,89 @@ while leader is not a shard guard (iterate up to SHARD_LEADER_SELECT_TOL times)
   Leader index = Hash % shard size
 ```
 
-## Runtime Validation
+## 运行时验证
 
-Guard mode is designed to work when the following assumption holds:
+守卫模式旨在在以下假设成立时工作：
 
-- number of new DS nodes injected into the shards >= number of allowed non-guard shard nodes
+- 注入分片的新 DS 节点数 >= 允许的非守卫分片节点数
 
-Using a simple local run as an example:
+以一个简单的本地运行为例：
 
-- Number of nodes: 20
-- DS nodes: 10
-- Shard size: 5
-- DS MIMO: 2
+- 节点数：20
+- DS 节点：10
+- 分片大小：5
+- DS 多进多出：2
 
 <table>
   <tr>
-    <th colspan="2">DS Committee</th>
+    <th colspan="2">DS 委员会</th>
   </tr>
   <tr>
-    <td>DS guards (8)</td>
-    <td>Non-guards (2)</td>
+    <td>DS 守卫 (8)</td>
+    <td>非守卫 (2)</td>
   </tr>
 </table>
 
 <table>
   <tr>
-    <th colspan="2">Shard 1</th>
+    <th colspan="2">分片 1</th>
   </tr>
   <tr>
-    <td>Shard guards (4)</td>
-    <td>Non-guards (1)</td>
+    <td>分片守卫 (4)</td>
+    <td>非守卫 (1)</td>
   </tr>
 </table>
 
 <table>
   <tr>
-    <th colspan="2">Shard 2</th>
+    <th colspan="2">分片 2</th>
   </tr>
   <tr>
-    <td>Shard guards (4)</td>
-    <td>Non-guards (1)</td>
+    <td>分片守卫 (4)</td>
+    <td>非守卫 (1)</td>
   </tr>
 </table>
 
-In this example, if the network is reduced from 2 shards to 1, the DS MIMO process will inject more nodes (the 2 oldest non-guard DS nodes) into the shard than the shard limit (5).
+在这个例子中，如果网络从 2 个分片减少到 1 个，DS 多进多出过程将比分片限制 (5) 注入更多的节点（2 个最老的非保护 DS 节点）到分片中。
 
 <table>
   <tr>
-    <th colspan="2">DS Committee</th>
+    <th colspan="2">DS 委员会</th>
   </tr>
   <tr>
-    <td>DS guards (8)</td>
-    <td>Non-guards (2)</td>
+    <td>DS 守卫 (8)</td>
+    <td>非守卫 (2)</td>
   </tr>
 </table>
 
 <table>
   <tr>
-    <th colspan="2">Shard 1</th>
+    <th colspan="2">分片 1</th>
   </tr>
   <tr>
-    <td>Shard guards (4)</td>
-    <td><b>Non-guards (2)</b></td>
+    <td>分片守卫 (4)</td>
+    <td><b>非守卫 (2)</b></td>
   </tr>
 </table>
 
-There is no easy solution around it. Hence, `ValidateRunTimeEnvironment()` checks for such a condition and terminates the node with a log message if it happens.
+没有简单的解决方案。因此，`ValidateRunTimeEnvironment()` 会检查这种情况，如果发生这种情况，就会用日志消息终止节点。
 
-## Changing Network Information of DS Guards
+## 更改DS守卫的网络信息
 
-It is not uncommon for nodes in the network to go down and then attempt to rejoin under a different IP address. Under normal operation without guard mode, faulty DS nodes can be gracefully kicked out of the DS committee using regular shifting and view change if necessary. However, in guard mode, DS guards do not shift and stay in the DS committee indefinitely. As such, we can possibly lose a node forever if the DS guard has gone down and changed its IP address.
+网络中的节点出现故障，然后尝试在不同的 IP 地址下重新加入的情况并不少见。在没有守卫模式的正常操作下，如有必要，可以使用定期转移和视图更改将故障 DS 节点优雅地踢出 DS 委员会。但是，在守卫模式下，DS 守卫不会轮班并无限期地留在 DS 委员会中。因此，如果 DS 守卫关闭并更改其 IP 地址，我们可能会永远失去一个节点。
 
-To address this situation, we have devised a simple protocol for the DS guard to rejoin and update the network about its new information.
+为了解决这种情况，我们设计了一个简单的协议，让 DS 守卫重新加入网络并更新它的信息。
 
-The steps are:
+步骤是：
 
-1. DS guard goes down and restarts with (possibly) a different IP address
-1. DS guard completes rejoin sequence and enters `FinishRejoinAsDS()`
-1. DS guard broadcasts its updated information (pubkey, network info, and timestamp) to the lookups, and gossips the same to the DS committee
-1. DS committee and lookup update their view of the DS committee
-1. Lookup stores the updated information
-1. At the next vacuous epoch, all shard nodes query the lookup for any updated DS guard network information
-1. Lookup will not respond if there is no new information
-1. Otherwise, lookup sends the information to the requesting shard nodes
-1. The requesting shard nodes verify the message and update their view of the DS committee
+1. DS 守卫关闭并使用（可能）不同的 IP 地址重新启动
+2. DS 守卫完成重新加入序列并进入`FinishRejoinAsDS()`
+3. DS 守卫将其更新的信息（公钥、网络信息和时间戳）广播给查询节点，并将相同的 gossip 报告给 DS 委员会
+4. DS 委员会和查询节点更新他们对 DS 委员会的视图
+5. 查询节点存储更新的信息
+6. 在下一个空的纪元，所有分片节点在查询节点查询任何更新的 DS 守卫网络信息
+7. 如果没有新信息，查询节点不会响应
+8. 否则，查询节点将信息发送到请求分片节点
+9. 请求分片节点验证消息并更新他们对 DS 委员会的视图
 
 <img alt="Guard Mode Image 1" src={useBaseUrl('img/contributors/core/guard-mode/image01.png')} />

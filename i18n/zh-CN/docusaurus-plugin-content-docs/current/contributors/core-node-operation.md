@@ -22,7 +22,7 @@ Zilliqa 节点在启动期间需要以下信息：
 
 - 基于同步类型和引导条件的新节点、分片节点或 DS 节点（例如，`DSInstructionType::SETPRIMARY`）
 - 如果 `GUARD_MODE=true` 和公钥在 `constants.xml` 中的 `ds_guard` 或 `shard_guard` 列表中，则为 DS 或分片保护节点
-- 查找节点，如果 `LOOKUP_NODE_MODE=true`
+- 查询节点，如果 `LOOKUP_NODE_MODE=true`
 - 如果 `LOOKUP_NODE_MODE=true` 且 `ARCHIVAL_LOOKUP=true`，则为种子节点
 
 节点在启动时通常会执行以下操作：

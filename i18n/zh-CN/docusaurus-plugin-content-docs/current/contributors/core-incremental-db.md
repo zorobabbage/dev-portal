@@ -1,6 +1,6 @@
 ---
 id: core-incremental-db
-title: Incremental DB
+title: 增量数据库
 keywords: 
 - core 
 - incremental 
@@ -9,58 +9,58 @@ description: Core protocol design - incremental DB.
 ---
 
 ---
-The incremental DB feature leverages on AWS Simple Storage Service (S3) to provide an efficient way for miners and seed nodes to get blockchain data in order to join the network.
+增量数据库功能利用 AWS 简单存储服务 (S3) 为矿工和种子节点提供一种有效的方式来获取区块链数据以加入网络。
 
-## Background
+## 背景
 
-Prior to this feature, the basic design involved uploading or syncing entire persistence to an AWS S3 bucket at each and every Tx epoch. New nodes would then fetch the entire persistence from that bucket.
+在此功能之前，基本设计涉及在每个 Tx 时期将整个持久性数据上传或同步到 AWS S3 存储桶。然后新节点将从该存储桶中获取整个持久性数据。
 
-This would have been alright for all existing LevelDB databases, with the exception of the `state` database. This is because running `aws-cli sync` on `state` results in uploading all files in the database, which is time-consuming and not bandwidth efficient.
+这对于所有现有的 LevelDB 数据库都没有问题，但 `state` 数据库除外。这是因为在 `state` 上运行 `aws-cli sync` 时，会导致上传数据库中的所有文件，这很耗时且带宽效率不高。
 
-Uploading of `state` LevelDB for every Tx epoch is thus a bottleneck, and so incremental DB was introduced as the solution.
+因此，为每个 Tx epoch 上传 `state` LevelDB 是一个瓶颈，为此我们引入了增量数据库作为解决方案。
 
 :::note
-It is practically possible that all files in `stateDB` get updated at every Tx epoch, if transactions in that particular epoch changed the states of addresses that somehow update TrieDB across all the files in `state` LevelDB.
+实际上有可能在每个 Tx 时期更新 `stateDB` 中的所有文件，如果该特定时期中的交易改变了地址的状态，这些地址以某种方式更新了状态 LevelDB 中所有文件的 TrieDB。
 :::
 
-## Implementation
+## 执行
 
-Two scripts make up the building blocks for incremental DB.
+两个脚本构成了增量数据库的构建块。
 
-### Upload Incremental DB Script
+### 上传增量数据库脚本
 
-The script `uploadIncrDB.py` runs on a lookup node managed by Zilliqa Research. It performs the following steps:
+脚本 `uploadIncrDB.py` 在由 Zilliqa Research 管理的查询节点上运行。它执行以下步骤：
 
-1. Add `Lock` file to S3 bucket **incremental**
-1. Perform sync between local `persistence` folder (i.e., within this lookup node) and `incremental\persistence` on AWS S3 every Tx epoch. More specifically, syncing is done according to different criteria based on the Tx epoch number. These are the possibilities:
-  - At script startup
-    1. Clear both buckets, i.e., **incremental** and **statedelta**
-    1. Sync entire `persistence` (i.e., everything that exists in the folder, including `state`, `stateroot`, `txBlocks`, `txnBodies`, `txnBodiesTmp`, `microblock`, etc) to bucket **incremental**
-    1. Clear all state deltas from bucket **statedelta**
-  - At every 10th DS epoch (i.e., the first Tx epoch following the 10th DS epoch)
-    1. Sync entire `persistence` to bucket **incremental**
-    1. Clear all state deltas from bucket **statedelta**
-  - At all other Tx epochs
-    1. Sync entire `persistence` (excluding `state`, `stateroot`, `contractCode`, `contractStateData`, `contractStateIndex`) to bucket **incremental**
-    1. For the first Tx block within the DS epoch (e.g., 100, 200, 300, ...), we don't need to upload state delta differences. Instead, the complete `stateDelta` LevelDB (composed as a tarball, e.g.,  `stateDelta_100.tar.gz`) is uploaded to S3 bucket **statedelta**
-    1. For other Tx blocks, we upload the state delta differences (composed as tarballs, e.g., `stateDelta_101.tar.gz`, `stateDelta_102.tar.gz`, .... `stateDelta_199.tar.gz`) to S3 bucket **statedelta**
-1. Remove `Lock` file from S3 bucket **incremental**
+1. 将 `Lock` 文件添加到 S3 存储桶**增量**
+2. 在每个 Tx 时期，在本地 `persistence` 文件夹（即在这个查询节点内）和 AWS S3 上的 `incremental\persistence` 之间执行同步。更具体地说，同步是根据基于 Tx 纪元号的不同标准来完成的。下面是一些可能性：
+  - 在脚本启动时
+    1. 清除两个 bucket，即 **incremental** 和 **statedelta**
+    2. 同步整个`persistence`（即文件夹中存在的所有内容，包括 `state`、`stateroot`、`txBlocks`、`txnBodies`、`txnBodiesTmp`、`microblock` 等）到 bucket **incremental* *
+    3. 清除存储桶 **statedelta** 中的所有状态增量
+  - 每 10 个 DS 时期（即第 10 个 DS 时期之后的第一个 Tx 时期）
+    1. 同步整个 `persistence` 到 bucket **incremental**
+    2. 清除存储桶 **statedelta** 中的所有状态增量
+  - 在所有其他 Tx 时期
+    1. 同步整个 `persistence`（不包括`state`、`stateroot`、`contractCode`、`contractStateData`、`contractStateIndex`）到 bucket **incremental**
+    2. 对于 DS 时期内的第一个 Tx 块（例如，100、200、300，...），我们不需要上传状态增量差异。相反，完整的 `stateDelta` LevelDB（生成一个 tarball，例如 `stateDelta_100.tar.gz`）被上传到 S3 存储桶 **statedelta**
+    3. 对于其他 Tx 区块，我们将状态增量差异（由 tarball 组成，例如 `stateDelta_101.tar.gz`、`stateDelta_102.tar.gz`、....`stateDelta_199.tar.gz`）上传到 S3 存储桶 **statedelta**
+3. 从 S3 存储桶中移除 `Lock` 文件**增量**
 
-### Download Incremental DB Script
+### 下载增量数据库脚本
 
-The script `downloadIncrDB.py` is executed upon startup by every miner or seed node to get the latest block chain data. It performs the following steps:
+每个矿工或种子节点在启动时执行脚本 `downloadIncrDB.py`，以获取最新的区块链数据。它执行以下步骤：
 
-1. Check if `Lock` file exists. Wait until no `Lock` file is found
-1. Clear existing local `persistence` folder, then download entire persistence data (except `microblocks` and `txBodies` for miner nodes) from S3 bucket **incremental**
-1. Check if `Lock` file has appeared after executing the previous step. If yes, return to the first step
-1. Clear existing local `StateDeltasFromS3` folder, then download all state deltas from S3 bucket **statedelta** to `StateDeltasFromS3` folder
+1. 检查 `Lock` 文件是否存在。一直等到没有找到 `Lock` 文件为止
+2. 清除现有的本地 `persistence` 文件夹，然后从 S3 存储桶**增量**下载整个持久化数据（除了矿工节点的 `microblocks` 和 `txBodies`）
+3. 检查上一步执行后是否出现了 `Lock` 文件。如果是，返回第一步
+4. 清除现有的本地 `StateDeltasFromS3` 文件夹，然后将所有状态增量从 S3 存储桶 **statedelta** 下载到 `StateDeltasFromS3` 文件夹
 
-## Incremental DB Usage by a Joining Node
+## 加入节点的增量数据库使用
 
-1. Node uses the `downloadIncrDB.py` script to populate its `persistence` folder from S3 bucket **incrementalDB**
-1. Node uses the same script to populate its `StateDeltasFromS3` folder with all the state deltas from S3 bucket **statedelta**
-1. Node loads the contents of `persistence` and initiates syncup. At this point, node has a base state of, say, `X`
-1. Node then recreates the latest state using the state deltas in `StateDeltasFromS3` (e.g. `stateDelta_101.tar.gz`, `stateDelta_101.tar.gz`, ...., `stateDelta_199.tar.gz`, `stateDelta_200.tar.gz`, `stateDelta_201.tar.gz`, ....)
-1. Using these files, the final state `Y` is computed as `Y = X + x1 + x2 + ... + x99 + x100 + x101 + x102 + ...`
+1. 节点使用 `downloadIncrDB.py` 脚本从 S3 存储桶 **incrementalDB** 下载数据到它的 `persistence` 文件夹
+2. 节点使用相同的脚本用来自 S3 存储桶 **statedelta** 的所有状态增量同步到其 `StateDeltasFromS3` 文件夹
+3.节点加载 `persistence` 的内容并启动同步。在这一点上，节点有一个基本状态，比如说，`X`
+4. 然后节点使用 `StateDeltasFromS3` 中的状态增量重新创建最新状态（例如 `stateDelta_101.tar.gz`、`stateDelta_101.tar.gz`、....、`stateDelta_199.tar.gz`、`stateDelta_200。 tar.gz`, `stateDelta_201.tar.gz`, ....)
+5. 使用这些文件，最终状态 `Y` 计算为 `Y = X + x1 + x2 + ... + x99 + x100 + x101 + x102 + ...`
 
-More information on new node joining can be found in the [Rejoin Mechanism](core-rejoin-mechanism.md) page.
+更多关于新节点加入的信息可以在 [重新加入机制](core-rejoin-mechanism.md) 页面中找到。

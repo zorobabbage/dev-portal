@@ -1,6 +1,6 @@
 ---
 id: core-message-queues
-title: Message Queues and Jobs
+title: 消息队列和作业
 keywords: 
 - core 
 - message 
@@ -10,8 +10,8 @@ description: Core protocol design - message queues and jobs.
 ---
 
 ---
-Incoming and outgoing message queues are maintained between `P2PComm` and the rest of the Zilliqa core. This helps provide some ordering in the processing of messages, and it also adds some control over the number of messages that can be buffered. Once ready for processing, messages enter a thread pool, which regulates the number of messages that can be processed concurrently.
+传入和传出消息队列在 `P2PComm` 和 Zilliqa 核心的其余部分之间维护。这有助于在消息处理中提供一些排序，并且还增加了对可以缓冲的消息数量的一些控制。一旦准备好进行处理，消息就会进入一个线程池，线程池控制可以并发处理的消息数量。
 
-After an incoming message is read from a socket, it is first inserted into `Zilliqa::m_msgQueue`, whose maximum size is controlled by `MSGQUEUE_SIZE`. When the queue reaches full capacity, any further incoming messages are dropped. A dedicated thread launched during startup manages dequeueing of messages and sending them to `Zilliqa::m_queuePool`, a thread pool limited by `MAXRECVMESSAGE`. Once assigned to a thread, the message gets dispatched according to the earlier section.
+从 socket 读取传入消息后，首先将其插入到 `Zilliqa::m_msgQueue` 中，其最大大小由 `MSGQUEUE_SIZE` 控制。当队列达到满容量时，将丢弃任何新的传入的消息。在启动期间启动的专用线程管理消息的出队并将它们发送到 `Zilliqa::m_queuePool`，这是一个受`MAXRECVMESSAGE` 限制的线程池。一旦分配给一个线程，消息就会根据前面的部分被分派。
 
-Equivalently, before an outgoing message is written out to a socket, it is first inserted into `P2PComm::m_sendQueue`, whose maximum size is controlled by `SENDQUEUE_SIZE`. Any further outgoing messages are also dropped once the queue is full. A dedicated thread launched during startup also manages dequeueing of messages and sending them to `Zilliqa::m_SendPool`, which is also limited by `MAXSENDMESSAGE`. One assigned to a thread, the message gets sent out according to the `P2PComm::SendJob` settings for the message.
+等效地，在将传出消息写出到 socket 之前，它首先被插入到 `P2PComm::m_sendQueue` 中，其最大大小由 `SENDQUEUE_SIZE` 控制。一旦队列已满，任何新的传出消息也会被丢弃。在启动期间启动的专用线程还管理消息的出列并将它们发送到 `Zilliqa::m_SendPool`，这也受 `MAXSENDMESSAGE` 限制。一个分配给线程的消息根据消息的 `P2PComm::SendJob` 设置发送出去。

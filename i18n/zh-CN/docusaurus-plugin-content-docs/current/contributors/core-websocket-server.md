@@ -1,6 +1,6 @@
 ---
 id: core-websocket-server
-title: WebSocket Server
+title: WebSocket 服务器
 keywords: 
 - core 
 - websocket
@@ -9,8 +9,8 @@ description: Core protocol design - websocket server.
 ---
 
 ---
-A lookup or seed node has the option (using `ENABLE_WEBSOCKET`) to enable a WebSocket server on port `WEBSOCKET_PORT` (4401 by default). The WebSocket server provides users (e.g., SDK clients) with a subscription-based data querying model as an alternative to polling.
+查找或种子节点可以选择（使用 `ENABLE_WEBSOCKET`）在端口 `WEBSOCKET_PORT`（默认为 4401）上启用 WebSocket 服务器。 WebSocket 服务器为用户（例如 SDK 客户端）提供基于订阅的数据查询模型，并作为轮询的替代方案。
 
-Interacting with the WebSocket server is detailed in our [Application Developers](../dev/dev-tools-websockets.md) section.
+我们的 [应用程序开发人员](../dev/dev-tools-websockets.md) 部分详细介绍了与 WebSocket 服务器的交互。
 
-The WebSocket server is implemented in [libServer](https://github.com/Zilliqa/Zilliqa/blob/master/src/libServer/WebsocketServer.h) in the Zilliqa core, using the [WebSocket++](https://github.com/zaphoyd/websocketpp) C++ library.
+WebSocket 服务器在 Zilliqa 核心的 [libServer](https://github.com/Zilliqa/Zilliqa/blob/master/src/libServer/WebsocketServer.h) 中实现，使用 [WebSocket++](https://github.com/zaphoyd/websocketpp) C++ 库。

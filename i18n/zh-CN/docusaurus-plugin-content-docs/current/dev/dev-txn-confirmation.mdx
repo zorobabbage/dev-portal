@@ -11,7 +11,7 @@ description: Zilliqa Transaction Confirmation
 ---
 现在交易对象位于其中一个分片中。 每个分片都会产生一个 __微区块__。 DS 委员会通过 pBFT 共识机制对交易区块达成一致后，由 DS 委员会将微区块聚合为一个交易区块。
 
-DS 委员会就交易区块达成共识后，将结果广播到所有分片节点和查找节点。 在这个阶段，种子节点将为我们的交易对象产生一个结果。 可以使用相同的 `GetTransaction` JSON RPC API 检索结果。
+DS 委员会就交易区块达成共识后，将结果广播到所有分片节点和查询节点。 在这个阶段，种子节点将为我们的交易对象产生一个结果。 可以使用相同的 `GetTransaction` JSON RPC API 检索结果。
 
 :::info
 下面的示例使用 zilliqa-js SDK 来检索交易响应。 该结构可能与 __JSON RPC__ `GetTransaction` 结果_略有不同_。

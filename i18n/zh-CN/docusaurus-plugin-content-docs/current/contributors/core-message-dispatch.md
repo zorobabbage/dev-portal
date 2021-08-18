@@ -1,6 +1,6 @@
 ---
 id: core-message-dispatch
-title: Message Dispatch and Processing
+title: 消息调度和处理
 keywords: 
 - core 
 - message 
@@ -10,18 +10,18 @@ description: Core protocol design - message dispatch and processing.
 ---
 
 ---
-In `src/cmd/main.cpp`, we assign `Zilliqa::Dispatch` as the dispatcher inside `P2PComm::StartMessagePump`. Every message that is read from a socket by `P2PComm` then gets sent to `Zilliqa::Dispatch`.
+在 `src/cmd/main.cpp` 中，我们指定 `Zilliqa::Dispatch` 作为 `P2PComm::StartMessagePump` 中的调度器。 `P2PComm` 从 socket 读取的每条消息都被发送到 `Zilliqa::Dispatch`。
 
-When Zilliqa starts to process a message, it will call `Zilliqa::ProcessMessage`. The first byte of any message defines the **message type**.
+当 Zilliqa 开始处理消息时，它会调用 `Zilliqa::ProcessMessage`。任何消息的第一个字节都定义了**消息类型**。
 
 :::note
-The “first byte” here refers to the payload part of a socket message. At the `P2PComm` level, each socket message consists of a predefined header plus the payload.
+这里的“第一个字节”指的是 socket 消息的有效载荷部分。在`P2PComm` 级别，每个 socket 消息由预定义的标头和有效负载组成。
 :::
 
-Depending on the type, `Zilliqa::ProcessMessage` will forward the message to the appropriate handler for it. The list of message types can be found in `enum MessageType` inside `src/common/Messages.h`.
+根据类型，`Zilliqa::ProcessMessage` 会将消息转发到相应的处理程序。消息类型列表可以在 `src/common/Messages.h` 内的 `enum MessageType` 中找到。
 
-Any class that inherits from `Executable` will be a message handler. For example, type `0x01` means `DIRECTORY`, and this message will be handled by `libDirectoryService`. If you go into `libDirectoryService`, you will find a function `DirectoryService::Execute`.
+任何继承自 `Executable` 的类都将是一个消息处理程序。例如，类型 `0x01` 表示 `DIRECTORY`，这个消息将由 `libDirectoryService` 处理。如果你进入 `libDirectoryService`，你会发现一个函数`DirectoryService::Execute`。
 
-All classes that inherit from `Executable` will first check the second byte in the message, which defines the **instruction type**. The list of instruction types can be found in `src/common/Messages.h`.
+所有从 `Executable` 继承的类将首先检查消息中的第二个字节，该字节定义了**指令类型**。指令类型列表可以在 `src/common/Messages.h` 中找到。
 
-From there, `Execute()` will further forward the message to a private function inside the class, and these functions are all named `ProcessXXX`.
+从那里开始，`Execute()` 将进一步将消息转发到类内部的一个私有函数，这些函数都被命名为 `ProcessXXX`。

@@ -1,6 +1,6 @@
 ---
 id: core-por
-title: Proof of Reputation
+title: 声望证明
 keywords: 
 - core 
 - por 
@@ -10,17 +10,17 @@ description: Core protocol design - proof of reputation.
 ---
 
 ---
-The [DS reputation](core-ds-reputation.md) feature uses node performance to regulate node tenure within the DS committee. In a similar manner, the PoW submission selection process is designed to prioritize nodes that generated more cosignatures (i.e., actively perform consensus to generate blocks) during their time in the network. When the Mainnet is full (i.e., the 2400-node limit is reached), the PoW submissions from nodes with higher priority ratings will be processed first. This feature is referred to as Proof of Reputation (PoR).
+[DS 声望](core-ds-reputation.md) 功能使用节点性能来规范 DS 委员会内的节点任期。以类似的方式，PoW 提交选择过程旨在优先考虑在网络中生成更多联合签名（即积极执行共识以生成区块）的节点。当主网已满时（即达到 2400 个节点的限制），将首先处理来自具有更高优先级评级的节点的 PoW 提交。此功能称为声望证明 (PoR)。
 
 :::note
-Selection by reputation only takes effect when the number of PoW submissions exceeds `MAX_SHARD_NODE_NUM` in `constants.xml`.
+只有当 PoW 提交数量超过 `constants.xml` 中的 `MAX_SHARD_NODE_NUM` 时，声望选择才生效。
 :::
 
-## PoR Procedure
+## PoR 程序
 
-1. When we bootstrap the system, the reputation of every node is 0
-1. Every microblock or Tx block cosigned by a node increases its reputation by one. The reputation is capped at 4096
-1. If in any DS epoch a node fails to join the network, its reputation will be reset to 0
-1. At the beginning of each DS epoch, the DS leader calls `CalculateNodePriority()` to calculate the node priority based on the node reputation. The nodes with higher priority will be considered first for adding to the sharding structure
-1. When the DS backups receive the DS block announcement, they call `VerifyNodePriority()` to calculate the node priority similarly and verify that the nodes in the sharding structure have met the minimum reputation/priority requirement
-1. When a new DS leader is selected, the sharding structure is sent to it. The new DS leader can get the reputation of each node from the sharding structure
+1.当我们引导系统时，每个节点的声望为 0
+2. 节点共同签名的每一个微区块或 Tx 区块，其声望都会增加 1。声望上限为 4096
+3. 如果在任何 DS 纪元节点未能加入网络，其声望将重置为 0
+4. 在每个 DS epoch 开始时，DS leader 调用 `CalculateNodePriority()` 根据节点声望计算节点优先级。优先级高的节点会被优先考虑加入分片结构
+5. DS 备份收到 DS 区块公告后，调用 `VerifyNodePriority()` 同样计算节点优先级，验证分片结构中的节点是否满足最低声望/优先级要求
+6. 当新的 DS leader 被选中时，分片结构被发送给它。新的 DS leader 可以从分片结构中获得每个节点的声望

@@ -1,6 +1,6 @@
 ---
 id: core-global-gas-price
-title: Global Gas Price
+title: 全局 Gas 价格
 keywords: 
 - gas 
 - price
@@ -9,82 +9,81 @@ description: Core protocol design - computing global gas price.
 ---
 
 ---
-Each miner node's PoW solution comes with a proposed minimum transaction processing gas price that the node is willing to accept. During DS block consensus, the DS committee runs an algorithm to compute the globally acceptable minimum gas price that the entire network will operate on. The DS committee then informs the shards, lookups, and seeds (through `m_gasPrice` in the DS block) about the agreed upon global minimum gas price. The network will accept any transaction that has a gas price larger than or equal to the minimum gas price and reject transactions that don't.
+每个矿工节点的 PoW 解决方案都带有节点愿意接受的提议的最低交易处理 gas 价格。在 DS 区块共识期间，DS 委员会运行一种算法来计算整个网络将运行的全局可接受的最低 gas 价格。然后 DS 委员会将商定的全局最低 gas 价格通知给分片、查找和种子（通过 DS 区块中的`m_gasPrice`）。网络将接受任何 gas 价格大于或等于最低 gas 价格的交易，并拒绝不符合的交易。
 
-The algorithm to compute the global minimum gas price takes into account:
+计算全局最低 gas 价格的算法考虑以下因素：
 
-1. the average `m_gasPrice` used over the last _n_ DS epochs
-1. the average of the gas prices proposed by each individual miner for the next DS epoch (in case a price increase is necessary)
-1. the trend in network congestion (i.e., the actual consumed gas in the Tx blocks) in the last DS epoch
+1. 过去 _n_ 个 DS 纪元使用的平均 `m_gasPrice`
+2. 每个独立矿工为下一个 DS 纪元提出的 gas 价格的平均值（防止价格上涨是必要的）
+3. 上一个 DS 纪元的网络拥塞趋势（即 Tx 区块中实际消耗的 gas）
 
-Essentially, the algorithm decides on the gas price depending on the level of network congestion: if network congestion is high, then the miners
-get to have a say on the gas price; otherwise, the minimum gas price should not depend too much on their proposed gas prices.
+本质上，该算法根据网络拥塞程度来决定 gas 价格：如果网络拥塞程度很高，那么矿工对 gas 价格有发言权；否则，最低 gas 价格不应过多依赖于他们提议的 gas 价格。
 
-## Algorithm Inputs
+## 算法输入
 
-| Global Parameter       | Description                                                 |
+| 全局参数 | 描述                                                |
 |------------------------|-------------------------------------------------------------|
-| `microblock_gas_limit` | Gas limit for each micro block                              |
-| `num_shards`           | Number of shards in the network, including the DS committee |
-| `txblock_gas_limit`    | Gas limit for the Tx block (`num_shards x microblock_gas_limit` for simplicity's sake, although the DS committee has a different gas limit value from the shards) |
-| `default_min_gas_price` | The lowest value that the gas price can take               |
+| `microblock_gas_limit` | 每个微块的 gas 限制                             |
+| `num_shards`           | 网络中的分片数量，包括 DS 委员会 |
+| `txblock_gas_limit`    | Tx 区块的 Gas 限制（为简单起见，使用 `num_shards x microblock_gas_limit`，尽管 DS 委员会与分片有不同的 Gas 限制值） |
+| `default_min_gas_price` | gas 价格可以采取的最低值              |
 
-| Data from Current DS Epoch   | Description                                                 |
+| 来自当前 DS 纪元的数据 | 描述                                                |
 |------------------------------|-------------------------------------------------------------|
-| `num_nodes`                  | Number of nodes in the network (including the DS committee) |
-| `proposed_min_price_node[i]` | Minimum gas price proposed by the _i_ th miner node         |
+| `num_nodes`                  | 网络中的节点数（包括 DS 委员会） |
+| `proposed_min_price_node[i]` | 第 _i_ 个矿工节点提出的最低 gas 价格        |
  
-| Data from Last _n_ DS Epochs | Description                                                       |
+| 来自最后 _n_ 个 DS 纪元的数据 | 描述                                                   |
 |-------------------------------|------------------------------------------------------------------|
-| `min_price_epoch[j]`          | Global minimum gas price value used in the _j_ th DS epoch       |
-| `consumed_gas_tx_block[j][k]` | Total consumed gas in the _k_ th Tx block in the _j_ th DS epoch |
+| `min_price_epoch[j]`          | 第 _j_ 个 DS 纪元中使用的全局最低 gas 价格值       |
+| `consumed_gas_tx_block[j][k]` | 在第 _j_ 个 DS 纪元的第 _k_ 个 Tx 区块中消耗的 gas 总量 |
 
-## Algorithm Steps
+## 算法步骤
 
-In the following, we describe an algorithm to compute `global_gas_price` for the next DS epoch.
+在下文中，我们将描述一种算法来计算下一个 DS 纪元的 `global_gas_price`。
 
-1. We first compute `percentage_full_tx_blocks`, i.e., the number of Tx blocks mined in the last DS epoch for which the total gas consumed is at least 80% of `txblock_gas_limit`. This computation will require checking each `consumed_gas_tx_block[j][k]`.
-1. Then, we make the decision on how to set `global_gas_price` according to the table below.
+1. 我们首先计算 `percentage_full_tx_blocks`，即在最后一个 DS 纪元中开采的 Tx 区块的数量，其中消耗的总 gas 至少为`txblock_gas_limit` 的 80%。 这个计算需要检查每个 `consumed_gas_tx_block[j][k]`。
+2. 然后，我们根据下表决定如何设置 `global_gas_price`。
 
-| Percentage of Full Blocks  | Interpretation                                                                      | Impact on Gas Price      |
+| 完整区块的百分比| 说明 | 对 gas 价格的影响|
 |----------------------------|-------------------------------------------------------------------------------------|-------------|
-| < 10%                      | Blocks are mostly empty; demand is low and hence miners should accept a lower price | **Increase in the gas price** compared to the previous epoch
-| Between 10% and 70%        | Blocks are mostly filled; demand and supply have met the sweet spot                 | **No change in the gas price** compared to the previous epoch
-| > 70%                      | Blocks are heavily filled and hence there is a sign of high demand                  | **Decrease in the gas price** compared to the previous epoch
+| < 10%                      | 区块大多是空的； 需求低，因此矿工应该接受较低的价格 | 与上一纪元相比，**gas 价格上涨**
+| Between 10% and 70%        | 区块大多被填满； 需求和供应已经达到临界点                 | 与前一纪元相比，**gas 格没有变化**
+| > 70%                      | 区块被大量填满，因此有高需求的迹象                 | 与前一个纪元相比，**gas 价格下降**
 
-### Decreasing the Gas Price
+### 降低 gas 价格
 
-1. Discard all `proposed_min_price_node[i]` values
-1. Compute the average gas price over the last _n_ DS epochs:
+1. 丢弃所有 `proposed_min_price_node[i]` 的值
+2. 计算过去 _n_ 个 DS 纪元的平均 gas 价格：
    ```
    average_gas_price_val = mean(min_price_epoch[j-1], ..., min_price_epoch[j-n])
    ```
-1. Compute the decreased gas price value:
+3. 计算减少的 gas 价格值：
    ```
    decreased_gas_price_val = 99% of average_gas_price_val
    ```
-1. Finally, compute the new `global_gas_price`:
+4. 最后，计算新的 `global_gas_price`：
    ```
    global_gas_price = min_price_epoch[j] =
       max(default_min_gas_price, decreased_gas_price_val)
    ```
 
-### Increasing the Gas Price
+### 提高 gas 价格
 
-1. Get the median `proposed_min_price_node[i]` value over all values from the _N_ miners:
+1. 获取 _N_ 个矿工的所有值的中间值 `proposed_min_price_node[i]` 的值：
    ```
    median_proposed_min_price = median(proposed_min_price_node[1], ..., proposed_min_price_node[N])
    ```
-1. Compute the average gas price over the last _n_ DS epochs:
+2. 计算过去 _n_ 个 DS 纪元的平均 gas 价格：
    ```
    average_gas_price_val = mean(min_price_epoch[j-1], ..., min_price_epoch[j-n])
    ```
-1. Compute the lower and upper bounds for the increased gas price value:
+3. 计算增加的 gas 价格值的下限和上限：
    ```
    increased_gas_price_val_lower_bound = 100.5% of average_gas_price_val
    increased_gas_price_val_upper_bound = 101.5% of average_gas_price_val
    ```
-1. Finally, compute the new `global_gas_price`:
+4. 最后，计算新的 `global_gas_price`：
    ```
    global_gas_price = min_price_epoch[j] =
       max{

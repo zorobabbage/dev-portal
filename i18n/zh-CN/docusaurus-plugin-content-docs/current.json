@@ -172,7 +172,7 @@
     "description": "The label for category Directory Service in sidebar ContributorsSidebar"
   },
   "sidebar.ContributorsSidebar.category.Lookup": {
-    "message": "查找",
+    "message": "查询节点",
     "description": "The label for category Lookup in sidebar ContributorsSidebar"
   },
   "sidebar.ContributorsSidebar.category.Mining": {

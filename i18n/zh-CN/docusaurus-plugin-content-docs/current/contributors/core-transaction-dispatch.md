@@ -1,6 +1,6 @@
 ---
 id: core-transaction-dispatch
-title: Transaction Dispatch
+title: 交易调度
 keywords: 
 - core 
 - transaction 
@@ -9,15 +9,15 @@ description: Core protocol design - transaction dispatch.
 ---
 
 ---
-From creation to confirmation, a transaction lifecycle proceeds in the following sequence:
+从创建到确认，交易生命周期按以下顺序进行：
 
-1. An end user sends a `CreateTransaction` JSON request through the Zilliqa API. The transaction JSON contains the essential information about the transaction
-1. The seed node that receives the request validates its contents and converts it into the core's transaction definition format
-1. The seed node forwards this transaction (and other processed transaction requests) to a lookup node at intervals determined by `SEED_TXN_COLLECTION_TIME_IN_SEC`
-1. The lookup node that receives the forwarded transaction decides which shard should process the transaction, and adds it to the transaction packet meant for that shard
-1. At the start of every Tx epoch (plus a short delay determined by `LOOKUP_DELAY_SEND_TXNPACKET_IN_MS`), the lookup node dispatches its transaction packets to all the shards (including the DS committee)
-1. The transaction packets are gossiped within the shards. Each node buffers the packet after receipt
-1. Within the interval determined by `TX_DISTRIBUTE_TIME_IN_MS`, each node processes transaction packets buffered from the previous Tx epoch. Processing packets involves validating each transaction and adding these into the node's transaction memory pool
-1. After the interval, the nodes (shards) first perform microblock, and then Tx block (DS committee) consensus. During consensus, transactions in the memory pool are consumed in a deterministic manner
-1. After creation of the Tx block, the shard and DS nodes commit the transactions to the blockchain and forward the transaction receipts to the lookup nodes (and the seed nodes, through the [multipliers](core-multipliers.md))
-1. The end user queries the transaction status through the Zilliqa API. The seed node that receives the request uses the transaction receipt to inform the user of the transaction's status
+1. 终端用户通过 Zilliqa API 发送 `CreateTransaction` JSON 请求。交易 JSON 包含有关交易的基本信息
+2. 收到请求的种子节点验证其内容，并将其转换为核心的交易定义格式
+3. 种子节点以 `SEED_TXN_COLLECTION_TIME_IN_SEC` 确定的时间间隔将这个交易（和其他处理过的交易请求）转发到一个查询节点
+4. 接收转发交易的查询节点决定哪个分片应该处理交易，并将其添加到该分片的交易数据包中
+5. 在每个 Tx 纪元开始时（加上由 `LOOKUP_DELAY_SEND_TXNPACKET_IN_MS` 确定的短暂延迟），查询节点将其交易数据包分派到所有分片（包括 DS 委员会）
+6. 交易数据包在分片内进行 gossip。每个节点收到后缓存数据包
+7. 在 `TX_DISTRIBUTE_TIME_IN_MS` 确定的间隔内，每个节点处理从前一个Tx 纪元缓冲的交易数据包。处理数据包涉及验证每个交易并将它们添加到节点的交易内存池中
+8. 间隔后，节点（分片）先进行微块，再进行 Tx 区块（DS委员会）共识。在共识期间，内存池中的交易以一种确定性的方式被消费
+9. 创建 Tx 区块后，分片和 DS 节点将交易提交到区块链并将交易回执转发到查询节点（和种子节点，通过 [multipliers](core-multipliers.md)）
+10. 终端用户通过 Zilliqa API 查询交易状态。接收请求的种子节点使用交易回执通知用户交易状态
