@@ -2,7 +2,7 @@
 id: staking-overview
 title: 概述
 keywords: 
-- staking
+- 质押
 - overview
 - ssn
 - seed node
@@ -20,7 +20,7 @@ description: Zilliqa Seed Node Staking Overview
 
 质押计划中的种子节点被称为 **Staked Seed Node** 或 **SSN**。
 
-## 阶段1
+## 阶段 1
 阶段 1 是 SSN 质押的过去阶段。 [ZIP-11](https://github.com/Zilliqa/ZIP/blob/master/zips/zip-11.md) 中正式描述了阶段 1。
 
 阶段 1 介绍：

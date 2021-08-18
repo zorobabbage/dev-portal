@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Zilliqa Developer Portal',
   tagline: 'Technical documentation for participating in the Zilliqa network.',
-  url: 'https://dev.zilliqa.com',
+  url: 'http://dev-portal.china-zil.com',
   baseUrl: '/',
   favicon: 'img/favicon.png',
   organizationName: 'zorobabbage', // Usually your GitHub org/user name.

@@ -12,6 +12,8 @@ import MineSvg from './components/cards_img03.js';
 import ExchangeSvg from './components/cards_img04.js';
 import ContributeSvg from './components/cards_img05.js';
 
+import Head from '@docusaurus/Head';
+
 import Translate from '@docusaurus/Translate';
 
 const CoverImgDiv = () => {
@@ -49,12 +51,24 @@ function Feature({imageUrl, title, description}) {
   );
 }
 
+const CustomMeta = () => (
+  <Head>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:domain" content="china-zil.com" />
+    <meta data-react-helmet="true" name="twitter:site" content="@zorobabbage"/>
+    <meta name="twitter:title" content="Zilliqa 开发者门户" />
+    <meta name="twitter:image" content="http://dev-portal.china-zil.com/img/hand_light.png" />
+    <meta name="twitter:image:src" content="http://dev-portal.china-zil.com/img/hand_light.png" />
+  </Head>
+);
+
 function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
 
   return (
       <Layout>
+        <CustomMeta />
         <div className="cover-container">
           <div className="cover-title">
             <h1 className="hero__title">
