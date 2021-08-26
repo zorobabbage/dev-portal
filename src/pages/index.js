@@ -57,8 +57,8 @@ const CustomMeta = () => (
     <meta name="twitter:domain" content="china-zil.com" />
     <meta data-react-helmet="true" name="twitter:site" content="@zorobabbage"/>
     <meta name="twitter:title" content="Zilliqa 开发者门户" />
-    <meta name="twitter:image" content="http://dev-portal.china-zil.com/img/hand_light.png" />
-    <meta name="twitter:image:src" content="http://dev-portal.china-zil.com/img/hand_light.png" />
+    <meta name="twitter:image" content="http://dev-portal.china-zil.com/img/dev-portal-twitter.png" />
+    <meta name="twitter:image:src" content="http://dev-portal.china-zil.com/img/dev-portal-twitter.png" />
   </Head>
 );
 
