@@ -14,7 +14,7 @@ description: gozilliqa
 
 ---
 ## 介绍
-[gozilliqa](https://github.com/Zilliqa/gozilliqa-sdk) is a Golang library for interacting with the Zilliqa network. It can create wallets, deploy contracts, and invoke transitions to interact with smart contracts on the Zilliqa network.
+[gozilliqa](https://github.com/Zilliqa/gozilliqa-sdk) 是一个用于与 Zilliqa 网络交互的 Golang 库。 它可以创建钱包、部署合约并调用 transition 以与 Zilliqa 网络上的智能合约进行交互。
 
 ## 源代码
 
